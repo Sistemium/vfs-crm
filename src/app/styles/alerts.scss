@@ -1,0 +1,49 @@
+@import "variables";
+
+.alert-default {
+  background-color: $gray-background-color;
+}
+
+.alert {
+  @media (max-width: $screen-xs-max) {
+    .pull-right {
+      line-height: 1.1;
+    }
+  }
+}
+
+%header-alert {
+
+  margin-bottom: 11px;
+
+  @extend %rounded-borders;
+  @extend .spaced;
+  @extend %flex-center;
+
+  .popover-trigger {
+    @extend %flex-center;
+  }
+
+  .totals {
+    min-height: 18px;
+    text-align: right;
+    flex: 1;
+  }
+
+  @include responsive-only(lt-sm) {
+
+    display: block !important;
+
+    > * {
+      display: block;
+    }
+
+    .totals {
+      font-size: 12px;
+      margin-top: $margin-bottom-xs;
+      //text-align: left;
+    }
+
+  }
+
+}

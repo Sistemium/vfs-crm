@@ -1,0 +1,60 @@
+@import "variables";
+
+@media (max-width: $screen-xs-max) {
+
+  h3, .h3 {
+
+    margin-top: $margin-bottom-xs;
+    margin-bottom: $margin-bottom-xs;
+
+    font-size: 17px;
+
+  }
+
+  h2, .h2 {
+
+    margin-top: $margin-bottom-xs;
+    margin-bottom: $margin-bottom-xs;
+
+    font-size: 21px;
+
+  }
+
+  h2.root-navbar {
+    margin-bottom: -1px;
+  }
+
+  h4, .h4 {
+    font-size: 15px;
+  }
+
+  .clear-both-xs {
+    clear: both;
+  }
+
+  hr {
+    margin-top: $margin-bottom-xs-minus;
+    margin-bottom: $margin-bottom-xs;
+  }
+
+  .breadcrumb,
+  .form-group,
+  .alert,
+  .list-group {
+    margin-bottom: $margin-bottom-xs;
+  }
+
+  .alert {
+    padding: $margin-bottom-xs;
+  }
+
+  .breadcrumb {
+    padding-left: $margin-bottom-xs;
+    padding-right: $margin-bottom-xs;
+  }
+
+  .list-group-item {
+    padding: $margin-bottom-xs-minus $margin-bottom-xs;
+  }
+
+}

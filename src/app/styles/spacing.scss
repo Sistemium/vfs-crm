@@ -1,0 +1,34 @@
+.spaced div, .spaced, h4, h3, h2, h1, a, button {
+
+  > * + strong,
+  > * + span,
+  > span + a,
+  > a + a {
+
+    margin-left: 6px;
+
+  }
+
+  > * + small {
+    margin-left: 4px;
+  }
+
+  .badge, .pull-right {
+    & + span, & + a {
+      margin-left: 0;
+    }
+  }
+
+  > * + label {
+    //margin-left: 2px;
+  }
+
+}
+
+span.caret, .btn span.caret {
+  margin-left: 4px;
+}
+
+.alert h4 {
+  margin: 0;
+}

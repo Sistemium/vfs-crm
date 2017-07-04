@@ -1,0 +1,63 @@
+.form-group.form-group-switch {
+  label {
+    padding-top: 5px;
+  }
+  .ats-switch {
+    width: 100%;
+  }
+}
+
+.ats-switch, .uib-datepicker-popup, .uib-datepicker-popup * {
+  outline: none;
+  &:active, &:focus {
+    outline: none;
+  }
+}
+
+.uib-datepicker-popup {
+
+  .uib-datepicker {
+    button.btn.btn-default {
+      border-color: white;
+    }
+    > table {
+      margin-right: auto;
+      margin-left: auto;
+    }
+  }
+
+  .uib-button-bar {
+    button.btn.uib-close.btn-success {
+      background-color: white;
+      border-color: white;
+      color: black;
+    }
+  }
+
+}
+
+.uib-datepicker-no-clear {
+
+  .uib-datepicker-popup {
+
+    .uib-button-bar {
+      button.btn.uib-datepicker-current {
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+        width: 100%;
+      }
+      button.btn.uib-clear {
+        display: none;
+      }
+    }
+
+  }
+
+}
+
+.form[disabled] {
+  .form-group label + * {
+    pointer-events: none;
+    opacity: 0.7;
+  }
+}

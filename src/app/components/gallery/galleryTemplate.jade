@@ -1,0 +1,13 @@
+.thumbnails(ng-class='baseClass')
+  a.thumb(
+  href
+  ng-disabled='!thumbImage.srcThumbnail'
+  ng-click='vm.thumbnailClick(thumbImage)'
+  ondragstart='return false;'
+  )
+    img(
+    ng-src='{{ thumbImage.srcThumbnail }}'
+    ng-class='[thumbClass, !thumbImage.srcThumbnail ? "placeholder" : ""]'
+    draggable='false'
+    ondragstart='return false;'
+    )

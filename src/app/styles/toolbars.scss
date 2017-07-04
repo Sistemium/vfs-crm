@@ -1,0 +1,57 @@
+@import "variables";
+
+.flat-on-small li {
+  float: left;
+  margin: 0;
+
+  > li {
+    float: left;
+
+    > a {
+      padding-top:    $navbar-padding-vertical;
+      padding-bottom: $navbar-padding-vertical;
+    }
+  }
+
+}
+
+form.flat-on-small {
+
+
+  width: auto;
+  border: 0;
+  margin-left: 0;
+  margin-right: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+
+}
+
+.has-navbar-fixed-bottom {
+  margin-bottom: 60px;
+}
+
+@media (max-width: 767px) {
+
+  .navbar {
+    .nav.float-right.navbar-right {
+      margin-right: -10px;
+    }
+  }
+
+  .navbar-collapse {
+    clear: both;
+  }
+
+  .navbar-right {
+    float: right;
+  }
+
+  ul .navbar-btn {
+    margin-top: 3px;
+    margin-bottom: 4px;
+  }
+
+}

@@ -1,0 +1,13 @@
+@import "../../styles/variables";
+
+
+.stm-menu {
+
+  overflow-x: hidden;
+
+  button.btn .caption .badge {
+    background-color: $primary-color;
+    color: $white;
+  }
+
+}

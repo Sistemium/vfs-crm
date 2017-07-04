@@ -1,0 +1,17 @@
+@import "../../styles/variables";
+
+.syncer-indicator {
+
+  display: block;
+  font-size: 21px;
+
+  padding: 6px 8px;
+  background: $gray-background-color;
+
+  @extend %rounded-borders;
+
+  a {
+    color: $red !important;
+  }
+
+}

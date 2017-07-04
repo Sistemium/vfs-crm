@@ -1,0 +1,12 @@
+@import "variables";
+
+.stm-typeahead-popup-wrapper {
+
+  ul > li > a {
+    &:hover {
+      background-color: $primary-color;
+    }
+  }
+
+}
+

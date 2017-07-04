@@ -1,0 +1,5 @@
+.syncer-indicator(
+ng-if='vm.hasUnsynced'
+)
+  a(href ng-click='vm.syncerInfoClick()')
+    i.glyphicon.glyphicon-cloud-upload

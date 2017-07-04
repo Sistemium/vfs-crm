@@ -1,0 +1,118 @@
+.iOS {
+
+  .hidden-ios {
+    display: none;
+  }
+
+  .list-group-item, .container, .container-fluid {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .form-horizontal .form-group {
+    margin-left: -10px;
+    margin-right: -10px;
+  }
+
+  .row {
+    margin-left: -10px;
+    margin-right: -10px;
+  }
+
+  .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1,
+  .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2,
+  .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3,
+  .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4,
+  .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5,
+  .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6,
+  .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7,
+  .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8,
+  .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9,
+  .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10,
+  .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11,
+  .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+
+  .sorter-handle {
+    margin-left: -10px;
+  }
+
+  .btn.btn-default:hover {
+    background: none;
+    border-color: #ccc;
+  }
+
+  .display-flex {
+    > button {
+      margin-top: -9px;
+      margin-bottom: -9px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .container {
+      width: 758px;
+    }
+  }
+  @media (min-width: 992px) {
+    .container {
+      width: 982px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container {
+      width: 1014px;
+    }
+  }
+  @media (min-width: 1200px) {
+    .container {
+      width: 1190px;
+    }
+  }
+
+  a.thummbnail {
+    outline: none;
+    &:focus, &:hover, &:active {
+      outline: none;
+    }
+  }
+
+  .dropdown li a {
+    padding: 7px 20px;
+  }
+
+  a.list-group-item:hover:not(.active), .list-group-item:not(.active) a:hover {
+    background-color: white;
+    color: #555;
+  }
+
+}
+
+body.iOS {
+
+  position: relative;
+  padding-top: 0;
+  margin-bottom: 0;
+  //overflow-y: scroll;
+  //-webkit-overflow-scrolling: touch;
+  .has-navbar-fixed-bottom {
+    margin-bottom: 120px;
+  }
+
+  //-webkit-overflow-scrolling: touch;
+  //
+  //section {
+  //  -webkit-overflow-scrolling: touch;
+  //}
+}
+
+::-webkit-scrollbar, *::-webkit-scrollbar {
+  display: none;
+}
+
+a, button, .clickable {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+}

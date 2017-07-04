@@ -1,0 +1,14 @@
+.modal-header
+  h4.modal-title
+    span.title {{vm.title}}
+    a(ng-hide='vm.hideCloseButton' href='' ng-click='vm.cancel()')
+      i.pull-right.glyphicon.glyphicon-remove
+.modal-body
+  p(ng-class='vm.textClass') {{vm.text}}
+  p(ng-class='vm.questionClass' ng-if='vm.question') {{vm.question}}?
+.modal-footer
+  button.btn(
+  ng-repeat='button in vm.buttons'
+  ng-click='vm.buttonClick(button.id, button.type)'
+  ng-class="{'btn-primary': (button.type === 'submit'), 'btn-warning': (button.type === 'cancel')}"
+  ) {{button.title}}

@@ -1,0 +1,51 @@
+@import "mixins";
+@import "flex";
+
+$primary-color: #2768b7;
+$active-color: $primary-color;
+$sab-blue: $primary-color;
+
+@import "../../../bower_components/sistemium-angular-bootstrap/dist/sass/variables.scss";
+@import "../../../bower_components/sistemium-angular-bootstrap/dist/sass/colors.scss";
+
+$black: #333333;
+$blue: $sab-blue;
+$dark-blue: darken($blue, 10%);
+$gray: gray;
+$red: red;
+$white: #fff;
+
+$navbar-padding-vertical: 15px;
+$margin-bottom-xs: 10px;
+$margin-bottom-xs-minus: 7px;
+$border-gray: #eee;
+
+$short-duration: 0.5s;
+$gray-background-color: #f5f5f5;
+
+$article-nav-menu-text-color: #555;
+
+$border-radius: 10px;
+
+// copied from bootstrap
+
+$state-success-text:             #3c763d !default;
+$state-success-bg:               #dff0d8 !default;
+$state-success-border:           darken(adjust-hue($state-success-bg, -10), 5%) !default;
+
+$state-info-text:                #31708f !default;
+$state-info-bg:                  #d9edf7 !default;
+$state-info-border:              darken(adjust-hue($state-info-bg, -10), 7%) !default;
+
+$state-warning-text:             #8a6d3b !default;
+$state-warning-bg:               #fcf8e3 !default;
+$state-warning-border:           darken(adjust-hue($state-warning-bg, -10), 5%) !default;
+
+$state-danger-text:              #a94442 !default;
+$state-danger-bg:                #f2dede !default;
+$state-danger-border:            darken(adjust-hue($state-danger-bg, -10), 5%) !default;
+
+
+$info-background-color: $state-info-bg;
+$info-color: $state-info-text;
+

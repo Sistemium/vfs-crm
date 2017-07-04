@@ -1,0 +1,80 @@
+@import "variables";
+
+button {
+  &.margin {
+    margin: 2px;
+  }
+  .glyphicon {
+    top: 2px;
+    //left: 1px;
+  }
+  outline-style: none !important;
+}
+
+.buttons-container {
+  button {
+    width: 100%;
+    text-align: left;
+    white-space: normal;
+  }
+}
+
+.stm-location {
+  .buttons {
+    margin-top: 9px;
+  }
+}
+
+.datepicker-with-buttons {
+
+  padding: 5px 0;
+
+  .buttons {
+    @media (max-width: $screen-xs-max) {
+      margin-top: 6px;
+      .btn-block {
+        //max-width: 400px;
+      }
+    }
+  }
+
+}
+
+a[disabled], [disabled] a {
+  color: gray;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+a.disabled, .disabled a {
+  pointer-events: none;
+  cursor: not-allowed;
+  -moz-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+  filter: gray;
+  -webkit-filter: grayscale(100%);
+}
+
+.disable-click {
+  pointer-events: none;
+}
+
+
+.iOS a:hover, a:focus {
+  color: #4290d0;
+  text-decoration: none;
+}
+
+.btn-danger {
+  background-color: #ff4422;
+}
+
+%primary-button {
+  background-color: $primary-color;
+  border: solid 1px #258fbf;
+  color: $white;
+  text-align: center;
+  padding: 6px;
+  border-radius: 6px;
+}

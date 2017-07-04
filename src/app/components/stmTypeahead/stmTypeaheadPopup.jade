@@ -1,0 +1,14 @@
+.stm-typeahead-popup-wrapper(
+  ng-style="{top: position().top+'px', left: position().left+'px', 'max-height': $parent.vm.popupHeightPx}"
+  style="display: block;"
+  ng-show="$parent.vm.popupHeightPx && isOpen() && !moveInProgress"
+  aria-hidden="{{!isOpen()}}"
+)
+  //p.message Выберите контрагента
+
+  ul.dropdown-menu(role="listbox")
+    li.uib-typeahead-match(
+    ng-repeat="match in matches track by match.id"
+    ng-mouseenter="selectActive($index)" ng-click="selectMatch($index)" role="option" id="{{::match.id}}"
+    )
+      div(uib-typeahead-match index="$index" match="match" query="query" template-url="templateUrl")

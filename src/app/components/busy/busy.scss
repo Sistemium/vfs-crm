@@ -1,0 +1,22 @@
+@import "variables";
+
+.cg-busy-default-spinner {
+  top: 10px;
+  left: 20px;
+}
+
+.cg-busy-default-sign {
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: $cg-background-color;
+  border-color: darken($cg-background-color,4);
+  -webkit-border-radius: $cg-border-radius;
+  -moz-border-radius: $cg-border-radius;
+  border-radius: $cg-border-radius;
+
+  .cg-busy-default-text {
+    font-size: 14px;
+    font-weight: normal;
+    text-shadow: none;
+  }
+}

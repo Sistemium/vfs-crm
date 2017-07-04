@@ -1,0 +1,27 @@
+.display-flex
+  input.flex-1(
+  type="text"
+  ng-class='vm.inputClass'
+  id='{{vm.inputId}}'
+  ng-model='vm.inputModel'
+  placeholder="{{vm.currentPlaceholder}}"
+  ng-focus='vm.inputFocus($event)'
+  ng-blur='vm.inputBlur($event)'
+  trim-enabled
+  input-required
+  uib-typeahead
+  autocomplete="off"
+  typeahead-click-open
+  typeahead-focus-on-select='false'
+  typeahead-wait-ms="20"
+  typeahead-min-length=0
+  typeahead-append-to-body='true'
+  typeahead-on-select='vm.onSelectItem($item)'
+  typeahead-popup-template-url='app/components/stmTypeahead/stmTypeaheadPopup.html'
+  typeahead-editable
+  )
+  div.animate-show(ng-if='vm.inputEditable' ng-show='!vm.startClickOpen && vm.inputModel && vm.inputModel !== vm.currentSelected')
+    button.btn.ml-em.btn-primary.pull-right(
+    ng-click='vm.addButtonClick($event)'
+    )
+      i.glyphicon.glyphicon-plus

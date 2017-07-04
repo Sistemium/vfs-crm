@@ -1,0 +1,47 @@
+@import "variables";
+
+.collapsing {
+
+  -webkit-transition-timing-function: ease-in !important;
+  transition-timing-function: ease-in !important;
+
+  -webkit-transition-duration: $short-duration;
+  transition-duration: $short-duration;
+
+}
+
+.turnable {
+
+  -webkit-transition: $short-duration linear;
+  transition: $short-duration linear;
+
+  &.turn-90-counter-clock {
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+  }
+
+  &.turn-180-counter-clock {
+    -webkit-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+  }
+
+  &.flip-vertical {
+    -webkittransform: scale(1, -1);
+    transform: scale(1, -1);
+  }
+
+}
+
+.animate-show.ng-hide-add,
+.animate-show.ng-hide-remove {
+  transition: opacity linear $short-duration;
+}
+
+.scalable {
+  -webkit-transition: $short-duration linear;
+  transition: transform $short-duration linear;
+  &.scale-y-50 {
+    -webkit-transform: scale(1, 1.5);
+    transform: scale(1, 1.5);
+  }
+}

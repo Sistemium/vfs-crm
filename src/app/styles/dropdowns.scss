@@ -1,0 +1,64 @@
+@import "variables";
+
+.popover {
+
+  .option {
+
+    padding: 8px 0;
+
+    & + .option, & + .divider {
+      border-top: solid 1px $border-gray;
+    }
+
+
+    // TODO: experimental
+    &.active {
+      font-weight: bold;
+      @extend .disabled;
+    }
+
+    &.current {
+      background-color: $active-color;
+      border-radius: 4px;
+      border: none;
+
+      &.current > span {
+        color: white;
+      }
+    }
+
+    &.current + div {
+      border: none;
+    }
+
+  }
+
+  .divider {
+    margin-top: 4px;
+  }
+
+}
+
+.dropdown[disabled], .disabled, [disabled] {
+  .caret {
+    display: none;
+  }
+}
+
+span.caret {
+
+  font-family: 'Glyphicons Halflings';
+  font-size: 9px;
+
+  border: none !important;
+
+  width: auto;
+  height: auto;
+  position: relative;
+  top: 2px;
+
+  &:before {
+    content: "\e252"
+  }
+
+}

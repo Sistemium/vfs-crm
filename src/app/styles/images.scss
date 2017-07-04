@@ -1,0 +1,86 @@
+@import "mixins";
+
+.thumbnail img.w-150 {
+  max-width: 150px;
+  max-height: 150px;
+}
+
+.mh-120 img {
+  max-height: 120px;
+}
+
+.mh-80 img {
+  max-height: 80px;
+}
+
+.stream-photo {
+
+  a.thumbnail {
+    width: auto;
+    margin: 0 auto;
+    display: inline-block;
+    img {
+      max-height: 240px;
+    }
+  }
+
+  min-height: 340px;
+  max-height: 340px;
+  padding-bottom: 40px;
+}
+
+img.placeholder {
+  opacity: 0.3;
+  background: url("../images/placeholder.png") no-repeat center;
+  background-size: 85%;
+}
+
+a.thumb {
+  overflow: hidden;
+  padding: 0;
+  border: none;
+  margin: 0;
+}
+
+.popover-inner {
+
+  .thumb {
+
+    position: relative;
+
+    width: 60px;
+    height: 60px;
+
+    @extend %center-vertical;
+
+    border: solid 1px $border-gray;
+
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+
+    img {
+
+      object-fit: contain;
+
+      width: 60px;
+      height: 60px;
+      min-width: 60px;
+      min-height: 60px;
+    }
+
+    .remove {
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      border-radius: 10px;
+      padding: 4px;
+      background: red;
+      color: $white;
+      line-height: 1;
+      font-size: 10px;
+    }
+  }
+
+}

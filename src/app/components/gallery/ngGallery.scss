@@ -1,0 +1,196 @@
+@import "../../styles/variables";
+
+.ng-gallery-fullscreen {
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background: white;
+  z-index: 9000;
+
+  display: flex;
+  flex: 1;
+
+  * {
+    outline: none;
+  }
+
+  @extend %no-select;
+
+  .commentText i {
+    font-size: 18px;
+    position: relative;
+    top: 5px;
+  }
+
+}
+
+.ng-gallery {
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  .left-right-chevron {
+
+    @media (max-width: 400px) {
+      display: none;
+    }
+
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+
+    &:hover {
+      text-decoration: none;
+    }
+
+  }
+
+  .window-controls {
+    position: fixed;
+    right: 0;
+    margin: 1px;
+  }
+
+  .main-view {
+
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 0;
+
+    .main-photo-block {
+
+      display: flex;
+      flex: 1;
+      position: relative;
+      width: 100%;
+
+      loading-circle {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        text-align: center;
+
+        @media (max-width: 569px) and (orientation: landscape) {
+          top: 35%;
+        }
+
+        @media (max-width: 569px) {
+          top: 40%;
+        }
+      }
+
+      img.fullsize {
+
+        height: 100%;
+        width: 100%;
+        padding: 20px 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+
+        object-fit: contain;
+
+      }
+
+    }
+
+    .image-info {
+
+      text-align: center;
+      margin: 0;
+      font-size: smaller;
+
+      .name {
+        color: gray;
+      }
+
+      .index {
+        font-weight: bold;
+        margin-bottom: 0;
+        @include responsive-only(lt-sm) {
+          display: none;
+        }
+      }
+
+    }
+
+    .ng-thumbnails-wrapper {
+      min-width: 100px;
+      max-width: 534px;
+      padding: 15px;
+      width: 100%;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+
+      @include responsive-only(lt-sm) {
+        display: none;
+      }
+
+    }
+
+    #ng-thumbnails-scroll {
+
+      width: 100%;
+      height: 70px;
+
+      display: flex;
+
+      flex-direction: row;
+      flex-wrap: nowrap;
+
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+
+      > a {
+        display: block;
+      }
+
+      .ng-thumbnail {
+
+        display: block;
+        border-radius: 4px;
+        background: white;
+        min-width: 70px;
+        max-width: 70px;
+        height: 70px;
+        border: 1px solid $border-gray;
+        margin-right: 2px;
+
+        img {
+          width: 66px;
+          height: 66px;
+          cursor: pointer;
+          opacity: 0.5;
+          object-fit: contain;
+          padding: 2px;
+        }
+
+        &:hover, &.active {
+          border-color: darken($border-gray, 20%);
+          img {
+            opacity: 1;
+          }
+        }
+
+      }
+
+    }
+
+  }
+
+  .flex-center {
+    justify-content: center;
+  }
+
+}

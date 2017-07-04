@@ -1,0 +1,19 @@
+.modal-header
+  h4.modal-title
+    span {{vm.title}}
+    = ' '
+    small {{ vm.titleSmall }}
+    a(href='' ng-click='vm.cancel()')
+      i.pull-right.glyphicon.glyphicon-remove
+.modal-body(cg-busy='vm.busy')
+  p(ng-if='vm.text') {{ ::vm.text }}
+  .text-center
+    img(ng-if='vm.src' ng-src='{{ vm.src }}' style='max-width: 100%; max-height: 500px;')
+.modal-footer
+  sab-confirm-buttons(
+  submit-disable='false'
+  on-cancel='vm.deleteItem'
+  on-submit='vm.submit'
+  submit-label='Готово'
+  cancel-label='{{vm.deleteDelegate ? "Удалить" : ""}}'
+  )

@@ -1,0 +1,32 @@
+// if flickering add display: block property;
+
+#scroll-main, .scroll-y {
+  overflow-y: scroll;
+  //overflow-x:
+  -webkit-overflow-scrolling: touch;
+
+  > table {
+    margin-bottom: 0;
+  }
+
+}
+
+.scroll-bar {
+
+  &::-webkit-scrollbar:vertical {
+    -webkit-appearance: none;
+    width: 30px;
+    display: block;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: darken($gray-background-color, 10);
+    border-radius: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 5px;
+    background-color: $gray-background-color;
+  }
+
+}

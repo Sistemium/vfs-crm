@@ -1,0 +1,79 @@
+.ng-gallery.ng-gallery-fullscreen(
+)
+
+  a.left-right-chevron(
+  href
+  ng-click='vm.prevImageClick()'
+  ng-show='imagesAll.length > 1'
+  )
+    i.glyphicon.glyphicon-chevron-left.btn-lg
+
+  .main-view
+
+    // TODO: Swipes
+    a.main-photo-block.noPreventDefault(
+    href
+    ng-click='vm.closeGalleryClick()'
+    ng-swipe-right='vm.prevImageClick()'
+    ng-swipe-left='vm.nextImageClick()'
+    ng-swipe-up='vm.closeGalleryClick()'
+    )
+
+      loading-circle(ng-if='loading')
+
+      img.fullsize(
+      ondragstart='return false;'
+      draggable='false'
+      ng-src='{{ currentImageSrc }}'
+      ng-if='!loading'
+      alt='Ошибка загрузки изображения'
+      ng-pinch-zoom max-scale='8' zoom-fn='vm.setZoom'
+      )
+
+    .image-info
+      p.name(ng-if='vm.currentImage.name || vm.currentImage.title')
+
+        span {{ vm.currentImage.name || vm.currentImage.title() }}
+        span &nbsp;
+        a.commentText(
+        href
+        ng-if='vm.commentText'
+        uib-tooltip='{{vm.commentText}}'
+        )
+          i.glyphicon.glyphicon-question-sign
+
+      p.index {{index + 1}} / {{imagesAll.length}} [{{ vm.zoom }}]
+
+    .ng-thumbnails-wrapper
+      #ng-thumbnails-scroll(
+      ng-class='imagesAll.length < 7 ? "flex-center" : "" '
+      vs-horizontal
+      vs-autoresize
+      vs-repeat
+      )
+        a.ng-thumbnail(
+        href
+        ng-click='vm.fullScreenThumbnailClick(image)'
+        ng-class='{active : vm.currentImage.id === image.id}'
+        ng-repeat='image in imagesAll track by image.id'
+        )
+          img(
+          draggable='false'
+          ng-src='{{ image.srcThumbnail }}'
+          )
+
+
+  a.left-right-chevron(
+  href
+  ng-show='imagesAll.length > 1'
+  ng-click='vm.nextImageClick()'
+  )
+    i.glyphicon.glyphicon-chevron-right.btn-lg
+
+  .window-controls
+
+    a(
+    href
+    ng-click='vm.closeGalleryClick()'
+    )
+      i.glyphicon.glyphicon-remove.btn-lg

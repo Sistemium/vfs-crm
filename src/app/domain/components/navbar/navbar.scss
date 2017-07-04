@@ -1,0 +1,147 @@
+@import "../../styles/variables";
+@import "../../styles/flex";
+
+.root-navbar {
+
+  @extend %flex-center;
+
+  margin-bottom: -7px;
+  margin-top: $margin-bottom-xs;
+  height: 37px;
+
+  > .separator {
+    @extend .flex-1;
+  }
+
+  a:hover, a:focus {
+    text-decoration: none;
+  }
+
+  .fullscreen-menu {
+    font-size: 24px;
+    @media (max-width: $screen-xs-max) {
+      font-size: 20px;
+    }
+  }
+
+  > a + a {
+    margin-left: 20px;
+    @media (max-width: $screen-xs-max) {
+      margin-left: 15px;
+    }
+  }
+
+  & + hr {
+    margin-top: 12px;
+  }
+
+  a.home {
+    background: $cg-background-color;
+    padding: 0 8px;
+    line-height: 37px;
+    border-radius: 9px;
+    font-size: 21px;
+    display: block;
+
+    b {
+      top: 3px;
+      right: 1px;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      font-size: 20px;
+    }
+
+    &.disabled {
+      background: none !important;
+    }
+
+  }
+
+  syncer-indicator {
+    margin-right: 8px;
+  }
+
+  a.sub-root-nav {
+    @include responsive-only(xxs) {
+      display: none;
+    }
+  }
+
+}
+
+@media (min-width: 768px) {
+
+  .navbar {
+    form.only {
+      display: block;
+      width: 100%;
+
+      .form-group, .form-group .form-control {
+        display: block;
+        width: 100%;
+      }
+
+    }
+  }
+
+}
+
+@media (min-width: 768px) {
+  .navbar.navbar-fixed-bottom {
+    .float-right {
+      margin-right: 5px;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+
+  .navbar.navbar-fixed-bottom {
+    .nav.float-right {
+      margin-right: -5px;
+    }
+  }
+
+  .navbar {
+
+    .navbar-header:after {
+      clear: none;
+    }
+
+    .nav.float-right {
+      float: right;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      margin-right: -15px;
+    }
+
+    .float-left {
+      float: left;
+    }
+
+    .nav.float-left {
+      float: left;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    li.divider {
+      height: 1px;
+      margin: 9px 0;
+      overflow: hidden;
+      background-color: #e5e5e5
+    }
+
+    form.only {
+      padding-top: 0;
+      padding-bottom: 0;
+      border: none;
+    }
+
+  }
+}
+
+.root-navbar + hr {
+  border: none;
+}

@@ -1,0 +1,132 @@
+h1, h2, h3, h4, h5, h6 {
+  label {
+    margin-bottom: 0;
+  }
+
+  &:active, &:focus {
+    outline: none;
+  }
+
+}
+
+.ui-view {
+  > h1, > h2, > h3, > h4, > h5, > h6 {
+    &:first-child {
+      margin-top: 5px;
+    }
+  }
+}
+
+.list-group {
+  label {
+    margin-bottom: 0;
+  }
+}
+
+span.editable {
+  outline: none;
+  padding-bottom: 1px;
+  border-bottom: 1px;
+  &.focused {
+    border-bottom: solid 1px gray;
+  }
+  label {
+    border-right: solid 1px transparent;
+    padding-right: 1px;
+    box-sizing: content-box;
+    min-height: 0.9em;
+    cursor: pointer;
+  }
+}
+
+hr {
+  margin-top: 17px;
+  margin-bottom: 17px;
+}
+
+.mt {
+  margin-top: 17px;
+}
+
+.em6 {
+  min-width: 6em;
+}
+
+p.list-group-item-text {
+  label {
+    margin-right: 0.25em;
+  }
+  span + label {
+    margin-left: 0.5em;
+  }
+}
+
+.ml-em {
+  margin-left: 1em;
+}
+
+.ml-15 {
+  margin-left: 15px;
+}
+
+.ml-10 {
+  margin-left: 10px;
+}
+
+.mb-0 {
+  margin-bottom: 0px;
+}
+
+.mb--1 {
+  margin-bottom: -1px;
+}
+
+.centered {
+  text-align: center;
+}
+
+.w100 {
+  width: 100%;
+}
+
+.mr--8 {
+  margin-right: -8px;
+}
+
+.scroll-horizontal {
+  white-space: nowrap;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+.p-6 {
+  padding: 6px;
+}
+
+.header-button {
+  h4 {
+    margin-top: 3px;
+    @media (min-width: 768px) {
+      margin-top: 0px;
+    }
+  }
+  button {
+    position: relative;
+    top: -3px;
+    @media (min-width: 768px) {
+      top: -8px;
+    }
+  }
+}
+
+// TODO: something a bit smarter needed
+.max-width-75p {
+  max-width: 75%;
+  @media (max-width: 450px) {
+    max-width: 200px;
+  }
+}
+
+small i.glyphicon {
+  font-size: 80%;
+}

@@ -1,0 +1,2 @@
+div(ng-show='dm.errors.length')
+  uib-alert(ng-repeat='error in dm.errors' type='{{error.type}}' close='dm.closeError($index)') {{error.msg}}

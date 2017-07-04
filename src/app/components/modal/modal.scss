@@ -1,0 +1,27 @@
+@import "../../styles/variables";
+
+.modal-primary,
+.modal-info,
+.modal-success,
+.modal-warning,
+.modal-danger {
+  .modal-header {
+    color: #fff;
+    border-radius: 5px 5px 0 0;
+  }
+}
+.modal-primary .modal-header .title{
+  color: $brand-primary;
+}
+.modal-info .modal-header .title{
+  color: $state-info-text;
+}
+.modal-success .modal-header .title{
+  color: $state-success-text;
+}
+.modal-warning .modal-header .title{
+  color: $state-warning-text;
+}
+.modal-danger .modal-header .title{
+  color: $state-danger-text;
+}

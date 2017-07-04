@@ -1,0 +1,18 @@
+fieldset
+  button.btn.margin.btn-warning(
+  ng-if='!vm.isInCancelProcess && vm.cancelLabel !== ""'
+  ng-click='vm.cancelClick()'
+  ) {{ ::vm.cancelLabel }}
+  button.btn.margin.btn-warning(
+  ng-if='vm.isInCancelProcess'
+  ng-click='vm.isInCancelProcess = false'
+  ) {{ ::vm.cancelNoLabel }}
+  button.btn.margin.btn-danger(
+  ng-if='vm.isInCancelProcess'
+  ng-click='vm.cancelConfirmClick()'
+  ) Да, {{ ::vm.cancelLabel | lowercase }}
+  button.btn.margin.btn-primary(
+  ng-if='!vm.isInCancelProcess'
+  ng-disabled='vm.isSubmitDisabled()'
+  ng-click='vm.submitClick()'
+  ) {{ ::vm.submitLabel }}

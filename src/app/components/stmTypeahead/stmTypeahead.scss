@@ -1,0 +1,62 @@
+.stm-typeahead-popup-wrapper {
+
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+
+  padding: 2px 0;
+  margin: 2px 0 0;
+  font-size: 14px;
+  text-align: left;
+
+  background-color: #fff;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, .15);
+  border-radius: 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+
+  > .message {
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
+    color: #868686;
+  }
+
+  > .dropdown-menu {
+    position: static;
+    float: none;
+    display: block;
+    min-width: 160px;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    list-style: none;
+  }
+
+  li > a:hover {
+    background-color: #5555ff;
+  }
+
+  ul > li > a {
+
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #333;
+    white-space: nowrap;
+
+    &:active, &:focus, & {
+      outline-style: none;
+    }
+  }
+
+}
+

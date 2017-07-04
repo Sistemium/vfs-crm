@@ -1,0 +1,38 @@
+$breadcrumb-padding: 8px;
+
+.breadcrumb > li {
+
+  padding-top: $breadcrumb-padding;
+  padding-bottom: $breadcrumb-padding;
+
+  margin-top: -$breadcrumb-padding;
+  margin-bottom: -$breadcrumb-padding;
+
+  overflow-y: hidden;
+
+  & + li:before {
+    margin-left: 4px;
+  }
+
+  & + li.active:before {
+    margin-left: 0;
+  }
+
+  &.dropdown {
+    overflow-y: visible;
+  }
+
+}
+
+.breadcrumb {
+
+  min-height: 35px;
+
+  padding-top: $breadcrumb-padding;
+  padding-bottom: $breadcrumb-padding;
+
+  > * {
+    vertical-align: text-top;
+  }
+
+}
