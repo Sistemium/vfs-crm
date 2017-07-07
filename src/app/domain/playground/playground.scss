@@ -1,0 +1,53 @@
+//@import "../../styles/placeholder-selectors";
+
+.playground {
+
+  .table-headers {
+
+    @extend %flex-row-nowrap;
+
+    > * {
+      font-weight: 900;
+      font-size: 20px;
+    }
+
+    .service-user {
+      width: 30%;
+    }
+
+    .address {
+      width: 50%;
+    }
+    .serving-master {
+      width: 20%;
+    }
+  }
+
+  .scroll-y {
+    .service-point-repeater {
+      .service-point {
+
+        @extend %flex-row-nowrap;
+
+        > * {
+          padding: 2px 5px;
+        }
+
+        .service-point-name {
+          width: 30%;
+          border: 1px solid $gray;
+          @extend .ellipsis;
+        }
+        .service-point-address {
+          width: 50%;
+          border: 1px solid $gray;
+        }
+        .service-point-master {
+          width: 20%;
+          border: 1px solid $gray;
+        }
+      }
+    }
+  }
+
+}

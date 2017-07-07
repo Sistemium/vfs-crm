@@ -9,14 +9,22 @@
 
     const vm = saControllerHelper.setup(this, $scope);
 
-    const {Person} = Schema.models();
+    const {Employee, Person, ServicePoint} = Schema.models();
 
-    vm.use({
-      version: 0.1
-    });
+    vm.use({});
 
-    Person.findAll()
-      .then(data => vm.data = data);
+    Person.findAll();
+
+    ServicePoint.findAll()
+      .then(data => {
+        vm.data = data;
+        _.each(data, (a, b) => {
+          console.log(a, b);
+        });
+      });
+
+    Employee.find('dc2a0b00-5bef-11e7-8000-6c40089c5fc0')
+      .then(data => console.log(data));
 
   }
 })();

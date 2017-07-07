@@ -1,4 +1,17 @@
-section
+.playground
 
-  h2 Playground
-    .lead v{{ vm.version }}
+  .table-headers
+    .service-user Naudotojas
+    .address Adresas
+    .serving-master Atsakingas Meistras
+
+  .scroll-y(
+  resize
+  resize-offset-top='5'
+  vs-excess='10'
+  )
+    .service-point-repeater(ng-repeat='servicePoint in vm.data| orderBy: "name" track by servicePoint.id')
+      .service-point
+        span.service-point-name {{servicePoint.name}}
+        span.service-point-address {{servicePoint.address}}
+        span.service-point-master {{servicePoint.servingMasterId}}
