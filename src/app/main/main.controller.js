@@ -11,8 +11,9 @@
     const vm = this;
 
     _.assign(vm, {
-      data: Menu.root()
-    });
+        data: Menu.root()
+      }
+    );
 
   }
 })();
