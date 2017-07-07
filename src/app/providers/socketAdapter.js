@@ -5,7 +5,8 @@
   angular.module('Models').service('SocketAdapter', function (Sockets) {
 
     const DEBUG = debug('stg:SocketAdapter');
-    const Defaults = function () {};
+    const Defaults = function () {
+    };
 
     const defaultsPrototype = Defaults.prototype;
 
@@ -36,7 +37,7 @@
 
       options = options || {};
 
-      let parsed = _.assign({},params);
+      let parsed = _.assign({}, params);
 
       if (params.limit) {
         parsed['x-page-size:'] = params.limit;
@@ -80,7 +81,7 @@
         params: paramsToOptions(params, options),
         options: angular.extend({
           headers: {
-            'x-page-size': options.limit || 3000,
+            'x-page-size': options.limit || 2000,
             'x-start-page': options.startPage || 1
           }
         }, options)
