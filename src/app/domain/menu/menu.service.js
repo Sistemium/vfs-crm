@@ -6,8 +6,8 @@
 
 
     const items = [{
-      title: 'Тесты',
-      state: 'playground'
+      title: 'Aptarnavimo taškai',
+      state: 'servicePoints'
     }];
 
 
