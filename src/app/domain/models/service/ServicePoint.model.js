@@ -11,9 +11,9 @@
       relations: {
         hasOne: {
           Employee: {
-            localField: 'employee',
-            foreignId: 'servingMaster'
-          },
+            localField: 'servingMaster',
+            localKey: 'servingMasterId'
+          }
         }
       }
 
