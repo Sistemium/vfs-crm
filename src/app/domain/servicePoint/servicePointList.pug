@@ -1,0 +1,20 @@
+.service-point-list.ui-view(cg-busy='vm.cgBusy')
+
+  .headers
+    .name Naudotojas
+    .address Adresas
+    .serving-master Aptarnavimo Meistras
+
+  .scroll-y(
+  resize
+  resize-offset-top='5'
+  vs-repeat
+  vs-excess='10'
+  )
+    .service-point(
+    ng-repeat='servicePoint in vm.data | orderBy: "name" track by servicePoint.id'
+    ng-click='vm.servicePointClick(servicePoint)'
+    )
+      .name {{servicePoint.name}}
+      .address {{servicePoint.address}}
+      .serving-master {{servicePoint.servingMaster.name}}
