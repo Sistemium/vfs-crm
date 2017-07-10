@@ -1,3 +1,5 @@
+@import "../../../styles/flex";
+
 .root-navbar {
 
   @extend %flex-center;
@@ -7,7 +9,7 @@
   height: 37px;
 
   > .separator {
-    @extend .flex-1;
+    flex: 1;
   }
 
   a:hover, a:focus {
