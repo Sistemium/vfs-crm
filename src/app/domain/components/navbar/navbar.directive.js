@@ -1,6 +1,9 @@
 (function () {
 
-  function acmeNavbar() {
+  angular.module('webPage')
+    .directive('rootNavbar', rootNavbar);
+
+  function rootNavbar() {
     return {
 
       restrict: 'E',
@@ -15,26 +18,43 @@
     };
   }
 
-  function NavbarController(Menu, $scope, $rootScope, saControllerHelper, $window, localStorageService) {
+  function NavbarController(Menu, $scope, $rootScope, saControllerHelper, $window, localStorageService, $state) {
 
-    const DEFAULT_TITLE = 'Главное меню';
+    const DEFAULT_TITLE = 'Pagrindinis meniu';
     const vm = saControllerHelper.setup(this, $scope);
 
     vm.use({
 
       menu: Menu.root(),
-      rootClick: () => $rootScope.$broadcast('rootClick')
+      rootClick
 
     });
 
+    onStateChange({}, $state.current);
+
     $scope.$on('$stateChangeSuccess', onStateChange);
     $scope.$on('$stateChangeStart', onStateChange);
+
+    /*
+     Functions
+     */
+
+    function rootClick() {
+
+      if (vm.isSubRootState) {
+        return $state.go(vm.rootState);
+      }
+
+      $rootScope.$broadcast('rootClick');
+
+    }
 
     function onStateChange(event, to) {
 
       let rootState = _.get(to, 'data.rootState');
 
       vm.use({
+        rootState,
         hide: !!_.get(to, 'data.hideTopBar'),
         hideNavs: !!_.get(to, 'data.hideNavs'),
         title: _.get(to, 'data.title') || DEFAULT_TITLE,
@@ -58,9 +78,5 @@
 
 
   }
-
-  angular
-    .module('webPage')
-    .directive('navbar', acmeNavbar);
 
 })();
