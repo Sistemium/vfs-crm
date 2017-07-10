@@ -11,9 +11,9 @@
       relations: {
         hasMany: {
           ServicePoint: {
-            localField: 'ServicePoints',
-            localKey: 'ServingMaster'
-          },
+            localField: 'servicePointsAsServingMaster',
+            foreignKey: 'servingMasterId'
+          }
         }
       }
 
