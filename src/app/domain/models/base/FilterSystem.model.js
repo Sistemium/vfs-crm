@@ -6,21 +6,21 @@
 
     Schema.register({
 
-      name: 'ServicePoint',
+      name: 'FilterSystem',
 
       relations: {
 
         hasOne: {
-          Employee: {
-            localField: 'servingMaster',
-            localKey: 'servingMasterId'
+          Brand: {
+            localField: 'brand',
+            localKey: 'brandId'
           }
         },
 
         hasMany: {
           ServiceItem: {
-            localField: 'servingItems',
-            foreignKey: 'servicePointId'
+            localField: 'serviceItem',
+            foreignKey: 'filterSystemId'
           }
         }
 

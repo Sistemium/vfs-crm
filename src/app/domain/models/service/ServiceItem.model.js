@@ -6,7 +6,27 @@
 
     Schema.register({
 
-      name: 'ServiceItem'
+      name: 'ServiceItem',
+      relations: {
+        hasOne: {
+          ServicePoint: {
+            localField: 'servicePoint',
+            localKey: 'servicePointId'
+          },
+          FilterSystem: {
+            localField: 'filterSystem',
+            localKey: 'filterSystemId'
+          },
+          Employee: [{
+            localField: 'installingMaster',
+            localKey: 'installingMasterId'
+          },{
+            localField: 'servingMaster',
+            localKey: 'servingMasterId'
+          }]
+
+        }
+      }
 
     });
 
