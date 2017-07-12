@@ -1,0 +1,15 @@
+.service-point-master {
+
+  display: flex;
+  flex-direction: row;
+
+  service-point-sidenav {
+    max-width: 400px;
+  }
+
+  .ui-view {
+    flex: 1;
+  }
+
+
+}

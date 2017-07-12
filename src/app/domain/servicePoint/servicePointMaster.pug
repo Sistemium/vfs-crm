@@ -1,0 +1,18 @@
+.service-point-master(
+cg-busy='vm.cgBusy'
+ng-class='{"detailed-state": vm.isDetailedState}'
+)
+
+  service-point-sidenav(
+  ng-if='vm.servicePointId'
+  service-points='vm.data'
+  current-service-point-id='vm.servicePointId'
+  current-idx='vm.idx'
+  service-point-click-fn='vm.servicePointClick'
+  )
+
+  .ui-view
+    service-point-list(
+    service-points='vm.data'
+    service-point-click-fn='vm.servicePointClick'
+    )
