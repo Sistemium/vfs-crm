@@ -3,34 +3,35 @@
 
 %flex-table {
 
-  $cells-border: 1px solid $border-gray;
+  $cells-border-bottom: 1px solid $border-gray;
   $cells-padding: 3px;
-
-  $width-name: 30%;
-  $width-address: 50%;
-  $width-serving-master: 20%;
 
   > %flex-table-headers {
 
     @extend %flex-row-nowrap;
+    border-bottom: $cells-border-bottom;
 
     > * {
       font-weight: 500;
       font-size: 110%;
-      padding: $cells-padding * 2;
+      padding-bottom: $cells-padding * 2;
     }
 
   }
 
   %flex-table-item {
+    border-bottom: $cells-border-bottom;
 
     @extend %flex-row-nowrap;
 
     > * {
       padding: $cells-padding;
-      border: $cells-border;
     }
 
+  }
+
+  %flex-table-item:hover {
+    background: $hover-color;
   }
 
 }
