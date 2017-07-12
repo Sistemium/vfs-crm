@@ -11,7 +11,7 @@
 
           name: 'servicePoints',
           url: '/servicePoints',
-          template: '<service-point-list></service-point-list>',
+          template: '<service-point-master></service-point-master>',
 
           data: {
             title: 'Aptarnavimo taškai'
@@ -24,6 +24,7 @@
             template: '<service-point-details></service-point-details>',
 
             data: {
+              title: 'Aptarnavimo taškas',
               rootState: 'servicePoints'
             }
 
