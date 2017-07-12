@@ -1,4 +1,4 @@
-.service-point-list.ui-view(cg-busy='vm.cgBusy')
+.service-point-list
 
   .headers
     .name Naudotojas
@@ -12,9 +12,11 @@
   vs-excess='10'
   )
     .service-point(
-    ng-repeat='servicePoint in vm.data | orderBy: "name" track by servicePoint.id'
-    ng-click='vm.servicePointClick(servicePoint)'
+    ng-repeat='servicePoint in vm.servicePoints | orderBy: "name" track by servicePoint.id'
+    ng-click='vm.servicePointClickFn(servicePoint, $index)'
     )
       .name {{servicePoint.name}}
       .address {{servicePoint.address}}
       .serving-master {{servicePoint.servingMaster.name}}
+
+  .ui-view
