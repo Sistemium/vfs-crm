@@ -12,7 +12,7 @@
     .constant('geolib', geolib)
 
     .value('cgBusyDefaults', {
-      message: 'Идет загрузка',
+      message: 'Puslapis kraunasi',
       delay: 100,
       templateUrl: 'app/components/busy/busy.html'
     })
