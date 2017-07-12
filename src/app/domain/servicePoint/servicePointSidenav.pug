@@ -1,0 +1,15 @@
+.service-point-sidenav
+  p {{vm.idx}}
+  .scroll-y(
+  resize
+  resize-offset-top='5'
+  vs-repeat
+  vs-excess='10'
+  )
+    .service-point(
+    ng-repeat='servicePoint in vm.servicePoints | orderBy: "name" track by servicePoint.id'
+    ng-click='vm.servicePointClickFn(servicePoint)'
+    ng-class='{active: servicePoint.id === vm.currentServicePointId}'
+    )
+      .name {{servicePoint.name}}
+      .address {{servicePoint.address}}
