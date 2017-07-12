@@ -1,1 +1,27 @@
-pre {{ vm.servicePoint | json }}
+.service-point-detailed
+
+  .filter-user {{vm.servicePoint.name}}
+    .user-address {{vm.servicePoint.address}}
+
+
+
+  .service-point-items
+
+    .header-1 Naudotojo Įrenginiai
+      .badge {{vm.servicePoint.servingItems.length}}
+
+    .headers
+      .filter-system Filtro Sistema
+      .assembler Montavimo Meistras
+      .serving-master Aptarnavimo Meistras
+
+    .scroll-y(
+    resize
+    resize-offset-top='5'
+    )
+      .service-point-item(
+      ng-repeat='item in vm.servicePoint.servingItems track by item.id'
+      )
+        .filter-system {{item.filterSystem.brand.name}} {{item.filterSystem.model}}
+        .assembler {{item.installingMaster.name}}
+        .serving-master {{item.servingMaster.name}}

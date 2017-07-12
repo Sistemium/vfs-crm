@@ -13,12 +13,14 @@
 
     const vm = saControllerHelper.setup(this, $scope);
 
-    const {ServicePoint} = Schema.models();
+    const {ServicePoint, FilterSystem, Brand} = Schema.models();
 
-    vm.use({
-    });
+    vm.use({});
 
     refresh();
+
+    FilterSystem.findAll();
+    Brand.findAll();
 
     /*
      Functions
@@ -29,12 +31,14 @@
       let id = $state.params.servicePointId;
 
       let busy = [
-        ServicePoint.find(id)
+        ServicePoint.find(id),
+        ServicePoint.findAllWithRelations({id}, {bypassCache: true})(['ServiceItem'])
       ];
 
       vm.setBusy(busy)
         .then(res => {
-          vm.servicePoint = res;
+          vm.servicePoint = res[0];
+          console.warn(res[0]);
         });
 
     }
