@@ -8,7 +8,14 @@
     const items = [{
       title: 'Aptarnavimo taškai',
       state: 'servicePoints'
-    }];
+    }, {
+      title: 'Test',
+      state: 'test'
+    }, {
+      title: 'Darbuotojai',
+      state: 'employee'
+    }
+    ];
 
 
     function setItemData(state, data) {

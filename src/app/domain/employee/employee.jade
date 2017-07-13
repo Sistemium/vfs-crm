@@ -1,0 +1,17 @@
+.employee
+
+  .headers
+    .first-name Vardas
+    .last-name Pavardė
+    .telephone Mob. Telefonas
+
+  .scroll-y(
+  resize
+  resize-offset-top='5'
+  )
+    .employee-item(
+    ng-repeat='employee in vm.employees track by employee.id'
+    )
+      .first-name {{employee.personInfo.firstName}}
+      .last-name {{employee.personInfo.lastName}}
+      .telephone {{employee.phoneInfo.phone}}
