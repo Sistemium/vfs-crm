@@ -14,6 +14,13 @@
             localField: 'servicePointsAsServingMaster',
             foreignKey: 'servingMasterId'
           }
+        },
+
+        hasOne: {
+          Person: {
+            localField: 'personInfo',
+            localKey: 'personId'
+          }
         }
       }
 

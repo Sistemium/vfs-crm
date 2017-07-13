@@ -6,7 +6,15 @@
 
     Schema.register({
 
-      name: 'Person'
+      name: 'Person',
+
+      relations: {
+        // hasOne: {
+        //   localKey: '',
+        //   localField: ''
+        // }
+
+      }
 
     });
 
