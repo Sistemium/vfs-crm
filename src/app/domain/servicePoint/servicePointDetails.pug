@@ -1,9 +1,13 @@
 .service-point-detailed
 
-  .filter-user {{vm.servicePoint.name}}
-    .user-address {{vm.servicePoint.address}}
-
-
+  .sub-nav
+    .filter-user {{vm.servicePoint.name}}
+      .user-address {{vm.servicePoint.address}}
+    .buttons
+      button.btn.btn-warning(
+      ng-click=''
+      )
+        i.glyphicon.glyphicon-edit
 
   .service-point-items
 
