@@ -33,9 +33,9 @@
 
     // Auth.init(IOS.isIos() ? IOS.init() : phaService).then();
 
-    function afterAuth(autorization) {
+    function afterAuth(authorization) {
 
-      console.log('Auth', autorization);
+      console.log('Auth', authorization);
 
       let appConfig =
         InitService.localDevMode ? {} :
