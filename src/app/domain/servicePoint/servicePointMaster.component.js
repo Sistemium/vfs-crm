@@ -46,7 +46,8 @@
         ServicePoint.findAll()
       ];
 
-      vm.setBusy(busy);
+      vm.lol = vm.setBusy(busy);
+
 
     }
 

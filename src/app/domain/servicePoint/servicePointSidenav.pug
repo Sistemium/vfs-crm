@@ -1,10 +1,13 @@
 .service-point-sidenav
-  p {{vm.idx}}
-  .scroll-y(
+
+  searcher
+
+  #sidenav-scroll-list.scroll-y(
   resize
   resize-offset-top='5'
   vs-repeat
   vs-excess='10'
+  elem-ready='vm.restoreScrollPosition()'
   )
     .service-point(
     ng-repeat='servicePoint in vm.servicePoints | orderBy: "name" track by servicePoint.id'

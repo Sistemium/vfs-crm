@@ -5,7 +5,8 @@
       servicePoints: '=',
       currentServicePointId: '=',
       servicePointClickFn: '=',
-      currentIdx: '='
+      currentIdx: '=',
+      setBusyTest: '='
     },
     templateUrl: 'app/domain/servicePoint/servicePointSidenav.html',
     controller: servicePointSidenav,
@@ -13,19 +14,32 @@
 
   });
 
-  function servicePointSidenav(saControllerHelper, $scope) {
+  function servicePointSidenav(saControllerHelper, $scope, $q) {
 
     const vm = saControllerHelper.setup(this, $scope);
+    const servicePointHeight = 53;
 
     vm.use({
-      $onInit
+      restoreScrollPosition
     });
 
-    function $onInit() {
-      let scrollingBlock = document.getElementsByClassName('service-point-sidenav');
-      console.log(scrollingBlock[0].offsetTop);
-      scrollingBlock[0].scrollTop = vm.currentIdx * 53;
-      console.log('Should be ', vm.currentIdx * 53);
+    function restoreScrollPosition() {
+
+      $q.when(vm.setBusyTest).then((res) => {
+
+        if (vm.servicePoints.length <= 1) {
+          vm.servicePoints = res[1];
+        }
+
+        let servicePoints = _.orderBy(vm.servicePoints, ['name'], ['asc']);
+        let idx = _.findIndex(servicePoints, {id: vm.currentServicePointId});
+        let scrollingBlock = document.getElementById('sidenav-scroll-list');
+
+        setTimeout(() => {
+          scrollingBlock.scrollTop = idx * servicePointHeight;
+        });
+
+      });
 
     }
 
