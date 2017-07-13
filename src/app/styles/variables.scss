@@ -49,6 +49,8 @@ $state-danger-bg: #f2dede !default;
 $state-danger-border: darken(adjust-hue($state-danger-bg, -10), 5%) !default;
 
 $hover-color: #CFE1EE;
+$hover-color-gray: #e6e6e6;
+$hover-border-color-gray: #adadad;
 
 $info-background-color: $state-info-bg;
 $info-color: $state-info-text;
