@@ -81,7 +81,7 @@
         params: paramsToOptions(params, options),
         options: angular.extend({
           headers: {
-            'x-page-size': options.limit || 2000,
+            'x-page-size': options.limit || 5000,
             'x-start-page': options.startPage || 1
           }
         }, options)
