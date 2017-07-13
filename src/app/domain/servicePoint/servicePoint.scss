@@ -54,27 +54,26 @@
   $width-serving-master: 30%;
 
   @extend %flex-column-nowrap;
+  .sub-nav {
 
-  .filter-user {
-    font-size: 20px;
-    color: $primary-color;
+    @extend %flex-row-nowrap;
+    justify-content: space-between;
     padding: 10px;
-    border-radius: $border-radius;
+    box-shadow: $box-shadow;
     background: $gray-background-color;
 
-    .user-address {
-      font-size: 15px;
-      color: $custom-gray;
+    .filter-user {
+      font-size: 20px;
+      color: $primary-color;
+
+      .user-address {
+        font-size: 15px;
+        color: $custom-gray;
+      }
+
     }
-
-  }
-
-  .header-1 {
-    font-size: 20px;
-    margin: 20px 0;
-    .badge {
-      line-height: 15px;
-      margin-bottom: 5px;
+    .buttons {
+      align-self: center;
     }
   }
 
@@ -96,8 +95,20 @@
     }
   }
 
+  .header-1 {
+    font-size: 20px;
+    margin: 10px 0;
+    .badge {
+      line-height: 15px;
+      margin-bottom: 5px;
+    }
+  }
+
   .service-point-items {
-    padding-left: 8px;
+    margin-top: 10px;
+    padding: 10px;
+    box-shadow: $box-shadow;
+
     @extend %flex-table;
 
     .headers {
@@ -134,41 +145,50 @@
 
 .service-point-sidenav {
 
-  margin-right: 20px;
+  margin-right: 10px;
   width: 300px;
-  box-shadow: $box-shadow;
 
-  .service-point {
+  searcher {
+    margin-bottom: 10px;
+    display: flex;
+  }
 
-    @extend %flex-column-nowrap;
-    border-bottom: 1px solid $border-gray;
-    padding: 0 10px;
+  .scroll-y {
+    box-shadow: $box-shadow;
+    .service-point {
 
-    .name {
-      @extend .ellipsis;
-      margin-top: 3px;
-      font-weight: 400;
+      @extend %flex-column-nowrap;
+      border-bottom: 1px solid $border-gray;
+      padding: 0 10px;
+
+      .name {
+        @extend .ellipsis;
+        margin-top: 3px;
+        font-weight: 400;
+      }
+
+      .address {
+        @extend .ellipsis;
+        align-self: flex-end;
+        max-width: 100%;
+        color: $custom-gray;
+        line-height: 30px;
+        font-size: smaller;
+      }
     }
 
-    .address {
-      @extend .ellipsis;
-      align-self: flex-end;
-      max-width: 100%;
-      color: $custom-gray;
-      line-height: 30px;
-      font-size: smaller;
+    .service-point:hover {
+      background: $hover-color;
     }
-  }
 
-  .service-point:hover {
-    background: $hover-color;
-  }
+    .active {
+      background: darken($hover-color, 5%);
+    }
 
-  .active {
-    background: darken($hover-color, 5%);
-  }
+    .active:hover {
 
-  .active:hover {
+    }
 
   }
+
 }
