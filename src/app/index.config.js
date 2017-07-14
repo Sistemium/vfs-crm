@@ -38,7 +38,7 @@
       console.log('Auth', authorization);
 
       let appConfig =
-        InitService.localDevMode ? {} :
+        // InitService.localDevMode ? {} :
           {
             url: {
               socket: 'https://socket2.sistemium.com'
