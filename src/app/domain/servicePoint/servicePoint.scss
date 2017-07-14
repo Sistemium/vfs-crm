@@ -65,6 +65,7 @@
     .filter-user {
       font-size: 20px;
       color: $primary-color;
+      min-height: 50px;
 
       .user-address {
         font-size: 15px;
@@ -97,7 +98,7 @@
 
   .header-1 {
     font-size: 20px;
-    margin: 10px 0;
+    margin: 5px 0 5px 0;
     .badge {
       line-height: 15px;
       margin-bottom: 5px;
@@ -108,6 +109,12 @@
     margin-top: 10px;
     padding: 10px;
     box-shadow: $box-shadow;
+
+    .header {
+      @extend %flex-row-nowrap;
+      justify-content: space-between;
+      align-items: center;
+    }
 
     @extend %flex-table;
 

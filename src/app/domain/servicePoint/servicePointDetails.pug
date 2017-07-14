@@ -11,8 +11,13 @@
 
   .service-point-items
 
-    .header-1 Naudotojo Įrenginiai
-      .badge {{vm.servicePoint.servingItems.length}}
+    .header
+      .header-1 Naudotojo Įrenginiai
+      .button
+        button.btn.btn-warning(
+        ng-click=''
+        )
+          i.glyphicon.glyphicon-plus
 
     .headers
       .filter-system Filtro Sistema
@@ -26,6 +31,6 @@
       .service-point-item(
       ng-repeat='item in vm.servicePoint.servingItems track by item.id'
       )
-        .filter-system {{item.filterSystem.brand.name}} {{item.filterSystem.model}}
+        .filter-system {{item.filterSystem.brand.name}} {{item.filterSystem.model}} {{item.info}}
         .assembler {{item.installingMaster.name}}
         .serving-master {{item.servingMaster.name}}

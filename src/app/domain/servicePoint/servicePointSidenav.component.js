@@ -36,7 +36,7 @@
         let scrollingBlock = document.getElementById('sidenav-scroll-list');
 
         setTimeout(() => {
-          scrollingBlock.scrollTop = idx * servicePointHeight;
+          scrollingBlock.scrollTop = (idx) * servicePointHeight;
         });
 
       });
