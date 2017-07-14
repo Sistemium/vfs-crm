@@ -1,17 +1,13 @@
 .employee
 
-  .headers
-    .first-name Vardas
-    .last-name Pavardė
-    .telephone Mob. Telefonas
+  .subnav
+    .navigation
 
-  .scroll-y(
-  resize
-  resize-offset-top='5'
-  )
-    .employee-item(
-    ng-repeat='employee in vm.employees track by employee.id'
-    )
-      .first-name {{employee.personInfo.firstName}}
-      .last-name {{employee.personInfo.lastName}}
-      .telephone {{employee.phoneInfo.phone}}
+      i.glyphicon.glyphicon-th(ng-click='vm.goToTable()')
+      i.glyphicon.glyphicon-align-justify(ng-click='vm.goToTile()')
+
+    .buttons
+      button.btn.btn-info
+        i.glyphicon-plus.glyphicon
+
+  .ui-view

@@ -8,17 +8,40 @@
 
   });
 
-  function employeeController($scope, Schema, saControllerHelper) {
+  function employeeController($scope, Schema, saControllerHelper, $state) {
 
     const vm = saControllerHelper.setup(this, $scope);
 
     const {Employee, Person} = Schema.models();
 
-    vm.use({});
+    vm.use({
+      goToTile,
+      goToTable,
+      $onInit
+    });
 
     vm.rebindAll(Employee, {}, 'vm.data');
 
     getData();
+
+    /*
+     Functions
+     */
+
+    function $onInit() {
+      if ($state.current.name === 'employee') {
+        goToTable();
+      }
+    }
+
+    function goToTile() {
+      console.log('wrewrwer');
+      $state.go('.detailedTiles');
+    }
+
+    function goToTable() {
+      $state.go('.detailedTable')
+    }
 
     function getData() {
 
@@ -29,11 +52,6 @@
         });
 
     }
-
-    /*
-     Functions
-     */
-
 
   }
 
