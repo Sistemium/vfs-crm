@@ -21,6 +21,10 @@
           ServiceItem: {
             localField: 'servingItems',
             foreignKey: 'servicePointId'
+          },
+          ServicePointContact: {
+            localField: 'servicePointContact',
+            foreignKey: 'servicePointId'
           }
         }
 

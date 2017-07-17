@@ -25,6 +25,12 @@
             localKey: 'servingMasterId'
           }]
 
+        },
+        hasMany: {
+          ServiceContractItem: {
+            localField: 'serviceContractItems',
+            foreignKey: 'serviceItemId'
+          }
         }
       }
 
