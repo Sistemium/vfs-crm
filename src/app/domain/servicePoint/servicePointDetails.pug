@@ -1,8 +1,11 @@
 .service-point-detailed
-
   .sub-nav
-    .filter-user {{vm.servicePoint.name}}
+    .filter-user
       .user-address {{vm.servicePoint.address}}
+      .users(ng-repeat='servicePointContact in vm.servicePoint.servicePointContact track by servicePointContact.id')
+        span {{servicePointContact.person.firstName}} {{servicePointContact.person.lastName}}
+        a(href='tel:{{ employee.phoneInfo.phone}}') {{ servicePointContact.person.phone }}
+
     .buttons
       button.btn.btn-warning(
       ng-click=''
@@ -23,6 +26,7 @@
       .filter-system Filtro Sistema
       .assembler Montavimo Meistras
       .serving-master Aptarnavimo Meistras
+      .edit-button
 
     .scroll-y(
     resize
@@ -30,7 +34,15 @@
     )
       .service-point-item(
       ng-repeat='item in vm.servicePoint.servingItems track by item.id'
+      ng-mouseenter='vm.onItemHover(item)' ng-mouseleave='vm.onItemHover()'
       )
-        .filter-system {{item.filterSystem.brand.name}} {{item.filterSystem.model}} {{item.info}}
+        .filter-system
+          span {{item.filterSystem.brand.name}} {{item.filterSystem.model}}
+          span(ng-if='!item.filterSystem.brand.name') {{item.info}}
         .assembler {{item.installingMaster.name}}
         .serving-master {{item.servingMaster.name}}
+        .edit-button
+          i.glyphicon.glyphicon-pencil(
+          ng-click='vm.editItem(item)'
+          ng-if='vm.showIcon && vm.currHoverId === item.id'
+          )

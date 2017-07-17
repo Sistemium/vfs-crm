@@ -49,9 +49,10 @@
 
 .service-point-detailed {
 
-  $width-filter-system: 40%;
+  $width-filter-system: 35%;
   $width-assembler: 30%;
   $width-serving-master: 30%;
+  $width-edit-button: 5%;
 
   @extend %flex-column-nowrap;
   .sub-nav {
@@ -63,13 +64,19 @@
     background: $gray-background-color;
 
     .filter-user {
-      font-size: 20px;
-      color: $primary-color;
       min-height: 50px;
 
       .user-address {
-        font-size: 15px;
+        font-size: 20px;
+      }
+
+      .users {
         color: $custom-gray;
+        justify-content: flex-end;
+        @extend %flex-row-nowrap;
+        span {
+          margin-right: 10px;
+        }
       }
 
     }
@@ -134,12 +141,21 @@
       .serving-master {
         width: $width-filter-system;
       }
+      .edit-button {
+        width: $width-edit-button;
+      }
 
     }
 
     .scroll-y {
       .service-point-item {
         @extend %flex-table-item;
+
+        .edit-button:hover {
+          background: darken($hover-color, 10%);
+          border-radius: 2px;
+        }
+
         .assembler, .filter-system {
           @extend .ellipsis;
         }
