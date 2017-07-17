@@ -35,7 +35,6 @@
     }
 
     function goToTile() {
-      console.log('wrewrwer');
       $state.go('.detailedTiles');
     }
 
