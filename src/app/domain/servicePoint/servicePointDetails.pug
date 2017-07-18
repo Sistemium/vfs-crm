@@ -1,48 +1,48 @@
 .service-point-detailed
-  .sub-nav
-    .filter-user
-      .user-address {{vm.servicePoint.address}}
-      .users(ng-repeat='servicePointContact in vm.servicePoint.servicePointContact track by servicePointContact.id')
-        span {{servicePointContact.person.firstName}} {{servicePointContact.person.lastName}}
-        a(href='tel:{{ employee.phoneInfo.phone}}') {{ servicePointContact.person.phone }}
+  .service-point
+    .service-point-info
+      .address {{vm.servicePoint.address}}
+      .service-point-contacts
+        .contact(ng-repeat='servicePointContact in vm.servicePoint.servicePointContacts track by servicePointContact.id')
+          span.name {{servicePointContact.person.firstName}} {{servicePointContact.person.lastName}}
+          a.phone(href='tel:{{ employee.phoneInfo.phone}}') {{ servicePointContact.person.phone }}
 
-    .buttons
-      button.btn.btn-warning(
-      ng-click=''
-      )
+    .button-block
+      button.btn.btn-warning(ng-click='')
         i.glyphicon.glyphicon-edit
 
   .service-point-items
 
     .header
-      .header-1 Naudotojo Įrenginiai
-      .button
-        button.btn.btn-warning(
+      .header-text-1 Naudotojo Įrenginiai
+      .button-block
+        button.btn.btn-warning.action(
         ng-click=''
         )
           i.glyphicon.glyphicon-plus
 
-    .headers
-      .filter-system Filtro Sistema
-      .assembler Montavimo Meistras
-      .serving-master Aptarnavimo Meistras
-      .edit-button
+    .service-point-list
+      .headers
+        .filter-system Filtro Sistema
+        .installing-master Montavimo Meistras
+        .serving-master Aptarnavimo Meistras
+        .action-edit-button
 
-    .scroll-y(
-    resize
-    resize-offset-top='5'
-    )
-      .service-point-item(
-      ng-repeat='item in vm.servicePoint.servingItems track by item.id'
-      ng-mouseenter='vm.onItemHover(item)' ng-mouseleave='vm.onItemHover()'
+      .scroll-y(
+      resize
+      resize-offset-top='5'
       )
-        .filter-system
-          span {{item.filterSystem.brand.name}} {{item.filterSystem.model}}
-          span(ng-if='!item.filterSystem.brand.name') {{item.info}}
-        .assembler {{item.installingMaster.name}}
-        .serving-master {{item.servingMaster.name}}
-        .edit-button
-          i.glyphicon.glyphicon-pencil(
-          ng-click='vm.editItem(item)'
-          ng-if='vm.showIcon && vm.currHoverId === item.id'
-          )
+        .service-point-item(
+        ng-repeat='item in vm.servicePoint.servingItems track by item.id'
+        ng-mouseenter='vm.onItemHover(item)' ng-mouseleave='vm.onItemHover()'
+        )
+          .filter-system
+            span {{item.filterSystem.brand.name}} {{item.filterSystem.model}}
+            span(ng-if='!item.filterSystem.brand.name') {{item.info}}
+          .installing-master {{item.installingMaster.name}}
+          .serving-master {{item.servingMaster.name}}
+          .action-edit-button.action.button
+            i.glyphicon.glyphicon-pencil(
+            ng-click='vm.editItem(item)'
+            ng-if='vm.showIcon && vm.currHoverId === item.id'
+            )

@@ -50,37 +50,46 @@
 .service-point-detailed {
 
   $width-filter-system: 35%;
-  $width-assembler: 30%;
+  $width-installing-master: 30%;
   $width-serving-master: 30%;
-  $width-edit-button: 5%;
+  $width-action-edit-button: 30px;
+
+  $btn-padding: 3px 6px;
+  $action-button-margin: 7px;
 
   @extend %flex-column-nowrap;
-  .sub-nav {
+  .service-point {
 
     @extend %flex-row-nowrap;
     justify-content: space-between;
     padding: 10px;
     box-shadow: $box-shadow;
     background: $gray-background-color;
+    min-height: 70px;
 
-    .filter-user {
-      min-height: 50px;
+    .service-point-info {
 
-      .user-address {
+      .address {
         font-size: 20px;
       }
 
-      .users {
+      .service-point-contacts {
+
         color: $custom-gray;
-        justify-content: flex-end;
-        @extend %flex-row-nowrap;
-        span {
-          margin-right: 10px;
+        align-items: flex-end;
+        @extend %flex-column-nowrap;
+
+        .contact {
+
+          .name {
+            margin-right: 10px;
+          }
+
         }
       }
 
     }
-    .buttons {
+    .button-block {
       align-self: center;
     }
   }
@@ -103,61 +112,86 @@
     }
   }
 
-  .header-1 {
-    font-size: 20px;
-    margin: 5px 0 5px 0;
-    .badge {
-      line-height: 15px;
-      margin-bottom: 5px;
+  .button-block {
+    .btn {
+      padding: $btn-padding;
     }
   }
 
   .service-point-items {
     margin-top: 10px;
-    padding: 10px;
     box-shadow: $box-shadow;
 
     .header {
+      box-shadow: $box-shadow;
       @extend %flex-row-nowrap;
       justify-content: space-between;
       align-items: center;
+      padding: 0 10px;
+
+      .header-text-1 {
+        font-size: 20px;
+        margin: 5px 0 5px 0;
+      }
+
+      .button-block {
+        .btn {
+          padding: $btn-padding;
+        }
+      }
     }
 
     @extend %flex-table;
 
-    .headers {
-      @extend %flex-table-headers;
-    }
-
-    > * {
-
-      .filter-system {
-        width: $width-filter-system;
+    .service-point-list {
+      margin: 0 5px;
+      .headers {
+        padding: 5px 0 0 4px;
+        @extend %flex-table-headers;
       }
 
-      .assembler {
-        width: $width-filter-system;
-      }
-      .serving-master {
-        width: $width-filter-system;
-      }
-      .edit-button {
-        width: $width-edit-button;
-      }
+      > * {
 
-    }
-
-    .scroll-y {
-      .service-point-item {
-        @extend %flex-table-item;
-
-        .edit-button:hover {
-          background: darken($hover-color, 10%);
-          border-radius: 2px;
+        .filter-system {
+          width: $width-filter-system;
+        }
+        .installing-master {
+          width: $width-filter-system;
+        }
+        .serving-master {
+          width: $width-filter-system;
+        }
+        .action-edit-button {
+          width: $width-action-edit-button;
+          margin-right: $action-button-margin;
         }
 
-        .assembler, .filter-system {
-          @extend .ellipsis;
+      }
+
+      .scroll-y {
+
+        .service-point-item {
+
+          @extend %flex-table-item;
+
+          .action-edit-button {
+
+            margin-right: $action-button-margin - 1;
+            border-radius: 4px;
+
+            i {
+              @extend %flex-row-nowrap;
+              justify-content: center
+            }
+          }
+
+          .action-edit-button:hover {
+            background: darken($hover-color, 10%);
+          }
+
+          .installing-master, .filter-system, .serving-master {
+            @extend .ellipsis;
+          }
         }
       }
     }
