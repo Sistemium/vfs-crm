@@ -23,7 +23,7 @@
             foreignKey: 'servicePointId'
           },
           ServicePointContact: {
-            localField: 'servicePointContact',
+            localField: 'servicePointContacts',
             foreignKey: 'servicePointId'
           }
         }
