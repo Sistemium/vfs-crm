@@ -1,6 +1,8 @@
 .service-point-sidenav
 
-  searcher
+  searcher(
+  search='vm.searchText'
+  )
 
   #sidenav-scroll-list.scroll-y(
   resize
@@ -10,7 +12,7 @@
   elem-ready='vm.restoreScrollPosition()'
   )
     .service-point(
-    ng-repeat='servicePoint in vm.servicePoints | orderBy: "name" track by servicePoint.id'
+    ng-repeat='servicePoint in vm.servicePoints | filter: vm.searchText | orderBy: "name" track by servicePoint.id'
     ng-click='vm.servicePointClickFn(servicePoint)'
     ng-class='{active: servicePoint.id === vm.currentServicePointId}'
     )

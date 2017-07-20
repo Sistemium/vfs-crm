@@ -6,7 +6,7 @@
       currentServicePointId: '=',
       servicePointClickFn: '=',
       currentIdx: '=',
-      setBusyTest: '='
+      promise: '='
     },
     templateUrl: 'app/domain/servicePoint/servicePointSidenav.html',
     controller: servicePointSidenav,
@@ -25,7 +25,7 @@
 
     function restoreScrollPosition() {
 
-      $q.when(vm.setBusyTest).then((res) => {
+      $q.when(vm.promise).then((res) => {
 
         if (vm.servicePoints.length <= 1) {
           vm.servicePoints = res[1];
