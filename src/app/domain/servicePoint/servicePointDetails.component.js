@@ -8,16 +8,15 @@
 
   });
 
-
-  function servicePointDetailsController($scope, Schema, saControllerHelper, $state) {
+  function servicePointDetailsController($scope, Schema, saControllerHelper, $state, $uibModal) {
 
     const vm = saControllerHelper.setup(this, $scope);
 
     const {ServicePoint, FilterSystem, Brand, Person} = Schema.models();
 
     vm.use({
-      onItemHover,
-      editItem
+      editItem,
+      openEditItemModal
     });
 
     refresh();
@@ -38,7 +37,7 @@
 
       let busy = [
         ServicePoint.findAllWithRelations({id}, {bypassCache: true})(['ServiceItem', 'ServicePointContact'])
-          .then(loadServicePointRelations)
+        .then(loadServicePointRelations)
       ];
 
       vm.setBusy(busy);
@@ -52,34 +51,39 @@
 
       _.each(servicePoint.servingItems, serviceItem => {
         serviceItem.DSLoadRelations()
-          .then(() => {
-            _.each(serviceItem.serviceContractItems, serviceContractItem => {
-              serviceContractItem.DSLoadRelations();
-            });
-          });
+        .then(() => {
+          // _.each(serviceItem.serviceContractItems, serviceContractItem => {
+          //   serviceContractItem.DSLoadRelations();
+          // });
+        });
       });
 
       console.warn(servicePoint);
 
     }
 
-    function onItemHover(item) {
-
-      if (item) {
-        vm.currHoverId = item.id;
-        vm.showIcon = true;
-      } else {
-        vm.currHoverId = '';
-        vm.showIcon = false;
-      }
-
+    function openEditItemModal(point) {
+      $uibModal.open({
+        animation: true,
+        ariaLabelledBy: 'modal-title-bottom',
+        ariaDescribedBy: 'modal-body-bottom',
+        templateUrl: 'app/domain/servicePoint/editItem/editItem.html',
+        size: 'lg',
+        controller: function () {
+          let vm = this;
+          vm.point = point;
+        },
+        controllerAs: 'vm'
+      });
     }
 
-    function editItem(item) {
-
+    function editItem(point) {
+      console.log(point);
+      vm.currentPointEdit = point;
+      vm.openComponent = true;
+      //openEditItemModal(point);
     }
 
   }
-
 
 })(angular.module('webPage'));

@@ -8,7 +8,7 @@
           a.phone(href='tel:{{ employee.phoneInfo.phone}}') {{ servicePointContact.person.phone }}
 
     .button-block
-      button.btn.btn-warning(ng-click='')
+      button.btn.btn-warning
         i.glyphicon.glyphicon-edit
 
   .service-point-items
@@ -26,6 +26,7 @@
         .filter-system Filtro Sistema
         .installing-master Montavimo Meistras
         .serving-master Aptarnavimo Meistras
+        .service-contract Sutartis
         .action-edit-button
 
       .scroll-y(
@@ -34,15 +35,20 @@
       )
         .service-point-item(
         ng-repeat='item in vm.servicePoint.servingItems track by item.id'
-        ng-mouseenter='vm.onItemHover(item)' ng-mouseleave='vm.onItemHover()'
         )
           .filter-system
-            span {{item.filterSystem.brand.name}} {{item.filterSystem.model}}
+            span {{item.filterSystem.brand.nameS}} {{item.filterSystem.model}}
             span(ng-if='!item.filterSystem.brand.name') {{item.info}}
           .installing-master {{item.installingMaster.name}}
           .serving-master {{item.servingMaster.name}}
+          .service-contract {{ item.currentServiceContract.num }} nuo {{ item.currentServiceContract.date }}
           .action-edit-button.action.button
-            i.glyphicon.glyphicon-pencil(
+            i.glyphicon.glyphicon.glyphicon-option-horizontal(
             ng-click='vm.editItem(item)'
-            ng-if='vm.showIcon && vm.currHoverId === item.id'
+            popover-placement='auto bottom-right'
+            popover-is-open='vm.isOpenEditPopover'
+            popover-trigger='"click"'
+            uib-popover-template='"/app/domain/servicePoint/editItem/editItem.html"'
+            popover-title='Įrenginio Modifikavimas'
+            popover-append-to-body='false'
             )

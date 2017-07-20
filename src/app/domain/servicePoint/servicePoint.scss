@@ -49,9 +49,10 @@
 
 .service-point-detailed {
 
-  $width-filter-system: 35%;
-  $width-installing-master: 30%;
-  $width-serving-master: 30%;
+  $width-filter-system: 30%;
+  $width-installing-master: 20%;
+  $width-serving-master: 20%;
+  $width-service-contract: 30%;
   $width-action-edit-button: 30px;
 
   $btn-padding: 3px 6px;
@@ -160,6 +161,9 @@
         }
         .serving-master {
           width: $width-filter-system;
+        }
+        .service-contract {
+          width: $width-service-contract;
         }
         .action-edit-button {
           width: $width-action-edit-button;
