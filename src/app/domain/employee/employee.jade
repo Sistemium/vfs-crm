@@ -1,13 +1,5 @@
 .employee
 
-  .subnav
-    .navigation
-
-      i.glyphicon.glyphicon-th(ng-click='vm.goToTable()')
-      i.glyphicon.glyphicon-align-justify(ng-click='vm.goToTile()')
-
-    .buttons
-      button.btn.btn-info
-        i.glyphicon-plus.glyphicon
+  navigation-bar(view-buttons='true' state-name='employee' search-text='vm.searchText')
 
   .ui-view

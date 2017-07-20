@@ -53,6 +53,10 @@
 
       }
 
+      .headers > *:last-of-type {
+        text-align: right;
+      }
+
       .scroll-y {
 
         .employee-item {
@@ -63,6 +67,10 @@
             @extend .ellipsis;
           }
 
+          > *:last-of-type {
+            text-align: right;
+          }
+
         }
 
       }
@@ -70,7 +78,7 @@
 
   }
 
-  .employee-tile {
+  .employee-tiles {
 
     $tile-height: 270px;
 

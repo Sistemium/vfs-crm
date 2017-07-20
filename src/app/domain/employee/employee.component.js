@@ -8,17 +8,13 @@
 
   });
 
-  function employeeController($scope, Schema, saControllerHelper, $state) {
+  function employeeController($scope, Schema, saControllerHelper) {
 
     const vm = saControllerHelper.setup(this, $scope);
 
     const {Employee, Person} = Schema.models();
 
-    vm.use({
-      goToTile,
-      goToTable,
-      $onInit
-    });
+    vm.use({});
 
     vm.rebindAll(Employee, {}, 'vm.data');
 
@@ -28,27 +24,13 @@
      Functions
      */
 
-    function $onInit() {
-      if ($state.current.name === 'employee') {
-        goToTable();
-      }
-    }
-
-    function goToTile() {
-      $state.go('.detailedTiles');
-    }
-
-    function goToTable() {
-      $state.go('.detailedTable')
-    }
-
     function getData() {
 
       Employee.findAll()
-        .then(data => {
-          vm.employees = data;
-          Person.findAll();
-        });
+      .then(data => {
+        vm.employees = data;
+        Person.findAll();
+      });
 
     }
 
