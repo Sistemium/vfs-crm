@@ -14,12 +14,13 @@
 
     const {Employee, Person} = Schema.models();
 
-    vm.use({goToList});
+    vm.use({});
 
     vm.rebindAll(Employee, {}, 'vm.data');
 
     getData();
 
+    console.log(vm.searchText);
 
     /*
      Functions
@@ -28,16 +29,11 @@
     function getData() {
 
       Employee.findAll()
-        .then(data => {
-          vm.employees = data;
-          Person.findAll();
-        });
+      .then(data => {
+        vm.employees = data;
+        Person.findAll();
+      });
     }
-
-    function goToList() {
-      $state.go('employee')
-    }
-
 
   }
 

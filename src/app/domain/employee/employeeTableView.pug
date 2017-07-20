@@ -10,7 +10,7 @@
   resize-offset-top='5'
   )
     .employee-item(
-    ng-repeat='employee in vm.employees track by employee.id'
+    ng-repeat='employee in vm.employees | filter: vm.searchText track by employee.id'
     )
       .first-name {{employee.personInfo.firstName}}
       .last-name {{employee.personInfo.lastName}}
