@@ -2,18 +2,20 @@
 cg-busy='vm.cgBusy'
 ng-class='{"detailed-state": vm.isDetailedState}'
 )
-
   service-point-sidenav(
   ng-if='vm.servicePointId'
   service-points='vm.data'
   current-service-point-id='vm.servicePointId'
   current-idx='vm.idx'
   service-point-click-fn='vm.servicePointClick'
-  set-busy-test='vm.lol'
+  promise='vm.promise'
   )
 
   .ui-view
+
+    navigation-bar(search-text='vm.searchText')
+
     service-point-list(
-    service-points='vm.data'
+    service-points='vm.servicePoints'
     service-point-click-fn='vm.servicePointClick'
     )
