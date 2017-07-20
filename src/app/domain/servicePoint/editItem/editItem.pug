@@ -1,0 +1,40 @@
+.edit-user-item
+
+  .filter-system-dropdown
+
+    h4 Filtro Sistema:
+
+    vfs-dropdown(
+    model-name='FilterSystem'
+    current='vm.currentPointEdit.filterSystem'
+    destination='model'
+    id='vm.currentPointEdit.id'
+    current-model='vm.servicePoint.servingItems[0]'
+    id-to-rewrite='filterSystemId'
+    )
+
+  .installing-master-dropdown
+
+    h4 Montavimo Meistras:
+
+    vfs-dropdown(
+    model-name='Employee'
+    current='vm.currentPointEdit.installingMaster'
+    destination='name'
+    id='vm.currentPointEdit.id'
+    current-model='vm.servicePoint.servingItems[0]'
+    id-to-rewrite='installingMasterId'
+    )
+
+  .serving-master-dropdown
+
+    h4 Aptarnavimo Meistras:
+
+    vfs-dropdown(
+    model-name='Employee'
+    current='vm.currentPointEdit.servingMaster'
+    destination='name'
+    id='vm.currentPointEdit.id'
+    current-model='vm.servicePoint.servingItems[0]'
+    id-to-rewrite='servingMasterId'
+    )

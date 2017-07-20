@@ -1,0 +1,13 @@
+.action-edit-button .popover {
+  max-width: 500px;
+  min-width: 500px;
+}
+
+.edit-user-item {
+
+  > * {
+    @extend %flex-row-nowrap;
+    justify-content: space-between;
+  }
+
+}
