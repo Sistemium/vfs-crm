@@ -9,6 +9,10 @@
       name: 'ServiceItem',
       relations: {
         hasOne: {
+          ServiceContract: {
+            localField: 'currentServiceContract',
+            localKey: 'currentServiceContractId'
+          },
           ServicePoint: {
             localField: 'servicePoint',
             localKey: 'servicePointId'
