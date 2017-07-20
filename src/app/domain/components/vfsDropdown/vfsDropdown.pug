@@ -1,0 +1,25 @@
+.custom-dropdown
+
+  .btn-group(uib-dropdown is-open='vm.isOpen')
+
+    button#single-button.btn.btn-primary(
+    type='button'
+    uib-dropdown-toggle
+    ) {{vm.current[vm.destination] || 'Duomenų nėra'}}
+      span.caret
+
+    .dropdown-menu.dropdown-menu-right(
+    uib-dropdown-menu
+    role='menu'
+    aria-labelledby='single-button'
+    )
+      .scroll-y(
+      resize
+      resize-offset-top='15'
+      )
+        .item(
+        ng-repeat='item in vm.data track by item.id'
+        ng-class='{active : vm.current.id === item.id}'
+        ng-click='vm.save(item)'
+        )
+          span {{item[vm.destination]}}

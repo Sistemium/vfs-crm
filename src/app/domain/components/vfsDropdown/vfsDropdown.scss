@@ -1,0 +1,25 @@
+vfs-dropdown {
+  .active {
+    background: darken($hover-color, 5%);
+  }
+
+  .scroll-y {
+
+    .item {
+      height: 40px;
+      width: 200px;
+
+      span {
+        display: block;
+        @extend .ellipsis;
+        line-height: 40px;
+        padding: 0 10px;
+      }
+    }
+
+    .item:hover {
+      background: $hover-color;
+      cursor: pointer;
+    }
+  }
+}
