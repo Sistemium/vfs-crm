@@ -12,7 +12,7 @@
   vs-excess='10'
   )
     .service-point(
-    ng-repeat='servicePoint in vm.servicePoints | orderBy: "name" track by servicePoint.id'
+    ng-repeat='servicePoint in vm.servicePoints track by servicePoint.id'
     ng-click='vm.servicePointClickFn(servicePoint, $index)'
     )
       .name {{servicePoint.name}}
