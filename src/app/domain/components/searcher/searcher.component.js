@@ -2,6 +2,10 @@
 
   module.component('searcher', {
 
+    bindings: {
+      search: '='
+    },
+
     templateUrl: 'app/domain/components/searcher/searcher.html',
     controller: searcherController,
     controllerAs: 'vm'
@@ -18,8 +22,6 @@
      Functions
      */
 
-
   }
-
 
 })(angular.module('webPage'));

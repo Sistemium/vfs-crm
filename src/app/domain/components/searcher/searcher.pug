@@ -1,6 +1,12 @@
 .searcher
   .input-group
-    input#system-search.form-control(name='q', placeholder='Įveskite paieškos tekstą')
+    input#system-search.form-control(
+    name='q'
+    placeholder='Įveskite paieškos tekstą'
+    ng-model='vm.search'
+    autocomplete='off'
+    )
+
     span.input-group-btn
       button.btn.btn-default
         i.glyphicon.glyphicon-search
