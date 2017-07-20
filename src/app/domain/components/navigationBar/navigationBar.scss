@@ -1,0 +1,49 @@
+navigation-bar {
+
+  .nav {
+
+    @extend %flex-row-nowrap;
+
+    box-shadow: $box-shadow;
+    height: 50px;
+    padding: 0 10px;
+    margin-bottom: 10px;
+
+    .navigation {
+
+      min-width: 50%;
+      @extend %flex-row-nowrap;
+      align-items: center;
+      .buttons {
+        margin: 0 10px;
+        a {
+          cursor: pointer;
+          i {
+            font-size: 25px;
+            color: $gray;
+            margin-right: 10px;
+          }
+        }
+      }
+
+    }
+
+    .search-edit-block {
+
+      width: 50%;
+      @extend %flex-row-nowrap;
+      align-items: center;
+      justify-content: flex-end;
+
+      .buttons {
+        margin: 0 10px;
+      }
+    }
+
+  }
+
+  .active {
+    color: $warn !important;
+    pointer-events: none;
+  }
+}

@@ -1,0 +1,18 @@
+.navigation-bar
+
+  .nav
+    .navigation
+      .buttons(ng-if='vm.viewButtons')
+
+        a(ng-click='vm.goToTable()')
+          i.glyphicon.glyphicon-align-justify(ng-class='{active: vm.active === "table"}')
+
+        a(ng-click='vm.goToTiles()')
+          i.glyphicon.glyphicon-th(ng-class='{active: vm.active === "tiles"}')
+
+    .search-edit-block
+      searcher(search='vm.searchText')
+
+      .buttons
+        button.btn.btn-warning
+          i.glyphicon-plus.glyphico
