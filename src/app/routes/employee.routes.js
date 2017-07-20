@@ -3,51 +3,52 @@
 (function () {
 
   angular.module('webPage')
-    .config(function (stateHelperProvider) {
+  .config(function (stateHelperProvider) {
 
-      stateHelperProvider
+    stateHelperProvider
 
-        .state({
+    .state({
 
-          name: 'employee',
-          url: '/employee',
-          template: '<employee></employee>',
+      name: 'employee',
+      url: '/employee',
+      template: '<employee></employee>',
+
+      defaultChild: 'tiles',
+
+      data: {
+        title: 'Darbuotojai'
+      },
+
+      children: [
+        {
+
+          name: 'tiles',
+          url: '/tiles',
+          template: '<employee-tile-view></employee-tile-view>',
 
           data: {
-            title: 'Darbuotojai'
-          },
+            title: 'Darbuotojai',
+            rootState: 'employee.tiles'
+          }
 
-          children: [
-            {
+        },
+        {
 
-              name: 'detailedTiles',
-              url: '/detailedTiles',
-              template: '<employee-tile-view></employee-tile-view>',
+          name: 'table',
+          url: '/table',
+          template: '<employee-table-view></employee-table-view>',
 
-              data: {
-                title: 'Darbuotojai',
-                rootState: 'employee'
-              }
+          data: {
+            title: 'Darbuotojai',
+            rootState: 'employee.table'
+          }
 
-            },
-            {
+        }
 
-              name: 'detailedTable',
-              url: '/detailedTable',
-              template: '<employee-table-view></employee-table-view>',
-
-              data: {
-                title: 'Darbuotojai',
-                rootState: 'employee'
-              }
-
-            }
-
-
-          ]
-
-        });
+      ]
 
     });
+
+  });
 
 })();
