@@ -1,4 +1,4 @@
-.employee-tile
+.employee-tiles
 
   .scroll-y(
   resize
@@ -7,8 +7,8 @@
 
     .tile-repeater(ng-repeat='employee in vm.employees track by employee.id')
       .photo
-        simg(src='../../../images/placeholder.png')
-        img(src='http://www.piranhaphotography.com/blog/wp-content/uploads/2012/02/employee-photograph.jpg')
+        img(src='../../../images/placeholder.png')
+
       .info
         .first-name
           span  Vardas:
