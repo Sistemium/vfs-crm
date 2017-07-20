@@ -2,14 +2,14 @@
 
 (function () {
 
-    angular.module('Models').run(function (Schema) {
+  angular.module('Models').run(function (Schema) {
 
-      Schema.register ({
+    Schema.register({
 
-        name: 'LogMessage'
-
-      });
+      name: 'LogMessage'
 
     });
+
+  });
 
 })();
