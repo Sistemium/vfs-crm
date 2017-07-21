@@ -13,6 +13,6 @@
     .search-edit-block
       searcher(search='vm.searchText')
 
-      .buttons
-        button.btn.btn-warning
-          i.glyphicon-plus.glyphico
+      .button-block
+        button.btn.btn-warning(ng-click='vm.addItem()')
+          i.glyphicon-plus.glyphicon

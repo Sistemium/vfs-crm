@@ -1,5 +1,4 @@
 navigation-bar {
-
   .nav {
 
     @extend %flex-row-nowrap;
@@ -35,9 +34,17 @@ navigation-bar {
       align-items: center;
       justify-content: flex-end;
 
-      .buttons {
-        margin: 0 10px;
+      searcher {
+        flex: 0.7;
       }
+
+      .button-block {
+        margin: 0 10px;
+        button {
+          padding: 6px 8.5px;
+        }
+      }
+
     }
 
   }
