@@ -1,0 +1,28 @@
+.new-service-point {
+
+  form {
+    @extend %flex-column-nowrap;
+
+    .user {
+      width: 90%;
+      margin: 0 auto;
+    }
+
+    .address {
+      width: 90%;
+      margin: 0 auto;
+      .address-common, .address-detailed {
+        @extend %flex-row-nowrap;
+        justify-content: space-between;
+      }
+
+    }
+
+    .serving-master {
+      width: 90%;
+      margin: 0 auto;
+    }
+  }
+
+}
+
