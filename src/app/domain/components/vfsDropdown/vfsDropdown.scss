@@ -5,6 +5,16 @@ vfs-dropdown {
 
   .scroll-y {
 
+    .search {
+      margin: 0 5px 5px 5px;
+
+      input {
+        width: 190px;
+        border-radius: 0;
+      }
+
+    }
+
     .item {
       height: 40px;
       width: 200px;
@@ -15,6 +25,12 @@ vfs-dropdown {
         line-height: 40px;
         padding: 0 10px;
       }
+
+      span.no-res {
+        text-align: center;
+        font-weight: bold;
+      }
+
     }
 
     .item:hover {

@@ -1,5 +1,4 @@
 .custom-dropdown
-
   .btn-group(uib-dropdown is-open='vm.isOpen')
 
     button#single-button.btn.btn-primary(
@@ -13,13 +12,24 @@
     role='menu'
     aria-labelledby='single-button'
     )
+
       .scroll-y(
       resize
       resize-offset-top='15'
       )
+        .search
+          input.form-control(
+          type='text'
+          ng-click='vm.onInputClick($event)'
+          ng-model='vm.search'
+          )
+
         .item(
-        ng-repeat='item in vm.data track by item.id'
+        ng-repeat='item in vm.data | filter: vm.search as filteredItems track by item.id '
         ng-class='{active : vm.current.id === item.id}'
         ng-click='vm.save(item)'
         )
           span {{item[vm.destination]}}
+
+        .item(ng-if='filteredItems.length === 0')
+          span.no-res Rezultatų nerasta

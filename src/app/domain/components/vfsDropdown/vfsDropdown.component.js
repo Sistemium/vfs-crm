@@ -24,12 +24,24 @@
 
     vm.use({
       $onInit,
+      onInputClick,
       save
     });
 
     /*
      Functions
      */
+
+    $scope.$watch('vm.isOpen', (nv, ov) => {
+      if (nv !== ov) {
+        vm.search = '';
+      }
+    });
+
+    function onInputClick(ev) {
+      ev.stopPropagation();
+
+    }
 
     function $onInit() {
       let model = Schema.model(vm.modelName);
