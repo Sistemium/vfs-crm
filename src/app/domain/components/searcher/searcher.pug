@@ -1,12 +1,16 @@
-.searcher
-  .input-group
-    input#system-search.form-control(
-    name='q'
-    placeholder='Įveskite paieškos tekstą'
-    ng-model='vm.search'
-    autocomplete='off'
-    )
+.input-buttons-group
 
-    span.input-group-btn
-      button.btn.btn-default
-        i.glyphicon.glyphicon-search
+  .search-icon
+    i.glyphicon.glyphicon-search
+
+  input#system-search(
+  name='q'
+  placeholder='Įveskite paieškos tekstą'
+  ng-model='vm.search'
+  autocomplete='off'
+  )
+
+  span
+    button.btn.btn-warning(ng-click='vm.search = ""')
+      i.glyphicon.glyphicon-remove
+

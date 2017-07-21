@@ -1,14 +1,49 @@
-.searcher {
+searcher {
 
-  .input-group {
+  $border: 1px solid #ccc;
+
+  .input-buttons-group {
+
+    @extend %flex-row-nowrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    .search-icon {
+      border: $border;
+      border-right: 0;
+      height: 34px;
+      line-height: 34px;
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+      i {
+        color: #737373;
+        margin: 0 10px;
+      }
+    }
 
     input {
       border-radius: 0;
+      border: $border;
+      line-height: 30px;
+      border-right: none;
+      border-left: none;
+      padding-left: 0;
+      width: calc(100%);
     }
 
     span {
       button {
+        border: $border;
         border-radius: 0;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+        border-left: none;
+        padding: 6.5px 10px;
+
+        i {
+          color: white;
+        }
       }
     }
 
