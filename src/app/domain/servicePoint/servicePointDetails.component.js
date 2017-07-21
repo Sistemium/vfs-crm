@@ -50,12 +50,7 @@
       if (!servicePoint) return;
 
       _.each(servicePoint.servingItems, serviceItem => {
-        serviceItem.DSLoadRelations()
-        .then(() => {
-          // _.each(serviceItem.serviceContractItems, serviceContractItem => {
-          //   serviceContractItem.DSLoadRelations();
-          // });
-        });
+        serviceItem.DSLoadRelations();
       });
 
       console.warn(servicePoint);
