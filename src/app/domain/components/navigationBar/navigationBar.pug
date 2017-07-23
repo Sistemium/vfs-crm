@@ -1,18 +1,18 @@
 .navigation-bar
 
-  .nav
-    .navigation
-      .buttons(ng-if='vm.viewButtons')
+  .navigation(ng-if='vm.viewButtons')
 
-        a(ng-click='vm.goToTable()')
-          i.glyphicon.glyphicon-align-justify(ng-class='{active: vm.active === "table"}')
+    .buttons
+      a(ng-click='vm.goToTable()')
+        i.glyphicon.glyphicon-align-justify(ng-class='{active: vm.active === "table"}')
 
-        a(ng-click='vm.goToTiles()')
-          i.glyphicon.glyphicon-th(ng-class='{active: vm.active === "tiles"}')
+      a(ng-click='vm.goToTiles()')
+        i.glyphicon.glyphicon-th(ng-class='{active: vm.active === "tiles"}')
 
-    .search-edit-block
-      vfs-searcher(search='vm.searchText')
+  .tools
 
-      .button-block
-        button.btn.btn-warning(ng-click='vm.addItem()')
-          i.glyphicon-plus.glyphicon
+    vfs-searcher(search='vm.searchText')
+
+    .buttons
+      button.btn.btn-warning(ng-click='vm.addItem()')
+        i.glyphicon-plus.glyphicon
