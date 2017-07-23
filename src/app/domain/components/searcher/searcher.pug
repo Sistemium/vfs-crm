@@ -1,15 +1,19 @@
 .vfs-searcher
 
-  .search-icon
+  label.search-icon(for='vfs-searcher-input')
     i.glyphicon.glyphicon-search
 
-  input(
-  name='search'
-  placeholder='Įveskite paieškos tekstą'
-  ng-model='vm.search'
-  autocomplete='off'
-  )
+  .form-group
 
-  button.btn.btn-warning(ng-click='vm.search = ""')
-    i.glyphicon.glyphicon-remove
+    input#vfs-searcher-input(
+    name='search'
+    placeholder='Įveskite paieškos tekstą'
+    ng-model='vm.search'
+    autocomplete='off'
+    )
 
+    a.clear-button.animate-show(href ng-click='vm.search = ""' ng-show='vm.search')
+      i.glyphicon.glyphicon-remove
+
+  //a.clear-button(href ng-click='vm.search = ""')
+  //  i.glyphicon.glyphicon-remove.animate-show(ng-show='vm.search')

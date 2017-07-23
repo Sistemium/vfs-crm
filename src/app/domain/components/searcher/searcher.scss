@@ -5,54 +5,59 @@
   $border: solid 1px $border-gray;
 
   @extend %flex-row-nowrap;
-  justify-content: center;
+  justify-content: stretch;
   align-items: center;
 
   width: 100%;
+  position: relative;
 
-  > * {
-    border: $border;
-  }
+  border: $border;
+  border-radius: 4px;
 
   .search-icon {
 
-    border-right: 0;
-
     height: 34px;
     line-height: 34px;
-
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
+    margin-bottom: 0;
 
     i {
-      color: #737373;
+      color: $gray;
       margin: 0 10px;
     }
 
   }
 
+  .form-group {
+    flex: 1;
+    margin-bottom: 0;
+  }
+
   input {
 
-    border-radius: 0;
-    border-right: none;
-    border-left: none;
+    width: 100%;
 
     padding-left: 0;
+    padding-right: 40px;
 
     line-height: 30px;
-    width: 100%;
+    border: none;
 
   }
 
-  button {
+  .clear-button {
 
-    border-radius: 0 4px 4px 0;
-    border-left: none;
-    padding: 6.5px 10px;
+    display: inline-block;
 
-    i {
-      color: white;
-    }
+    position: absolute;
+
+    top: 3px;
+    right: 5px;
+
+    border: none;
+    padding: 6px;
+
+    text-align: center;
+    vertical-align: middle;
 
   }
 
