@@ -12,8 +12,9 @@
     border-bottom: $cells-border-bottom;
 
     > * {
+      color: darken($gray, 20%);
       font-weight: 500;
-      font-size: 110%;
+      font-size: 100%;
       padding-bottom: $cells-padding * 2;
     }
 
