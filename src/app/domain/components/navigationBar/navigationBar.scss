@@ -1,4 +1,7 @@
+@import "../../../styles/variables";
+
 navigation-bar {
+
   .nav {
 
     @extend %flex-row-nowrap;
@@ -53,4 +56,5 @@ navigation-bar {
     color: $warn !important;
     pointer-events: none;
   }
+
 }
