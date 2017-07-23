@@ -9,11 +9,14 @@
   $width-telephone: 40%;
 
   .subnav {
-    box-shadow: $box-shadow;
-    height: 50px;
+
     @extend %flex-row-nowrap;
+
     justify-content: space-between;
     align-items: center;
+
+    box-shadow: $box-shadow;
+    height: 50px;
 
     .navigation {
       i {
@@ -32,6 +35,7 @@
   .ui-view {
 
     .employee-table {
+
       @extend %flex-table;
 
       .headers {
@@ -93,15 +97,19 @@
       margin-top: 20px;
 
       .photo {
+
         margin-bottom: 15px;
         text-align: center;
+
         img {
           object-fit: contain;
           width: 100%;
           height: 150px;
           box-shadow: $box-shadow;
         }
+
       }
+
       .info {
 
         > * {
@@ -122,14 +130,19 @@
         }
 
       }
+
       .buttons {
-        margin-top: 15px;
+
         @extend %flex-row-nowrap;
         justify-content: flex-end;
+
+        margin-top: 5px;
+
         > * {
           margin-right: 5px;
-          box-shadow: $box-shadow;
+          border: none;
         }
+
       }
 
     }
