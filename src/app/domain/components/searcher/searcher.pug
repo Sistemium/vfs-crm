@@ -1,16 +1,15 @@
-.input-buttons-group
+.vfs-searcher
 
   .search-icon
     i.glyphicon.glyphicon-search
 
-  input#system-search(
-  name='q'
+  input(
+  name='search'
   placeholder='Įveskite paieškos tekstą'
   ng-model='vm.search'
   autocomplete='off'
   )
 
-  span
-    button.btn.btn-warning(ng-click='vm.search = ""')
-      i.glyphicon.glyphicon-remove
+  button.btn.btn-warning(ng-click='vm.search = ""')
+    i.glyphicon.glyphicon-remove
 

@@ -1,6 +1,6 @@
 (function (module) {
 
-  module.component('searcher', {
+  module.component('vfsSearcher', {
 
     bindings: {
       search: '='
