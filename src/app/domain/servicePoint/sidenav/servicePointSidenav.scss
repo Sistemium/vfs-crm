@@ -1,0 +1,51 @@
+@import "../../../styles/variables";
+
+.service-point-sidenav {
+
+  margin-right: 10px;
+  width: 300px;
+
+  vfs-searcher {
+    margin-bottom: 10px;
+    display: flex;
+  }
+
+  .scroll-y {
+    box-shadow: $box-shadow;
+    .service-point {
+
+      @extend %flex-column-nowrap;
+      border-bottom: 1px solid $border-gray;
+      padding: 0 10px;
+
+      .name {
+        @extend .ellipsis;
+        margin-top: 3px;
+        font-weight: 400;
+      }
+
+      .address {
+        @extend .ellipsis;
+        align-self: flex-end;
+        max-width: 100%;
+        color: $custom-gray;
+        line-height: 30px;
+        font-size: smaller;
+      }
+    }
+
+    .service-point:hover {
+      background: $hover-color;
+    }
+
+    .active {
+      background: darken($hover-color, 5%);
+    }
+
+    .active:hover {
+
+    }
+
+  }
+
+}

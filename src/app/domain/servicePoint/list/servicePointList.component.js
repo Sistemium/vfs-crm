@@ -7,7 +7,7 @@
       servicePointClickFn: '='
     },
 
-    templateUrl: 'app/domain/servicePoint/servicePointList.html',
+    templateUrl: 'app/domain/servicePoint/list/servicePointList.html',
     controllerAs: 'vm'
 
   });

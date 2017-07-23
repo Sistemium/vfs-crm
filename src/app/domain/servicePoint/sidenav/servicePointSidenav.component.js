@@ -8,7 +8,7 @@
       currentIdx: '=',
       promise: '='
     },
-    templateUrl: 'app/domain/servicePoint/servicePointSidenav.html',
+    templateUrl: 'app/domain/servicePoint/sidenav/servicePointSidenav.html',
     controller: servicePointSidenav,
     controllerAs: 'vm'
 

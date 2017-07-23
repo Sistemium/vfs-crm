@@ -2,7 +2,7 @@
 
   module.component('servicePointDetails', {
 
-    templateUrl: 'app/domain/servicePoint/servicePointDetails.html',
+    templateUrl: 'app/domain/servicePoint/details/servicePointDetails.html',
     controller: servicePointDetailsController,
     controllerAs: 'vm'
 

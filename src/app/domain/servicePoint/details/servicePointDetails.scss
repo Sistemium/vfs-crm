@@ -1,53 +1,6 @@
-@import "../../styles/flex-table";
-@import "../../styles/mixins";
+@import "../../../styles/flex-table";
 
-.service-point-list {
-
-  $width-name: 30%;
-  $width-address: 50%;
-  $width-serving-master: 20%;
-
-  @extend %flex-table;
-
-  > * {
-
-    .name {
-      width: $width-name;
-    }
-
-    .address {
-      width: $width-address;
-    }
-
-    .serving-master {
-      width: $width-serving-master;
-    }
-
-  }
-
-  .headers {
-    @extend %flex-table-headers;
-  }
-
-  .scroll-y {
-
-    .service-point {
-
-      cursor: pointer;
-
-      @extend %flex-table-item;
-
-      .name, .address, .serving-master {
-        @extend .ellipsis;
-      }
-
-    }
-
-  }
-
-}
-
-.service-point-detailed {
+.service-point-details {
 
   $width-filter-system: 30%;
   $width-installing-master: 20%;
@@ -59,6 +12,7 @@
   $action-button-margin: 7px;
 
   @extend %flex-column-nowrap;
+
   .service-point {
 
     @extend %flex-row-nowrap;
@@ -120,6 +74,7 @@
   }
 
   .service-point-items {
+
     margin-top: 10px;
     box-shadow: $box-shadow;
 
@@ -145,7 +100,9 @@
     @extend %flex-table;
 
     .service-point-list {
+
       margin: 0 5px;
+
       .headers {
         padding: 5px 0 0 4px;
         @extend %flex-table-headers;
@@ -198,56 +155,6 @@
           }
         }
       }
-    }
-
-  }
-
-}
-
-.service-point-sidenav {
-
-  margin-right: 10px;
-  width: 300px;
-
-  vfs-searcher {
-    margin-bottom: 10px;
-    display: flex;
-  }
-
-  .scroll-y {
-    box-shadow: $box-shadow;
-    .service-point {
-
-      @extend %flex-column-nowrap;
-      border-bottom: 1px solid $border-gray;
-      padding: 0 10px;
-
-      .name {
-        @extend .ellipsis;
-        margin-top: 3px;
-        font-weight: 400;
-      }
-
-      .address {
-        @extend .ellipsis;
-        align-self: flex-end;
-        max-width: 100%;
-        color: $custom-gray;
-        line-height: 30px;
-        font-size: smaller;
-      }
-    }
-
-    .service-point:hover {
-      background: $hover-color;
-    }
-
-    .active {
-      background: darken($hover-color, 5%);
-    }
-
-    .active:hover {
-
     }
 
   }

@@ -1,0 +1,49 @@
+@import "../../../styles/flex-table";
+
+.service-point-list {
+
+  $width-name: 30%;
+  $width-address: 50%;
+  $width-serving-master: 20%;
+
+  @extend %flex-table;
+
+  > * {
+
+    .name {
+      width: $width-name;
+    }
+
+    .address {
+      width: $width-address;
+    }
+
+    .serving-master {
+      width: $width-serving-master;
+    }
+
+  }
+
+  .headers {
+    @extend %flex-table-headers;
+  }
+
+  .scroll-y {
+
+    .service-point {
+
+      cursor: pointer;
+
+      @extend %flex-table-item;
+
+      .name, .address, .serving-master {
+        @extend .ellipsis;
+      }
+
+    }
+
+  }
+
+}
+
+
