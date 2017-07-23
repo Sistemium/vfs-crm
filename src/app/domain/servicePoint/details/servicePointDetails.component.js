@@ -53,7 +53,7 @@
         serviceItem.DSLoadRelations();
       });
 
-      console.warn(servicePoint);
+      // console.warn(servicePoint);
 
     }
 
@@ -73,7 +73,7 @@
     }
 
     function editItem(point) {
-      console.log(point);
+      // console.log(point);
       vm.currentPointEdit = point;
       vm.openComponent = true;
       //openEditItemModal(point);
