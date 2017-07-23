@@ -8,7 +8,7 @@
 
   });
 
-  function employeeTileViewController($scope, Schema, saControllerHelper, $state) {
+  function employeeTileViewController($scope, Schema, saControllerHelper) {
 
     const vm = saControllerHelper.setup(this, $scope);
 
