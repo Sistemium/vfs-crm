@@ -4,14 +4,14 @@
 
   margin-right: 10px;
   width: 300px;
+  box-shadow: $box-shadow;
 
   vfs-searcher {
-    margin-bottom: 10px;
+    padding: 6px;
     display: flex;
   }
 
   .scroll-y {
-    box-shadow: $box-shadow;
     .service-point {
 
       @extend %flex-column-nowrap;
