@@ -27,8 +27,7 @@
     function getData() {
 
       Employee.findAll()
-      .then(data => {
-        vm.employees = data;
+      .then(() => {
         Person.findAll();
       });
 

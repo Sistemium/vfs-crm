@@ -12,28 +12,15 @@
 
     const vm = saControllerHelper.setup(this, $scope);
 
-    const {Employee, Person} = Schema.models();
+    const {Employee} = Schema.models();
 
     vm.use({});
 
-    vm.rebindAll(Employee, {}, 'vm.data');
-
-    getData();
-
-    console.log(vm.searchText);
+    vm.rebindAll(Employee, {}, 'vm.employees');
 
     /*
      Functions
      */
-
-    function getData() {
-
-      Employee.findAll()
-      .then(data => {
-        vm.employees = data;
-        Person.findAll();
-      });
-    }
 
   }
 
