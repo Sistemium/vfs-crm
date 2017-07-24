@@ -8,30 +8,6 @@
   $width-last-name: 30%;
   $width-telephone: 40%;
 
-  .subnav {
-
-    @extend %flex-row-nowrap;
-
-    justify-content: space-between;
-    align-items: center;
-
-    box-shadow: $box-shadow;
-    height: 50px;
-
-    .navigation {
-      i {
-        font-size: 25px;
-        color: $gray;
-        margin: 0 10px;
-      }
-    }
-
-    .buttons {
-      margin: 0 10px;
-    }
-
-  }
-
   .ui-view {
 
     .employee-table {
@@ -79,111 +55,119 @@
 
       }
     }
+    .employee-tiles {
 
-  }
+      $tile-height: 270px;
 
-  .employee-tiles {
+      .tile-repeater {
 
-    $tile-height: 270px;
+        float: left;
+        box-shadow: $box-shadow;
+        height: $tile-height;
 
-    .tile-repeater {
+        width: calc(100% / 5 - 20px);
+        margin: 10px;
 
-      float: left;
-      box-shadow: $box-shadow;
-      height: $tile-height;
+        .photo {
 
-      width: calc(100% / 5 - 17px);
-      margin-left: 15px;
-      margin-top: 20px;
+          margin-bottom: 10px;
+          text-align: center;
 
-      .photo {
+          img {
+            object-fit: contain;
+            width: 100%;
+            height: 150px;
+            box-shadow: $box-shadow;
+          }
 
-        margin-bottom: 15px;
-        text-align: center;
-
-        img {
-          object-fit: contain;
-          width: 100%;
-          height: 150px;
-          box-shadow: $box-shadow;
         }
 
-      }
+        .info {
 
-      .info {
+          > * {
 
-        > * {
+            @extend %flex-row-nowrap;
 
-          padding: 0 5px;
+            padding: 0 5px;
+            height: 24px;
+            line-height: 24px;
+            width: 100%;
+            justify-content: space-between;
 
-          width: 100%;
+            label {
+              font-weight: normal;
+              color: $gray;
+              margin-right: 10px;
+            }
+
+            span {
+              font-weight: bold;
+            }
+
+            i {
+              font-size: larger;
+            }
+
+            span, a {
+              @extend .ellipsis;
+            }
+          }
+
+        }
+
+        .buttons {
+
           @extend %flex-row-nowrap;
-          justify-content: space-between;
 
-          i {
-            font-size: larger;
+          border-top: 1px solid lighten($custom-gray, 30%);
+          justify-content: flex-end;
+          margin-top: 6px;
+
+          > button {
+            margin-right: 0;
+            border: 0;
+            border-radius: 0;
           }
 
-          label, a {
-            @extend .ellipsis;
-          }
         }
 
       }
 
-      .buttons {
+      @include responsive-only(gt-md) {
 
-        @extend %flex-row-nowrap;
-        justify-content: flex-end;
+        .tile-repeater {
+          margin: 10px;
+          width: calc(100% / 4 - 20px);
+        }
 
-        margin-top: 5px;
+      }
 
-        > * {
-          margin-right: 5px;
-          border: none;
+      @include responsive-only(sm) {
+
+        .tile-repeater {
+          width: calc(100% / 3 - 20px);
+        }
+
+      }
+
+      @include responsive-only(xs) {
+
+        .tile-repeater {
+          width: calc(100% / 2 - 20px);
+        }
+
+      }
+
+      @include responsive-only(xxs) {
+
+        .tile-repeater {
+          width: calc(100% / 1 - 20px);
         }
 
       }
 
     }
 
-    @include responsive-only(gt-md) {
-      .tile-repeater {
-        margin: 10px 5px;
-        width: calc(100% / 4 - 10px);
-
-        height: $tile-height;
-
-      }
-    }
-
-    @media(max-width: $screen-md) and (min-width: $screen-sm + 1) {
-
-      .tile-repeater {
-        width: calc(100% / 3 - 10px);
-
-        height: $tile-height;
-
-      }
-    }
-
-    @media(max-width: $screen-sm) and (min-width: $screen-xs + 1) {
-
-      .tile-repeater {
-
-        width: calc(100% / 2 - 10px);
-
-      }
-
-    }
-
-    @media (max-width: $screen-xs) {
-
-      .tile-repeater {
-        width: calc(100% / 1);
-      }
-
-    }
   }
 
 }
