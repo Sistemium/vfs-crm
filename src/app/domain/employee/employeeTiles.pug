@@ -1,0 +1,38 @@
+.employee-tiles
+
+  pre {{ vm.isOpenedEditPopover | json }}
+  pre {{vm.currItem}}
+
+  .scroll-y(
+  resize
+  resize-offset-top='10'
+  )
+
+    .tile-repeater(ng-repeat='employee in vm.employees track by employee.id')
+      .photo
+        img(src='../../../images/placeholder.png')
+
+      .info
+        .first-name
+          label  Vardas:
+          span {{employee.personInfo.firstName}}
+        .last-name
+          label  Pavardė:
+          span {{employee.personInfo.lastName}}
+        .telephone
+          label
+            i.glyphicon.glyphicon-earphone
+          a(href='tel:{{ employee.phoneInfo.phone || "+37060743433" }}') {{employee.phoneInfo.phone || '+37060743433'}}
+      .buttons
+        button.btn.btn-default(
+        ng-click='vm.editItem(employee)'
+        popover-placement='auto bottom-right'
+        popover-is-open='vm.currentItem === employee.id'
+        popover-trigger='"outsideClick"'
+        uib-popover-template='"/app/domain/employee/employeeEditPopover/employeeEdit.html"'
+        popover-title='Kliento Redagavimas'
+        popover-append-to-body='false'
+        )
+          i.glyphicon.glyphicon-edit
+        button.btn.btn-default
+          i.glyphicon.glyphicon-camera

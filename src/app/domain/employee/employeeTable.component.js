@@ -1,18 +1,18 @@
 (function (module) {
 
-  module.component('employeeTileView', {
+  module.component('employeeTable', {
 
     bindings: {
       employees: '='
     },
 
-    templateUrl: 'app/domain/employee/employeeTileView.html',
-    controller: employeeTileViewController,
+    templateUrl: 'app/domain/employee/employeeTable.html',
+    controller: employeeTableController,
     controllerAs: 'vm'
 
   });
 
-  function employeeTileViewController($scope, saControllerHelper) {
+  function employeeTableController($scope, saControllerHelper) {
 
     const vm = saControllerHelper.setup(this, $scope);
 
