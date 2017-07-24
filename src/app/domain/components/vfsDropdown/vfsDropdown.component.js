@@ -21,8 +21,7 @@
 
     vm.use({
       $onInit,
-      onInputClick,
-      save
+      itemClick
     });
 
     /*
@@ -37,10 +36,6 @@
 
     });
 
-    function onInputClick(ev) {
-      ev.stopPropagation();
-    }
-
     function $onInit() {
 
       let model = Schema.model(vm.modelName);
@@ -52,7 +47,7 @@
 
     }
 
-    function save(item) {
+    function itemClick(item) {
 
       vm.currentModel[vm.idToRewrite] = item.id;
 
@@ -62,6 +57,9 @@
         })
         .catch(() => {
           toastr.success('Klaida. Pakeitimai neišsaugoti');
+        })
+        .finally(() => {
+          vm.isOpen = false;
         });
 
     }

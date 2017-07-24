@@ -1,36 +1,10 @@
 .vfs-dropdown
 
-  .btn-group(uib-dropdown is-open='vm.isOpen')
+  a(
+  href
+  uib-popover-template='"/app/domain/components/vfsDropdown/vfsDropdown.template.html"'
+  popover-is-open='vm.isOpen'
+  )
+    span {{vm.current[vm.destination] || 'Spustelėkite kad pasirinktumėte'}}
+    span.caret
 
-    button#single-button.btn.btn-primary(
-    type='button'
-    uib-dropdown-toggle
-    ) {{vm.current[vm.destination] || 'Duomenų nėra'}}
-      span.caret
-
-    .dropdown-menu.dropdown-menu-right(
-    uib-dropdown-menu
-    role='menu'
-    aria-labelledby='single-button'
-    )
-
-      .scroll-y(
-      resize
-      resize-offset-top='15'
-      )
-        .search
-          input.form-control(
-          type='text'
-          ng-click='vm.onInputClick($event)'
-          ng-model='vm.search'
-          )
-
-        .item(
-        ng-repeat='item in vm.data | filter: vm.search as filteredItems track by item.id '
-        ng-class='{active : vm.current.id === item.id}'
-        ng-click='vm.save(item)'
-        )
-          span {{item[vm.destination]}}
-
-        .item(ng-if='filteredItems.length === 0')
-          span.no-res Rezultatų nerasta

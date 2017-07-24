@@ -141,16 +141,16 @@
             margin-right: $action-button-margin - 1;
             border-radius: 4px;
 
-            i {
+            > i {
               @extend %flex-row-nowrap;
               justify-content: center
             }
 
-            .popover {
+            > .popover {
               max-width: 500px;
               min-width: 500px;
             }
-            
+
           }
 
           .action-edit-button:hover {

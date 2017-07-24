@@ -2,25 +2,22 @@
 
 vfs-dropdown {
 
+  .popover {
+    min-width: 340px;
+    max-width: 340px;
+  }
+
+  .popover-content {
+    padding: 5px;
+  }
+
   .active {
     background: darken($hover-color, 5%);
   }
 
   .scroll-y {
 
-    .search {
-      margin: 0 5px 5px 5px;
-
-      input {
-        width: 190px;
-        border-radius: 0;
-      }
-
-    }
-
     .item {
-      height: 40px;
-      width: 200px;
 
       span {
         display: block;
@@ -40,5 +37,6 @@ vfs-dropdown {
       background: $hover-color;
       cursor: pointer;
     }
+
   }
 }

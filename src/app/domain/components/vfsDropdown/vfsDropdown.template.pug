@@ -1,0 +1,16 @@
+.scroll-y(
+resize
+resize-offset-top='15'
+)
+
+  vfs-searcher.search(search='vm.search')
+
+  .item(
+  ng-repeat='item in vm.data | filter: vm.search as filteredItems track by item.id '
+  ng-class='{active : vm.current.id === item.id}'
+  ng-click='vm.itemClick(item)'
+  )
+    span {{item[vm.destination]}}
+
+  .item(ng-if='filteredItems.length === 0')
+    span.no-res Rezultatų nerasta
