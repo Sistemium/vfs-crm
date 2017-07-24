@@ -147,7 +147,7 @@
 
     }
 
-    @media(max-width: $screen-lg) {
+    @include responsive-only(gt-md) {
       .tile-repeater {
         margin: 10px 5px;
         width: calc(100% / 4 - 10px);
