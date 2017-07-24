@@ -8,7 +8,7 @@
 
   });
 
-  function employeeController($scope, Schema, saControllerHelper) {
+  function employeeController($scope, Schema, saControllerHelper, $filter) {
 
     const vm = saControllerHelper.setup(this, $scope);
 
@@ -16,13 +16,23 @@
 
     vm.use({});
 
-    vm.rebindAll(Employee, {}, 'vm.data');
+    vm.rebindAll(Employee, {}, 'vm.data', onSearch);
+
+    vm.watchScope('vm.searchText', onSearch);
 
     getData();
 
     /*
      Functions
      */
+
+    function onSearch() {
+
+      let {searchText} = vm;
+
+      vm.employees = searchText ? $filter('filter')(vm.data, searchText) : vm.data;
+
+    }
 
     function getData() {
 

@@ -21,7 +21,6 @@
 
     vm.watchScope('vm.searchText', onSearch);
 
-
     onStateChange($state.current, $state.params);
     refresh();
 
