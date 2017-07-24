@@ -19,8 +19,6 @@
 
     const vm = saControllerHelper.setup(this, $scope);
 
-    const {ServiceItem} = Schema.models();
-
     vm.use({
       $onInit,
       onInputClick,
@@ -53,12 +51,13 @@
 
       vm.currentModel[vm.idToRewrite] = item.id;
 
-      ServiceItem.create(vm.currentModel).then(() => {
-        toastr.success('Pakeitimai išsaugoti');
-      })
-      .catch(() => {
-        toastr.success('Klaida. Pakeitimai neišsaugoti');
-      });
+      vm.currentModel.DSCreate(vm.currentModel)
+        .then(() => {
+          toastr.success('Pakeitimai išsaugoti');
+        })
+        .catch(() => {
+          toastr.success('Klaida. Pakeitimai neišsaugoti');
+        });
 
     }
 
