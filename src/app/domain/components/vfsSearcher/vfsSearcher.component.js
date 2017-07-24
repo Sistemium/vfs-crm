@@ -6,7 +6,7 @@
       search: '='
     },
 
-    templateUrl: 'app/domain/components/searcher/searcher.html',
+    templateUrl: 'app/domain/components/vfsSearcher/vfsSearcher.html',
     controller: searcherController,
     controllerAs: 'vm'
 
