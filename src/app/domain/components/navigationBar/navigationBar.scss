@@ -21,6 +21,12 @@
 
       margin: 0 10px;
 
+      .active-view {
+        cursor: pointer;
+        color: $warn;
+        pointer-events: none;
+      }
+
       a {
 
         cursor: pointer;
@@ -30,6 +36,7 @@
           color: $gray;
           margin-right: 10px;
         }
+
       }
 
     }
@@ -61,11 +68,4 @@
 
   }
 
-}
-
-// FIXME: move out somewhere
-
-.active {
-  color: $warn !important;
-  pointer-events: none;
 }

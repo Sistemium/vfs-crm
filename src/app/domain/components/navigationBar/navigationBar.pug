@@ -4,10 +4,10 @@
 
     .buttons
       a(ng-click='vm.goToTable()')
-        i.glyphicon.glyphicon-align-justify(ng-class='{active: vm.active === "table"}')
+        i.glyphicon.glyphicon-align-justify(ng-class='{"active-view": vm.active === "table"}')
 
       a(ng-click='vm.goToTiles()')
-        i.glyphicon.glyphicon-th(ng-class='{active: vm.active === "tiles"}')
+        i.glyphicon.glyphicon-th(ng-class='{"active-view": vm.active === "tiles"}')
 
   .tools
 
