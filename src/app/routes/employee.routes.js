@@ -24,7 +24,7 @@
 
           name: 'tiles',
           url: '/tiles',
-          template: '<employee-tile-view employees="vm.employees"></employee-tile-view>',
+          template: '<employee-tiles employees="vm.employees"></employee-tiles>',
 
           data: {
             title: 'Darbuotojai',
@@ -36,7 +36,7 @@
 
           name: 'table',
           url: '/table',
-          template: '<employee-table-view></employee-table-view>',
+          template: '<employee-table employees="vm.employees"></employee-table>',
 
           data: {
             title: 'Darbuotojai',
