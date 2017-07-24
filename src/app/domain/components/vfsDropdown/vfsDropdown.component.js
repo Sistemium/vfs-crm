@@ -7,8 +7,7 @@
       currentModel: '=',
       modelName: '@',
       destination: '@',
-      idToRewrite: '@',
-      id: '@'
+      idToRewrite: '@'
     },
     templateUrl: 'app/domain/components/vfsDropdown/vfsDropdown.html',
     controller: dropdownController,
