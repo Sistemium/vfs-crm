@@ -23,7 +23,6 @@
           let vm = this;
           vm.point = point;
         },
-
         controllerAs: 'vm'
 
       });
