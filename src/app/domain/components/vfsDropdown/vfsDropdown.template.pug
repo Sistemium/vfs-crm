@@ -1,9 +1,9 @@
+vfs-searcher.search(search='vm.search')
+
 .scroll-y(
 resize
 resize-offset-top='15'
 )
-
-  vfs-searcher.search(search='vm.search')
 
   .item(
   ng-repeat='item in vm.data | filter: vm.search as filteredItems track by item.id '
