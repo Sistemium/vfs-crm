@@ -12,6 +12,5 @@
     autocomplete='off'
     )
 
-    a.clear-button.animate-show(href ng-click='vm.search = ""' ng-show='vm.search')
+    a.clear-button.animate-show.ng-hide(href ng-click='vm.search = ""' ng-show='vm.search')
       i.glyphicon.glyphicon-remove
-      
