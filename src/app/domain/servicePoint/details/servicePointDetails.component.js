@@ -15,8 +15,12 @@
     const {ServicePoint, FilterSystem, Brand, Person} = Schema.models();
 
     vm.use({
-      editItem,
+
+      isOpenEditPopover: {},
+
+      editItemClick,
       openEditItemModal
+
     });
 
     refresh();
@@ -72,11 +76,10 @@
       });
     }
 
-    function editItem(point) {
-      // console.log(point);
-      vm.currentPointEdit = point;
-      vm.openComponent = true;
-      //openEditItemModal(point);
+    function editItemClick(item) {
+      let popoverOpen = {};
+      popoverOpen[item.id] = !vm.isOpenEditPopover[item.id];
+      vm.isOpenEditPopover = popoverOpen;
     }
 
   }

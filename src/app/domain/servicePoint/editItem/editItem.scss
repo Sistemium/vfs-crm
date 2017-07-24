@@ -1,13 +1,11 @@
-.action-edit-button .popover {
-  max-width: 500px;
-  min-width: 500px;
-}
+@import "../../../styles/variables";
 
-.edit-user-item {
+.service-point-item-edit {
 
   > * {
     @extend %flex-row-nowrap;
     justify-content: space-between;
+    align-items: center;
   }
 
 }

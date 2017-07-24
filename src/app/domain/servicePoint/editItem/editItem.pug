@@ -1,40 +1,37 @@
-.edit-user-item
+.service-point-item-edit
 
   .filter-system-dropdown
 
-    h4 Filtro Sistema:
+    label Filtro Sistema:
 
     vfs-dropdown(
     model-name='FilterSystem'
-    current='vm.currentPointEdit.filterSystem'
+    current='item.filterSystem'
     destination='model'
-    id='vm.currentPointEdit.id'
-    current-model='vm.servicePoint.servingItems[0]'
+    current-model='item'
     id-to-rewrite='filterSystemId'
     )
 
   .installing-master-dropdown
 
-    h4 Montavimo Meistras:
+    label Montuotojas:
 
     vfs-dropdown(
     model-name='Employee'
-    current='vm.currentPointEdit.installingMaster'
+    current='item.installingMaster'
     destination='name'
-    id='vm.currentPointEdit.id'
-    current-model='vm.servicePoint.servingItems[0]'
+    current-model='item'
     id-to-rewrite='installingMasterId'
     )
 
   .serving-master-dropdown
 
-    h4 Aptarnavimo Meistras:
+    label Aptarnavimo Meistras:
 
     vfs-dropdown(
     model-name='Employee'
-    current='vm.currentPointEdit.servingMaster'
+    current='item.servingMaster'
     destination='name'
-    id='vm.currentPointEdit.id'
-    current-model='vm.servicePoint.servingItems[0]'
+    current-model='item'
     id-to-rewrite='servingMasterId'
     )

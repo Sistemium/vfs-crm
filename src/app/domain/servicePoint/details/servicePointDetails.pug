@@ -16,7 +16,7 @@
   .service-point-items
 
     .header
-      .header-text-1 Naudotojo Įrenginiai
+      .header-text-1 Įrenginiai
       .button-block
         button.btn.btn-warning.action(
         ng-click=''
@@ -24,9 +24,10 @@
           i.glyphicon.glyphicon-plus
 
     .service-point-list
+
       .headers
         .filter-system Filtro Sistema
-        .installing-master Montavimo Meistras
+        .installing-master Montuotojas
         .serving-master Aptarnavimo Meistras
         .service-contract Sutartis
         .action-edit-button
@@ -38,20 +39,25 @@
         .service-point-item(
         ng-repeat='item in vm.servicePoint.servingItems track by item.id'
         )
+
           .filter-system
             span {{item.filterSystem.brand.nameS}} {{item.filterSystem.model}}
             span(ng-if='!item.filterSystem.brand.name') {{item.info}}
+
           .installing-master {{item.installingMaster.name}}
+
           .serving-master {{item.servingMaster.name}}
+
           .service-contract
             span(ng-if='item.currentServiceContract')
               | {{ item.currentServiceContract.num }} nuo {{ item.currentServiceContract.date }}
+
           .action-edit-button.action.button
             i.glyphicon.glyphicon.glyphicon-option-horizontal(
-            ng-click='vm.editItem(item)'
+            ng-click='vm.editItemClick(item)'
             popover-placement='auto bottom-right'
-            popover-is-open='vm.isOpenEditPopover'
-            popover-trigger='"click"'
+            popover-is-open='vm.isOpenEditPopover[item.id]'
+            popover-trigger='"none"'
             uib-popover-template='"/app/domain/servicePoint/editItem/editItem.html"'
             popover-title='Įrenginio Modifikavimas'
             popover-append-to-body='false'
