@@ -4,8 +4,9 @@
 
     bindings: {
       viewButtons: '@',
+      stateName: '@',
       searchText: '=?',
-      stateName: '@'
+      editClickFn: '='
     },
 
     templateUrl: 'app/domain/components/navigationBar/navigationBar.html',
@@ -14,39 +15,19 @@
 
   });
 
-  function navigationBarController($scope, saControllerHelper, $state, $uibModal) {
+  function navigationBarController($scope, saControllerHelper, $state) {
 
     const vm = saControllerHelper.setup(this, $scope);
 
     vm.use({
       goToTable,
       goToTiles,
-      addItem,
       active: 'tiles'
     });
 
     /*
      Functions
      */
-
-    function addItem() {
-      openEditItemModal()
-    }
-
-    function openEditItemModal(point) {
-      $uibModal.open({
-        animation: true,
-        ariaLabelledBy: 'modal-title-bottom',
-        ariaDescribedBy: 'modal-body-bottom',
-        templateUrl: 'app/domain/components/navigationBar/newServicePoint.html',
-        size: 'lg',
-        controller: function () {
-          let vm = this;
-          vm.point = point;
-        },
-        controllerAs: 'vm'
-      });
-    }
 
     function goToTiles() {
       $state.go(vm.stateName + '.tiles');

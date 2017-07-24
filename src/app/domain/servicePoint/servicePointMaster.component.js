@@ -8,7 +8,7 @@
 
   });
 
-  function servicePointMasterController($scope, Schema, saControllerHelper, $state, $filter) {
+  function servicePointMasterController($scope, Schema, saControllerHelper, $state, $filter, servicePointEditing) {
 
     const vm = saControllerHelper.setup(this, $scope);
 
@@ -16,13 +16,16 @@
 
     vm.use({
       servicePointClick,
-      onStateChange
+      onStateChange,
+      editClick: servicePointEditing.openEditItemModal
     });
 
     vm.watchScope('vm.searchText', onSearch);
 
     onStateChange($state.current, $state.params);
     refresh();
+
+    vm.rebindAll(ServicePoint, {}, 'vm.data', onSearch);
 
     /*
      Functions
@@ -35,8 +38,6 @@
       vm.servicePoints = searchText ? $filter('filter')(vm.data, searchText) : vm.data;
 
     }
-
-    vm.rebindAll(ServicePoint, {}, 'vm.data', onSearch);
 
     function onStateChange(to, params) {
       vm.servicePointId = to.name === 'servicePoints.detailed' ? params.servicePointId : null;
