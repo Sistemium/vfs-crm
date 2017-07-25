@@ -28,9 +28,28 @@
           }
         }
 
+      },
+
+      methods: {
+        servingItemsLazy
       }
 
     });
+
+    const cache = {};
+
+    // TODO: bindAll to watch changes an refresh cache
+
+    function servingItemsLazy() {
+
+      let cached = cache[this.id];
+
+      if (cached) return cached;
+
+      cache[this.id] = this.DSLoadRelations('ServiceItem')
+        .then(res => cache[this.id] = res.servingItems);
+
+    }
 
   });
 
