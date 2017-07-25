@@ -8,21 +8,26 @@
   resize-offset-top='10'
   )
 
-    .tile-repeater(ng-repeat='employee in vm.employees track by employee.id')
+    .employee(ng-repeat='employee in vm.employees track by employee.id')
+
       .photo
         img(src='../../../images/placeholder.png')
 
       .info
         .first-name
           label  Vardas:
-          span {{employee.personInfo.firstName}}
+          span {{ employee.person.firstName }}
         .last-name
           label  Pavardė:
-          span {{employee.personInfo.lastName}}
+          span {{ employee.person.lastName}}
         .telephone
           label
             i.glyphicon.glyphicon-earphone
-          a(href='tel:{{ employee.phoneInfo.phone || "+37060743433" }}') {{employee.phoneInfo.phone || '+37060743433'}}
+          a(
+          href='tel:{{ employee.person.phone }}'
+          ng-if='employee.person.phone'
+          ) {{ employee.person.phone }}
+
       .buttons
         button.btn.btn-default(
         ng-click='vm.editItem(employee)'

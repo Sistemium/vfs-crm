@@ -6,7 +6,7 @@
       employees: '='
     },
 
-    templateUrl: 'app/domain/employee/employeeTable.html',
+    templateUrl: 'app/domain/employee/table/employeeTable.html',
     controller: employeeTableController,
     controllerAs: 'vm'
 

@@ -9,10 +9,10 @@
   resize
   resize-offset-top='5'
   )
-    .employee-item(
+    .employee(
     ng-repeat='employee in vm.employees | filter: vm.searchText track by employee.id'
     )
-      .first-name {{employee.personInfo.firstName}}
-      .last-name {{employee.personInfo.lastName}}
+      .first-name {{employee.person.firstName}}
+      .last-name {{employee.person.lastName}}
       .telephone
-        a(href='tel:{{ employee.phoneInfo.phone || "+37060743433" }}') {{employee.phoneInfo.phone || '+37060743433'}}
+        a(href='tel:{{ employee.person.phone }}') {{ employee.person.phone }}

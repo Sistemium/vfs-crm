@@ -1,0 +1,48 @@
+@import "../employee";
+
+.employee-table {
+
+  @extend %flex-table;
+
+  .headers {
+    @extend %flex-table-headers;
+  }
+
+  > * {
+
+    .first-name {
+      width: $width-first-name;
+    }
+
+    .last-name {
+      width: $width-last-name;
+    }
+    .telephone {
+      width: $width-telephone;
+    }
+
+  }
+
+  .headers > *:last-of-type {
+    text-align: right;
+  }
+
+  .scroll-y {
+
+    .employee {
+
+      @extend %flex-table-item;
+
+      .first-name, .last-name, .telephone {
+        @extend .ellipsis;
+      }
+
+      > *:last-of-type {
+        text-align: right;
+      }
+
+    }
+
+  }
+
+}
