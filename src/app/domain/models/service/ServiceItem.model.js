@@ -7,7 +7,9 @@
     Schema.register({
 
       name: 'ServiceItem',
+
       relations: {
+
         hasOne: {
           ServiceContract: {
             localField: 'currentServiceContract',
@@ -30,12 +32,14 @@
           }]
 
         },
+
         hasMany: {
           ServiceContractItem: {
             localField: 'serviceContractItems',
             foreignKey: 'serviceItemId'
           }
         }
+
       }
 
     });
