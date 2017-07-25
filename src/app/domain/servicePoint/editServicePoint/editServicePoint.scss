@@ -1,0 +1,16 @@
+.edit-service-point {
+
+  margin: 10px 0;
+
+  form {
+    @extend %flex-column-nowrap;
+
+    .name, .address {
+      width: 95%;
+      margin: 0 auto;
+    }
+
+  }
+
+}
+

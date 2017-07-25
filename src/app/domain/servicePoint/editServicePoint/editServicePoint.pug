@@ -1,0 +1,17 @@
+.edit-service-point
+  form
+    .name
+      label(for='name') Pavadinimas
+      input#name.form-control(
+      type='text'
+      placeholder='Pavadinimas'
+      ng-model='vm.servicePoint.name'
+      )
+
+    .address
+      label(for='address') Adresas
+      input#address.form-control(
+      type='text'
+      placeholder='Adresas'
+      ng-model='vm.servicePoint.address'
+      )
