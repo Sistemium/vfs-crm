@@ -10,7 +10,7 @@
           a.phone(href='tel:{{ employee.phoneInfo.phone}}') {{ servicePointContact.person.phone }}
 
     .button-block
-      button.btn.btn-warning
+      button.btn.btn-warning(ng-click='vm.editServicePointClick(vm.servicePoint)')
         i.glyphicon.glyphicon-edit
 
   .service-point-items
@@ -52,13 +52,13 @@
             span(ng-if='item.currentServiceContract')
               | {{ item.currentServiceContract.num }} nuo {{ item.currentServiceContract.date }}
 
-          .action-edit-button.action.button
-            i.glyphicon.glyphicon.glyphicon-option-horizontal(
-            ng-click='vm.editItemClick(item)'
-            popover-placement='auto bottom-right'
-            popover-is-open='vm.isOpenEditPopover[item.id]'
-            popover-trigger='"none"'
-            uib-popover-template='"/app/domain/servicePoint/editItem/editItem.html"'
-            popover-title='Įrenginio Modifikavimas'
-            popover-append-to-body='false'
-            )
+          .action-edit-button.action.button(
+          ng-click='vm.editItemClick(item)'
+          popover-placement='auto bottom-right'
+          popover-is-open='vm.isOpenEditPopover[item.id]'
+          popover-trigger='"none"'
+          uib-popover-template='"/app/domain/servicePoint/editItem/editItem.html"'
+          popover-title='Įrenginio Modifikavimas'
+          popover-append-to-body='false'
+          )
+            i.glyphicon.glyphicon.glyphicon-option-horizontal

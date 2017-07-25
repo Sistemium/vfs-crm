@@ -143,14 +143,16 @@
 
             > i {
               @extend %flex-row-nowrap;
+              top: 3px;
               justify-content: center
             }
 
-            > .popover {
-              max-width: 500px;
-              min-width: 500px;
-            }
+          }
 
+          .action-edit-button + .popover {
+            padding: 0;
+            max-width: 500px;
+            min-width: 500px;
           }
 
           .action-edit-button:hover {
