@@ -12,11 +12,14 @@
   }
 
   .scroll-y {
+
     .service-point {
 
       @extend %flex-column-nowrap;
+
       border-bottom: 1px solid $border-gray;
       padding: 0 10px;
+      position: relative;
 
       .name {
         @extend .ellipsis;
@@ -32,6 +35,15 @@
         line-height: 30px;
         font-size: smaller;
       }
+
+      .badge {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background-color: $gray-background-color;
+        color: darken($gray, 10%);
+      }
+
     }
 
     .service-point:hover {
