@@ -8,7 +8,7 @@
 
   });
 
-  function servicePointDetailsController($scope, Schema, saControllerHelper, $state, $uibModal) {
+  function servicePointDetailsController($scope, Schema, saControllerHelper, $state, Editing) {
 
     const vm = saControllerHelper.setup(this, $scope);
 
@@ -19,7 +19,7 @@
       isOpenEditPopover: {},
 
       editItemClick,
-      openEditItemModal
+      editServicePointClick: Editing.editModal('edit-service-point', 'Aptarnavimo Taško Redagavimas')
 
     });
 
@@ -59,21 +59,6 @@
 
       // console.warn(servicePoint);
 
-    }
-
-    function openEditItemModal(point) {
-      $uibModal.open({
-        animation: true,
-        ariaLabelledBy: 'modal-title-bottom',
-        ariaDescribedBy: 'modal-body-bottom',
-        templateUrl: 'app/domain/servicePoint/editItem/editItem.html',
-        size: 'lg',
-        controller: function () {
-          let vm = this;
-          vm.point = point;
-        },
-        controllerAs: 'vm'
-      });
     }
 
     function editItemClick(item) {
