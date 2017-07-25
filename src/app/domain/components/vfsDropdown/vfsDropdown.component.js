@@ -53,10 +53,10 @@
 
       vm.currentModel.DSCreate(vm.currentModel)
         .then(() => {
-          toastr.success('Pakeitimai išsaugoti');
+          // toastr.success('Pakeitimai išsaugoti');
         })
         .catch(() => {
-          toastr.success('Klaida. Pakeitimai neišsaugoti');
+          toastr.error('Klaida. Pakeitimai neišsaugoti');
         })
         .finally(() => {
           vm.isOpen = false;
