@@ -8,7 +8,7 @@
 
   });
 
-  function servicePointMasterController($scope, Schema, saControllerHelper, $state, $filter, servicePointEditing) {
+  function servicePointMasterController($scope, Schema, saControllerHelper, $state, $filter, Editing) {
 
     const vm = saControllerHelper.setup(this, $scope);
 
@@ -17,7 +17,7 @@
     vm.use({
       servicePointClick,
       onStateChange,
-      editClick: servicePointEditing.openEditItemModal
+      editClick: Editing.editModal('edit-service-point', 'Naujas Taškas')
     });
 
     vm.watchScope('vm.searchText', onSearch);
@@ -36,6 +36,7 @@
       let {searchText} = vm;
 
       vm.servicePoints = searchText ? $filter('filter')(vm.data, searchText) : vm.data;
+      vm.servicePoints = $filter('orderBy')(vm.servicePoints, 'name');
 
     }
 
