@@ -18,7 +18,7 @@
 
         hasOne: {
           Person: {
-            localField: 'personInfo',
+            localField: 'person',
             localKey: 'personId'
           }
         }

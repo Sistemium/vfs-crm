@@ -7,7 +7,7 @@
       .service-point-contacts
         .contact(ng-repeat='servicePointContact in vm.servicePoint.servicePointContacts track by servicePointContact.id')
           span.name {{servicePointContact.person.firstName}} {{servicePointContact.person.lastName}}
-          a.phone(href='tel:{{ employee.phoneInfo.phone}}') {{ servicePointContact.person.phone }}
+          a.phone(href='tel:{{ servicePointContact.person.phone }}') {{ servicePointContact.person.phone }}
 
     .button-block
       button.btn.btn-warning(ng-click='vm.editServicePointClick(vm.servicePoint)')

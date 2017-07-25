@@ -14,6 +14,12 @@
         //   localField: ''
         // }
 
+      },
+
+      computed: {
+        // phoneNumber: ['phone', function (phone) {
+        //   return phone || '+37060010001';
+        // }]
       }
 
     });
