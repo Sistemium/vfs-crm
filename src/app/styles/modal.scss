@@ -1,6 +1,22 @@
+@import "variables";
+
 .modal-footer {
+
   .btn {
     margin: 5px;
   }
+
   padding: 10px;
+
+}
+
+
+.modal-header {
+
+  h1 {
+    font-size: 130%;
+    margin: 0;
+    padding: 0;
+  }
+  
 }

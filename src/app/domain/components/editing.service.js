@@ -3,7 +3,7 @@
 (function () {
 
   angular.module('webPage')
-  .service('Editing', Editing);
+    .service('Editing', Editing);
 
   function Editing($uibModal) {
 
@@ -18,12 +18,12 @@
       let modal = $uibModal.open({
 
         animation: true,
-        template: `<div class="modal-header">{{title}}</div>` +
+        template: `<div class="modal-header"><h1>{{title}}</h1></div>` +
         `<${componentName} service-point="item" save-fn="saveFn"></${componentName}>` +
-        `<div class="modal-footer">
-          <button class="btn btn-success" ng-click="saveClick()">Išsaugoti</button>
-          <button class="btn btn-danger" ng-click="cancelClick()">Atšaukti</button>
-         </div>`,
+        `<div class="modal-footer">` +
+        `  <button class="btn btn-success" ng-click="saveClick()">Išsaugoti</button>` +
+        `  <button class="btn btn-danger" ng-click="cancelClick()">Atšaukti</button>` +
+        `</div>`,
         size: 'lg',
 
         controller
