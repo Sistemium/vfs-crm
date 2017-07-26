@@ -10,6 +10,7 @@
     placeholder='Įveskite paieškos tekstą'
     ng-model='vm.search'
     autocomplete='off'
+    auto-focus='{{vm.focus}}'
     )
 
     a.clear-button.animate-show.ng-hide(href ng-click='vm.search = ""' ng-show='vm.search')

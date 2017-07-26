@@ -6,7 +6,7 @@ resize-offset-top='15'
 )
 
   .item(
-  ng-repeat='item in vm.data | filter: vm.search as filteredItems track by item.id '
+  ng-repeat='item in vm.data | filter: vm.search | orderBy:vm.itemsNameProperty as filteredItems track by item.id '
   ng-class='{active : vm.currentItem.id === item.id}'
   ng-click='vm.itemClick(item)'
   )

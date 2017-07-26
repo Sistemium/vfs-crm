@@ -3,7 +3,8 @@
   module.component('vfsSearcher', {
 
     bindings: {
-      search: '='
+      search: '=',
+      focus: '<'
     },
 
     templateUrl: 'app/domain/components/vfsSearcher/vfsSearcher.html',
