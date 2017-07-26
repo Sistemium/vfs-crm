@@ -109,7 +109,7 @@
         @extend %flex-table-headers;
       }
 
-      > * {
+      .headers >, .service-point-item > {
 
         .filter-system {
           width: $width-filter-system;

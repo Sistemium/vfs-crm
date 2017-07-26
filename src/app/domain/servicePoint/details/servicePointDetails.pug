@@ -41,12 +41,12 @@
         )
 
           .filter-system
-            span {{item.filterSystem.brand.nameS}} {{item.filterSystem.model}}
-            span(ng-if='!item.filterSystem.brand.name') {{item.info}}
+            span {{ item.filterSystem.brand.name }} {{ item.filterSystem.model }}
+            span(ng-if='!item.filterSystem.brand.name') {{ item.info }}
 
-          .installing-master {{item.installingMaster.name}}
+          .installing-master {{ item.installingMaster.name }}
 
-          .serving-master {{item.servingMaster.name}}
+          .serving-master {{ item.servingMaster.name }}
 
           .service-contract
             span(ng-if='item.currentServiceContract')

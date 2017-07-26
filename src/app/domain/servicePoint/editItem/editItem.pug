@@ -1,6 +1,14 @@
 .service-point-item-edit
 
-  .filter-system-dropdown
+  .field
+
+    label(for='service-point-item-edit-info') Pastaba:
+
+    input.form-control#service-point-item-edit-info(
+    ng-model='item.info'
+    )
+
+  .field
 
     label Filtro Sistema:
 
@@ -12,7 +20,7 @@
     id-to-rewrite='filterSystemId'
     )
 
-  .installing-master-dropdown
+  .field
 
     label Montuotojas:
 
@@ -24,7 +32,7 @@
     id-to-rewrite='installingMasterId'
     )
 
-  .serving-master-dropdown
+  .field
 
     label Aptarnavimo Meistras:
 

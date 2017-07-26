@@ -2,11 +2,28 @@
 
 .service-point-item-edit {
 
-  > * {
+  .field {
+
     @extend %flex-row-nowrap;
+
     justify-content: space-between;
     align-items: center;
     padding: 3px 0;
+
+    label {
+      flex: 40;
+    }
+
+    label + * {
+
+      margin-left: $margin-default;
+      flex: 75;
+
+      display: block;
+      text-align: right;
+
+    }
+
   }
 
 }
