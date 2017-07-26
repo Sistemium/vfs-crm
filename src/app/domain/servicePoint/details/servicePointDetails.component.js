@@ -8,7 +8,7 @@
 
   });
 
-  function servicePointDetailsController($scope, Schema, saControllerHelper, $state, Editing, toastr) {
+  function servicePointDetailsController($scope, Schema, saControllerHelper, $state, Editing) {
 
     const vm = saControllerHelper.setup(this, $scope);
 
@@ -18,8 +18,6 @@
 
       isOpenEditPopover: {},
 
-      editItemCancelClick,
-      editItemSaveClick,
       editItemClick,
       addItemClick,
       editServicePointClick: Editing.editModal('edit-service-point', 'Aptarnavimo Taško Redagavimas')
@@ -38,22 +36,6 @@
 
     function addItemClick() {
       console.warn('not implemented');
-    }
-
-    function editItemCancelClick(serviceItem) {
-      // TODO: rewrite popoverOpen with string and watch it to revert
-      if (serviceItem.id) {
-        serviceItem.DSRevert();
-      }
-      vm.isOpenEditPopover = {};
-    }
-
-    function editItemSaveClick(serviceItem) {
-
-      serviceItem.DSCreate()
-        .then(() => vm.isOpenEditPopover = {})
-        .catch(err => toastr.error(angular.toJson(err)));
-
     }
 
     function refresh() {
