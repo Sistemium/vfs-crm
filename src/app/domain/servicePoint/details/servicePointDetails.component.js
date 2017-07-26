@@ -62,8 +62,6 @@
         serviceItem.DSLoadRelations();
       });
 
-      // console.warn(servicePoint);
-
     }
 
     function editItemClick(item) {
