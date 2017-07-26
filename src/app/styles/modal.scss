@@ -2,14 +2,21 @@
 
 .modal-footer {
 
+  $padding: 10px;
+
+  padding: $padding;
+  position: relative;
+
   .btn {
     margin: 5px;
   }
 
-  padding: 10px;
+  button.destroy {
+    position: absolute;
+    left: $padding;
+  }
 
 }
-
 
 .modal-header {
 

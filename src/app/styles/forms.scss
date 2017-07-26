@@ -1,3 +1,11 @@
+form {
+  input.ng-touched.ng-invalid {
+    border-color: red;
+  }
+}
+
+
+
 .form-group.form-group-switch {
   label {
     padding-top: 5px;

@@ -37,10 +37,15 @@
       },
 
       methods: {
-        servingItemsLazy
+        servingItemsLazy,
+        isValid
       }
 
     });
+
+    function isValid() {
+      return this.siteId && this.address && this.name;
+    }
 
     const cache = {};
 

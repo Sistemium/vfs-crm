@@ -5,7 +5,7 @@
   angular.module('webPage')
     .service('Editing', Editing);
 
-  function Editing($uibModal) {
+  function Editing($uibModal, $timeout) {
 
     return {editModal};
 
@@ -21,8 +21,9 @@
         template: `<div class="modal-header"><h1>{{title}}</h1></div>` +
         `<${componentName} service-point="item" save-fn="saveFn"></${componentName}>` +
         `<div class="modal-footer">` +
-        `  <button class="btn btn-success" ng-click="saveClick()">Išsaugoti</button>` +
-        `  <button class="btn btn-danger" ng-click="cancelClick()">Atšaukti</button>` +
+        (item.id ? `  <button class="btn destroy" ng-class="confirmDestroy ? 'btn-danger' : 'btn-warning'" ng-click="destroyClick()">Ištrinti</button>` : '') +
+        `  <button class="btn btn-success save" ng-disabled="!item.isValid()" ng-click="saveClick()">Išsaugoti</button>` +
+        `  <button class="btn btn-default cancel" ng-click="cancelClick()">Atšaukti</button>` +
         `</div>`,
         size: 'lg',
 
@@ -30,9 +31,12 @@
 
       });
 
-      modal.result.catch(() => {
-        item.DSRevert();
-      });
+      modal.result
+        .catch(() => {
+          if (item.id) {
+            item.DSRevert();
+          }
+        });
 
       return modal.result;
 
@@ -42,7 +46,8 @@
           item,
           title,
           saveClick,
-          cancelClick
+          cancelClick,
+          destroyClick
         });
 
         function saveClick() {
@@ -58,6 +63,24 @@
         function cancelClick() {
           modal.dismiss();
         }
+
+        function destroyClick() {
+
+          $scope.confirmDestroy = !$scope.confirmDestroy;
+
+          if ($scope.confirmDestroy) {
+            return $timeout(2000).then(() => $scope.confirmDestroy = false);
+          }
+
+          if (_.isFunction(item.DSDestroy)) {
+            item.DSDestroy()
+              .then(modal.close);
+          } else {
+            modal.dismiss();
+          }
+
+        }
+
       }
 
     }

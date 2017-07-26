@@ -46,11 +46,12 @@ form.service-point-item-edit
 
   .footer
 
+    button.btn.btn-success.btn-sm.animate-show.ng-hide(
+    ng-click='vm.saveClick(item)'
+    ng-show='vm.item.DSHasChanges()'
+    ) Išsaugoti
+
     button.btn.btn-default.btn-sm(
     ng-click='vm.cancelClick()'
     ) Atšaukti
 
-    button.btn.btn-success.btn-sm(
-    ng-click='vm.saveClick(item)'
-    ng-disabled='!vm.item.DSHasChanges()'
-    ) Išsaugoti

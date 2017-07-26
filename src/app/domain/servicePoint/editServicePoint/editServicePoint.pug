@@ -4,6 +4,8 @@
       label(for='name') Pavadinimas
       input#name.form-control(
       type='text'
+      required
+      autocomplete='off'
       placeholder='Pavadinimas'
       ng-model='vm.servicePoint.name'
       )
@@ -12,6 +14,8 @@
       label(for='address') Adresas
       input#address.form-control(
       type='text'
+      required
+      autocomplete='off'
       placeholder='Adresas'
       ng-model='vm.servicePoint.address'
       )
@@ -19,6 +23,8 @@
     .site
       label Padalinys
       vfs-dropdown(
+      ng-required='true'
+      ng-model='vm.servicePoint.siteId'
       items-data-source-name='Site'
       items-name-property='name'
       save-to='vm.servicePoint'
