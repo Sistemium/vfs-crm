@@ -35,7 +35,7 @@
      */
 
     function addItemClick() {
-      vm.newItem = ServiceItem.createInstance();
+      vm.newItem = ServiceItem.createInstance({servicePointId: vm.servicePoint.id});
     }
 
     function refresh() {
