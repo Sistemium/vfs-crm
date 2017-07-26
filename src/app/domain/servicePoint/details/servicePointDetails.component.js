@@ -21,6 +21,7 @@
       editItemCancelClick,
       editItemSaveClick,
       editItemClick,
+      addItemClick,
       editServicePointClick: Editing.editModal('edit-service-point', 'Aptarnavimo Taško Redagavimas')
 
     });
@@ -34,6 +35,10 @@
     /*
      Functions
      */
+
+    function addItemClick() {
+      console.warn('not implemented');
+    }
 
     function editItemCancelClick(serviceItem) {
       // TODO: rewrite popoverOpen with string and watch it to revert
