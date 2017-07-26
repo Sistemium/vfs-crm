@@ -17,7 +17,7 @@
     vm.use({
       servicePointClick,
       onStateChange,
-      editClick: Editing.editModal('edit-service-point', 'Naujas Taškas')
+      addClick
     });
 
     vm.watchScope('vm.searchText', onSearch);
@@ -30,6 +30,10 @@
     /*
      Functions
      */
+
+    function addClick() {
+      Editing.editModal('edit-service-point', 'Naujas Taškas')(ServicePoint.createInstance())
+    }
 
     function onSearch() {
 
