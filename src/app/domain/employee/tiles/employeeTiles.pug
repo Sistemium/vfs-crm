@@ -1,14 +1,14 @@
 .employee-tiles
 
-  pre {{ vm.isOpenedEditPopover | json }}
-  pre {{vm.currItem}}
+  //pre {{ vm.isOpenedEditPopover | json }}
+  //pre {{vm.currItem}}
 
   .scroll-y(
   resize
   resize-offset-top='10'
   )
 
-    .employee(ng-repeat='employee in vm.employees track by employee.id')
+    .employee.tile(ng-repeat='employee in vm.employees track by employee.id')
 
       .photo
         img(src='../../../images/placeholder.png')
