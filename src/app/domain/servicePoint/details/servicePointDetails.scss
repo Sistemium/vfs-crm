@@ -24,8 +24,13 @@
 
     .service-point-info {
 
+
       .address {
         font-size: 20px;
+        .office {
+          color: $gray;
+          margin-left: 10px;
+        }
       }
 
       .service-point-contacts {
