@@ -15,19 +15,24 @@
 
   function controller(toastr) {
 
-    const vm = _.assign(this,{
+    const vm = _.assign(this, {
       cancelClick,
       saveClick,
       $onDestroy
     });
 
+    console.error(vm.item);
+
     function $onDestroy() {
-      if (vm.item.DSHasChanges()) {
+      if (vm.item.id && vm.item.DSHasChanges()) {
         vm.item.DSRevert();
       }
     }
 
     function cancelClick() {
+
+      console.log(vm.item.id);
+      
       if (vm.item.id) {
         vm.item.DSRevert();
       }
@@ -35,9 +40,10 @@
     }
 
     function saveClick() {
+      console.log(vm.item);
       vm.item.DSCreate()
-        .then(() => vm.whenDone())
-        .catch(err => toastr.error(angular.toJson(err)));
+      .then(() => vm.whenDone())
+      .catch(err => toastr.error(angular.toJson(err)));
     }
 
   }

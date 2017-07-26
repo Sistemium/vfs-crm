@@ -12,7 +12,7 @@
 
     const vm = saControllerHelper.setup(this, $scope);
 
-    const {ServicePoint, FilterSystem, Brand, Person} = Schema.models();
+    const {ServicePoint, FilterSystem, Brand, Person, ServiceItem} = Schema.models();
 
     vm.use({
 
@@ -35,7 +35,7 @@
      */
 
     function addItemClick() {
-      console.warn('not implemented');
+      vm.newItem = ServiceItem.createInstance();
     }
 
     function refresh() {
@@ -46,7 +46,7 @@
 
       let busy = [
         ServicePoint.findAllWithRelations({id}, {bypassCache: true})(['ServiceItem', 'ServicePointContact'])
-          .then(loadServicePointRelations)
+        .then(loadServicePointRelations)
       ];
 
       vm.setBusy(busy);

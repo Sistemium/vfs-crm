@@ -21,6 +21,11 @@
       .button-block
         button.btn.btn-warning.action(
         ng-click='vm.addItemClick()'
+        popover-placement='auto bottom-right'
+        popover-is-open='vm.isOpenAddPopover'
+        uib-popover-template='"/app/domain/servicePoint/addItem/addItem.html"'
+        popover-title='Įrenginio Papildymas'
+        popover-append-to-body='false'
         )
           i.glyphicon.glyphicon-plus
 
