@@ -17,8 +17,15 @@
 
     const vm = _.assign(this,{
       cancelClick,
-      saveClick
+      saveClick,
+      $onDestroy
     });
+
+    function $onDestroy() {
+      if (vm.item.DSHasChanges()) {
+        vm.item.DSRevert();
+      }
+    }
 
     function cancelClick() {
       if (vm.item.id) {
