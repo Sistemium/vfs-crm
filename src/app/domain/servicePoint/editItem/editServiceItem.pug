@@ -47,8 +47,9 @@ form.service-point-item-edit
   .footer
 
     button.btn.btn-success.btn-sm.animate-show.ng-hide(
-    ng-click='vm.saveClick(item)'
-    ng-show='vm.item.DSHasChanges()'
+    ng-click='vm.saveClick()'
+    ng-disabled='!vm.item.isValid()'
+    ng-show='!vm.item.id || vm.item.DSHasChanges()'
     ) Išsaugoti
 
     button.btn.btn-default.btn-sm(
