@@ -26,7 +26,7 @@
           Employee: [{
             localField: 'installingMaster',
             localKey: 'installingMasterId'
-          },{
+          }, {
             localField: 'servingMaster',
             localKey: 'servingMasterId'
           }]
@@ -40,9 +40,16 @@
           }
         }
 
+      },
+      methods: {
+        isValid
       }
 
     });
+
+    function isValid() {
+      return this.filterSystemId
+    }
 
   });
 
