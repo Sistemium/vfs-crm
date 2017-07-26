@@ -8,23 +8,12 @@
     },
 
     templateUrl: 'app/domain/servicePoint/editServicePoint/editServicePoint.html',
-    controller,
+    controller: editServicePointController,
     controllerAs: 'vm'
 
   });
 
-  function controller() {
-
-    //const vm = this;
-    //
-    //vm.$onInit = function () {
-    //  vm.saveFn = save;
-    //};
-    //
-    //function save() {
-    //  return Schema.model('ServicePoint').create(vm.servicePoint);
-    //}
-
+  function editServicePointController() {
   }
 
 })(angular.module('webPage'));
