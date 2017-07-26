@@ -50,7 +50,7 @@
             $scope.saveFn()
               .then(modal.close);
           } else if (_.isFunction(item.DSCreate)) {
-            item.DSCreate(item)
+            item.DSCreate()
               .then(modal.close);
           }
         }
