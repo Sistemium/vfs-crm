@@ -21,7 +21,10 @@
       $onDestroy
     });
 
-    console.error(vm.item);
+
+    /*
+     Functions
+     */
 
     function $onDestroy() {
       if (vm.item.id && vm.item.DSHasChanges()) {
@@ -31,19 +34,20 @@
 
     function cancelClick() {
 
-      console.log(vm.item.id);
-      
       if (vm.item.id) {
         vm.item.DSRevert();
       }
+
       vm.whenDone();
+
     }
 
     function saveClick() {
-      console.log(vm.item);
+
       vm.item.DSCreate()
-      .then(() => vm.whenDone())
-      .catch(err => toastr.error(angular.toJson(err)));
+        .then(() => vm.whenDone())
+        .catch(err => toastr.error(angular.toJson(err)));
+
     }
 
   }
