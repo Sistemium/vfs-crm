@@ -123,7 +123,7 @@
         .service-contract {
           width: $width-service-contract;
         }
-        .action-edit-button {
+        .action {
           width: $width-action-edit-button;
           margin-right: $action-button-margin;
         }
@@ -140,26 +140,24 @@
             background-color: $state-warning-text;
           }
 
-          .action-edit-button {
+          .action.btn {
 
             margin-right: $action-button-margin - 1;
-            border-radius: 4px;
+            padding: 0;
 
             > i {
-              @extend %flex-row-nowrap;
               top: 3px;
-              justify-content: center
             }
 
           }
 
-          .action-edit-button + .popover {
+          .action + .popover {
             padding: 0;
             max-width: 500px;
             min-width: 500px;
           }
 
-          .action-edit-button:hover {
+          .action.btn:hover {
             background: darken($hover-color, 10%);
           }
 

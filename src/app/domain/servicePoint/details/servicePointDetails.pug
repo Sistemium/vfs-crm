@@ -30,7 +30,7 @@
         .installing-master Montuotojas
         .serving-master Aptarnavimo Meistras
         .service-contract Sutartis
-        .action-edit-button
+        .action
 
       .scroll-y(
       resize
@@ -53,7 +53,7 @@
             span(ng-if='item.currentServiceContract')
               | {{ item.currentServiceContract.num }} nuo {{ item.currentServiceContract.date }}
 
-          .action-edit-button.action.button(
+          button.btn.action.btn-default(
           ng-click='vm.editItemClick(item)'
           popover-placement='auto bottom-right'
           popover-is-open='vm.isOpenEditPopover[item.id]'
