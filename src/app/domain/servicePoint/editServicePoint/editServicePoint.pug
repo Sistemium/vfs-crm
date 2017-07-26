@@ -15,3 +15,13 @@
       placeholder='Adresas'
       ng-model='vm.servicePoint.address'
       )
+
+    .site
+      label Padalinys
+      vfs-dropdown(
+      items-data-source-name='Site'
+      items-name-property='name'
+      save-to='vm.servicePoint'
+      save-to-property='siteId'
+      placement='bottom-left'
+      )
