@@ -136,6 +136,10 @@
 
           @extend %flex-table-item;
 
+          &.has-changes > .action.button {
+            background-color: $state-warning-text;
+          }
+
           .action-edit-button {
 
             margin-right: $action-button-margin - 1;

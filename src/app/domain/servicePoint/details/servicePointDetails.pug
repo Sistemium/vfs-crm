@@ -38,6 +38,7 @@
       )
         .service-point-item(
         ng-repeat='item in vm.servicePoint.servingItems track by item.id'
+        ng-class='{"has-changes": item.DSHasChanges()}'
         )
 
           .filter-system

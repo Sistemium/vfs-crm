@@ -1,45 +1,59 @@
-.service-point-item-edit
+form.service-point-item-edit
 
-  .field
+  fieldset
 
-    label(for='service-point-item-edit-info') Pastaba:
+    .field
 
-    input.form-control#service-point-item-edit-info(
-    ng-model='item.info'
-    )
+      label(for='service-point-item-edit-info') Pastaba:
 
-  .field
+      input.form-control#service-point-item-edit-info(
+      autocomplete='off'
+      ng-model='item.info'
+      )
 
-    label Filtro Sistema:
+    .field
 
-    vfs-dropdown(
-    model-name='FilterSystem'
-    current='item.filterSystem'
-    destination='model'
-    current-model='item'
-    id-to-rewrite='filterSystemId'
-    )
+      label Filtro Sistema:
 
-  .field
+      vfs-dropdown(
+      model-name='FilterSystem'
+      current='item.filterSystem'
+      destination='model'
+      current-model='item'
+      id-to-rewrite='filterSystemId'
+      )
 
-    label Montuotojas:
+    .field
 
-    vfs-dropdown(
-    model-name='Employee'
-    current='item.installingMaster'
-    destination='name'
-    current-model='item'
-    id-to-rewrite='installingMasterId'
-    )
+      label Montuotojas:
 
-  .field
+      vfs-dropdown(
+      model-name='Employee'
+      current='item.installingMaster'
+      destination='name'
+      current-model='item'
+      id-to-rewrite='installingMasterId'
+      )
 
-    label Aptarnavimo Meistras:
+    .field
 
-    vfs-dropdown(
-    model-name='Employee'
-    current='item.servingMaster'
-    destination='name'
-    current-model='item'
-    id-to-rewrite='servingMasterId'
-    )
+      label Aptarnavimo Meistras:
+
+      vfs-dropdown(
+      model-name='Employee'
+      current='item.servingMaster'
+      destination='name'
+      current-model='item'
+      id-to-rewrite='servingMasterId'
+      )
+
+  .footer
+
+    button.btn.btn-default.btn-sm(
+    ng-click='vm.editItemCancelClick(item)'
+    ) Atšaukti
+
+    button.btn.btn-success.btn-sm(
+    ng-click='vm.editItemSaveClick(item)'
+    ng-disabled='!item.DSHasChanges()'
+    ) Išsaugoti

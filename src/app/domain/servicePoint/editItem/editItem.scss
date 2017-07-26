@@ -2,19 +2,21 @@
 
 .service-point-item-edit {
 
+  $padding: 4px;
+
   .field {
 
     @extend %flex-row-nowrap;
 
     justify-content: space-between;
     align-items: center;
-    padding: 3px 0;
+    //padding: $padding 0;
 
-    label {
+    > label {
       flex: 40;
     }
 
-    label + * {
+    > label + * {
 
       margin-left: $margin-default;
       flex: 75;
@@ -23,6 +25,24 @@
       text-align: right;
 
     }
+
+    .vfs-dropdown {
+      margin: 6px 0;
+    }
+
+  }
+
+  .footer {
+
+    padding: $padding 14px;
+    text-align: right;
+
+    margin: 9px -14px -9px;
+
+    background-color: $gray-background-color;
+    border-top: solid 1px $border-gray;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 
   }
 
