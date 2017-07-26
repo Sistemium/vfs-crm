@@ -14,7 +14,13 @@
           Employee: {
             localField: 'servingMaster',
             localKey: 'servingMasterId'
+          },
+
+          Site: {
+            localField: 'site',
+            localKey: 'siteId'
           }
+
         },
 
         hasMany: {
@@ -47,7 +53,7 @@
       if (cached) return cached;
 
       cache[this.id] = this.DSLoadRelations('ServiceItem')
-        .then(res => cache[this.id] = res.servingItems);
+      .then(res => cache[this.id] = res.servingItems);
 
     }
 
