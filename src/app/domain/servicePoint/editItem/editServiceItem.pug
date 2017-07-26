@@ -4,15 +4,6 @@ form.edit-service-item
 
     .field
 
-      label(for='service-point-item-edit-info') Pastaba:
-
-      input.form-control#service-point-item-edit-info(
-      autocomplete='off'
-      ng-model='vm.item.info'
-      )
-
-    .field
-
       label Filtro Sistema:
 
       vfs-dropdown(
@@ -44,15 +35,32 @@ form.edit-service-item
       save-to-property='servingMasterId'
       )
 
+    .field
+
+      label(for='service-point-item-edit-info') Pastaba:
+
+      input.form-control#service-point-item-edit-info(
+      autocomplete='off'
+      ng-model='vm.item.info'
+      placeholder='Komentaras arba paaiškinimas'
+      )
+
   .footer
 
-    button.btn.btn-success.btn-sm.animate-show.ng-hide(
+    button.btn.btn-xs.destroy(
+    ng-click='vm.destroyClick()'
+    ng-if='vm.item.id'
+    ng-class='vm.confirmDestroy ? "btn-danger" : "btn-default"'
+    )
+      i.glyphicon.glyphicon-trash
+
+    button.btn.btn-success.btn-xs.animate-show.ng-hide.save(
     ng-click='vm.saveClick()'
     ng-disabled='!vm.item.isValid()'
     ng-show='!vm.item.id || vm.item.DSHasChanges()'
     ) Išsaugoti
 
-    button.btn.btn-default.btn-sm(
+    button.btn.btn-default.btn-xs.cancel(
     ng-click='vm.cancelClick()'
     ) Atšaukti
 

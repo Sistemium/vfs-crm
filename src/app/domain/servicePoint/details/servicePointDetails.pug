@@ -59,7 +59,7 @@
             span(ng-if='item.currentServiceContract')
               | {{ item.currentServiceContract.num }} nuo {{ item.currentServiceContract.date }}
 
-          button.btn.action.btn-default(
+          button.btn.action.btn-default.btn-xs(
           ng-click='vm.editItemClick(item)'
           popover-placement='auto bottom-right'
           popover-is-open='vm.isOpenEditPopover[item.id]'

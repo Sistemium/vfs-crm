@@ -21,7 +21,7 @@
         template: `<div class="modal-header"><h1>{{title}}</h1></div>` +
         `<${componentName} service-point="item" save-fn="saveFn"></${componentName}>` +
         `<div class="modal-footer">` +
-        (item.id ? `  <button class="btn destroy" ng-class="confirmDestroy ? 'btn-danger' : 'btn-warning'" ng-click="destroyClick()">Ištrinti</button>` : '') +
+        (item.id ? `  <button class="btn destroy" ng-class="confirmDestroy ? 'btn-danger' : 'btn-default'" ng-click="destroyClick()">Ištrinti</button>` : '') +
         `  <button class="btn btn-success save" ng-disabled="!item.isValid()" ng-click="saveClick()">Išsaugoti</button>` +
         `  <button class="btn btn-default cancel" ng-click="cancelClick()">Atšaukti</button>` +
         `</div>`,

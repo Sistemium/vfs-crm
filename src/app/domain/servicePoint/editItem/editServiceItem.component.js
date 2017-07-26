@@ -13,12 +13,13 @@
 
   });
 
-  function controller(toastr) {
+  function controller(toastr, $timeout) {
 
     const vm = _.assign(this, {
       cancelClick,
       saveClick,
-      $onDestroy
+      $onDestroy,
+      destroyClick
     });
 
 
@@ -47,6 +48,23 @@
       vm.item.DSCreate()
         .then(() => vm.whenDone())
         .catch(err => toastr.error(angular.toJson(err)));
+
+    }
+
+    function destroyClick() {
+
+      vm.confirmDestroy = !vm.confirmDestroy;
+
+      if (vm.confirmDestroy) {
+        return $timeout(2000).then(() => vm.confirmDestroy = false);
+      }
+
+      if (_.isFunction(vm.item.DSDestroy)) {
+        vm.item.DSDestroy()
+          .then(() => vm.whenDone());
+      } else {
+        vm.whenDone()
+      }
 
     }
 
