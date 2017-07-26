@@ -7,10 +7,10 @@ resize-offset-top='15'
 
   .item(
   ng-repeat='item in vm.data | filter: vm.search as filteredItems track by item.id '
-  ng-class='{active : vm.current.id === item.id}'
+  ng-class='{active : vm.currentItem.id === item.id}'
   ng-click='vm.itemClick(item)'
   )
-    span {{item[vm.destination]}}
+    span {{item[vm.itemsNameProperty]}}
 
-  .no-results(ng-if='filteredItems.length === 0')
+  .no-results(ng-if='!filteredItems.length')
     span.no-res Rezultatų nerasta

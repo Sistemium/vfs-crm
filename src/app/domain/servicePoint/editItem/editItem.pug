@@ -16,11 +16,10 @@ form.service-point-item-edit
       label Filtro Sistema:
 
       vfs-dropdown(
-      model-name='FilterSystem'
-      current='item.filterSystem'
-      destination='model'
-      current-model='item'
-      id-to-rewrite='filterSystemId'
+      items-data-source-name='FilterSystem'
+      items-name-property='model'
+      save-to='item'
+      save-to-property='filterSystemId'
       )
 
     .field
@@ -28,11 +27,10 @@ form.service-point-item-edit
       label Montuotojas:
 
       vfs-dropdown(
-      model-name='Employee'
-      current='item.installingMaster'
-      destination='name'
-      current-model='item'
-      id-to-rewrite='installingMasterId'
+      items-data-source-name='Employee'
+      items-name-property='name'
+      save-to='item'
+      save-to-property='installingMasterId'
       )
 
     .field
@@ -40,11 +38,10 @@ form.service-point-item-edit
       label Aptarnavimo Meistras:
 
       vfs-dropdown(
-      model-name='Employee'
-      current='item.servingMaster'
-      destination='name'
-      current-model='item'
-      id-to-rewrite='servingMasterId'
+      items-data-source-name='Employee'
+      items-name-property='name'
+      save-to='item'
+      save-to-property='servingMasterId'
       )
 
   .footer

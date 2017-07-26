@@ -3,13 +3,13 @@
   module.component('vfsDropdown', {
 
     bindings: {
-      current: '=',
-      currentModel: '=',
-      modelName: '@',
-      destination: '@',
-      idToRewrite: '@',
+      saveTo: '=',
+      saveToProperty: '@',
+      itemsDataSourceName: '@',
+      itemsNameProperty: '@',
       autoSave: '='
     },
+
     templateUrl: 'app/domain/components/vfsDropdown/vfsDropdown.html',
     controller: dropdownController,
     controllerAs: 'vm'
@@ -39,34 +39,39 @@
 
     function $onInit() {
 
-      let model = Schema.model(vm.modelName);
+      vm.currentId = vm.saveTo[vm.saveToProperty];
+
+      let model = Schema.model(vm.itemsDataSourceName);
+
+      model.bindAll({}, $scope, 'vm.data');
 
       model.findAll()
-        .then((data) => {
-          vm.data = data;
-        });
+      .then(data => {
+        vm.currentItem = _.find(data, {id: vm.currentId});
+      });
 
     }
 
     function itemClick(item) {
 
-      vm.currentModel[vm.idToRewrite] = item.id;
+      vm.currentItem = item;
+      vm.saveTo[vm.saveToProperty] = item.id;
 
       if (!vm.autoSave) {
         vm.isOpen = false;
         return;
       }
 
-      vm.currentModel.DSCreate(vm.currentModel)
-        .then(() => {
-          // toastr.success('Pakeitimai išsaugoti');
-        })
-        .catch(() => {
-          toastr.error('Klaida. Pakeitimai neišsaugoti');
-        })
-        .finally(() => {
-          vm.isOpen = false;
-        });
+      vm.currentModel.DSCreate(vm.saveTo)
+      .then(() => {
+        // toastr.success('Pakeitimai išsaugoti');
+      })
+      .catch(() => {
+        toastr.error('Klaida. Pakeitimai neišsaugoti');
+      })
+      .finally(() => {
+        vm.isOpen = false;
+      });
 
     }
 

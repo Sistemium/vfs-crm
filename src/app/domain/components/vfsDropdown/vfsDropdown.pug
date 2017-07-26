@@ -6,6 +6,6 @@
   popover-is-open='vm.isOpen'
   popover-placement='bottom-right'
   )
-    span {{vm.current[vm.destination] || 'Paspauskite, kad pasirinkti'}}
+    span {{vm.currentItem[vm.itemsNameProperty] || 'Paspauskite, kad pasirinkti'}}
     span.caret
 
