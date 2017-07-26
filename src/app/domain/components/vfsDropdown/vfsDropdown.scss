@@ -17,7 +17,7 @@ vfs-dropdown {
 
   .scroll-y {
 
-    .item, .search-empty-item {
+    > * {
 
       span {
         display: block;

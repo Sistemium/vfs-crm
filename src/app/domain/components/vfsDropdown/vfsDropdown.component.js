@@ -7,7 +7,8 @@
       currentModel: '=',
       modelName: '@',
       destination: '@',
-      idToRewrite: '@'
+      idToRewrite: '@',
+      autoSave: '='
     },
     templateUrl: 'app/domain/components/vfsDropdown/vfsDropdown.html',
     controller: dropdownController,
@@ -50,6 +51,11 @@
     function itemClick(item) {
 
       vm.currentModel[vm.idToRewrite] = item.id;
+
+      if (!vm.autoSave) {
+        vm.isOpen = false;
+        return;
+      }
 
       vm.currentModel.DSCreate(vm.currentModel)
         .then(() => {
