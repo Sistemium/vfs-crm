@@ -7,7 +7,8 @@
       saveToProperty: '@',
       itemsDataSourceName: '@',
       itemsNameProperty: '@',
-      autoSave: '='
+      autoSave: '=',
+      placement: '@'
     },
 
     templateUrl: 'app/domain/components/vfsDropdown/vfsDropdown.html',
