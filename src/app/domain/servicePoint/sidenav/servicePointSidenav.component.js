@@ -16,7 +16,7 @@
 
   });
 
-  function servicePointSidenav(saControllerHelper, $scope, $q, $filter, Schema, $state) {
+  function servicePointSidenav(saControllerHelper, $scope, $q, $filter, Schema, $state, $timeout, saEtc) {
 
     const vm = saControllerHelper.setup(this, $scope);
     const servicePointHeight = 53;
@@ -25,8 +25,6 @@
 
     vm.watchScope('vm.searchText', onSearch);
     vm.rebindAll(ServicePoint, {}, 'vm.data', onSearch);
-
-    vm.watchScope('vm.currentServicePointId', onIdxChange);
 
     vm.use({
       restoreScrollPosition,
@@ -82,11 +80,20 @@
 
         let servicePoints = _.orderBy(vm.servicePoints, ['name'], ['asc']);
         let idx = _.findIndex(servicePoints, {id: vm.currentServicePointId});
-        let scrollingBlock = document.getElementById('sidenav-scroll-list');
 
-        setTimeout(() => {
+        $timeout(100).then(() => {
+
+          let scrollingBlock = saEtc.getElementById('sidenav-scroll-list');
+
+          if (!scrollingBlock) {
+            console.error('no scrollingBlock');
+            return;
+          }
+
           scrollingBlock.scrollTop = (idx) * servicePointHeight;
           vm.lastIndex = idx;
+          vm.watchScope('vm.currentServicePointId', onIdxChange);
+
         });
 
       });
