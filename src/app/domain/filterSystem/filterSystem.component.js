@@ -2,7 +2,7 @@
 
   module.component('filterSystem', {
 
-    templateUrl: 'app/domain/waterFilter/waterFilter.html',
+    templateUrl: 'app/domain/filterSystem/filterSystem.html',
     controller: filterSystemController,
     controllerAs: 'vm'
 
