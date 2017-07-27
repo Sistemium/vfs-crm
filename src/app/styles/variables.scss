@@ -2,7 +2,10 @@
 @import "flex";
 
 //$primary-color: #2768b7;
-$primary-color: darken(rgb(141, 184, 238), 15%);
+
+$cask: rgb(141, 184, 238);
+
+$primary-color: darken($cask, 15%);
 $active-color: $primary-color;
 $sab-blue: $primary-color;
 
@@ -52,7 +55,8 @@ $state-danger-text: #a94442 !default;
 $state-danger-bg: #f2dede !default;
 $state-danger-border: darken(adjust-hue($state-danger-bg, -10), 5%) !default;
 
-$hover-color: #CFE1EE;
+//$hover-color: #CFE1EE;
+$hover-color: lighten($cask, 20%);
 $hover-color-gray: #e6e6e6;
 $hover-border-color-gray: #adadad;
 
