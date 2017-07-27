@@ -62,11 +62,13 @@
 
     function openEditModal(item, componentName, title) {
 
+      let itemName = _.last(componentName.match(/edit-(.*)/));
+
       let modal = $uibModal.open({
 
         animation: true,
         template: `<div class="modal-header"><h1>{{vm.title}}</h1></div>` +
-        `<${componentName} service-point="vm.item" save-fn="vm.saveFn"></${componentName}>` +
+        `<${componentName} ${itemName}="vm.item" save-fn="vm.saveFn"></${componentName}>` +
         `<div class="modal-footer">` +
         (item.id ? `  <button class="btn destroy" ng-class="vm.confirmDestroy ? 'btn-danger' : 'btn-default'" ng-click="vm.destroyClick()">Ištrinti</button>` : '') +
         `  <button class="btn btn-success save" ng-disabled="!vm.item.isValid()" ng-click="vm.saveClick()">Išsaugoti</button>` +
