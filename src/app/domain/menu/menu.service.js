@@ -11,7 +11,7 @@
       title: 'Darbuotojai',
       state: 'employee'
     }, {
-      title: 'Filtrai',
+      title: 'Filtravimo sistemos',
       state: 'filterSystem'
     }];
 
