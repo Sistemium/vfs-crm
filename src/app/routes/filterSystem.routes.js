@@ -15,7 +15,7 @@
 
       data: {
         title: 'Filtravimo sistemos'
-      },
+      }
 
     });
 
