@@ -8,7 +8,9 @@
     resize-offset-top='5'
     )
       .filter-brand(ng-repeat='brand in vm.brands track by brand.id')
-        h1 {{brand.name}}
+
+        h2 {{brand.name}}
+
         .headers
           .filter-system-type Filtro Sistemos Tipas
           .filter-model Filtro Sistemos Modelis

@@ -5,9 +5,18 @@
 
   .filter-system-list {
 
+    h2 {
+      margin-top: 0;
+    }
+
+    .filter-brand + .filter-brand {
+      h2 {
+        margin-top: 15px;
+      }
+    }
+
     .headers {
       @extend %flex-table-headers;
-
     }
 
     .filter-brand {

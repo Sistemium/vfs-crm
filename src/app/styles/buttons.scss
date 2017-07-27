@@ -1,9 +1,11 @@
 @import "variables";
 
 button {
+
   &.margin {
     margin: 2px;
   }
+
   .glyphicon {
     top: 2px;
     //left: 1px;
@@ -15,6 +17,7 @@ button {
     background-color: $warn;
     border-color: darken($warn, 10%);
   }
+
 
 }
 
