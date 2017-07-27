@@ -8,7 +8,14 @@ button {
     top: 2px;
     //left: 1px;
   }
+
   outline-style: none !important;
+
+  &.btn-warning {
+    background-color: $warn;
+    border-color: darken($warn, 10%);
+  }
+
 }
 
 .buttons-container {

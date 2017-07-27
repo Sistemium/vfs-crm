@@ -1,7 +1,8 @@
 @import "mixins";
 @import "flex";
 
-$primary-color: #2768b7;
+//$primary-color: #2768b7;
+$primary-color: darken(rgb(141, 184, 238), 15%);
 $active-color: $primary-color;
 $sab-blue: $primary-color;
 
@@ -12,9 +13,11 @@ $black: #333333;
 $blue: $sab-blue;
 $dark-blue: darken($blue, 10%);
 $gray: gray;
-$red: red;
+//$red: red;
+$red: rgb(247, 143, 143);
 $white: #fff;
-$warn: #f0ad4e;
+//$warn: #f0ad4e;
+$warn: darken(rgb(245, 206, 133), 8%);
 
 $box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
 

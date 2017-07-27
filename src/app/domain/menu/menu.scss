@@ -1,13 +1,49 @@
 @import "../../styles/variables";
 
-
 .stm-menu {
 
   overflow-x: hidden;
+  $img-size: 40px;
+
+  .items {
+
+    align-items: stretch;
+    width: 100%;
+
+  }
 
   button.btn .caption .badge {
     background-color: $primary-color;
     color: $white;
+  }
+
+  .icon {
+    padding: 5px;
+    img {
+      max-height: $img-size;
+      max-width: $img-size;
+    }
+  }
+
+  button {
+
+    padding: 10px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    justify-content: flex-start;
+
+    .icon {
+
+    }
+
+    .caption {
+      //color: $primary-color;
+      flex: 1;
+      text-align: center;
+    }
   }
 
 }
