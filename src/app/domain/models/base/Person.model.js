@@ -9,20 +9,28 @@
       name: 'Person',
 
       relations: {
-        // hasOne: {
-        //   localKey: '',
-        //   localField: ''
-        // }
+
+        hasMany: {
+          ServiceContract: {
+            localField: 'serviceContracts',
+            foreignKey: 'customerPersonId'
+          }
+        }
 
       },
 
       computed: {
+        name: ['firstName', 'lastName', name]
         // phoneNumber: ['phone', function (phone) {
         //   return phone || '+37060010001';
         // }]
       }
 
     });
+
+    function name(firstName, lastName) {
+      return `${firstName} ${lastName}`;
+    }
 
   });
 
