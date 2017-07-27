@@ -35,12 +35,13 @@
   }
 
   a.home {
-    background: $cg-background-color;
-    padding: 0 8px;
-    line-height: 37px;
-    border-radius: 9px;
-    font-size: 21px;
-    display: block;
+
+    //background: $cg-background-color;
+    //padding: 0 8px;
+    //line-height: 37px;
+    //border-radius: 9px;
+    //font-size: 21px;
+    //display: block;
 
     b {
       top: 3px;
@@ -56,7 +57,7 @@
     }
 
     img {
-      max-height: 20px;
+      max-height: 40px;
     }
 
   }

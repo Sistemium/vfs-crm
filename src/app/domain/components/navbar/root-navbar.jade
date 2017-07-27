@@ -1,7 +1,8 @@
 h2.root-navbar(ng-hide='vm.hide' ng-class='{disabled: vm.hideNavs}')
 
-  a.home(href ui-sref='home' ng-class='{disabled: vm.isHomeState}')
-    b.glyphicon.glyphicon-home
+  a.home(href ui-sref='home' ng-class='{disabled: vm.isHomeState}' ng-if='vm.currentItem')
+    //b.glyphicon.glyphicon-home
+    img(ng-src='/images/{{vm.currentItem.icon}}')
 
   a.home.sub-root-nav(href ng-click='vm.rootClick()' ng-if='vm.isSubRootState')
     b.glyphicon.glyphicon-chevron-left
