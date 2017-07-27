@@ -6,15 +6,17 @@
 
     Schema.register({
 
-      name: 'Brand',
+      name: 'FilterSystemType',
 
       relations: {
+
         hasMany: {
           FilterSystem: {
-            localField: 'filterSystems',
-            foreignKey: 'brandId'
+            localField: 'filterSystem',
+            foreignKey: 'filterSystemTypeId'
           }
         }
+
       }
 
     });

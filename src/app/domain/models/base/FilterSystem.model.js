@@ -14,7 +14,13 @@
           Brand: {
             localField: 'brand',
             localKey: 'brandId'
+          },
+
+          FilterSystemType: {
+            localField: 'filterSystemType',
+            localKey: 'filterSystemTypeId'
           }
+
         },
 
         hasMany: {
