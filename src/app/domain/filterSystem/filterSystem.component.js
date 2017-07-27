@@ -20,7 +20,9 @@
       addClick
     });
 
-    Brand.bindAll({}, $scope, 'vm.brands');
+    Brand.bindAll({
+      orderBy: ['name']
+    }, $scope, 'vm.brands');
 
     /*
      Functions

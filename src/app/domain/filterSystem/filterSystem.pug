@@ -21,7 +21,7 @@
         //.no-res.warn-block(ng-if='!foundFilter.length') Filtrų Nerasta
 
         .filter-system(
-        ng-repeat='filterSystem in brand.filterSystems | filter: vm.searchText as foundFilter track by filterSystem.id'
+        ng-repeat='filterSystem in brand.filterSystems | filter: vm.searchText | orderBy: "model" as foundFilter track by filterSystem.id'
         ng-click='vm.openModal(filterSystem)'
         )
 
