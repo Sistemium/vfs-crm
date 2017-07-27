@@ -16,7 +16,7 @@
 
     vm.use({
       $onInit,
-      openModal: Editing.editModal('edit-filter-system', 'Filtro Sistemos Redagavimas'),
+      openModal: Editing.editModal('edit-filter-system', 'Filtravimo Sistemos Redagavimas'),
       addClick
     });
 

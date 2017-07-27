@@ -5,7 +5,7 @@
   margin: 10px 0;
 
   form {
-    
+
     @extend %flex-column-nowrap;
 
     .name, .address, .site {

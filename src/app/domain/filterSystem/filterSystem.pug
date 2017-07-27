@@ -12,13 +12,15 @@
         h2 {{brand.name}}
 
         .headers
-          .filter-system-type Filtro Sistemos Tipas
-          .filter-model Filtro Sistemos Modelis
+          .filter-system-type Tipas
+          .filter-model Modelis
 
         .no-res.warn-block(ng-if='!foundFilter.length') Filtrų Nerasta
 
-        .filter-system(ng-repeat='filter in brand.filterSystems | filter: vm.searchText as foundFilter track by ' +
-        'filter.id' ng-click='vm.openModal(filter)')
+        .filter-system(
+        ng-repeat='filterSystem in brand.filterSystems | filter: vm.searchText as foundFilter track by filterSystem.id'
+        ng-click='vm.openModal(filterSystem)'
+        )
 
-          .filter-system-type {{filter.filterSystemType.name}}
-          .filter-model {{filter.model}}
+          .filter-system-type {{filterSystem.filterSystemType.name}}
+          .filter-model {{filterSystem.model}}
