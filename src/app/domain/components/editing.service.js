@@ -7,7 +7,54 @@
 
   function Editing($uibModal, $timeout) {
 
-    return {editModal};
+    return {editModal, setupController};
+
+    function setupController(vm) {
+
+      _.assign(vm, {
+        saveClick,
+        cancelClick,
+        destroyClick,
+        afterSave: vm.afterSave || _.noop,
+        afterCancel: vm.afterCancel || _.noop
+      });
+
+      /*
+       Functions
+       */
+
+      function saveClick() {
+        if (vm.saveFn) {
+          vm.saveFn()
+            .then(vm.afterSave);
+        } else if (_.isFunction(vm.item.DSCreate)) {
+          vm.item.DSCreate()
+            .then(vm.afterSave);
+        }
+      }
+
+      function cancelClick() {
+        vm.afterCancel();
+      }
+
+      function destroyClick() {
+
+        vm.confirmDestroy = !vm.confirmDestroy;
+
+        if (vm.confirmDestroy) {
+          return $timeout(2000).then(() => vm.confirmDestroy = false);
+        }
+
+        if (_.isFunction(vm.item.DSDestroy)) {
+          vm.item.DSDestroy()
+            .then(vm.afterSave);
+        } else {
+          vm.afterSave();
+        }
+
+      }
+
+    }
 
     function editModal(componentName, title) {
       return item => openEditModal(item, componentName, title);
@@ -46,44 +93,15 @@
 
         $scope.vm = vm;
 
+        setupController(vm);
+
         _.assign(vm, {
           item,
           title,
-          saveClick,
-          cancelClick,
-          destroyClick
+          afterSave: modal.close,
+          afterCancel: modal.dismiss
         });
 
-        function saveClick() {
-          if (vm.saveFn) {
-            vm.saveFn()
-              .then(modal.close);
-          } else if (_.isFunction(item.DSCreate)) {
-            item.DSCreate()
-              .then(modal.close);
-          }
-        }
-
-        function cancelClick() {
-          modal.dismiss();
-        }
-
-        function destroyClick() {
-
-          vm.confirmDestroy = !vm.confirmDestroy;
-
-          if (vm.confirmDestroy) {
-            return $timeout(2000).then(() => vm.confirmDestroy = false);
-          }
-
-          if (_.isFunction(item.DSDestroy)) {
-            item.DSDestroy()
-              .then(modal.close);
-          } else {
-            modal.dismiss();
-          }
-
-        }
 
       }
 
