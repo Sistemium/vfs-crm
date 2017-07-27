@@ -1,44 +1,36 @@
 .filter-system {
 
-  .filter-system-table {
-
-    @extend %flex-table;
+  .filter-system-list {
 
     .headers {
       @extend %flex-table-headers;
     }
 
-    > * {
-
-      //.first-name {
-      //  width: $width-first-name;
-      //}
-      //
-      //.last-name {
-      //  width: $width-last-name;
-      //}
-      //.telephone {
-      //  width: $width-telephone;
-      //}
-
+    .filter-brand {
+      @extend %flex-table;
     }
 
-    .headers > *:last-of-type {
-      text-align: right;
+    > * {
+
+      .filter-system-type {
+        width: 50%;
+      }
+
+      .filter-model {
+        width: 50%;
+      }
+
     }
 
     .scroll-y {
 
-      .employee {
+      .filter-system {
 
         @extend %flex-table-item;
 
-        .first-name, .last-name, .telephone {
+        .filter-system-type, .filter-model {
+          cursor: pointer;
           @extend .ellipsis;
-        }
-
-        > *:last-of-type {
-          text-align: right;
         }
 
       }

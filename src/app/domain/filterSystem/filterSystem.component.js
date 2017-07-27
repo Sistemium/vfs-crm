@@ -12,13 +12,26 @@
 
     const vm = saControllerHelper.setup(this, $scope);
 
-    //const {} = Schema.models();
+    const {Brand, FilterSystemType} = Schema.models();
 
-    vm.use({});
+    vm.use({$onInit});
+
+    Brand.bindAll({}, $scope, 'vm.brands');
 
     /*
      Functions
      */
+
+    function $onInit() {
+
+      let busy = [
+        FilterSystemType.findAll(),
+        Brand.findAllWithRelations({}, {bypassCache: true})(['FilterSystem'])
+      ];
+
+      vm.setBusy(busy);
+
+    }
 
   }
 

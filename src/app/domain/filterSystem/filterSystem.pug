@@ -1,0 +1,23 @@
+.filter-system(cg-busy='vm.cgBusy')
+
+  navigation-bar(view-buttons='' state-name='' search-text='vm.searchText')
+
+  .filter-system-list
+    .scroll-y(
+    resize
+    resize-offset-top='5'
+    )
+      .filter-brand(ng-repeat='brand in vm.brands track by brand.id' ng-if='brand.filterSystems.length')
+        h1 {{brand.name}}
+        .headers
+          .filter-system-type Filtro Sistemos Tipas
+          .filter-model Filtro Sistemos Modelis
+
+        .no-res.btn-warn(ng-if='!foundFilter.length') Filtrų Nerasta
+
+        .filter-system(ng-repeat='filter in brand.filterSystems | filter: vm.searchText as foundFilter track by ' +
+        'filter.id')
+
+          .filter-system-type {{filter.filterSystemType.name}}
+          .filter-model {{filter.model}}
+
