@@ -10,6 +10,9 @@
     }, {
       title: 'Darbuotojai',
       state: 'employee'
+    }, {
+      title: 'Filtrai',
+      state: 'waterFilters'
     }];
 
     function setItemData(state, data) {
