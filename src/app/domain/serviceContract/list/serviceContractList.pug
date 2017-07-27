@@ -1,0 +1,22 @@
+.service-contract-list
+
+  .headers
+    .date Data
+    .num Numeris
+    .legalType Tipas
+    .customer Klientas
+
+  .scroll-y(
+  resize
+  resize-offset-top='5'
+  vs-repeat
+  vs-excess='10'
+  )
+    .service-contract(
+    ng-repeat='serviceContract in vm.serviceContracts track by serviceContract.id'
+    ng-click='vm.serviceContractClickFn(serviceContract, $index)'
+    )
+      .date {{ serviceContract.date | amDateFormat: "YYYY/MM/DD" }}
+      .num {{ serviceContract.num }}
+      .legalType {{ serviceContract.legalType }}
+      .customer {{ serviceContract.customer().name }}

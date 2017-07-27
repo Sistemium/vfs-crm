@@ -1,0 +1,58 @@
+@import "../../../styles/flex-table";
+
+.service-contract-list {
+
+  $width-date: 20%;
+  $width-num: 15%;
+  $width-legalType: 15%;
+  $width-customer: 50%;
+
+  @extend %flex-table;
+
+  > * {
+
+    .date {
+      width: $width-date;
+    }
+
+    .num {
+      width: $width-num;
+    }
+
+    .legalType {
+      width: $width-legalType;
+    }
+
+    .customer {
+      width: $width-customer;
+    }
+
+    > * {
+      @extend .ellipsis;
+    }
+
+  }
+
+  .headers {
+    @extend %flex-table-headers;
+  }
+
+  .scroll-y {
+
+    > * {
+
+      cursor: pointer;
+
+      @extend %flex-table-item;
+
+      > * {
+        @extend .ellipsis;
+      }
+
+    }
+
+  }
+
+}
+
+

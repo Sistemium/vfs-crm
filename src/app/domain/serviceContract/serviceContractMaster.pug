@@ -1,0 +1,12 @@
+.service-contract-master(
+cg-busy='vm.cgBusy'
+)
+
+  .ui-view
+
+    navigation-bar(search-text='vm.searchText' edit-click-fn='vm.addClick')
+
+    service-contract-list(
+    service-contracts='vm.serviceContractsFiltered'
+    service-contract-click-fn='vm.serviceContractClick'
+    )

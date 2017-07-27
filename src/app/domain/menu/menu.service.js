@@ -13,6 +13,9 @@
     }, {
       title: 'Filtravimo sistemos',
       state: 'filterSystem'
+    }, {
+      title: 'Aptarnavimo sutartys',
+      state: 'serviceContract'
     }];
 
     function setItemData(state, data) {
