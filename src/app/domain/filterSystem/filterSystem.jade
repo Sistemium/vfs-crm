@@ -1,0 +1,22 @@
+.filter-system
+
+  navigation-bar(view-buttons='' state-name='' search-text='')
+
+  .water-filter-table
+    .headers
+      .first-name Vardas
+      .last-name Pavardė
+      .telephone Mob. Telefonas
+
+    .scroll-y(
+    resize
+    resize-offset-top='5'
+    )
+      .employee(
+      ng-repeat='waterFilter in vm.waterFilters | filter: vm.searchText track by employee.id'
+      )
+        .first-name {{employee.person.firstName}}
+        .last-name {{employee.person.lastName}}
+        .telephone
+          a(href='tel:{{ employee.person.phone }}') {{ employee.person.phone }}
+

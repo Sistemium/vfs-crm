@@ -12,7 +12,7 @@
       state: 'employee'
     }, {
       title: 'Filtrai',
-      state: 'waterFilters'
+      state: 'filterSystem'
     }];
 
     function setItemData(state, data) {
