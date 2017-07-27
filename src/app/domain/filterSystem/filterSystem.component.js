@@ -29,8 +29,9 @@
     function $onInit() {
 
       let busy = [
-        FilterSystemType.findAll(),
-        Brand.findAllWithRelations({}, {bypassCache: true})(['FilterSystem'])
+        FilterSystemType.findAll({}, {bypassCache: true}),
+        FilterSystem.findAll({}, {bypassCache: true}),
+        Brand.findAll({}, {bypassCache: true})
       ];
 
       vm.setBusy(busy);
