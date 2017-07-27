@@ -3,7 +3,7 @@
   module.component('editFilterSystem', {
 
     bindings: {
-      servicePoint: '=',
+      filterSystem: '='
     },
 
     templateUrl: 'app/domain/filterSystem/editFilterSystem/editFilterSystem.html',
@@ -17,8 +17,6 @@
     const vm = saControllerHelper.setup(this, $scope);
 
     vm.use({});
-
-    console.log(vm.servicePoint);
 
     /*
      Functions

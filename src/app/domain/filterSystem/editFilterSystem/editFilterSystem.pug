@@ -7,10 +7,10 @@
 
       vfs-dropdown(
       ng-required='true'
-      ng-model='vm.servicePoint.brand.name'
+      ng-model='vm.filterSystem.brand.name'
       items-data-source-name='Brand'
       items-name-property='name'
-      save-to='vm.servicePoint'
+      save-to='vm.filterSystem'
       save-to-property='brandId'
       placement='bottom-left'
       )
@@ -20,10 +20,10 @@
 
       vfs-dropdown(
       ng-required='true'
-      ng-model='vm.servicePoint.filterSystemType.name'
+      ng-model='vm.filterSystem.filterSystemType.name'
       items-data-source-name='FilterSystemType'
       items-name-property='name'
-      save-to='vm.servicePoint'
+      save-to='vm.filterSystem'
       save-to-property='filterSystemTypeId'
       placement='bottom-left'
       )
@@ -36,5 +36,5 @@
       required
       autocomplete='off'
       placeholder='Filtro Sistemos Modelis'
-      ng-model='vm.servicePoint.model'
+      ng-model='vm.filterSystem.model'
       )
