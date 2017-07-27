@@ -14,7 +14,7 @@
       template: '<filter-system></filter-system>',
 
       data: {
-        title: 'Filtro sistemos'
+        title: 'Filtravimo sistemos'
       },
 
     });
