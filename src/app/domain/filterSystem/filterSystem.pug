@@ -7,7 +7,10 @@
     resize
     resize-offset-top='5'
     )
-      .filter-brand(ng-repeat='brand in vm.brands track by brand.id')
+      .filter-brand(
+      ng-repeat='brand in vm.brands track by brand.id'
+      ng-hide='!foundFilter.length'
+      )
 
         h2 {{brand.name}}
 
@@ -15,7 +18,7 @@
           .filter-system-type Tipas
           .filter-model Modelis
 
-        .no-res.warn-block(ng-if='!foundFilter.length') Filtrų Nerasta
+        //.no-res.warn-block(ng-if='!foundFilter.length') Filtrų Nerasta
 
         .filter-system(
         ng-repeat='filterSystem in brand.filterSystems | filter: vm.searchText as foundFilter track by filterSystem.id'
