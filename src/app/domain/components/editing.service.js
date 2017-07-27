@@ -18,12 +18,12 @@
       let modal = $uibModal.open({
 
         animation: true,
-        template: `<div class="modal-header"><h1>{{title}}</h1></div>` +
-        `<${componentName} service-point="item" save-fn="saveFn"></${componentName}>` +
+        template: `<div class="modal-header"><h1>{{vm.title}}</h1></div>` +
+        `<${componentName} service-point="vm.item" save-fn="vm.saveFn"></${componentName}>` +
         `<div class="modal-footer">` +
-        (item.id ? `  <button class="btn destroy" ng-class="confirmDestroy ? 'btn-danger' : 'btn-default'" ng-click="destroyClick()">Ištrinti</button>` : '') +
-        `  <button class="btn btn-success save" ng-disabled="!item.isValid()" ng-click="saveClick()">Išsaugoti</button>` +
-        `  <button class="btn btn-default cancel" ng-click="cancelClick()">Atšaukti</button>` +
+        (item.id ? `  <button class="btn destroy" ng-class="vm.confirmDestroy ? 'btn-danger' : 'btn-default'" ng-click="vm.destroyClick()">Ištrinti</button>` : '') +
+        `  <button class="btn btn-success save" ng-disabled="!vm.item.isValid()" ng-click="vm.saveClick()">Išsaugoti</button>` +
+        `  <button class="btn btn-default cancel" ng-click="vm.cancelClick()">Atšaukti</button>` +
         `</div>`,
         size: 'lg',
 
@@ -42,7 +42,11 @@
 
       function controller($scope) {
 
-        _.assign($scope, {
+        const vm = {};
+
+        $scope.vm = vm;
+
+        _.assign(vm, {
           item,
           title,
           saveClick,
@@ -51,8 +55,8 @@
         });
 
         function saveClick() {
-          if ($scope.saveFn) {
-            $scope.saveFn()
+          if (vm.saveFn) {
+            vm.saveFn()
               .then(modal.close);
           } else if (_.isFunction(item.DSCreate)) {
             item.DSCreate()
@@ -66,10 +70,10 @@
 
         function destroyClick() {
 
-          $scope.confirmDestroy = !$scope.confirmDestroy;
+          vm.confirmDestroy = !vm.confirmDestroy;
 
-          if ($scope.confirmDestroy) {
-            return $timeout(2000).then(() => $scope.confirmDestroy = false);
+          if (vm.confirmDestroy) {
+            return $timeout(2000).then(() => vm.confirmDestroy = false);
           }
 
           if (_.isFunction(item.DSDestroy)) {
