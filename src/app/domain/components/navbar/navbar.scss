@@ -1,4 +1,4 @@
-@import "../../../styles/flex";
+@import "../../../styles/variables";
 
 .root-navbar {
 
@@ -70,6 +70,10 @@
     @include responsive-only(xxs) {
       display: none;
     }
+  }
+
+  .lastDigest {
+    color: $gray-background-color;
   }
 
 }

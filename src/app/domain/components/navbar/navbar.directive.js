@@ -20,7 +20,7 @@
 
   function NavbarController(Menu, $scope, $rootScope, saControllerHelper, $window, localStorageService, $state) {
 
-    const DEFAULT_TITLE = 'Pagrindinis meniu';
+    const DEFAULT_TITLE = '';
     const vm = saControllerHelper.setup(this, $scope);
 
     vm.use({

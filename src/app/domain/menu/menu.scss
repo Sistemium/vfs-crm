@@ -5,6 +5,23 @@
   overflow-x: hidden;
   $img-size: 40px;
 
+  .page-header {
+
+    margin: 0;
+    position: relative;
+
+    top: -5px;
+    border-bottom: none;
+
+    h2 {
+      margin: 0 auto 10px;
+      font-size: 230%;
+      text-align: center;
+      color: $black;
+    }
+
+  }
+
   .items {
 
     align-items: stretch;

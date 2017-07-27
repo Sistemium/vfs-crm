@@ -12,7 +12,7 @@ h2.root-navbar(ng-hide='vm.hide' ng-class='{disabled: vm.hideNavs}')
 
   .separator
 
-  small(ng-if='vm.lastDigest >= 0') D:{{ vm.lastDigest }}
+  small.lastDigest(ng-if='vm.lastDigest >= 0') D:{{ vm.lastDigest }}
 
   syncer-indicator
 
