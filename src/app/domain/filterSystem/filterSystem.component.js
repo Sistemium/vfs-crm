@@ -8,13 +8,17 @@
 
   });
 
-  function filterSystemController($scope, Schema, saControllerHelper) {
+  function filterSystemController($scope, Schema, saControllerHelper, Editing) {
 
     const vm = saControllerHelper.setup(this, $scope);
 
-    const {Brand, FilterSystemType} = Schema.models();
+    const {Brand, FilterSystemType, FilterSystem} = Schema.models();
 
-    vm.use({$onInit});
+    vm.use({
+      $onInit,
+      openModal: Editing.editModal('edit-filter-system', 'Filtro Sistemos Redagavimas'),
+      addClick
+    });
 
     Brand.bindAll({}, $scope, 'vm.brands');
 
@@ -31,6 +35,10 @@
 
       vm.setBusy(busy);
 
+    }
+
+    function addClick() {
+      Editing.editModal('edit-filter-system', 'Nauja Filtravimo Sistema')(FilterSystem.createInstance())
     }
 
   }

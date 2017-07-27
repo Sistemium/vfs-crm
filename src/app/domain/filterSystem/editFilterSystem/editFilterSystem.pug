@@ -1,0 +1,40 @@
+.edit-filter-system
+
+  form
+
+    .filter-brand
+      label Prekės Ženklas
+
+      vfs-dropdown(
+      ng-required='true'
+      ng-model='vm.servicePoint.brand.name'
+      items-data-source-name='Brand'
+      items-name-property='name'
+      save-to='vm.servicePoint'
+      save-to-property='brandId'
+      placement='bottom-left'
+      )
+
+    .filter-system-type
+      label Filtro Sistemos Tipas
+
+      vfs-dropdown(
+      ng-required='true'
+      ng-model='vm.servicePoint.filterSystemType.name'
+      items-data-source-name='FilterSystemType'
+      items-name-property='name'
+      save-to='vm.servicePoint'
+      save-to-property='filterSystemTypeId'
+      placement='bottom-left'
+      )
+
+    .filter-model
+      label(for='model') Filtro Sistemos Modelis
+
+      input#model.form-control(
+      type='text'
+      required
+      autocomplete='off'
+      placeholder='Filtro Sistemos Modelis'
+      ng-model='vm.servicePoint.model'
+      )

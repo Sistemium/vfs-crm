@@ -4,10 +4,19 @@
 
     .headers {
       @extend %flex-table-headers;
+
     }
 
     .filter-brand {
       @extend %flex-table;
+
+      .no-res.warn-block {
+        border: 1px solid $border-gray;
+        padding: 5px;
+        text-align: center;
+        background-color: $warn;
+        color: white;
+      }
     }
 
     > * {

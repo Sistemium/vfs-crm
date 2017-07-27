@@ -30,9 +30,16 @@
           }
         }
 
+      },
+      methods: {
+        isValid
       }
 
     });
+
+    function isValid() {
+      return true
+    }
 
   });
 

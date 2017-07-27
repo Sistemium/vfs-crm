@@ -1,16 +1,16 @@
-.edit-service-point {
+edit-filter-system {
 
   margin: 10px 0;
 
   form {
     @extend %flex-column-nowrap;
 
-    .name, .address, .site {
+    .filter-system-type, .filter-model, .filter-brand {
       width: 95%;
       margin: 10px auto;
     }
 
-    .site {
+    .filter-system-type, .filter-brand {
       vfs-dropdown {
 
         .vfs-dropdown {
@@ -35,4 +35,3 @@
   }
 
 }
-
