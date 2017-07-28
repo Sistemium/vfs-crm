@@ -36,10 +36,10 @@
 
     function getData() {
 
-      Employee.findAll()
-      .then(() => {
-        Person.findAll();
-      });
+      let busy = Person.findAll()
+        .then(() => Employee.findAll());
+
+      vm.setBusy(busy);
 
     }
 
