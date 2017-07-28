@@ -15,6 +15,22 @@ vfs-dropdown {
     background: darken($hover-color, 5%);
   }
 
+  .search-add {
+    @extend %flex-row-nowrap;
+
+    margin-bottom: 6px;
+
+    .search {
+      flex: 1;
+    }
+
+    button {
+      margin-left: 6px;
+    }
+
+  }
+
+
   .scroll-y {
 
     > * {
@@ -36,6 +52,19 @@ vfs-dropdown {
     .item:hover {
       background: $hover-color;
       cursor: pointer;
+    }
+
+  }
+
+  .edit-block{
+
+    .button-block{
+      @extend %flex-row-nowrap;
+      justify-content: flex-end;
+
+      button{
+        margin-left: 7px;
+      }
     }
 
   }

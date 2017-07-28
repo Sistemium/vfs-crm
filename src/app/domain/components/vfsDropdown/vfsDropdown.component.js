@@ -17,14 +17,19 @@
 
   });
 
-  function dropdownController($scope, saControllerHelper, Schema, toastr) {
+  function dropdownController($scope, saControllerHelper, Schema, toastr, Editing) {
 
     const vm = saControllerHelper.setup(this, $scope);
 
     vm.use({
       $onInit,
-      itemClick
+      itemClick,
+      addItem,
+      afterCancel,
+      afterSave,
     });
+
+    Editing.setupController(vm, 'newItem');
 
     /*
      Functions
@@ -38,11 +43,21 @@
 
     });
 
+    function addItem() {
+
+      vm.loadComponent = !vm.loadComponent;
+      vm.newItem = vm.model.createInstance({name: vm.search});
+
+    }
+
     function $onInit() {
+
+      vm.editComponentName = 'edit-' + _.kebabCase(vm.itemsDataSourceName);
 
       vm.currentId = vm.saveTo[vm.saveToProperty];
 
       let model = Schema.model(vm.itemsDataSourceName);
+      vm.model = model;
 
       model.bindAll({}, $scope, 'vm.data');
 
@@ -74,6 +89,16 @@
         vm.isOpen = false;
       });
 
+    }
+
+    function afterCancel() {
+      vm.isOpen = false;
+    }
+
+    function afterSave() {
+      vm.currentItem = vm.newItem;
+      vm.isOpen = false;
+      vm.saveTo[vm.saveToProperty] = vm.newItem.id;
     }
 
   }

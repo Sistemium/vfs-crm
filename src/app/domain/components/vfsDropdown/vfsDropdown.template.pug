@@ -1,8 +1,12 @@
-vfs-searcher.search(search='vm.search')
+.search-add
+  vfs-searcher.search(search='vm.search')
+  button.btn.btn-warning(ng-click='vm.addItem()')
+    i.glyphicon.glyphicon-plus
 
 .scroll-y(
 resize
 resize-offset-top='15'
+ng-if='!vm.loadComponent'
 )
 
   .item(
@@ -14,3 +18,16 @@ resize-offset-top='15'
 
   .no-results(ng-if='!filteredItems.length')
     span.no-res Rezultatų nerasta
+
+.edit-block(ng-if='vm.loadComponent')
+  transform-to-component(component-name='{{vm.editComponentName}}' instance='vm.newItem')
+  .button-block
+
+    button.btn.btn-success.animate-show.save(
+    ng-click='vm.saveClick()'
+    ) Išsaugoti
+
+    button.btn.btn-default.cancel(
+    ng-click='vm.cancelClick()'
+    ) Atšaukti
+
