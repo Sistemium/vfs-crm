@@ -6,8 +6,6 @@
       label Prekės Ženklas
 
       vfs-dropdown(
-      ng-required='true'
-      ng-model='vm.filterSystem.brand.name'
       items-data-source-name='Brand'
       items-name-property='name'
       save-to='vm.filterSystem'
@@ -19,8 +17,6 @@
       label Filtravimo Sistemos Tipas
 
       vfs-dropdown(
-      ng-required='true'
-      ng-model='vm.filterSystem.filterSystemType.name'
       items-data-source-name='FilterSystemType'
       items-name-property='name'
       save-to='vm.filterSystem'
@@ -33,7 +29,6 @@
 
       input#model.form-control(
       type='text'
-      required
       autocomplete='off'
       placeholder='Filtro Sistemos Modelis'
       ng-model='vm.filterSystem.model'
