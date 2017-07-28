@@ -6,7 +6,7 @@
     .first-name Vardas
     .last-name Pavardė
     .code Asmens Kodas
-    .phone Mob. Telefonas
+    .phone Telefonas
 
   .scroll-y(
   resize
@@ -18,9 +18,9 @@
     ng-click='vm.openModal(person)'
     )
 
-      .first-name {{person.firstName}}
-      .last-name {{person.lastName}}
-      .code {{person.code}}
+      .first-name {{ person.firstName }}
+      .last-name {{ person.lastName }}
+      .code {{ person.code }}
       .phone
         a(href='tel:{{person.phone}}') {{person.phone}}
 
