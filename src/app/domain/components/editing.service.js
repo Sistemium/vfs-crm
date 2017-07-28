@@ -3,13 +3,15 @@
 (function () {
 
   angular.module('webPage')
-    .service('Editing', Editing);
+  .service('Editing', Editing);
 
   function Editing($uibModal, $timeout) {
 
     return {editModal, setupController};
 
-    function setupController(vm) {
+    function setupController(vm, itemProperty) {
+
+      itemProperty = itemProperty || 'item';
 
       _.assign(vm, {
         saveClick,
@@ -26,15 +28,15 @@
       function saveClick() {
         if (vm.saveFn) {
           vm.saveFn()
-            .then(vm.afterSave);
-        } else if (_.isFunction(vm.item.DSCreate)) {
-          vm.item.DSCreate()
-            .then(vm.afterSave);
+          .then(vm.afterSave);
+        } else if (_.isFunction(vm[itemProperty].DSCreate)) {
+          vm[itemProperty].DSCreate()
+          .then(vm.afterSave);
         }
       }
 
-      function cancelClick() {
-        vm.afterCancel();
+      function cancelClick(ev) {
+        vm.afterCancel(ev);
       }
 
       function destroyClick() {
@@ -45,9 +47,9 @@
           return $timeout(2000).then(() => vm.confirmDestroy = false);
         }
 
-        if (_.isFunction(vm.item.DSDestroy)) {
-          vm.item.DSDestroy()
-            .then(vm.afterSave);
+        if (_.isFunction(vm[itemProperty].DSDestroy)) {
+          vm[itemProperty].DSDestroy()
+          .then(vm.afterSave);
         } else {
           vm.afterSave();
         }
@@ -81,11 +83,11 @@
       });
 
       modal.result
-        .catch(() => {
-          if (item.id) {
-            item.DSRevert();
-          }
-        });
+      .catch(() => {
+        if (item.id) {
+          item.DSRevert();
+        }
+      });
 
       return modal.result;
 
@@ -103,7 +105,6 @@
           afterSave: modal.close,
           afterCancel: modal.dismiss
         });
-
 
       }
 
