@@ -24,9 +24,17 @@
         // phoneNumber: ['phone', function (phone) {
         //   return phone || '+37060010001';
         // }]
+      },
+
+      methods: {
+        isValid
       }
 
     });
+
+    function isValid() {
+      return true
+    }
 
     function name(firstName, lastName) {
       return `${firstName} ${lastName}`;

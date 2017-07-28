@@ -22,8 +22,7 @@
       disabled: true
     }, {
       title: 'Asmenys',
-      state: 'person',
-      disabled: true
+      state: 'person'
     }];
 
     const icons = [

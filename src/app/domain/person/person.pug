@@ -1,0 +1,27 @@
+.person(cg-busy='vm.cgBusy')
+
+  navigation-bar(search-text='vm.searchText' edit-click-fn='vm.addClick')
+
+  .headers
+    .first-name Vardas
+    .last-name Pavardė
+    .personal-code Asmens Kodas
+    .telephone Mob. Telefonas
+
+  .scroll-y(
+  resize
+  resize-offset-top='5'
+  vs-repeat
+  )
+    .person-list(
+    ng-repeat='person in vm.persons | filter: vm.searchText track by person.id'
+    ng-click='vm.openModal(person)'
+    )
+
+      .first-name {{person.firstName}}
+      .last-name {{person.lastName}}
+      .personal-code {{person.code}}
+      .telephone
+        a(href='tel:{{person.phone}}') {{person.phone}}
+
+

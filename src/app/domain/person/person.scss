@@ -1,0 +1,55 @@
+.person {
+
+  @extend %flex-table;
+
+  $width-first-name: 30%;
+  $width-last-name: 30%;
+  $width-code: 20%;
+  $width-telephone: 20%;
+
+  .headers {
+    @extend %flex-table-headers;
+  }
+
+  > * {
+
+    .first-name {
+      width: $width-first-name;
+    }
+
+    .last-name {
+      width: $width-last-name;
+    }
+    .personal-code {
+      width: $width-code;
+    }
+
+    .telephone {
+      width: $width-telephone;
+    }
+
+  }
+
+  .headers > *:last-of-type {
+    text-align: right;
+  }
+
+  .scroll-y {
+
+    .person-list {
+
+      @extend %flex-table-item;
+
+      .first-name, .last-name, .telephone, .personal-code {
+        @extend .ellipsis;
+      }
+
+      > *:last-of-type {
+        text-align: right;
+      }
+
+    }
+
+  }
+
+}

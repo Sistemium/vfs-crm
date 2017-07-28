@@ -1,0 +1,7 @@
+@import "../../../styles/editing";
+
+.edit-person {
+
+  @extend %editing-with-form;
+
+}

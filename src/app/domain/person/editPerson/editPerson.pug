@@ -1,0 +1,48 @@
+.edit-person
+
+  form
+
+    .first-name
+      label(for='first-name') Vardas
+
+      input#first-name.form-control(
+      type='text'
+      required
+      autocomplete='off'
+      placeholder='Vardas'
+      ng-model='vm.person.firstName'
+      )
+
+    .last-name
+
+      label(for='last-name') Pavardė
+
+      input#last-name.form-control(
+      type='text'
+      required
+      autocomplete='off'
+      placeholder='Pavardė'
+      ng-model='vm.person.lastName'
+      )
+
+    .personal-code
+      label(for='code') Asmens Kodas
+
+      input#code.form-control(
+      type='text'
+      required
+      autocomplete='off'
+      placeholder='Asmens Kodas'
+      ng-model='vm.person.code'
+      )
+
+    .telephone
+      label(for='phone') Telefonas
+
+      input#phone.form-control(
+      type='text'
+      required
+      autocomplete='off'
+      placeholder='Telefonas'
+      ng-model='vm.person.phone'
+      )
