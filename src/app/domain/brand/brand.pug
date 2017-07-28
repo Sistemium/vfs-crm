@@ -1,0 +1,13 @@
+.brand(cg-busy='vm.cgBusy')
+
+  label(for='brand') Prekės Ženklas
+
+  input#brand.form-control(
+  type='text'
+  required
+  autocomplete='off'
+  placeholder='Įveskite Prekės Ženklą'
+  ng-model='vm.brand.name'
+  )
+  
+  button.btn.btn-warning(ng-click='vm.save()') Išsaugoti

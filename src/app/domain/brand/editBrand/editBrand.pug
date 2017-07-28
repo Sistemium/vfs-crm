@@ -1,0 +1,13 @@
+.edit-brand
+
+  form
+
+    .name
+      label(for='name') Pavadinimas
+
+      input#name.form-control(
+      type='text'
+      autocomplete='off'
+      placeholder='Pavadinimas'
+      ng-model='vm.brand.name'
+      )
