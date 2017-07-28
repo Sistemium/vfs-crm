@@ -59,16 +59,24 @@
     padding-right: 10px;
 
     > * {
+
       @extend %flex-row-nowrap;
       justify-content: space-between;
+
       > label {
-        padding-left: 10px;
+
         @extend .ellipsis;
+
+        padding-left: 10px;
+
         @include responsive-only(lt-sm) {
           max-width: 200px;
         }
+
       }
+
     }
+
   }
 
   .button-block {
@@ -146,6 +154,9 @@
 
           @extend %flex-table-item;
 
+          height: $small-row-height;
+          align-items: center;
+
           &.has-changes > .action.button {
             background-color: $state-warning-text;
           }
@@ -168,6 +179,7 @@
           .installing-master, .filter-system, .serving-master {
             @extend .ellipsis;
           }
+
         }
       }
     }
