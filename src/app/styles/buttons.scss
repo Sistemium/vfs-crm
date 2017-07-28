@@ -16,6 +16,11 @@ button {
   &.btn-warning {
     background-color: $warn;
     border-color: darken($warn, 10%);
+
+    &:hover:not([disabled]) {
+      background-color: $warn-hover;
+    }
+
   }
 
 
