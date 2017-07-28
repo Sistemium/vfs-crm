@@ -13,7 +13,7 @@
     _.assign(vm, {
         data: Menu.root(),
         header: {
-          title: 'Vandens Filtravimo CRM'
+          title: 'Pagrindinis meniu'
         }
       }
     );

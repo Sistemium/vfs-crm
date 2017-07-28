@@ -56,10 +56,14 @@
       background: none !important;
     }
 
-    img {
-      max-height: 40px;
-    }
+  }
 
+  a.inactive {
+    color: $aqf-dark-blue;
+  }
+
+  img {
+    max-height: 40px;
   }
 
   syncer-indicator {

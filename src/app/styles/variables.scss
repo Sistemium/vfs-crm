@@ -5,7 +5,12 @@
 
 $cask: rgb(141, 184, 238);
 
-$primary-color: darken($cask, 15%);
+$aqf-dark-blue: rgb(28, 24, 98);
+$aqf-blue: rgb(51, 172, 225);
+$aqf-light-blue: rgb(160, 224, 239);
+
+//$primary-color: darken($cask, 15%);
+$primary-color: darken($aqf-blue, 10%);
 $active-color: $primary-color;
 $sab-blue: $primary-color;
 
@@ -57,7 +62,8 @@ $state-danger-bg: #f2dede !default;
 $state-danger-border: darken(adjust-hue($state-danger-bg, -10), 5%) !default;
 
 //$hover-color: #CFE1EE;
-$hover-color: lighten($cask, 20%);
+//$hover-color: lighten($cask, 20%);
+$hover-color: lighten($aqf-light-blue, 10%);
 $hover-color-gray: #e6e6e6;
 $hover-border-color-gray: #adadad;
 

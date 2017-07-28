@@ -12,12 +12,16 @@
 
     top: -5px;
     border-bottom: none;
+    text-align: center;
+
+    .title {
+      display: inline-block;
+    }
 
     h2 {
-      margin: 0 auto 10px;
-      font-size: 230%;
-      text-align: center;
-      color: $black;
+      margin: 0 auto 30px;
+      font-size: 200%;
+      color: $aqf-dark-blue;
     }
 
   }
@@ -51,13 +55,14 @@
     align-items: center;
 
     justify-content: flex-start;
+    border-color: $aqf-light-blue;
 
     .icon {
 
     }
 
     .caption {
-      //color: $primary-color;
+      color: $aqf-dark-blue;
       flex: 1;
       text-align: center;
     }

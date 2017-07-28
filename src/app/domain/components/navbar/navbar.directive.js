@@ -20,13 +20,15 @@
 
   function NavbarController(Menu, $scope, $rootScope, saControllerHelper, $window, localStorageService, $state) {
 
-    const DEFAULT_TITLE = '';
+    const DEFAULT_TITLE = 'VFS CRM';
     const vm = saControllerHelper.setup(this, $scope);
 
     vm.use({
 
       menu: Menu.root(),
-      rootClick
+      rootClick,
+
+      rootIcon: '/images/Aquafilter-lt.png'
 
     });
 
@@ -52,15 +54,19 @@
     function onStateChange(event, to) {
 
       let rootState = _.get(to, 'data.rootState');
+      let currentItem = _.find(vm.menu.items, item => to.name && _.startsWith(to.name, item.state));
 
       vm.use({
+
         rootState,
         hide: !!_.get(to, 'data.hideTopBar'),
         hideNavs: !!_.get(to, 'data.hideNavs'),
         title: _.get(to, 'data.title') || DEFAULT_TITLE,
         isHomeState: to.name === 'home',
-        currentItem: _.find(vm.menu.items, item => to.name && _.startsWith(to.name, item.state)),
-        isSubRootState: _.startsWith(to.name, rootState) && to.name !== rootState
+        currentItem,
+        isSubRootState: _.startsWith(to.name, rootState) && to.name !== rootState,
+        currentIcon: `/images/${currentItem ? currentItem.icon : 'Aquafilter-lt.png'}`
+
       });
 
     }
