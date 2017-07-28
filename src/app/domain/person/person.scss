@@ -20,11 +20,11 @@
     .last-name {
       width: $width-last-name;
     }
-    .personal-code {
+    .code {
       width: $width-code;
     }
 
-    .telephone {
+    .phone {
       width: $width-telephone;
     }
 
@@ -40,7 +40,7 @@
 
       @extend %flex-table-item;
 
-      .first-name, .last-name, .telephone, .personal-code {
+      .first-name, .last-name, .phone, .code {
         @extend .ellipsis;
       }
 
