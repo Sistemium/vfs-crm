@@ -59,7 +59,7 @@
     }
 
     function legalType(customerPersonId, customerLegalEntityId) {
-      return customerPersonId && 'Asmuo' || customerLegalEntityId && 'Imonė' || null;
+      return customerPersonId && 'Asmuo' || customerLegalEntityId && 'Įmonė' || null;
     }
 
   });
