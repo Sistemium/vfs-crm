@@ -3,7 +3,6 @@
   module.component('navigationBar', {
 
     bindings: {
-      viewButtons: '@',
       stateName: '@',
       searchText: '=?',
       editClickFn: '='
@@ -20,22 +19,31 @@
     const vm = saControllerHelper.setup(this, $scope);
 
     vm.use({
-      goToTable,
-      goToTiles,
-      active: 'tiles'
+      tableViewClick,
+      tilesViewClick,
+      $onInit,
+      onStateChange
     });
 
     /*
      Functions
      */
 
-    function goToTiles() {
-      $state.go(vm.stateName + '.tiles');
-      vm.active = 'tiles'
+    function $onInit() {
+      vm.viewButtons = !!vm.stateName;
+      onStateChange($state.current);
     }
 
-    function goToTable() {
-      $state.go(vm.stateName + '.table');
+    function onStateChange(to) {
+      vm.currentState = _.last(to.name.match(/[^.]+$/))
+    }
+
+    function tilesViewClick() {
+      $state.go(`${vm.stateName}.tiles`);
+    }
+
+    function tableViewClick() {
+      $state.go(`${vm.stateName}.table`);
       vm.active = 'table'
     }
 

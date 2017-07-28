@@ -3,11 +3,11 @@
   .navigation(ng-if='vm.viewButtons')
 
     .buttons
-      a(ng-click='vm.goToTable()')
-        i.glyphicon.glyphicon-align-justify(ng-class='{"active-view": vm.active === "table"}')
+      a(href ng-click='vm.tableViewClick()')
+        i.glyphicon.glyphicon-align-justify(ng-class='{active: vm.currentState === "table"}')
 
-      a(ng-click='vm.goToTiles()')
-        i.glyphicon.glyphicon-th(ng-class='{"active-view": vm.active === "tiles"}')
+      a(href ng-click='vm.tilesViewClick()')
+        i.glyphicon.glyphicon-th(ng-class='{active: vm.currentState === "tiles"}')
 
   .tools
 

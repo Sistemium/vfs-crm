@@ -21,7 +21,7 @@
 
       margin: 0 10px;
 
-      .active-view {
+      .active {
         cursor: pointer;
         color: $warn;
         pointer-events: none;
@@ -29,11 +29,14 @@
 
       a {
 
-        cursor: pointer;
+        color: $gray;
+
+        &:hover {
+          color: $warn-hover;
+        }
 
         i {
           font-size: 25px;
-          color: $gray;
           margin-right: 10px;
         }
 
