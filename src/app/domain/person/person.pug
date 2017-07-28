@@ -22,6 +22,6 @@
       .last-name {{ person.lastName }}
       .code {{ person.code }}
       .phone
-        a(href='tel:{{person.phone}}') {{person.phone}}
+        a(href='tel:{{ person.phone }}' ng-click='$event.stopPropagation()') {{ person.phone }}
 
 
