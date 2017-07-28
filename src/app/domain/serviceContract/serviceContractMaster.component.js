@@ -46,7 +46,7 @@
 
       let {searchText} = vm;
 
-      let data = searchText ? filterContracts(vm.serviceContracts, searchText) : vm.serviceContracts;
+      let data = filterContracts(vm.serviceContracts, searchText);
 
       vm.serviceContractsFiltered = $filter('orderBy')(data, '-date');
 
@@ -54,13 +54,19 @@
 
     function filterContracts(data, text) {
 
+      if (!text) return data;
+
       let re = new RegExp(_.escapeRegExp(text), 'i');
+      let checkDateRe = /\//;
+      let dateRe = new RegExp(_.escapeRegExp(text.replace(/\//g, '-')), 'i');
 
       return _.filter(data, contract => {
 
-        let res = re.test(contract.num);
+        if (re.test(contract.num)) return true;
 
-        if (res) return;
+        if (text.match(checkDateRe)) {
+          if (dateRe.test(contract.date)) return true;
+        }
 
         let customer = _.result(contract, 'customer');
 
