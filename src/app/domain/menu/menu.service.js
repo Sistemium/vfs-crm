@@ -6,7 +6,7 @@
 
     const items = [{
       title: 'Aptarnavimo taškai',
-      state: 'servicePoints'
+      state: 'servicePoint'
     }, {
       title: 'Darbuotojai',
       state: 'employee'

@@ -9,8 +9,8 @@
 
         .state({
 
-          name: 'servicePoints',
-          url: '/servicePoints',
+          name: 'servicePoint',
+          url: '/servicePoint',
           template: '<service-point-master></service-point-master>',
 
           data: {
@@ -25,7 +25,7 @@
 
             data: {
               title: 'Aptarnavimo taškas',
-              rootState: 'servicePoints'
+              rootState: 'servicePoint'
             }
 
           }]

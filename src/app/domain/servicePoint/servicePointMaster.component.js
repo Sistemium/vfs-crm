@@ -45,13 +45,13 @@
     }
 
     function onStateChange(to, params) {
-      vm.servicePointId = to.name === 'servicePoints.detailed' ? params.servicePointId : null;
+      vm.servicePointId = to.name === 'servicePoint.detailed' ? params.servicePointId : null;
     }
 
     function servicePointClick(servicePoint, idx) {
       vm.idx = idx;
 
-      $state.go('servicePoints.detailed', {servicePointId: servicePoint.id});
+      $state.go('servicePoint.detailed', {servicePointId: servicePoint.id});
 
     }
 
