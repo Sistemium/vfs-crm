@@ -1,18 +1,8 @@
-@import "../../../styles/variables";
+@import "../../../styles/editing";
 
 
 .edit-filter-system {
 
-  margin: 10px 0;
-
-  form {
-    @extend %flex-column-nowrap;
-
-    .filter-system-type, .filter-model, .filter-brand {
-      width: 95%;
-      margin: 10px auto;
-    }
-
-  }
+  @extend %editing-with-form;
 
 }

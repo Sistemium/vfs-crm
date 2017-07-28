@@ -1,19 +1,9 @@
-@import "../../../styles/variables";
+@import "../../../styles/editing";
+
 
 .edit-service-point {
 
-  margin: 10px 0;
-
-  form {
-
-    @extend %flex-column-nowrap;
-
-    .name, .address, .site {
-      width: 95%;
-      margin: 10px auto;
-    }
-
-  }
+  @extend %editing-with-form;
 
 }
 

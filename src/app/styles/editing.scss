@@ -1,0 +1,18 @@
+@import "flex-table";
+
+%editing-with-form {
+
+  margin: 10px 0;
+
+  form {
+
+    @extend %flex-column-nowrap;
+
+    > * {
+      width: 95%;
+      margin: 10px auto;
+    }
+
+  }
+
+}
