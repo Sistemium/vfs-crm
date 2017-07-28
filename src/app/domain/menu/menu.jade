@@ -6,7 +6,10 @@
 .items(resize resize-offset-top='5' resize-property='height')
   .row
     .col-sm-6.col-md-4.col-lg-3(ng-repeat='item in items track by item.state')
-      button.btn.btn-default.btn-block.thumbnail.btn-lg(ui-sref='{{::item.state}}')
+      button.btn.btn-default.btn-block.thumbnail.btn-lg(
+      ui-sref='{{::item.state}}'
+      ng-disabled='item.disabled'
+      )
         .icon
           img(ng-src='/images/{{item.icon}}')
         .caption

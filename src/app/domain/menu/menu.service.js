@@ -16,13 +16,23 @@
     }, {
       title: 'Aptarnavimo sutartys',
       state: 'serviceContract'
+    }, {
+      title: 'Įmonės',
+      state: 'legalEntity',
+      disabled: true
+    }, {
+      title: 'Asmenys',
+      state: 'person',
+      disabled: true
     }];
 
     const icons = [
       'color/icons8-Geo-fence-80.png',
       'color/icons8-Worker-80.png',
       'color/icons8-Plumbing-80.png',
-      'color/icons8-Agreement-80.png'
+      'color/icons8-Agreement-80.png',
+      'color/icons8-Organization-80.png',
+      'color/icons8-User Groups-80.png'
     ];
 
     _.each(icons, (icon, idx) => items[idx].icon = icon);
