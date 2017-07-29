@@ -3,22 +3,33 @@
 (function () {
 
   angular.module('webPage')
-  .config(function (stateHelperProvider) {
+    .config(function (stateHelperProvider) {
 
-    stateHelperProvider
+      stateHelperProvider
 
-    .state({
+        .state({
 
-      name: 'filterSystem',
-      url: '/filterSystem',
-      template: '<filter-system></filter-system>',
+          name: 'filterSystem',
+          url: '/filterSystem',
+          template: '<filter-system></filter-system>',
 
-      data: {
-        title: 'Filtravimo sistemos'
-      }
+          data: {
+            title: 'Filtravimo sistemos'
+          }
+
+        })
+        .state({
+
+          name: 'brand',
+          url: '/brand',
+          template: '<brand-master></brand-master>',
+
+          data: {
+            title: 'Preki ženklai'
+          }
+
+        });
 
     });
-
-  });
 
 })();

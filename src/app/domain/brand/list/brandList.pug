@@ -1,0 +1,16 @@
+.brand-list
+
+  .headers
+    .name Pavadinimas
+
+  .scroll-y(
+  resize
+  resize-offset-top='5'
+  vs-repeat
+  vs-excess='10'
+  )
+    .brand(
+    ng-repeat='brand in vm.brands track by brand.id'
+    ng-click='vm.brandClick(brand)'
+    )
+      .name {{ brand.name }}
