@@ -4,6 +4,7 @@
 //$primary-color: #2768b7;
 
 $cask: rgb(141, 184, 238);
+$worker-face: rgb(245, 206, 133);
 
 $aqf-dark-blue: rgb(28, 24, 98);
 $aqf-blue: rgb(51, 172, 225);
@@ -25,8 +26,10 @@ $gray: gray;
 $red: rgb(247, 143, 143);
 $white: #fff;
 //$warn: #f0ad4e;
-$warn: darken(rgb(245, 206, 133), 8%);
-$warn-hover: #ec971f;
+//$warn: darken(, 8%);
+$warn: $worker-face;
+$warn-text: $primary-color;
+//$warn-hover: #ec971f;
 
 $box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
 
@@ -66,6 +69,9 @@ $state-danger-border: darken(adjust-hue($state-danger-bg, -10), 5%) !default;
 $hover-color: lighten($aqf-light-blue, 10%);
 $hover-color-gray: #e6e6e6;
 $hover-border-color-gray: #adadad;
+
+$warn-hover: darken($warn, 10%);
+$warn-hover-text: darken($warn-text, 10%);
 
 $info-background-color: $state-info-bg;
 $info-color: $state-info-text;

@@ -1,7 +1,7 @@
 .page-header(ng-if='header')
   h2
     div {{header.title}}
-    small {{header.small}}
+    small(ng-if='header.small') {{header.small}}
 
 .items(resize resize-offset-top='5' resize-property='height')
   .row
