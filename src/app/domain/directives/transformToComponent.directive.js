@@ -6,11 +6,12 @@
 
     return {
 
-      restrict: 'E',
       scope: {
         componentName: '@',
         instance: '='
       },
+
+      restrict: 'E',
       controller: transformToComponentController,
       controllerAs: 'vm',
       bindToController: true,
@@ -20,7 +21,8 @@
         let {componentName} = attrs;
         let itemName = _.last(componentName.match(/edit-(.*)/));
 
-        var template = angular.element(`<${componentName} ${itemName}="vm.instance"></${componentName}>`);
+        let template = angular.element(`<${componentName} ${itemName}="vm.instance"></${componentName}>`);
+
         element.append(template);
         $compile(template)(scope);
 
@@ -30,7 +32,7 @@
   }
 
   angular.module('webPage')
-  .directive('transformToComponent', transformToComponentDirective);
+    .directive('transformToComponent', transformToComponentDirective);
 
   function transformToComponentController() {
 
