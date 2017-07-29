@@ -82,7 +82,7 @@
 
       let busy = $q.all([LegalEntity.findAll(), Person.findAll()])
         .then(() => {
-          return ServiceContract.findAllWithRelations()(['Person', 'LegalEntity'])
+          return ServiceContract.findAll();
         });
 
       return vm.setBusy(busy);
