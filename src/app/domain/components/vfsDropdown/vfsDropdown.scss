@@ -26,6 +26,7 @@ vfs-dropdown {
 
     button {
       margin-left: 6px;
+      padding: 6px 8px;
     }
 
   }
@@ -38,7 +39,7 @@ vfs-dropdown {
       span {
         display: block;
         @extend .ellipsis;
-        line-height: 40px;
+        line-height: 34px;
         padding: 0 10px;
       }
 

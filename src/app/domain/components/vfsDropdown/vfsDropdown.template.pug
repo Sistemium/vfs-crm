@@ -1,12 +1,14 @@
-.search-add
+.search-add(ng-hide='vm.newItem')
+
   vfs-searcher.search(search='vm.search')
+
   button.btn.btn-warning(ng-click='vm.addItem()')
     i.glyphicon.glyphicon-plus
 
 .scroll-y(
 resize
 resize-offset-top='15'
-ng-if='!vm.loadComponent'
+ng-if='!vm.newItem'
 )
 
   .item(
@@ -19,8 +21,10 @@ ng-if='!vm.loadComponent'
   .no-results(ng-if='!filteredItems.length')
     span.no-res Rezultatų nerasta
 
-.edit-block(ng-if='vm.loadComponent')
+.edit-block(ng-if='vm.newItem')
+
   transform-to-component(component-name='{{vm.editComponentName}}' instance='vm.newItem')
+
   .button-block
 
     button.btn.btn-success.animate-show.save(
@@ -28,6 +32,6 @@ ng-if='!vm.loadComponent'
     ) Išsaugoti
 
     button.btn.btn-default.cancel(
-    ng-click='vm.cancelClick()'
+    ng-click='vm.cancelClick($event)'
     ) Atšaukti
 

@@ -26,7 +26,7 @@
       itemClick,
       addItem,
       afterCancel,
-      afterSave,
+      afterSave
     });
 
     Editing.setupController(vm, 'newItem');
@@ -39,13 +39,13 @@
 
       if (nv !== ov) {
         vm.search = '';
+        delete vm.newItem;
       }
 
     });
 
     function addItem() {
 
-      vm.loadComponent = !vm.loadComponent;
       vm.newItem = vm.model.createInstance({name: vm.search});
 
     }
@@ -62,9 +62,9 @@
       model.bindAll({}, $scope, 'vm.data');
 
       model.findAll()
-      .then(data => {
-        vm.currentItem = _.find(data, {id: vm.currentId});
-      });
+        .then(data => {
+          vm.currentItem = _.find(data, {id: vm.currentId});
+        });
 
     }
 
@@ -79,26 +79,29 @@
       }
 
       vm.currentModel.DSCreate(vm.saveTo)
-      .then(() => {
-        // toastr.success('Pakeitimai išsaugoti');
-      })
-      .catch(() => {
-        toastr.error('Klaida. Pakeitimai neišsaugoti');
-      })
-      .finally(() => {
-        vm.isOpen = false;
-      });
+        .then(() => {
+          // toastr.success('Pakeitimai išsaugoti');
+        })
+        .catch(() => {
+          toastr.error('Klaida. Pakeitimai neišsaugoti');
+        })
+        .finally(() => {
+          vm.isOpen = false;
+        });
 
     }
 
-    function afterCancel() {
-      vm.isOpen = false;
+    function afterCancel($event) {
+      $event.stopPropagation();
+      delete vm.newItem;
     }
 
     function afterSave() {
+
       vm.currentItem = vm.newItem;
-      vm.isOpen = false;
       vm.saveTo[vm.saveToProperty] = vm.newItem.id;
+      vm.isOpen = false;
+
     }
 
   }
