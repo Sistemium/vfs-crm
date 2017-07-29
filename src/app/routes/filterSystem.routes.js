@@ -25,7 +25,7 @@
           template: '<brand-master></brand-master>',
 
           data: {
-            title: 'Preki ženklai'
+            title: 'Prekių ženklai'
           }
 
         });
