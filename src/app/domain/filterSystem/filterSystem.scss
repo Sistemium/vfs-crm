@@ -9,7 +9,7 @@
       margin-top: 0;
     }
 
-    .filter-brand + .filter-brand {
+    .filter-brand:not(.ng-hide) + .filter-brand {
       h2 {
         margin-top: 15px;
       }
