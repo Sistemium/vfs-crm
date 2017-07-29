@@ -17,7 +17,7 @@
 
   });
 
-  function dropdownController($scope, saControllerHelper, Schema, toastr, Editing) {
+  function dropdownController($scope, saControllerHelper, Schema, toastr, Editing, $timeout) {
 
     const vm = saControllerHelper.setup(this, $scope);
 
@@ -38,8 +38,10 @@
     $scope.$watch('vm.isOpen', (nv, ov) => {
 
       if (nv !== ov) {
-        vm.search = '';
-        delete vm.newItem;
+        $timeout(200).then(()=>{
+          vm.search = '';
+          delete vm.newItem;
+        })
       }
 
     });

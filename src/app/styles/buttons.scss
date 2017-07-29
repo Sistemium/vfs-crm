@@ -18,11 +18,19 @@ button {
   outline-style: none !important;
 
   &.btn-warning {
+
     background-color: $warn;
     border-color: darken($warn, 10%);
+    color: $warn-text;
 
-    &:hover:not([disabled]) {
+    &:hover:not([disabled]), &:focus {
       background-color: $warn-hover;
+      color: $warn-hover-text;
+      border-color: darken($warn, 10%);
+    }
+
+    &:focus {
+      box-shadow: 0 0 3px 1px $warn;
     }
 
   }

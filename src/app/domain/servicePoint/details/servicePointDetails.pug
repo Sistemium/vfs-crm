@@ -11,23 +11,22 @@
           a.phone(href='tel:{{ servicePointContact.person.phone }}') {{ servicePointContact.person.phone }}
 
     .button-block
-      button.btn.btn-warning(ng-click='vm.editServicePointClick(vm.servicePoint)')
-        i.glyphicon.glyphicon-edit
+      button-edit(button-click='vm.editServicePointClick(vm.servicePoint)')
 
   .service-point-items
 
     .header
       .header-text-1 Įrenginiai
       .button-block
-        button.btn.btn-warning.action(
-        ng-click='vm.addItemClick()'
+
+        button-add(
+        button-click='vm.addItemClick()'
         popover-placement='auto bottom-right'
         popover-is-open='vm.isOpenAddPopover'
         uib-popover-template='"/app/domain/servicePoint/details/addItem.html"'
         popover-title='Įrenginio Papildymas'
         popover-append-to-body='false'
         )
-          i.glyphicon.glyphicon-plus
 
     .service-point-list
 
