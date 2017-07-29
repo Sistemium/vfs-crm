@@ -20,7 +20,7 @@ button {
   &.btn-warning {
 
     background-color: $warn;
-    border-color: darken($warn, 10%);
+    border-color: darken($warn, 7%);
     color: $warn-text;
 
     &:hover:not([disabled]), &:focus {
@@ -33,6 +33,23 @@ button {
       box-shadow: 0 0 3px 1px $warn;
     }
 
+  }
+
+  &.btn-primary {
+
+    background-color: $aqf-blue;
+    border-color: darken($aqf-blue, 7%);
+    color: white;
+
+    &:hover:not([disabled]), &:focus {
+      background-color: darken($aqf-blue, 10%);
+      //color: $warn-hover-text;
+      border-color: darken($aqf-blue, 10%);
+    }
+
+    &:focus {
+      box-shadow: 0 0 3px 1px $aqf-blue;
+    }
   }
 
 
