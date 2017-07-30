@@ -10,7 +10,16 @@
 
     const state = this;
 
-    return {onSelect, upload};
+    _.assign(state, {
+      onSelect,
+      upload
+    });
+
+    return state;
+
+    /*
+     Functions
+     */
 
     function onSelect(file, instance) {
 
