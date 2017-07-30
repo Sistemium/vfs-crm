@@ -8,13 +8,15 @@
 
   });
 
-  function employeeController($scope, Schema, saControllerHelper, $filter) {
+  function employeeController($scope, Schema, saControllerHelper, $filter, Editing) {
 
     const vm = saControllerHelper.setup(this, $scope);
 
     const {Employee, Person} = Schema.models();
 
-    vm.use({});
+    vm.use({
+      addClick
+    });
 
     vm.rebindAll(Employee, {}, 'vm.data', onSearch);
 
@@ -25,6 +27,10 @@
     /*
      Functions
      */
+
+    function addClick() {
+      Editing.editModal('edit-employee', 'Naujas Darbuotojas')(Employee.createInstance())
+    }
 
     function onSearch() {
 
