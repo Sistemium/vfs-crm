@@ -15,6 +15,13 @@
             localField: 'serviceContracts',
             foreignKey: 'customerPersonId'
           }
+        },
+
+        hasOne: {
+          Picture: {
+            localField: 'avatarPicture',
+            localKey: 'avatarPictureId'
+          }
         }
 
       },

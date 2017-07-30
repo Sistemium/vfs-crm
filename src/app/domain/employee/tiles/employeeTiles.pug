@@ -11,7 +11,10 @@
     .employee.tile(ng-repeat='employee in vm.employees track by employee.id')
 
       .photo
-        img.placeholder(src='../../../images/placeholder.png')
+        img(
+        ng-class='{placeholder: !employee.person.avatarPictureId}'
+        ng-src='{{ employee.person.avatarPicture.thumbnailHref || "../../../images/placeholder.png" }}'
+        )
 
       .info
         .first-name
@@ -34,7 +37,7 @@
         )
           i.glyphicon.glyphicon-edit
         button.btn.btn-default(
-        ngf-select='vm.pictureSelect($file, $event)'
+        ngf-select='vm.pictureSelect(employee, $file, $event)'
         ngf-capture='"capture"'
         ng-model='vm.files'
         )
