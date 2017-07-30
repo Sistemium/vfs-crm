@@ -59,24 +59,32 @@ vfs-dropdown {
 
   .edit-block {
 
+    .title {
+
+      text-align: center;
+      font-size: 120%;
+      font-weight: 400;
+      padding: $padding $padding $padding*2;
+
+      margin: 0 -5px;
+      border-bottom: solid 1px $border-gray;
+
+    }
+
     .button-block {
 
       @extend %flex-row-nowrap;
 
       justify-content: flex-end;
-      margin-top: $padding;
+      margin: $padding -5px 0;
+
+      padding: $padding*1.5 $padding $padding/2;
+      border-top: solid 1px $border-gray;
 
       button {
         margin-left: 7px;
       }
 
-    }
-
-    .title {
-      text-align: center;
-      font-size: 120%;
-      font-weight: 400;
-      padding: $padding;
     }
 
   }

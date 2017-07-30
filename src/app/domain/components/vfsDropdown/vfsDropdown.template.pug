@@ -30,12 +30,12 @@ vs-repeat='34'
 
   .button-block
 
-    button.btn.btn-success.animate-show.save(
+    button.btn.btn-success.animate-show.save.btn-sm(
     ng-click='vm.saveClick()'
     ng-disabled='!vm.newItem.isValid()'
     ) Išsaugoti
 
-    button.btn.btn-default.cancel(
+    button.btn.btn-default.cancel.btn-sm(
     ng-click='vm.cancelClick($event)'
     ) Atšaukti
 
