@@ -19,6 +19,7 @@
     const {Picture} = Schema.models();
 
     vm.use({
+      tileBusy: {},
       editItem,
       isOpenedEditPopover: [],
       editItemClick: Editing.editModal('edit-employee', 'Darbuotojo redagavimas'),
@@ -34,7 +35,6 @@
     }
 
     function pictureSelect(employee, file) {
-      console.warn(file);
 
       let helper = new PictureHelper();
       let {person} = employee;
@@ -45,12 +45,14 @@
         return;
       }
 
-      helper.onSelect(file, Picture.createInstance({ownerXid}), 'Person')
+      let busy = helper.onSelect(file, Picture.createInstance({ownerXid}), 'Person')
         .then(picture => {
           person.avatarPictureId = picture.id;
           return person.DSCreate();
         })
         .catch(err => console.error(err));
+
+      vm.tileBusy[employee.id] = {promise: busy, message: 'Nuotraukos siuntimas'};
 
     }
 

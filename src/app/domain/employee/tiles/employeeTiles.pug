@@ -8,7 +8,10 @@
   resize-offset-top='10'
   )
 
-    .employee.tile(ng-repeat='employee in vm.employees track by employee.id')
+    .employee.tile(
+    ng-repeat='employee in vm.employees track by employee.id'
+    cg-busy='vm.tileBusy[employee.id]'
+    )
 
       .photo
         img(
