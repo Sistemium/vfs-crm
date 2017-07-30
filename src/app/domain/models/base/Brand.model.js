@@ -15,6 +15,12 @@
             foreignKey: 'brandId'
           }
         }
+      },
+
+      meta: {
+        label: {
+          add: 'Naujas prekių ženklas'
+        }
       }
 
     });

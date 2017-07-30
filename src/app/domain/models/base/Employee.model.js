@@ -35,6 +35,10 @@
 
       methods: {
         isValid
+      },
+
+      meta: {
+        label: {add: 'Naujas darbuotojas'}
       }
 
     });

@@ -34,6 +34,12 @@
 
       methods: {
         isValid
+      },
+
+      meta: {
+        label: {
+          add: 'Nauja filtro sistema'
+        }
       }
 
     });

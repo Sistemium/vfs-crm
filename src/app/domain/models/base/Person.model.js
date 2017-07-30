@@ -31,7 +31,9 @@
       },
 
       meta: {
-        label: {add: 'Naujas asmuo'}
+        label: {
+          add: 'Naujas asmuo'
+        }
       }
 
     });
