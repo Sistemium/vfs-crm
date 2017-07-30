@@ -23,6 +23,18 @@
     }, {
       title: 'Asmenys',
       state: 'person'
+    }, {
+      title: 'Aptarnavimas',
+      state: 'serviceOrder',
+      disabled: true
+    }, {
+      title: 'Naudotojai',
+      state: 'users',
+      disabled: true
+    }, {
+      title: 'Nustatymai',
+      state: 'settings',
+      disabled: true
     }];
 
     const icons = [
@@ -31,7 +43,10 @@
       'color/icons8-Plumbing-80.png',
       'color/icons8-Agreement-80.png',
       'color/icons8-Organization-80.png',
-      'color/icons8-User Groups-80.png'
+      'color/icons8-User Groups-80.png',
+      'color/icons8-maintenance.png',
+      'color/icons8-user_folder.png',
+      'color/icons8-settings.png'
     ];
 
     _.each(icons, (icon, idx) => items[idx].icon = icon);
