@@ -1,15 +1,15 @@
 (function () {
 
   angular.module('webPage')
-  .run((Schema, $rootScope) => {
+    .run((Schema, $rootScope) => {
 
-    $rootScope.$on('authorized', () => {
+      $rootScope.$on('authorized', () => {
 
-      const {Site} = Schema.models();
-      Site.findAll();
+        const {Site} = Schema.models();
+        Site.findAll();
 
-    })
+      })
 
-  });
+    });
 
 })();
