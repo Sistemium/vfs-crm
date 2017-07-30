@@ -12,7 +12,7 @@
 
     const vm = saControllerHelper.setup(this, $scope);
 
-    const {Employee, Person} = Schema.models();
+    const {Employee, Person, Picture} = Schema.models();
 
     vm.use({
       addClick
@@ -43,6 +43,7 @@
     function getData() {
 
       let busy = Person.findAll()
+        .then(() => Picture.findAll())
         .then(() => Employee.findAll());
 
       vm.setBusy(busy);
