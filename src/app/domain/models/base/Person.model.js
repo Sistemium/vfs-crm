@@ -33,7 +33,7 @@
     });
 
     function isValid() {
-      return true
+      return this.firstName && this.lastName;
     }
 
     function name(firstName, lastName) {
