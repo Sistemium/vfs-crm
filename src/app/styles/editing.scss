@@ -4,12 +4,12 @@
 
   margin: 10px 0;
 
-  form {
+  > form, > .form {
 
     @extend %flex-column-nowrap;
 
     > * {
-      width: 95%;
+      width: 100%;
       margin: 7px auto;
     }
 
