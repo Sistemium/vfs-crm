@@ -1,0 +1,27 @@
+.edit-employee
+
+  form
+
+    .site
+
+      label Padalinys
+
+      vfs-dropdown(
+      items-data-source-name='Site'
+      items-name-property='name'
+      save-to='vm.employee'
+      save-to-property='siteId'
+      placement='bottom-left'
+      )
+
+    .person
+
+      label Asmuo
+
+      vfs-dropdown(
+      items-data-source-name='Person'
+      items-name-property='name'
+      save-to='vm.employee'
+      save-to-property='personId'
+      placement='bottom-left'
+      )

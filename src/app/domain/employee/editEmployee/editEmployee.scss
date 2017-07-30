@@ -1,0 +1,7 @@
+@import "../../../styles/editing";
+
+.edit-employee {
+
+  @extend %editing-with-form;
+
+}
