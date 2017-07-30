@@ -12,9 +12,10 @@
     controller: navigationBarController,
     controllerAs: 'vm'
 
-  });
+  })
+    .run(routerDecorator);
 
-  function navigationBarController($scope, saControllerHelper, $state) {
+  function navigationBarController($scope, saControllerHelper, $state, localStorageService) {
 
     const vm = saControllerHelper.setup(this, $scope);
 
@@ -39,13 +40,42 @@
     }
 
     function tilesViewClick() {
+      saveMode('tiles');
       $state.go(`${vm.stateName}.tiles`);
     }
 
     function tableViewClick() {
+      saveMode('table');
       $state.go(`${vm.stateName}.table`);
-      vm.active = 'table'
     }
+
+    function saveMode(mode) {
+      localStorageService.set(`${vm.stateName}.mode`, mode);
+    }
+
+  }
+
+  function routerDecorator($rootScope, localStorageService, $state) {
+
+    $rootScope.$on('$stateChangeStart', (event, toState, toParams) => {
+
+      if (!toState.defaultChild) {
+        return;
+      }
+
+      let mode = localStorageService.get(`${toState.name}.mode`) || toState.defaultChild;
+
+      //if (toParams.item) {
+      //  mode += '.item';
+      //  toParams = {
+      //    id: toParams.item
+      //  }
+      //}
+      event.preventDefault();
+
+      return $state.go(`${toState.name}.${mode}`, toParams, {inherit: false});
+
+    });
 
   }
 
