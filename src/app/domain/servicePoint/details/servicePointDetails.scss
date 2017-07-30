@@ -79,12 +79,6 @@
 
   }
 
-  .button-block {
-    .button-add {
-      padding: $btn-padding;
-    }
-  }
-
   .service-point-items {
 
     margin-top: 10px;
@@ -109,11 +103,6 @@
         margin: 5px 0 5px 0;
       }
 
-      .button-block {
-        .btn {
-          padding: $btn-padding;
-        }
-      }
     }
 
     @extend %flex-table;

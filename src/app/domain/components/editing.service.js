@@ -3,7 +3,7 @@
 (function () {
 
   angular.module('webPage')
-  .service('Editing', Editing);
+    .service('Editing', Editing);
 
   function Editing($uibModal, $timeout) {
 
@@ -28,10 +28,10 @@
       function saveClick() {
         if (vm.saveFn) {
           vm.saveFn()
-          .then(vm.afterSave);
+            .then(vm.afterSave);
         } else if (_.isFunction(vm[itemProperty].DSCreate)) {
           vm[itemProperty].DSCreate()
-          .then(vm.afterSave);
+            .then(vm.afterSave);
         }
       }
 
@@ -49,7 +49,7 @@
 
         if (_.isFunction(vm[itemProperty].DSDestroy)) {
           vm[itemProperty].DSDestroy()
-          .then(vm.afterSave);
+            .then(vm.afterSave);
         } else {
           vm.afterSave();
         }
@@ -85,11 +85,11 @@
       });
 
       modal.result
-      .catch(() => {
-        if (item.id) {
-          item.DSRevert();
-        }
-      });
+        .catch(() => {
+          if (item.id) {
+            item.DSRevert();
+          }
+        });
 
       return modal.result;
 
