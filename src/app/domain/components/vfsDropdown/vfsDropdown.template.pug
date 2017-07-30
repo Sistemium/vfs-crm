@@ -8,16 +8,17 @@
 resize
 resize-offset-top='15'
 ng-if='!vm.newItem'
+vs-repeat='34'
 )
 
   .item(
-  ng-repeat='item in vm.data | filter: vm.search | orderBy:vm.itemsNameProperty as filteredItems track by item.id '
+  ng-repeat='item in vm.filteredData track by item.id'
   ng-class='{active : vm.currentItem.id === item.id}'
   ng-click='vm.itemClick(item)'
   )
     span {{item[vm.itemsNameProperty]}}
 
-  .no-results(ng-if='!filteredItems.length')
+  .no-results(ng-if='!filteredData.length')
     span.no-res Rezultatų nerasta
 
 .edit-block(ng-if='vm.newItem')
