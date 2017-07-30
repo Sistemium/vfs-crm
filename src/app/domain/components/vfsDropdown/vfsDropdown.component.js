@@ -92,7 +92,7 @@
         return;
       }
 
-      vm.currentModel.DSCreate(vm.saveTo)
+      vm.saveTo.DSCreate()
         .then(() => {
           // toastr.success('Pakeitimai išsaugoti');
         })
@@ -110,10 +110,10 @@
       delete vm.newItem;
     }
 
-    function afterSave() {
+    function afterSave(saved) {
 
-      vm.currentItem = vm.newItem;
-      vm.saveTo[vm.saveToProperty] = vm.newItem.id;
+      vm.currentItem = saved;
+      vm.saveTo[vm.saveToProperty] = saved.id;
       vm.isOpen = false;
 
     }
