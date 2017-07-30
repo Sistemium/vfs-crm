@@ -30,14 +30,12 @@
 
       .buttons
         button.btn.btn-default(
-        ng-click='vm.editItem(employee)'
-        popover-placement='auto bottom-right'
-        popover-is-open='vm.currentItem === employee.id'
-        popover-trigger='"outsideClick"'
-        uib-popover-template='"/app/domain/employee/employeeEditPopover/employeeEdit.html"'
-        popover-title='Darbuotojo Redagavimas'
-        popover-append-to-body='false'
+        ng-click='vm.editItemClick(employee)'
         )
           i.glyphicon.glyphicon-edit
-        button.btn.btn-default
+        button.btn.btn-default(
+        ngf-select='vm.pictureSelect($file, $event)'
+        ngf-capture='"capture"'
+        ng-model='vm.files'
+        )
           i.glyphicon.glyphicon-camera

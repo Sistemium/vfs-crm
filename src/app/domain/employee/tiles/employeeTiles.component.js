@@ -12,14 +12,15 @@
 
   });
 
-  function employeeTilesController($scope, saControllerHelper) {
+  function employeeTilesController($scope, saControllerHelper, Editing) {
 
     const vm = saControllerHelper.setup(this, $scope);
 
     vm.use({
       editItem,
       isOpenedEditPopover: [],
-      currentItem: null
+      editItemClick: Editing.editModal('edit-employee', 'Darbuotojo redagavimas'),
+      pictureSelect
     });
 
     /*
@@ -28,6 +29,10 @@
 
     function editItem(item) {
       vm.currItem = item.id;
+    }
+
+    function pictureSelect(file) {
+      console.warn(file);
     }
 
   }
