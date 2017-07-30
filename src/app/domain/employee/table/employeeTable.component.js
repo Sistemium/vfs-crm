@@ -12,11 +12,13 @@
 
   });
 
-  function employeeTableController($scope, saControllerHelper) {
+  function employeeTableController($scope, saControllerHelper, Editing) {
 
     const vm = saControllerHelper.setup(this, $scope);
 
-    vm.use({});
+    vm.use({
+      employeeClick: Editing.editModal('edit-employee', 'Darbuotojo redagavimas')
+    });
 
     /*
      Functions
