@@ -24,6 +24,8 @@ vs-repeat='34'
 
 .edit-block(ng-if='vm.newItem')
 
+  .title {{ vm.newItemTitle }}
+
   transform-to-component(component-name='{{vm.editComponentName}}' instance='vm.newItem')
 
   .button-block

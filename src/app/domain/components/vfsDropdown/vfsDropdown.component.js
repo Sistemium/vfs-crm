@@ -67,7 +67,9 @@
       vm.currentId = vm.saveTo[vm.saveToProperty];
 
       let model = Schema.model(vm.itemsDataSourceName);
+
       vm.model = model;
+      vm.newItemTitle = _.get(model, 'meta.label.add') || 'Naujas įrašas';
 
       model.bindAll({}, $scope, 'vm.data', onSearch);
 
