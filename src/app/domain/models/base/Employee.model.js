@@ -9,6 +9,7 @@
       name: 'Employee',
 
       relations: {
+
         hasMany: {
           ServicePoint: {
             localField: 'servicePointsAsServingMaster',
@@ -17,11 +18,19 @@
         },
 
         hasOne: {
+
           Person: {
             localField: 'person',
             localKey: 'personId'
+          },
+
+          Site: {
+            localField: 'site',
+            localKey: 'siteId'
           }
+
         }
+
       },
 
       methods: {

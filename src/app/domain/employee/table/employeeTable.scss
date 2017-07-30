@@ -2,6 +2,12 @@
 
 .employee-table {
 
+  $width-first-name: 30%;
+  $width-last-name: 30%;
+  $width-telephone: 30%;
+
+  $width-site: 10%;
+
   @extend %flex-table;
 
   .headers {
@@ -10,6 +16,10 @@
 
   > * {
 
+    .site {
+      width: $width-site;
+    }
+
     .first-name {
       width: $width-first-name;
     }
@@ -17,6 +27,7 @@
     .last-name {
       width: $width-last-name;
     }
+
     .telephone {
       width: $width-telephone;
     }

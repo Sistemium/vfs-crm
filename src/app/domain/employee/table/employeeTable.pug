@@ -1,6 +1,7 @@
 .employee-table
 
   .headers
+    .site Padalinys
     .first-name Vardas
     .last-name Pavardė
     .telephone Telefonas
@@ -13,7 +14,8 @@
     ng-repeat='employee in vm.employees | filter: vm.searchText track by employee.id'
     ng-click='vm.employeeClick(employee)'
     )
-      .first-name {{employee.person.firstName}}
-      .last-name {{employee.person.lastName}}
+      .site {{ employee.site.name }}
+      .first-name {{ employee.person.firstName }}
+      .last-name {{ employee.person.lastName }}
       .telephone
         a(href='tel:{{ employee.person.phone }}' ng-click='$event.stopPropagation()') {{ employee.person.phone }}
