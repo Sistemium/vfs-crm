@@ -11,7 +11,7 @@
 
       name: 'person',
       url: '/person',
-      template: '<person></person>',
+      template: '<person-master></person-master>',
 
       data: {
         title: 'Asmenys'

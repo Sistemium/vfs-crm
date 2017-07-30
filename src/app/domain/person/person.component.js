@@ -1,6 +1,6 @@
 (function (module) {
 
-  module.component('person', {
+  module.component('personMaster', {
 
     templateUrl: 'app/domain/person/person.html',
     controller: personController,
