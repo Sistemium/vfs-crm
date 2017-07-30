@@ -29,6 +29,7 @@ vs-repeat='34'
 
     button.btn.btn-success.animate-show.save(
     ng-click='vm.saveClick()'
+    ng-disabled='!vm.newItem.isValid()'
     ) Išsaugoti
 
     button.btn.btn-default.cancel(
