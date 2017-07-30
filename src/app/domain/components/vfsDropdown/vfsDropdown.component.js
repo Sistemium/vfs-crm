@@ -7,6 +7,7 @@
       saveToProperty: '@',
       itemsDataSourceName: '@',
       itemsNameProperty: '@',
+      itemsGroupProperty: '@',
       autoSave: '=',
       placement: '@'
     },
@@ -26,7 +27,8 @@
       itemClick,
       addItem,
       afterCancel,
-      afterSave
+      afterSave,
+      groupLabel
     });
 
     Editing.setupController(vm, 'newItem');
@@ -47,6 +49,10 @@
     /*
      Functions
      */
+
+    function groupLabel(item) {
+      return _.get(item, vm.itemsGroupProperty);
+    }
 
     function addItem() {
 

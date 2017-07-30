@@ -31,17 +31,15 @@ vfs-dropdown {
 
   }
 
-
   .scroll-y {
 
     > * {
 
-      span {
-        display: block;
-        @extend .ellipsis;
-        line-height: 34px;
-        padding: 0 10px;
-      }
+      @extend .ellipsis;
+
+      line-height: 34px;
+      display: block;
+      padding: 0 10px;
 
       span.no-res {
         text-align: center;
@@ -57,13 +55,13 @@ vfs-dropdown {
 
   }
 
-  .edit-block{
+  .edit-block {
 
-    .button-block{
+    .button-block {
       @extend %flex-row-nowrap;
       justify-content: flex-end;
 
-      button{
+      button {
         margin-left: 7px;
       }
     }

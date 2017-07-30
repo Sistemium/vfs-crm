@@ -16,6 +16,7 @@ vs-repeat='34'
   ng-class='{active : vm.currentItem.id === item.id}'
   ng-click='vm.itemClick(item)'
   )
+    span(ng-if='vm.itemsGroupProperty') {{ vm.groupLabel(item) }} &nbsp;
     span {{item[vm.itemsNameProperty]}}
 
   .no-results(ng-if='!filteredData.length')
