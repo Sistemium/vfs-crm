@@ -28,6 +28,10 @@
 
       methods: {
         isValid
+      },
+
+      meta: {
+        label: {add: 'Naujas asmuo'}
       }
 
     });
