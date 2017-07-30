@@ -22,9 +22,17 @@
             localKey: 'personId'
           }
         }
+      },
+
+      methods: {
+        isValid
       }
 
     });
+
+    function isValid() {
+      return this.personId && this.siteId;
+    }
 
   });
 
