@@ -8,63 +8,72 @@
 
     let imsUrl = 'https://api.sistemium.com/ims/vfsd';
 
-    const state = this;
+    return function () {
 
-    _.assign(state, {
-      onSelect,
-      upload
-    });
+      const state = this;
 
-    return state;
+      _.assign(state, {
+        onSelect,
+        upload
+      });
 
-    /*
-     Functions
-     */
+      return state;
 
-    function onSelect(file, instance) {
 
-      if (!file) return;
+      /*
+       Functions
+       */
 
-      return upload(file)
-        .then(imsData => {
+      function onSelect(file, instance, folder) {
 
-          let picturesInfo = imsData.pictures;
-          let href = _.get(_.find(picturesInfo, {name: 'largeImage'}), 'src');
-          let thumbnailHref = _.get(_.find(picturesInfo, {name: 'thumbnail'}), 'src');
+        if (!file) return;
 
-          _.assign(instance, {picturesInfo, href, thumbnailHref});
+        return upload(file, folder)
+          .then(imsData => {
 
-          instance.DSCreate();
+            let {pictures} = imsData;
+            let href = _.get(_.find(pictures, {name: 'largeImage'}), 'src');
+            let thumbnailHref = _.get(_.find(pictures, {name: 'thumbnail'}), 'src');
 
-        });
+            _.assign(instance, {pictures, href, thumbnailHref});
 
-    }
+            return instance.DSCreate();
 
-    function upload(file, folder) {
+          });
 
-      state.uploading = {};
+      }
 
-      folder = `${folder}/${moment().format('YYYY/MM/DD')}`;
+      function upload(file, folder) {
 
-      return Upload.upload({
-        url: imsUrl,
-        data: {file, folder},
-        headers: {
-          // 'Authorization': Auth.getAccessToken()
-        }
-      })
-        .progress(progress => {
-          state.uploading && _.assign(state.uploading, _.pick(progress, ['loaded', 'total']));
+        state.uploading = {};
+
+        folder = `${folder}/${moment().format('YYYY/MM/DD')}`;
+
+        let q = Upload.upload({
+          url: imsUrl,
+          data: {file, folder},
+          headers: {
+            // 'Authorization': Auth.getAccessToken()
+          }
         })
-        .then(imsResponse => {
-          state.uploading = false;
-          state.file = file;
-          return imsResponse.data;
-        })
-        .catch(err => {
+          .progress(progress => {
+            state.uploading && _.assign(state.uploading, _.pick(progress, ['loaded', 'total']));
+          })
+          .then(imsResponse => {
+            state.uploading = false;
+            state.file = file;
+            return imsResponse.data;
+          });
+
+
+        q.catch(err => {
           console.error(err);
           state.uploading = false;
         });
+
+        return q;
+
+      }
 
     }
 
