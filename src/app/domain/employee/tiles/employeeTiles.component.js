@@ -48,14 +48,18 @@
 
       let helper = new PictureHelper();
       let {person} = employee;
-      let ownerXid = _.get(person, 'id');
 
-      if (!ownerXid) {
-        console.error('no personId for employee', employee);
+      if (!person) {
+        console.error('no person for employee', employee);
         return;
       }
 
-      let busy = helper.onSelect(file, Picture.createInstance({ownerXid}), 'Person')
+      let picture = Picture.createInstance({
+        ownerXid: person.id,
+        target: 'Person'
+      });
+
+      let busy = helper.onSelect(file, picture, 'Person')
         .then(picture => {
           person.avatarPictureId = picture.id;
           return person.DSCreate();

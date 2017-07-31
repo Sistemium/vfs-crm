@@ -35,7 +35,7 @@
             let href = _.get(_.find(pictures, {name: 'largeImage'}), 'src');
             let thumbnailHref = _.get(_.find(pictures, {name: 'thumbnail'}), 'src');
 
-            _.assign(instance, {pictures, href, thumbnailHref});
+            _.assign(instance, {picturesInfo: pictures, href, thumbnailHref});
 
             return instance.DSCreate();
 
