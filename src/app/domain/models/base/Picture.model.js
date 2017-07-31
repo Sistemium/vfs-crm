@@ -8,9 +8,7 @@
 
       name: 'Picture',
 
-      relations: {
-
-      },
+      relations: {},
 
       computed: {
         srcThumbnail: ['thumbnailHref', thumbnailHref => thumbnailHref],
@@ -25,10 +23,27 @@
 
 
     function title() {
-      const {Person} = Schema.models();
-      if (this.ownerXid) {
-        return _.get(Person.get(this.ownerXid), 'name');
+
+      let {ownerXid, target} = this;
+
+      if (!ownerXid || !target) {
+        return;
       }
+
+      const targetModel = Schema.model(target);
+
+      if (!targetModel) return;
+
+      const targetInstance = targetModel.get(this.ownerXid);
+
+      if (!targetInstance) return;
+
+      switch (this.target) {
+        case 'Person': {
+          return targetInstance.name;
+        }
+      }
+
     }
 
   });
