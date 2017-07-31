@@ -28,7 +28,7 @@
 
         if (!file) return;
 
-        return upload(file, folder)
+        return upload(file, folder || instance.target)
           .then(imsData => {
 
             let {pictures} = imsData;
