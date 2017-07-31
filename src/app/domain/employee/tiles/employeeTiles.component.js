@@ -17,10 +17,11 @@
     const vm = saControllerHelper.setup(this, $scope)
       .use(GalleryHelper);
 
-    const {Picture, Person} = Schema.models();
+    const {Picture} = Schema.models();
 
     vm.use({
       tileBusy: {},
+      progress: {},
       editItem,
       isOpenedEditPopover: [],
       editItemClick: Editing.editModal('edit-employee', 'Darbuotojo redagavimas'),
@@ -61,7 +62,9 @@
         target: 'Person'
       });
 
-      let busy = helper.onSelect(file, picture, 'Person')
+      vm.progress[employee.id] = helper;
+
+      let busy = helper.onSelect(file, picture)
         .then(picture => {
           person.avatarPictureId = picture.id;
           return person.DSCreate();
