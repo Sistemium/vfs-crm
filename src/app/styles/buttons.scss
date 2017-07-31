@@ -21,7 +21,7 @@ button {
 
     background-color: $warn;
     border-color: darken($warn, 7%);
-    color: $warn-text;
+    color: lighten($warn-text, 10%);
 
     &:hover:not([disabled]), &:focus {
       background-color: $warn-hover;
