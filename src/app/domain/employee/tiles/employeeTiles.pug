@@ -13,10 +13,22 @@
     cg-busy='vm.tileBusy[employee.id]'
     )
 
-      .photo
+      a.avatarPicture(
+      href ng-click='vm.avatarPhotoClick(employee.person.avatarPicture)'
+      ng-if='employee.person.avatarPictureId'
+      ngf-select='vm.pictureSelect(employee, $file, $event)'
+      )
         img(
-        ng-class='{placeholder: !employee.person.avatarPictureId}'
         ng-src='{{ employee.person.avatarPicture.thumbnailHref || "../../../images/placeholder.png" }}'
+        )
+
+      a.avatarPicture(
+      href
+      ng-if='!employee.person.avatarPictureId'
+      ngf-select='vm.pictureSelect(employee, $file, $event)'
+      )
+        img.placeholder(
+        src='../../../images/placeholder.png'
         )
 
       .info

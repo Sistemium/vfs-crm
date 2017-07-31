@@ -12,9 +12,10 @@
 
   });
 
-  function employeeTilesController($scope, saControllerHelper, Editing, PictureHelper, Schema) {
+  function employeeTilesController($scope, saControllerHelper, Editing, PictureHelper, Schema, GalleryHelper) {
 
-    const vm = saControllerHelper.setup(this, $scope);
+    const vm = saControllerHelper.setup(this, $scope)
+      .use(GalleryHelper);
 
     const {Picture} = Schema.models();
 
@@ -23,12 +24,21 @@
       editItem,
       isOpenedEditPopover: [],
       editItemClick: Editing.editModal('edit-employee', 'Darbuotojo redagavimas'),
-      pictureSelect
+      pictureSelect,
+      avatarPhotoClick
     });
 
     /*
      Functions
      */
+
+    function avatarPhotoClick(photo) {
+
+      $scope.imagesAll = Picture.getAll();
+
+      vm.thumbnailClick(photo);
+
+    }
 
     function editItem(item) {
       vm.currItem = item.id;

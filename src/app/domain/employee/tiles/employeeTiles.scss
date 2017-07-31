@@ -12,11 +12,12 @@
 
     width: calc(100% / 5 - 20px);
     margin: 10px;
+    text-align: center;
 
-    .photo {
+    .avatarPicture {
 
+      display: inline-block;
       margin-bottom: 10px;
-      text-align: center;
 
       img {
         object-fit: contain;
