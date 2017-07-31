@@ -17,7 +17,7 @@
     const vm = saControllerHelper.setup(this, $scope)
       .use(GalleryHelper);
 
-    const {Picture} = Schema.models();
+    const {Picture, Person} = Schema.models();
 
     vm.use({
       tileBusy: {},
@@ -34,7 +34,9 @@
 
     function avatarPhotoClick(photo) {
 
-      $scope.imagesAll = Picture.getAll();
+      let personIds = _.map(vm.employees, 'personId');
+
+      $scope.imagesAll = _.filter(Picture.getAll(), picture => personIds.indexOf(picture.ownerXid) >= 0);
 
       vm.thumbnailClick(photo);
 
