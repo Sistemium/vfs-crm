@@ -1,0 +1,10 @@
+.filter-system-type(
+cg-busy='vm.cgBusy'
+)
+  .ui-view
+
+    navigation-bar(search-text='vm.searchText' edit-click-fn='vm.addClick')
+
+    site-list(
+    sites='vm.sitesFiltered'
+    )

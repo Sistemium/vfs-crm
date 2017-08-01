@@ -1,0 +1,54 @@
+@import "../../../styles/flex-table";
+
+.site-list {
+
+  $width-name: 50%;
+  $width-code: 50%;
+
+  @extend %flex-table;
+
+  > * {
+
+    .name {
+      width: $width-name;
+    }
+    .code {
+      width: $width-code;
+    }
+
+
+    > * {
+      @extend .ellipsis;
+    }
+
+    > *:last-of-type {
+      text-align: right;
+    }
+
+  }
+
+  .headers {
+    @extend %flex-table-headers;
+  }
+
+  .scroll-y {
+
+    > * {
+
+      cursor: pointer;
+
+      @extend %flex-table-item;
+
+      > * {
+        @extend .ellipsis;
+      }
+
+      > *:last-of-type {
+        text-align: right;
+      }
+
+    }
+
+  }
+
+}

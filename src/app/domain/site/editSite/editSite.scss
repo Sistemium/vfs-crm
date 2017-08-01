@@ -1,0 +1,7 @@
+@import "../../../styles/editing";
+
+.edit-site {
+
+  @extend %editing-with-form;
+
+}

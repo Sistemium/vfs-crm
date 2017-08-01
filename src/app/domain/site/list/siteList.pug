@@ -1,0 +1,18 @@
+.site-list
+
+  .headers
+    .name Miestas
+    .code Kodas
+
+  .scroll-y(
+  resize
+  resize-offset-top='5'
+  vs-repeat
+  vs-excess='10'
+  )
+    .site(
+    ng-repeat='site in vm.sites track by site.id'
+    ng-click='vm.siteClick(site)'
+    )
+      .name {{ site.name }}
+      .code {{ site.code }}

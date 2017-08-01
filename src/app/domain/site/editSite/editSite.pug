@@ -1,0 +1,23 @@
+.edit-site
+
+  form
+
+    .name
+      label(for='name') Miestas
+
+      input#name.form-control(
+      type='text'
+      autocomplete='off'
+      placeholder='Miestas'
+      ng-model='vm.site.name'
+      )
+
+    .code
+      label(for='code') Kodas
+
+      input#code.form-control(
+      type='text'
+      autocomplete='off'
+      placeholder='Kodas'
+      ng-model='vm.site.code'
+      )
