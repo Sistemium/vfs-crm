@@ -17,9 +17,21 @@
           }
         }
 
+      },
+
+      meta:{
+        label: {add: 'Naujas Filtravimo Sistemos Tipas'}
+      },
+
+      methods: {
+        isValid
       }
 
     });
+
+    function isValid() {
+      return true;
+    }
 
   });
 
