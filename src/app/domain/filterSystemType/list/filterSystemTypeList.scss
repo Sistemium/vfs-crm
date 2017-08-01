@@ -1,5 +1,58 @@
-@import "../../styles/flex-table";
+@import "../../../styles/flex-table";
 
-.filter-system-type-master {
+.filter-system-type-list {
+
+  $width-name: 40%;
+  $width-code: 30%;
+  $width-service-frequency: 30%;
+
+  @extend %flex-table;
+
+  > * {
+
+    .name {
+      width: $width-name;
+    }
+    .code {
+      width: $width-code;
+    }
+
+    .service-frequency {
+      width: $width-service-frequency;
+    }
+
+    > * {
+      @extend .ellipsis;
+    }
+
+    > *:last-of-type {
+      text-align: right;
+    }
+
+  }
+
+  .headers {
+    @extend %flex-table-headers;
+  }
+
+  .scroll-y {
+
+    > * {
+
+      cursor: pointer;
+
+      @extend %flex-table-item;
+
+      > * {
+        @extend .ellipsis;
+      }
+
+      > *:last-of-type {
+        text-align: right;
+      }
+
+    }
+
+  }
 
 }

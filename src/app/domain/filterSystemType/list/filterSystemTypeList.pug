@@ -1,11 +1,20 @@
-.filter-system-type(
-cg-busy='vm.cgBusy'
-)
-  .ui-view
+.filter-system-type-list
 
-    navigation-bar(search-text='vm.searchText' edit-click-fn='vm.addClick')
+  .headers
+    .name Pavadinimas
+    .code Kodas
+    .service-frequency Aptarnavimo Dažnumas
 
-    brand-list(
-    brands='vm.brandsFiltered'
-    brand-click-fn='vm.brandClick'
+  .scroll-y(
+  resize
+  resize-offset-top='5'
+  vs-repeat
+  vs-excess='10'
+  )
+    .filter-system-type(
+    ng-repeat='filterSystemType in vm.filterSystemTypes track by filterSystemType.id'
+    ng-click='vm.filterSystemTypeClick(filterSystemType)'
     )
+      .name {{ filterSystemType.name }}
+      .code {{ filterSystemType.code }}
+      .service-frequency {{ filterSystemType.serviceFrequency }}
