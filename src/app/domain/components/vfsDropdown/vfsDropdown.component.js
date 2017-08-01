@@ -38,7 +38,7 @@
     $scope.$watch('vm.isOpen', (nv, ov) => {
 
       if (ov) {
-        $timeout(200).then(()=>{
+        $timeout(200).then(() => {
           vm.search = '';
           delete vm.newItem;
         })
