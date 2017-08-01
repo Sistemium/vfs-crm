@@ -62,8 +62,6 @@
         target: 'Person'
       });
 
-      vm.progress[employee.id] = helper;
-
       let busy = helper.onSelect(file, picture)
         .then(picture => {
           person.avatarPictureId = picture.id;
@@ -71,6 +69,7 @@
         })
         .catch(err => console.error(err));
 
+      vm.progress[employee.id] = helper;
       vm.tileBusy[employee.id] = {promise: busy, message: 'Nuotraukos siuntimas'};
 
     }
