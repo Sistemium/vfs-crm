@@ -1,0 +1,33 @@
+.edit-filter-system-type
+
+  form
+
+    .name
+      label(for='name') Pavadinimas
+
+      input#name.form-control(
+      type='text'
+      autocomplete='off'
+      placeholder='Pavadinimas'
+      ng-model='vm.filterSystemType.name'
+      )
+
+    .code
+      label(for='code') Kodas
+
+      input#code.form-control(
+      type='text'
+      autocomplete='off'
+      placeholder='Kodas'
+      ng-model='vm.filterSystemType.code'
+      )
+
+    .service-frequency
+      label(for='frequency') Aptarnavimo Dažnumas
+
+      input#frequency.form-control(
+      type='text'
+      autocomplete='off'
+      placeholder='Aptarnavimo Dažnumas'
+      ng-model='vm.filterSystemType.serviceFrequency'
+      )

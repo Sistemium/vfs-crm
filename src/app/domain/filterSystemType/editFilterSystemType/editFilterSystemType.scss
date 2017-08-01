@@ -1,0 +1,7 @@
+@import "../../../styles/editing";
+
+.edit-filter-system-type {
+
+  @extend %editing-with-form;
+
+}
