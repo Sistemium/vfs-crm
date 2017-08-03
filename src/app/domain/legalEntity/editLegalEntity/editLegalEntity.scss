@@ -1,0 +1,7 @@
+@import "../../../styles/editing";
+
+.edit-legal-entity {
+
+  @extend %editing-with-form;
+
+}

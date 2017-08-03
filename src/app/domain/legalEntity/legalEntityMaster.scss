@@ -1,0 +1,50 @@
+@import "../../styles/flex-table";
+
+.legal-entity-master {
+
+  @extend %flex-table;
+
+  $width-name: 50%;
+  $width-code: 50%;
+
+  .headers {
+    @extend %flex-table-headers;
+  }
+
+  > * {
+
+    width: 100%;
+
+    .name {
+      width: $width-name;
+    }
+
+    .code {
+      width: $width-code;
+    }
+
+  }
+
+  .headers > *:last-of-type {
+    text-align: right;
+  }
+
+  .scroll-y {
+
+    .legal-entity-list {
+
+      @extend %flex-table-item;
+
+      .name, .code {
+        @extend .ellipsis;
+      }
+
+      > *:last-of-type {
+        text-align: right;
+      }
+
+    }
+
+  }
+
+}

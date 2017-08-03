@@ -1,0 +1,19 @@
+.edit-legal-entity
+
+  form
+
+    .name
+      label(for='name') Pavadinimas
+      input#name.form-control(
+      autocomplete='off'
+      placeholder='Pavadinimas'
+      ng-model='vm.legalEntity.name'
+      )
+
+    .code
+      label(for='code') Papildoma Informacija
+      input#code.form-control(
+      autocomplete='off'
+      placeholder='Kodas'
+      ng-model='vm.legalEntity.code'
+      )
