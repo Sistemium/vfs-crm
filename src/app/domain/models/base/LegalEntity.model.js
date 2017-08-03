@@ -10,8 +10,7 @@
 
       relations: {
 
-        hasOne: {
-        },
+        hasOne: {},
 
         hasMany: {
           ServiceContract: {
@@ -20,9 +19,17 @@
           }
         }
 
+      },
+
+      methods: {
+        isValid
       }
 
     });
+
+    function isValid() {
+      return true
+    }
 
   });
 
