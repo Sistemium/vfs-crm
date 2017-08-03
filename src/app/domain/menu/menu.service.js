@@ -18,8 +18,7 @@
       state: 'serviceContract'
     }, {
       title: 'Įmonės',
-      state: 'legalEntity',
-      disabled: true
+      state: 'legalEntity'
     }, {
       title: 'Asmenys',
       state: 'person'
