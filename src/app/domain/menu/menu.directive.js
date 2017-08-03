@@ -1,4 +1,4 @@
-(function() {
+(function () {
 
   angular
     .module('webPage')
@@ -15,9 +15,23 @@
         items: '='
       },
 
-      controller: function menuDirectiveController() {
+      controller: function menuDirectiveController($state) {
         $rootScope.$broadcast('menu-show');
-      }
+
+        let vm = this;
+
+        _.assign(vm, {
+          goTo
+        });
+
+        function goTo(to, isDisabled) {
+          if (!isDisabled) {
+            $state.go(to);
+          }
+        }
+
+      },
+      controllerAs: 'vm'
 
     };
   }

@@ -2,71 +2,98 @@
 
 .stm-menu {
 
-  overflow-x: hidden;
-  $img-size: 40px;
+  @function random-metro-color($list) {
+    @return nth($list, random(10));
+  }
 
-  .page-header {
+  $metro-colors: #A200FF, #FF0097, #00ABA9, #8CBF26, #A05000, #E671B8, #F09609, #1BA1E2, #E51400, #339933;
+  $img-size: 100px;
+  $item-length: 9;
 
-    margin: 0 auto 35px;
-    position: relative;
+  overflow-y: scroll;
 
-    border-bottom: none;
-    text-align: center;
+  @mixin random-color() {
+    background-color: random-metro-color($metro-colors);
+  }
 
-    .title {
-      display: inline-block;
+  .item {
+
+    height: 150px;
+    margin: 2px;
+    width: 100%;
+    cursor: pointer;
+
+    @extend %flex-column-nowrap;
+    justify-content: space-between;
+
+    @for $i from 1 through $item-length {
+      &:nth-child(#{$i}) {
+        @include random-color();
+      }
     }
 
-    h2 {
-      margin: 0 auto;
-      font-size: 210%;
-      //color: $aqf-dark-blue;
-      color: $gray;
+    @include responsive-only(lg) {
+      width: calc(100% / 5 - 4px);
     }
 
+    @include responsive-only(gt-md) {
+      width: calc(100% / 4 - 4px);
+    }
+
+    @include responsive-only(sm) {
+      width: calc(100% / 3 - 4px);
+    }
+
+    @include responsive-only(xs) {
+      width: calc(100% / 2 - 4px);
+    }
+
+    @include responsive-only(xxs) {
+      width: calc(100% - 4px);
+    }
+
+  }
+
+  .item:last-of-type {
+    flex: 1;
+  }
+
+  .disabled-choice{
+
+  }
+
+  .disabled-choice:hover {
+    background: #dddddd;
+    cursor: no-drop;
   }
 
   .items {
-
-    align-items: stretch;
-    width: 100%;
-
-  }
-
-  button.btn .caption .badge {
-    background-color: $primary-color;
-    color: $white;
-  }
-
-  .icon {
-    padding: 5px;
-    img {
-      max-height: $img-size;
-      max-width: $img-size;
-    }
-  }
-
-  button {
-
-    padding: 10px;
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
+    @extend %flex-row-wrap;
+    height: 100%;
     justify-content: flex-start;
-    border-color: $aqf-light-blue;
+    align-items: flex-start;
+  }
 
-    .icon {
+  .pic {
 
+    @extend %flex-row-nowrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+
+    img {
+      align-self: center;
+      height: $img-size;
+      width: $img-size;
     }
 
-    .caption {
-      color: $aqf-dark-blue;
-      flex: 1;
-      text-align: center;
-      line-height: 30px;
-    }
+  }
+
+  .caption {
+    color: white;
+    margin: 15px 15px 10px 10px;
+    font-size: 15px;
+    letter-spacing: 1px;
   }
 
 }

@@ -20,7 +20,7 @@
 
   function NavbarController(Menu, $scope, $rootScope, saControllerHelper, $window, localStorageService, $state) {
 
-    const DEFAULT_TITLE = 'VFS CRM';
+    const DEFAULT_TITLE = 'Pagrindinis Meniu';
     const vm = saControllerHelper.setup(this, $scope);
 
     vm.use({
@@ -56,6 +56,7 @@
       let rootState = _.get(to, 'data.rootState');
       let currentItem = _.find(vm.menu.items, item => to.name && _.startsWith(to.name, item.state));
 
+
       vm.use({
 
         rootState,
@@ -65,10 +66,9 @@
         isHomeState: to.name === 'home',
         currentItem,
         isSubRootState: _.startsWith(to.name, rootState) && to.name !== rootState,
-        currentIcon: `/images/${currentItem ? currentItem.icon : 'Aquafilter-lt.png'}`
+        currentIcon: `/images/${currentItem ? 'color/' + currentItem.icon : 'Aquafilter-lt.png'}`
 
       });
-
     }
 
     function measure() {
@@ -81,7 +81,6 @@
     if (localStorageService.get('debug.performance')) {
       setTimeout(measure, 1000);
     }
-
 
   }
 

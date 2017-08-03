@@ -1,17 +1,11 @@
-.page-header(ng-if='header')
-  h2
-    div {{header.title}}
-    small(ng-if='header.small') {{header.small}}
+.items
 
-.items(resize resize-offset-top='5' resize-property='height')
-  .row
-    .col-sm-6.col-md-4.col-lg-3(ng-repeat='item in items track by item.state')
-      button.btn.btn-default.btn-block.thumbnail.btn-lg(
-      ui-sref='{{::item.state}}'
-      ng-disabled='item.disabled'
-      )
-        .icon
-          img(ng-src='/images/{{item.icon}}')
-        .caption
-          span {{::item.title}}
-          .badge(ng-if='item.badge') {{ item.badge }}
+  .item(
+  ng-repeat='item in items track by $index'
+  ng-click='vm.goTo(item.state, item.disabled)'
+  ng-class='{"disabled-choice" : item.disabled}'
+  )
+    .pic
+      img(ng-src='/images/windows/{{item.icon}}')
+
+    span.caption {{::item.title}}
