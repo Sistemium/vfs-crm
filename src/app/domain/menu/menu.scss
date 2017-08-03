@@ -55,16 +55,12 @@
   }
 
   .item:last-of-type {
-    flex: 1;
-  }
-
-  .disabled-choice{
-
+    flex: 1
   }
 
   .disabled-choice:hover {
     background: #dddddd;
-    cursor: no-drop;
+    cursor: default;
   }
 
   .items {
