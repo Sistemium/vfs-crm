@@ -8,14 +8,15 @@
 
   });
 
-  function filterSystemTypeMasterController($scope, Schema, saControllerHelper) {
+  function filterSystemTypeMasterController($scope, Schema, saControllerHelper, Editing) {
 
     const vm = saControllerHelper.setup(this, $scope);
 
     const {FilterSystemType} = Schema.models();
 
     vm.use({
-      $onInit
+      $onInit,
+      addClick
     });
 
     vm.rebindAll(FilterSystemType, {orderBy: ['name']}, 'vm.filterSystemTypes', onSearch);
@@ -24,6 +25,12 @@
     /*
      Functions
      */
+
+    function addClick() {
+      Editing.editModal(
+        'edit-filter-system-type', 'Naujas Filtravimo Sistemos Tipas')(FilterSystemType.createInstance()
+      )
+    }
 
     function onSearch() {
 

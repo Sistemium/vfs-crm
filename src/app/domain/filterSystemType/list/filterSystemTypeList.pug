@@ -13,7 +13,7 @@
   )
     .filter-system-type(
     ng-repeat='filterSystemType in vm.filterSystemTypes track by filterSystemType.id'
-    ng-click='vm.filterSystemTypeClick(filterSystemType)'
+    ng-click='vm.openModal(filterSystemType)'
     )
       .name {{ filterSystemType.name }}
       .code {{ filterSystemType.code }}
