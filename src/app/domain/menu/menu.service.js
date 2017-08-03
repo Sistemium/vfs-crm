@@ -38,18 +38,33 @@
     }];
 
     const icons = [
-      'color/icons8-Geo-fence-80.png',
-      'color/icons8-Worker-80.png',
-      'color/icons8-Plumbing-80.png',
-      'color/icons8-Agreement-80.png',
-      'color/icons8-Organization-80.png',
-      'color/icons8-User Groups-80.png',
-      'color/icons8-maintenance.png',
-      'color/icons8-user_folder.png',
-      'color/icons8-settings.png'
+      'icons8-Marker.png',
+      'icons8-Worker.png',
+      'icons8-Plumbing.png',
+      'icons8-Agreement.png',
+      'icons8-Organization.png',
+      'icons8-People.png',
+      'icons8-Maintenance.png',
+      'icons8-User-Folder.png',
+      'icons8-Cog.png'
     ];
 
-    _.each(icons, (icon, idx) => items[idx].icon = icon);
+    //const iconsOld = [
+    //  'color/icons8-Marker.png',
+    //  'color/icons8-Worker.png',
+    //  'color/icons8-Plumbing.png',
+    //  'color/icons8-Agreement.png',
+    //  'color/icons8-Organization.png',
+    //  'color/icons8-People.png',
+    //  'color/icons8-Maintenance.png',
+    //  'color/icons8-User-Folder.png',
+    //  'color/icons8-Cog.png'
+    //];
+
+    _.each(icons, (icon, idx) => {
+      items[idx].icon = icon;
+    });
+
 
     function setItemData(state, data) {
       _.assign(_.find(items, {state}), data);
@@ -59,7 +74,7 @@
 
       return {
 
-        title: 'Начало',
+        title: 'Pradžia',
         state: 'home',
 
         items: _.filter(items, function (option) {
