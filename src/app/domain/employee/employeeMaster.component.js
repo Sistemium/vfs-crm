@@ -2,7 +2,7 @@
 
   module.component('employeeMaster', {
 
-    templateUrl: 'app/domain/employee/employee.html',
+    templateUrl: 'app/domain/employee/employeeMaster.html',
     controller: employeeMasterController,
     controllerAs: 'vm'
 
