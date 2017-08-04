@@ -21,9 +21,17 @@
         label: {
           add: 'Naujas prekių ženklas'
         }
+      },
+
+      methods: {
+        isValid
       }
 
     });
+
+    function isValid() {
+      return true;
+    }
 
   });
 
