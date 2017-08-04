@@ -9,9 +9,6 @@
   .config(localStorageServiceProvider => {
     localStorageServiceProvider.setPrefix('vfs');
   })
-  .run(amMoment => {
-    amMoment.changeLocale('lt');
-  })
   .config($locationProvider => {
     $locationProvider.hashPrefix('');
   })
