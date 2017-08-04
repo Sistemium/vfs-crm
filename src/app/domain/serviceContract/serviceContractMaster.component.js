@@ -8,7 +8,7 @@
 
   });
 
-  function serviceContractMasterController($scope, Schema, $state, $filter, saControllerHelper, $q) {
+  function serviceContractMasterController($scope, Schema, $state, $filter, saControllerHelper, $q, Editing) {
 
     const vm = saControllerHelper.setup(this, $scope);
 
@@ -20,7 +20,8 @@
       serviceContracts: [],
 
       onStateChange,
-      serviceContractClick
+      serviceContractClick,
+      addClick
 
     });
 
@@ -37,6 +38,9 @@
 
     }
 
+    function addClick() {
+      Editing.editModal('edit-service-contract', 'Nauja Sutartis')(ServiceContract.createInstance())
+    }
 
     function serviceContractClick() {
 
@@ -90,6 +94,5 @@
     }
 
   }
-
 
 })(angular.module('webPage'));

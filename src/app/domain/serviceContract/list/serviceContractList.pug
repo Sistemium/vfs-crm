@@ -14,7 +14,7 @@
   )
     .service-contract(
     ng-repeat='serviceContract in vm.serviceContracts track by serviceContract.id'
-    ng-click='vm.serviceContractClickFn(serviceContract, $index)'
+    ng-click='vm.preOpen(serviceContract)'
     )
       .date {{ serviceContract.date | amDateFormat: "YYYY/MM/DD" }}
       .num {{ serviceContract.num }}

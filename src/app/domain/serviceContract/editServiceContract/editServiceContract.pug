@@ -1,0 +1,74 @@
+.edit-service-contract
+
+  pre {{vm.serviceContract}}
+
+  .form
+
+    .date-test
+      label Data
+
+      sab-date-picker(
+      value='vm.serviceContract.date'
+      )
+
+    .num
+      label(for='num') Numeris
+
+      input#num.form-control(
+      required
+      autocomplete='off'
+      placeholder='Numeris'
+      ng-model='vm.serviceContract.num'
+      )
+
+    .site
+      label Padalinys
+
+      vfs-dropdown(
+      ng-required='true'
+      ng-model='vm.servicePoint.siteId'
+      items-data-source-name='Site'
+      items-name-property='name'
+      save-to='vm.serviceContract'
+      save-to-property='siteId'
+      placement='bottom-left'
+      )
+
+    .code
+      label Tipas
+
+      .type-select(uib-dropdown)
+        button.btn.dropdown-btn(type='text' uib-dropdown-toggle)
+          span {{vm.serviceContract.legalType || "Paspauskite, kad pasirinkti"}}
+          span.caret
+        ul.dropdown-menu(uib-dropdown-menu)
+          li(role='menuitem')
+            a(ng-click='vm.serviceContract.legalType = "Asmuo"') Asmuo
+          li(role='menuitem')
+            a(ng-click='vm.serviceContract.legalType = "Įmonė"') Įmonė
+
+    .customer-legal-entity(ng-if='vm.serviceContract.legalType === "Įmonė"')
+      label Įmonė
+
+      vfs-dropdown(
+      ng-required='true'
+      ng-model='vm.servicePoint.customerLegalEntityId'
+      items-data-source-name='LegalEntity'
+      items-name-property='name'
+      save-to='vm.serviceContract'
+      save-to-property='customerLegalEntityId'
+      placement='bottom-left'
+      )
+
+    .customer-person(ng-if='vm.serviceContract.legalType === "Asmuo"')
+      label Asmuo
+
+      vfs-dropdown(
+      ng-required='true'
+      ng-model='vm.servicePoint.customerPersonId'
+      items-data-source-name='Person'
+      items-name-property='name'
+      save-to='vm.serviceContract'
+      save-to-property='customerPersonId'
+      placement='bottom-left'
+      )

@@ -1,0 +1,25 @@
+@import "../../../styles/editing";
+
+.edit-service-contract {
+
+  @extend %editing-with-form;
+
+  .type-select {
+
+    button {
+      background-color: transparent;
+      border: 1px solid #ccc;
+      width: 100%;
+      @extend %flex-row-nowrap;
+      justify-content: space-between;
+      align-items: center;
+
+      > * {
+        color: #1d91c4;
+      }
+
+    }
+
+  }
+
+}
