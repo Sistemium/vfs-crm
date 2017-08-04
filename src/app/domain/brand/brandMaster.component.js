@@ -8,7 +8,7 @@
 
   });
 
-  function brandMasterController($scope, Schema, saControllerHelper) {
+  function brandMasterController($scope, Schema, saControllerHelper, Editing) {
 
     const vm = saControllerHelper.setup(this, $scope);
 
@@ -16,10 +16,10 @@
 
     vm.use({
       $onInit,
-      brandClick
+      addClick
     });
 
-    vm.rebindAll(Brand, {orderBy:['name']}, 'vm.brands', onSearch);
+    vm.rebindAll(Brand, {orderBy: ['name']}, 'vm.brands', onSearch);
     vm.watchScope('vm.searchText', onSearch);
 
     /*
@@ -33,8 +33,8 @@
 
     }
 
-    function brandClick() {
-
+    function addClick() {
+      Editing.editModal('edit-brand', 'Naujas Prekės Ženklas')(Brand.createInstance());
     }
 
     function filterBrands(data, text) {
@@ -61,6 +61,5 @@
 
     }
   }
-
 
 })(angular.module('webPage'));
