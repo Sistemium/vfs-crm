@@ -11,6 +11,6 @@
   )
     .brand(
     ng-repeat='brand in vm.brands track by brand.id'
-    ng-click='vm.brandClick(brand)'
+    ng-click='vm.openModal(brand)'
     )
       .name {{ brand.name }}
