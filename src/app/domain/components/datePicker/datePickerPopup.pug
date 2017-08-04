@@ -1,0 +1,26 @@
+ul.uib-datepicker-popup.dropdown-menu.uib-position-measure(
+role='presentation'
+ng-if='isOpen'
+ng-keydown='keydown($event)'
+ng-click='$event.stopPropagation()'
+dropdown-nested
+)
+  li(ng-transclude='')
+  li.uib-button-bar(ng-if='showButtonBar')
+    span.btn-group.pull-left
+      button.btn.btn-sm.btn-info.uib-datepicker-current(
+      type='button'
+      ng-if='getText("current")!="false"'
+      ng-click='select("today", $event)'
+      ng-disabled='isDisabled("today")'
+      ) {{ getText('current') }}
+      button.btn.btn-sm.btn-warning.uib-clear(
+      type='button'
+      ng-if='getText("clear")!="false"'
+      ng-click='select(null, $event)'
+      ) {{ getText('clear') }}
+    button.btn.btn-sm.btn-default.pull-right.uib-close(
+    type='button'
+    ng-click='close($event)'
+    ) {{ getText('close') }}
+
