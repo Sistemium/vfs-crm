@@ -11,7 +11,7 @@
 
       name: 'employee',
       url: '/employee',
-      template: '<employee></employee>',
+      template: '<employee-master></employee-master>',
 
       defaultChild: 'tiles',
 
