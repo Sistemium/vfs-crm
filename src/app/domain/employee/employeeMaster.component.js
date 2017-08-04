@@ -1,14 +1,14 @@
 (function (module) {
 
-  module.component('employee', {
+  module.component('employeeMaster', {
 
     templateUrl: 'app/domain/employee/employee.html',
-    controller: employeeController,
+    controller: employeeMasterController,
     controllerAs: 'vm'
 
   });
 
-  function employeeController($scope, Schema, saControllerHelper, $filter, Editing) {
+  function employeeMasterController($scope, Schema, saControllerHelper, $filter, Editing) {
 
     const vm = saControllerHelper.setup(this, $scope);
 
