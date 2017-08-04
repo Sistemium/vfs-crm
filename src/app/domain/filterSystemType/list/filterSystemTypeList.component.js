@@ -16,7 +16,7 @@
     const vm = saControllerHelper.setup(this, $scope);
 
     vm.use({
-      openModal: Editing.editModal('edit-filter-system-type', 'Filtravimo Sistemos Tipo Redagavimas'),
+      openModal: Editing.editModal('edit-filter-system-type', 'Filtravimo Sistemos Tipo Redagavimas')
     });
 
   }

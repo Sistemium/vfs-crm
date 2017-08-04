@@ -16,7 +16,7 @@
     const vm = saControllerHelper.setup(this, $scope);
 
     vm.use({
-      openModal: Editing.editModal('edit-brand', 'Prekės Ženklo Redagavimas'),
+      openModal: Editing.editModal('edit-brand', 'Prekės Ženklo Redagavimas')
     });
   }
 
