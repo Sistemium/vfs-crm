@@ -1,14 +1,14 @@
 (function (module) {
 
-  module.component('filterSystem', {
+  module.component('filterSystemMaster', {
 
-    templateUrl: 'app/domain/filterSystem/filterSystem.html',
-    controller: filterSystemController,
+    templateUrl: 'app/domain/filterSystem/filterSystemMaster.html',
+    controller: filterSystemMasterController,
     controllerAs: 'vm'
 
   });
 
-  function filterSystemController($scope, Schema, saControllerHelper, Editing) {
+  function filterSystemMasterController($scope, Schema, saControllerHelper, Editing) {
 
     const vm = saControllerHelper.setup(this, $scope);
 
@@ -20,9 +20,7 @@
       addClick
     });
 
-    Brand.bindAll({
-      orderBy: ['name']
-    }, $scope, 'vm.brands');
+    vm.rebindAll(Brand, {orderBy: ['name']}, 'vm.brands');
 
     /*
      Functions

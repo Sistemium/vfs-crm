@@ -1,4 +1,4 @@
-.filter-system(cg-busy='vm.cgBusy')
+.filter-system-master(cg-busy='vm.cgBusy')
 
   navigation-bar(search-text='vm.searchText' edit-click-fn='vm.addClick')
 
@@ -17,8 +17,6 @@
         .headers
           .filter-system-type Tipas
           .filter-model Modelis
-
-        //.no-res.warn-block(ng-if='!foundFilter.length') Filtrų Nerasta
 
         .filter-system(
         ng-repeat='filterSystem in brand.filterSystems | filter: vm.searchText | orderBy: "model" as foundFilter track by filterSystem.id'
