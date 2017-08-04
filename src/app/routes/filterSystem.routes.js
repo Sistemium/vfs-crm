@@ -11,14 +11,14 @@
 
           name: 'filterSystem',
           url: '/filterSystem',
-          template: '<filter-system></filter-system>',
+          template: '<filter-system-master></filter-system-master>',
 
           data: {
             title: 'Filtravimo Sistemos'
           }
 
         })
-        
+
     });
 
 })();
