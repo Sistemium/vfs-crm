@@ -44,11 +44,16 @@
 
       methods: {
 
-        customer
+        customer,
+        isValid
 
       }
 
     });
+
+    function isValid() {
+      return true;
+    }
 
     function customer() {
 
