@@ -38,6 +38,8 @@
         return 'Klaipėdos'
       } else if (this.name === 'Kaunas') {
         return 'Kauno'
+      }else{
+        return this.name
       }
 
     }
