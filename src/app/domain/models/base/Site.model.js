@@ -18,13 +18,28 @@
       },
 
       methods: {
-        isValid
-      }
+        isValid,
+        declension
+      },
+
+      meta: {}
 
     });
 
     function isValid() {
       return true
+    }
+
+    function declension() {
+
+      if (this.name === 'Vilnius') {
+        return 'Vilniaus'
+      } else if (this.name === 'Klaipėda') {
+        return 'Klaipėdos'
+      } else if (this.name === 'Kaunas') {
+        return 'Kauno'
+      }
+
     }
 
   });

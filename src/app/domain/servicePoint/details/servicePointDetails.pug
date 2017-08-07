@@ -1,10 +1,10 @@
 .service-point-details
-
+  
   .service-point
 
     .service-point-info
       .address {{vm.servicePoint.address}}
-        .office ({{vm.servicePoint.site.name}} padalinys)
+        .office ({{vm.servicePoint.site.declension()}} padalinys)
       .service-point-contacts
         .contact(ng-repeat='servicePointContact in vm.servicePoint.servicePointContacts track by servicePointContact.id')
           span.name {{servicePointContact.person.firstName}} {{servicePointContact.person.lastName}}
