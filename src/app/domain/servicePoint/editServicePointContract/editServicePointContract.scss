@@ -1,0 +1,8 @@
+@import "../../../styles/editing";
+
+.edit-service-point-contract {
+
+  @extend %editing-with-form;
+
+}
+

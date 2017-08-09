@@ -1,0 +1,15 @@
+.edit-service-point-contract
+
+  .form
+
+    .first-name
+      label Naudotojas
+
+      vfs-dropdown(
+      ng-model='vm.servicePointContract.personId'
+      items-data-source-name='Person'
+      items-name-property='name'
+      save-to='vm.servicePointContract'
+      save-to-property='personId'
+      placement='bottom-left'
+      )
