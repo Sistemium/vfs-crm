@@ -12,7 +12,7 @@
 
     const vm = saControllerHelper.setup(this, $scope);
 
-    const {ServicePoint, FilterSystem, Brand, Person, ServiceItem} = Schema.models();
+    const {ServicePoint, FilterSystem, Brand, Person, ServiceItem, ServicePointContact} = Schema.models();
 
     vm.use({
 
@@ -20,7 +20,12 @@
 
       editItemClick,
       addItemClick,
-      editServicePointClick: Editing.editModal('edit-service-point', 'Aptarnavimo Taško Redagavimas')
+      contactClick,
+      addContractPerson,
+      phoneTo,
+
+      editServicePointClick: Editing.editModal('edit-service-point', 'Aptarnavimo Taško Redagavimas'),
+      editContractPerson: Editing.editModal('edit-service-point-contract', 'Redaguoti Naudotoją'),
 
     });
 
@@ -34,8 +39,21 @@
      Functions
      */
 
+    function phoneTo(ev, phone) {
+      ev.stopPropagation();
+      window.open('tel:' + phone, '_self');
+    }
+
     function addItemClick() {
       vm.newItem = ServiceItem.createInstance({servicePointId: vm.servicePoint.id});
+    }
+
+    function addContractPerson() {
+      Editing.editModal('edit-service-point-contract', 'Pridėti Naudotoją Prie Aptarnavimo Taško')(ServicePointContact.createInstance({servicePointId: vm.servicePoint.id}));
+    }
+
+    function contactClick() {
+      vm.clicked = !vm.clicked;
     }
 
     function refresh() {
@@ -46,7 +64,7 @@
 
       let busy = [
         ServicePoint.findAllWithRelations({id}, {bypassCache: true})(['ServiceItem', 'ServicePointContact'])
-        .then(loadServicePointRelations)
+          .then(loadServicePointRelations)
       ];
 
       vm.setBusy(busy);
