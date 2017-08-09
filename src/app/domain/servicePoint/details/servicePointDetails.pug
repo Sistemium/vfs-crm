@@ -1,24 +1,58 @@
 .service-point-details
-  
-  .service-point
 
-    .service-point-info
-      .address {{vm.servicePoint.address}}
-        .office ({{vm.servicePoint.site.declension()}} padalinys)
-      .service-point-contacts
-        .contact(ng-repeat='servicePointContact in vm.servicePoint.servicePointContacts track by servicePointContact.id')
-          span.name {{servicePointContact.person.firstName}} {{servicePointContact.person.lastName}}
-          a.phone(href='tel:{{ servicePointContact.person.phone }}') {{ servicePointContact.person.phone }}
-
-    .button-block
-      button-edit(button-click='vm.editServicePointClick(vm.servicePoint)')
-
-  .service-point-items
+  .address
 
     .header
-      .header-text-1 Įrenginiai
-      .button-block
 
+      .chapter-name
+        i.glyphicon.glyphicon-map-marker
+        span Adresas
+
+      .button-block
+        button-edit(button-click='vm.editServicePointClick(vm.servicePoint)')
+
+
+    .service-point-location
+
+      .service-point-map
+        img(src='images/dummyMap3.png')
+
+      .service-point-address
+        .point-address {{vm.servicePoint.address}}
+        .site {{vm.servicePoint.site.declension()}} padalinys
+
+  .users
+
+    .header
+
+      .chapter-name
+        i.glyphicon.glyphicon-user
+        span Naudotojai
+
+      .button-block
+        button-add(button-click='vm.addContractPerson()')
+
+
+    .service-point-contacts
+
+      .contact(ng-repeat='servicePointContact in vm.servicePoint.servicePointContacts track by servicePointContact.id'  ng-click='vm.editContractPerson(servicePointContact)')
+        span.name {{servicePointContact.person.firstName}} {{servicePointContact.person.lastName}}
+        a.phone(ng-click='vm.phoneTo($event, servicePointContact.person.phone)') {{ servicePointContact.person.phone }}
+
+      .contact(ng-if='vm.servicePoint.servicePointContacts.length === 0')
+        span.name Naudotojų nėrasta
+        a.phone.add-user(ng-click='vm.addContractPerson()') Pridėti naudotoją
+
+
+  .items
+
+    .header
+
+      .chapter-name
+        i.glyphicon.glyphicon-tint
+        span Įrenginiai
+
+      .button-block
         button-add(
         button-click='vm.addItemClick()'
         popover-placement='auto bottom-right'
@@ -28,42 +62,44 @@
         popover-append-to-body='false'
         )
 
-    .service-point-list
+    .service-point-items
 
-      .headers
-        .filter-system Filtro Sistema
-        .installing-master Montuotojas
-        .serving-master Aptarnavimo Meistras
-        .service-contract Sutartis
-        .action
+      .service-point-list
 
-      .scroll-y(
-      resize
-      resize-offset-top='5'
-      )
-        .service-point-item(
-        ng-repeat='item in vm.servicePoint.servingItems track by item.id'
-        ng-class='{"has-changes": item.DSHasChanges()}'
+        .headers
+          .filter-system Filtro Sistema
+          .installing-master Montuotojas
+          .serving-master Aptarnavimo Meistras
+          .service-contract Sutartis
+          .action
+
+        .scroll-y(
+        resize
+        resize-offset-top='15'
         )
-
-          .filter-system
-            span {{ item.filterSystem.brand.name }} {{ item.filterSystem.model }}
-            span(ng-if='!item.filterSystem.brand.name') {{ item.info }}
-
-          .installing-master {{ item.installingMaster.name }}
-
-          .serving-master {{ item.servingMaster.name }}
-
-          .service-contract
-            span(ng-if='item.currentServiceContract')
-              | {{ item.currentServiceContract.num }} nuo {{ item.currentServiceContract.date }}
-
-          button.btn.action.btn-default.btn-xs(
-          ng-click='vm.editItemClick(item)'
-          popover-placement='auto bottom-right'
-          popover-is-open='vm.isOpenEditPopover[item.id]'
-          uib-popover-template='"/app/domain/servicePoint/details/editItem.html"'
-          popover-title='Įrenginio Modifikavimas'
-          popover-append-to-body='false'
+          .service-point-item(
+          ng-repeat='item in vm.servicePoint.servingItems track by item.id'
+          ng-class='{"has-changes": item.DSHasChanges()}'
           )
-            i.glyphicon.glyphicon.glyphicon-option-horizontal
+
+            .filter-system
+              span {{ item.filterSystem.brand.name }} {{ item.filterSystem.model }}
+              span(ng-if='!item.filterSystem.brand.name') {{ item.info }}
+
+            .installing-master {{ item.installingMaster.name }}
+
+            .serving-master {{ item.servingMaster.name }}
+
+            .service-contract
+              span(ng-if='item.currentServiceContract')
+                | {{ item.currentServiceContract.num }} nuo {{ item.currentServiceContract.date }}
+
+            button.btn.action.btn-default.btn-xs(
+            ng-click='vm.editItemClick(item)'
+            popover-placement='auto bottom-right'
+            popover-is-open='vm.isOpenEditPopover[item.id]'
+            uib-popover-template='"/app/domain/servicePoint/details/editItem.html"'
+            popover-title='Įrenginio Modifikavimas'
+            popover-append-to-body='false'
+            )
+              i.glyphicon.glyphicon.glyphicon-option-horizontal
