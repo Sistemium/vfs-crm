@@ -4,7 +4,7 @@
 
   module.service('PictureHelper', PictureHelper);
 
-  function PictureHelper(Upload, moment) {
+  function PictureHelper(Upload, moment, $q) {
 
     let imsUrl = 'https://api.sistemium.com/ims/vfsd';
 
@@ -26,7 +26,7 @@
 
       function onSelect(file, instance, folder) {
 
-        if (!file) return;
+        if (!file) return $q.reject();
 
         return upload(file, folder || instance.target)
           .then(imsData => {
