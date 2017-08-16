@@ -27,7 +27,14 @@
 
         closeGalleryClick: () => vm.zoom === 1 && cleanup(),
 
-        deleteClick
+        deleteClick,
+
+        test: () => {
+          console.log('fired');
+          $scope.confirmDelete = !$scope.confirmDelete;
+        },
+
+        deleteCurrentImage
 
       });
 
@@ -63,8 +70,10 @@
         }
 
         imageModel.DSDestroy()
-          .then(cleanup)
-          .catch(cleanup);
+          .then(cleanup())
+          .catch((err) => {
+            console.error(err);
+          })
 
       }
 
@@ -74,9 +83,11 @@
       }
 
       function cleanup() {
+
         $scope.opened = false;
         $body.unbind('keydown', onKeyDown);
         fullscreenElement && fullscreenElement.remove();
+
       }
 
       function setNextImage() {
