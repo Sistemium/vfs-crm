@@ -4,4 +4,18 @@
 
   @extend %editing-with-form;
 
+  .avatar-picture {
+
+    img {
+      display: block;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 150px;
+      padding: 5px;
+      height: 150px;
+      object-fit: contain;
+    }
+
+  }
+
 }

@@ -25,3 +25,9 @@
       save-to-property='personId'
       placement='bottom-left'
       )
+
+    .avatar-picture
+
+      label Fotografija
+
+      img(ng-src='{{ vm.employee.person.avatarPicture.thumbnailHref || "../../../images/placeholder.png" }}')
