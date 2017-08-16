@@ -1,0 +1,43 @@
+@import "../../../styles/flex-table";
+
+.brand-list {
+
+  $width-name: 100%;
+
+  @extend %flex-table;
+
+  > * {
+
+    .name {
+      width: $width-name;
+    }
+
+    > * {
+      @extend .ellipsis;
+    }
+
+  }
+
+  .headers {
+    @extend %flex-table-headers;
+  }
+
+  .scroll-y {
+
+    > * {
+
+      cursor: pointer;
+
+      @extend %flex-table-item;
+
+      > * {
+        @extend .ellipsis;
+      }
+
+    }
+
+  }
+
+}
+
+
