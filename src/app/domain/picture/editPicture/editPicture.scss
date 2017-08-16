@@ -1,0 +1,23 @@
+@import "../../../styles/editing";
+
+.edit-picture {
+
+  @extend %editing-with-form;
+
+  form {
+    .image {
+      img {
+
+        object-fit: contain;
+        margin: 5px;
+        width: 107px;
+        height: 107px;
+        border: 1px solid #ccc;
+        background: white;
+        display: block;
+
+      }
+    }
+  }
+
+}
