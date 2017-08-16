@@ -1,4 +1,5 @@
-.service-point-details
+.service-point-details.scroll-y(resize resize-offset-top='5')
+
 
   .address
 
@@ -20,6 +21,54 @@
       .service-point-address
         .point-address {{vm.servicePoint.address}}
         .site {{vm.servicePoint.site.declension()}} padalinys
+
+  .service-point-pictures
+
+    .header
+
+      .chapter-name
+        i.glyphicon.glyphicon-picture
+        span Taško Nuotraukos
+
+      .button-block
+        button-add(
+        ng-class='{"disabled-add-button" : vm.uploadingPicture}'
+        ngf-select
+        ngf-change='vm.onChangeFile($file)'
+        ngf-accept="'image/*'"
+        ngf-max-size="10MB"
+        ng-model="vm.file"
+        )
+
+    .picture-gallery
+
+      .service-point-picture.scroll-y(resize)
+
+        img(
+        ng-repeat='picture in vm.servicePoint.pictures track by picture.id'
+        ng-src='{{picture.thumbnailHref}}'
+        ng-click='vm.photoClick(picture)'
+        ng-dblclick='vm.editPhoto(picture)'
+        )
+
+        .loading-img(ng-if='vm.uploadingPicture')
+
+          span(ng-if='vm.progress.uploading') {{(vm.progress.uploading.loaded / vm.progress.uploading.total) * 100 || 0 | number: 0}} %
+          .progress-info
+            .loading-spinner(
+            ng-if='(vm.progress.uploading.loaded === vm.progress.uploading.total) && vm.progress.uploading.loaded !== undefined             && vm.uploadingPicture'
+            )
+              .uil-ripple-css
+                div
+
+          .success-msg(ng-if='!vm.progress.uploading')
+            span Įkelta
+
+      .more-photos(
+      ng-class='{"more-photos-hidden": !vm.scrollToGallery, "more-photos-visible": vm.scrollToGallery}'
+      )
+        button.btn
+          i.glyphicon.glyphicon-chevron-down
 
   .users
 
