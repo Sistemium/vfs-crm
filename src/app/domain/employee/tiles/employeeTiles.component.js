@@ -49,6 +49,8 @@
 
     function pictureSelect(employee, file) {
 
+      if (!file) return;
+
       let helper = new PictureHelper();
       let {person} = employee;
 
