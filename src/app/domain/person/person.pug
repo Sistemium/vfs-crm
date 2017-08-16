@@ -7,6 +7,7 @@
     .last-name Pavardė
     .code Asmens Kodas
     .phone Telefonas
+    .avatar-picture Fotografija
 
   .scroll-y(
   resize
@@ -23,5 +24,7 @@
       .code {{ person.code }}
       .phone
         a(href='tel:{{ person.phone }}' ng-click='$event.stopPropagation()') {{ person.phone }}
+      .avatar-picture
+        span {{ person.avatarPictureId ? 'Yra' : ''}}
 
 

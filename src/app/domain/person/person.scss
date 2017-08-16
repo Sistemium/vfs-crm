@@ -5,9 +5,10 @@
   @extend %flex-table;
 
   $width-first-name: 30%;
-  $width-last-name: 30%;
+  $width-last-name: 22%;
   $width-code: 20%;
   $width-telephone: 20%;
+  $width-avatar-picture: 8%;
 
   .headers {
     @extend %flex-table-headers;
@@ -22,8 +23,13 @@
     .last-name {
       width: $width-last-name;
     }
+
     .code {
       width: $width-code;
+    }
+
+    .avatar-picture {
+      width: $width-avatar-picture;
     }
 
     .phone {
@@ -42,7 +48,7 @@
 
       @extend %flex-table-item;
 
-      .first-name, .last-name, .phone, .code {
+      .first-name, .last-name, .phone, .code, .avatar-picture {
         @extend .ellipsis;
       }
 
