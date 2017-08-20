@@ -66,7 +66,7 @@
         isHomeState: to.name === 'home',
         currentItem,
         isSubRootState: _.startsWith(to.name, rootState) && to.name !== rootState,
-        currentIcon: `/images/${currentItem ? 'color/' + currentItem.icon : 'Aquafilter-lt.png'}`
+        currentIcon: `/images/${currentItem ? currentItem.icon : 'Aquafilter-lt.png'}`
 
       });
     }
