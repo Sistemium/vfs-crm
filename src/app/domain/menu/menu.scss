@@ -7,13 +7,14 @@
   }
 
   $metro-colors: #A200FF, #FF0097, #00ABA9, #8CBF26, #A05000, #E671B8, #F09609, #1BA1E2, #E51400, #339933;
-  $img-size: 100px;
+  $img-size: 70px;
   $item-length: 9;
 
   overflow-y: scroll;
 
   @mixin random-color() {
-    background-color: random-metro-color($metro-colors);
+    //background-color: random-metro-color($metro-colors);
+    border: solid 1px $border-gray;
   }
 
   .item {
@@ -21,7 +22,10 @@
     height: 150px;
     margin: 2px;
     width: 100%;
-    cursor: pointer;
+
+    &.disabled > * {
+      opacity: 0.4;
+    }
 
     @extend %flex-column-nowrap;
     justify-content: space-between;
@@ -57,11 +61,11 @@
   .item:last-of-type {
     flex: 1
   }
-
-  .disabled-choice:hover {
-    background: #dddddd;
-    cursor: default;
-  }
+  //
+  //.disabled-choice:hover {
+  //  background: #dddddd;
+  //  cursor: default;
+  //}
 
   .items {
     @extend %flex-row-wrap;
@@ -86,7 +90,7 @@
   }
 
   .caption {
-    color: white;
+    //color: white;
     margin: 15px 15px 10px 10px;
     font-size: 15px;
     letter-spacing: 1px;
