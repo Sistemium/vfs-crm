@@ -9,22 +9,33 @@
   $metro-colors: #A200FF, #FF0097, #00ABA9, #8CBF26, #A05000, #E671B8, #F09609, #1BA1E2, #E51400, #339933;
   $img-size: 70px;
   $item-length: 9;
+  $item-hover-color: lighten($primary-color, 50%);
+  $shadow: 0 0 5px 2px $item-hover-color;
+
+  $item-margin: 4px;
 
   overflow-y: scroll;
 
   @mixin random-color() {
     //background-color: random-metro-color($metro-colors);
-    border: solid 1px $border-gray;
   }
 
   .item {
 
     height: 150px;
-    margin: 2px;
+    margin: $item-margin;
     width: 100%;
+    border: solid 1px $border-gray;
 
     &.disabled > * {
       opacity: 0.4;
+    }
+
+    &:hover {
+      box-shadow: $shadow;
+      text-decoration: none;
+      border-color: $item-hover-color;
+      background-color: lighten($border-gray, 4%);
     }
 
     @extend %flex-column-nowrap;
@@ -37,19 +48,19 @@
     }
 
     @include responsive-only(lg) {
-      width: calc(100% / 5 - 4px);
+      width: calc(100% / 5 - 8px);
     }
 
     @include responsive-only(gt-md) {
-      width: calc(100% / 4 - 4px);
+      width: calc(100% / 4 - 8px);
     }
 
     @include responsive-only(sm) {
-      width: calc(100% / 3 - 4px);
+      width: calc(100% / 3 - 8px);
     }
 
     @include responsive-only(xs) {
-      width: calc(100% / 2 - 4px);
+      width: calc(100% / 2 - 8px);
     }
 
     @include responsive-only(xxs) {
