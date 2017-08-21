@@ -37,8 +37,14 @@
       label Kliento tipas
 
       .btn-group
-        label.btn.btn-default(ng-model='vm.serviceContract.legalType' uib-btn-radio="'Asmuo'" uib-uncheckable='false') Asmuo
-        label.btn.btn-default(ng-model='vm.serviceContract.legalType' uib-btn-radio="'Įmonė'" uib-uncheckable='false') Įmonė
+        label.btn.btn-default(
+        ng-model='vm.serviceContract.legalType'
+        uib-btn-radio="'Asmuo'" uib-uncheckable='false'
+        ) Asmuo
+        label.btn.btn-default(
+        ng-model='vm.serviceContract.legalType'
+        uib-btn-radio="'Įmonė'" uib-uncheckable='false'
+        ) Įmonė
 
     .customer-legal-entity(ng-if='vm.serviceContract.legalType === "Įmonė"')
       label Įmonė
