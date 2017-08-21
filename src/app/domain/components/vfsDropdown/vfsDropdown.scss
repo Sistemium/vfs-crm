@@ -18,6 +18,7 @@ vfs-dropdown {
   }
 
   .search-add {
+
     @extend %flex-row-nowrap;
 
     margin-bottom: 6px;
@@ -35,7 +36,7 @@ vfs-dropdown {
 
   .scroll-y {
 
-    > * {
+    .vfs-dropdown-items > *, .no-results {
 
       @extend .ellipsis;
 
@@ -43,14 +44,15 @@ vfs-dropdown {
       display: block;
       padding: 0 10px;
 
-      span.no-res {
-        text-align: center;
-        font-weight: bold;
-      }
-
     }
 
-    .item:hover {
+    .no-results {
+      text-align: center;
+      font-weight: bold;
+      //color: $warn-text;
+    }
+
+    .vfs-dropdown-item:hover {
       background: $hover-color;
       cursor: pointer;
     }

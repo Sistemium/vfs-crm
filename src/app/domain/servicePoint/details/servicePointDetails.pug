@@ -76,7 +76,7 @@
 
       .chapter-name
         i.glyphicon.glyphicon-user
-        span Naudotojai
+        span Kontaktai
 
       .button-block
         button-add(button-click='vm.addContractPerson()')
@@ -84,13 +84,16 @@
 
     .service-point-contacts
 
-      .contact(ng-repeat='servicePointContact in vm.servicePoint.servicePointContacts track by servicePointContact.id'  ng-click='vm.editContractPerson(servicePointContact)')
+      .contact(
+      ng-repeat='servicePointContact in vm.servicePoint.servicePointContacts track by servicePointContact.id'
+      ng-click='vm.editContractPerson(servicePointContact)'
+      )
         span.name {{servicePointContact.person.firstName}} {{servicePointContact.person.lastName}}
         a.phone(ng-click='vm.phoneTo($event, servicePointContact.person.phone)') {{ servicePointContact.person.phone }}
 
       .contact(ng-if='vm.servicePoint.servicePointContacts.length === 0')
-        span.name Naudotojų nėrasta
-        a.phone.add-user(ng-click='vm.addContractPerson()') Pridėti naudotoją
+        span.name Kontaktų nėra
+        a(href ng-click='vm.addContractPerson()') Pridėti kontaktą
 
 
   .items
