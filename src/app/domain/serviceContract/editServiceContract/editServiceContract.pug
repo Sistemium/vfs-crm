@@ -2,7 +2,20 @@
 
   .form
 
-    .date-test
+    .site
+      label Aptarnaujantis padalinys
+
+      vfs-dropdown(
+      ng-required='true'
+      ng-model='vm.servicePoint.siteId'
+      items-data-source-name='Site'
+      items-name-property='name'
+      save-to='vm.serviceContract'
+      save-to-property='siteId'
+      placement='bottom-left'
+      )
+
+    .date
       label Data
 
       sab-date-picker(
@@ -19,31 +32,13 @@
       ng-model='vm.serviceContract.num'
       )
 
-    .site
-      label Padalinys
+    .legal-type
 
-      vfs-dropdown(
-      ng-required='true'
-      ng-model='vm.servicePoint.siteId'
-      items-data-source-name='Site'
-      items-name-property='name'
-      save-to='vm.serviceContract'
-      save-to-property='siteId'
-      placement='bottom-left'
-      )
+      label Kliento tipas
 
-    .code
-      label Tipas
-
-      .type-select(uib-dropdown)
-        button.btn.dropdown-btn(type='text' uib-dropdown-toggle)
-          span {{vm.serviceContract.legalType || "Paspauskite, kad pasirinkti"}}
-          span.caret
-        ul.dropdown-menu(uib-dropdown-menu)
-          li(role='menuitem')
-            a(ng-click='vm.serviceContract.legalType = "Asmuo"') Asmuo
-          li(role='menuitem')
-            a(ng-click='vm.serviceContract.legalType = "Įmonė"') Įmonė
+      .btn-group
+        label.btn.btn-default(ng-model='vm.serviceContract.legalType' uib-btn-radio="'Asmuo'" uib-uncheckable='false') Asmuo
+        label.btn.btn-default(ng-model='vm.serviceContract.legalType' uib-btn-radio="'Įmonė'" uib-uncheckable='false') Įmonė
 
     .customer-legal-entity(ng-if='vm.serviceContract.legalType === "Įmonė"')
       label Įmonė
