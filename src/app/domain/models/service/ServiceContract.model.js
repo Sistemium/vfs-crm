@@ -52,7 +52,10 @@
     });
 
     function isValid() {
-      return true;
+      return this.date &&
+        this.siteId &&
+        this.num &&
+        legalType(this.customerPersonId, this.customerLegalEntityId);
     }
 
     function customer() {
