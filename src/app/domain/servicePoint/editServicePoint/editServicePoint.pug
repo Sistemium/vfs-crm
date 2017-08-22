@@ -1,23 +1,9 @@
 .edit-service-point
-    .name
-      label(for='name') Pavadinimas
-      input#name.form-control(
-      autocomplete='off'
-      placeholder='Pavadinimas'
-      ng-model='vm.servicePoint.name'
-      )
 
-    .address
-      label(for='address') Adresas
-      input#address.form-control(
-      autocomplete='off'
-      placeholder='Adresas'
-      ng-model='vm.servicePoint.address'
-      )
   .form
 
     .site
-      label Padalinys
+      label Aptarnaujantis padalinys
       vfs-dropdown(
       ng-required='true'
       ng-model='vm.servicePoint.siteId'
@@ -27,3 +13,34 @@
       save-to-property='siteId'
       placement='bottom-left'
       )
+
+    .address
+      label(for='address') Adresas
+      input#address.form-control(
+      autocomplete='off'
+      placeholder='Adresas'
+      ng-model='vm.servicePoint.address'
+      )
+
+    .legal-type
+
+      label Taško tipas
+
+      .btn-group
+        label.btn.btn-default(
+        ng-model='vm.servicePoint.type'
+        uib-btn-radio="'Gyvenomosis'" uib-uncheckable='false'
+        ) Gyvenomosis
+        label.btn.btn-default(
+        ng-model='vm.servicePoint.type'
+        uib-btn-radio="'Negyvenomosis'" uib-uncheckable='false'
+        ) Negyvenomosis
+
+    .name
+      label(for='name') Pavadinimas
+      input#name.form-control(
+      autocomplete='off'
+      placeholder='Pavadinimas'
+      ng-model='vm.servicePoint.name'
+      )
+
