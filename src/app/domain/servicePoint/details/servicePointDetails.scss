@@ -18,7 +18,7 @@
 
   @extend %flex-column-nowrap;
 
-  .address, .users, .items, .service-point-pictures {
+  .address, .contacts, .items, .service-point-pictures {
 
     padding-bottom: 10px;
     padding-top: 10px;
@@ -262,7 +262,7 @@
 
   }
 
-  .users {
+  .contacts {
 
     background: $background-service-point-color;
 

@@ -34,7 +34,7 @@
 
       editPhoto: Editing.editModal('edit-picture', 'Fotografijos Redagavimas'),
       editServicePointClick: Editing.editModal('edit-service-point', 'Aptarnavimo Taško Redagavimas'),
-      editContractPerson: Editing.editModal('edit-service-point-contract', 'Redaguoti Naudotoją')
+      editContractPerson: Editing.editModal('edit-service-point-contract', 'Redaguoti Kontaktą')
 
     });
 
