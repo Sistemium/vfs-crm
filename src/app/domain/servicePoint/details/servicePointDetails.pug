@@ -128,7 +128,7 @@
           .filter-system Filtro Sistema
           .installing-master Montuotojas
           .serving-master Aptarnavimo Meistras
-          .service-contract Sutartis
+          //.service-contract Sutartis
           .action
 
         .scroll-y(
@@ -148,7 +148,7 @@
 
             .serving-master {{ item.servingMaster.name }}
 
-            .service-contract
+            //.service-contract
               span(ng-if='item.currentServiceContract')
                 | {{ item.currentServiceContract.num }} nuo {{ item.currentServiceContract.date }}
 

@@ -1,21 +1,24 @@
 @import "../../../styles/flex-table";
 @import "../../../styles/variables";
 
+$background-service-point-color: lighten($gray-background-color, 0%);
+
 .service-point-details {
 
-  $background-service-point-color: lighten($gray-background-color, 0%); //darken($purple, 2%);
   $header-color: darken($gray, 10%);
 
   box-shadow: $box-shadow;
 
-  $width-filter-system: 30%;
-  $width-installing-master: 20%;
-  $width-serving-master: 20%;
-  $width-service-contract: 30%;
+  $width-filter-system: 40%;
+  $width-installing-master: 30%;
+  $width-serving-master: 30%;
+  //$width-service-contract: 30%;
   $width-action-edit-button: 30px;
 
   $btn-padding: 3px 6px;
   $action-button-margin: 5px;
+
+  background: $background-service-point-color;
 
   @extend %flex-column-nowrap;
 
@@ -35,7 +38,7 @@
       justify-content: space-between;
       align-items: center;
       font-size: 20px;
-      margin: 0 5px;
+      margin: 0 8px;
       color: $header-color;
 
       .chapter-name {
@@ -55,8 +58,6 @@
   }
 
   .address {
-
-    background: $background-service-point-color;
 
     .header {
       float: right;
@@ -107,8 +108,6 @@
   }
 
   .service-point-pictures {
-
-    background: $background-service-point-color;
 
     .disabled-add-button {
 
@@ -269,54 +268,9 @@
 
   }
 
-  .contacts {
 
-    background: $background-service-point-color;
-
-    .service-point-contacts {
-
-      @extend %flex-row-wrap;
-
-      margin: 0 5px;
-
-      .contact:first-of-type {
-        //flex: 1;
-      }
-
-      .contact {
-
-        @extend %flex-column-nowrap;
-
-        > * {
-          outline: none;
-        }
-
-        border: 1px solid #ccc;
-        max-width: 160px;
-        //height: 48px;
-        margin: 5px;
-        padding: 4px;
-        background: lighten($gray-background-color, 10%);
-
-        .phone, .name {
-          max-width: 150px;
-          align-self: flex-end;
-          font-weight: bold;
-          @extend .ellipsis;
-        }
-
-      }
-
-      .contact:hover {
-        background: darken($background-service-point-color, 5%);
-      }
-
-    }
-  }
 
   .items {
-
-    background: $background-service-point-color;
 
     .header {
 
@@ -362,7 +316,7 @@
             width: $width-filter-system;
           }
           .service-contract {
-            width: $width-service-contract;
+            //width: $width-service-contract;
           }
           .action {
             width: $width-action-edit-button;
