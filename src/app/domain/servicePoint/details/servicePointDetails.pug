@@ -5,9 +5,9 @@
 
     .header
 
-      .chapter-name
-        i.glyphicon.glyphicon-map-marker
-        span Adresas
+      //.chapter-name
+        //i.glyphicon.glyphicon-map-marker
+        //span Adresas
 
       .button-block
         button-edit(button-click='vm.editServicePointClick(vm.servicePoint)')
@@ -28,7 +28,7 @@
 
       .chapter-name
         i.glyphicon.glyphicon-picture
-        span Taško Nuotraukos
+        span Nuotraukos
 
       .button-block
         button-add(
@@ -53,10 +53,12 @@
 
         .loading-img(ng-if='vm.uploadingPicture')
 
-          span(ng-if='vm.progress.uploading') {{(vm.progress.uploading.loaded / vm.progress.uploading.total) * 100 || 0 | number: 0}} %
+          span(ng-if='vm.progress.uploading')
+            | {{(vm.progress.uploading.loaded / vm.progress.uploading.total) * 100 || 0 | number: 0}} %
+
           .progress-info
             .loading-spinner(
-            ng-if='(vm.progress.uploading.loaded === vm.progress.uploading.total) && vm.progress.uploading.loaded !== undefined             && vm.uploadingPicture'
+            ng-if='vm.progress.uploading.loaded === vm.progress.uploading.total && vm.progress.uploading.loaded && vm.uploadingPicture'
             )
               .uil-ripple-css
                 div
@@ -65,6 +67,7 @@
             span Įkelta
 
       .more-photos(
+      ng-if='vm.servicePoint.pictures.length'
       ng-class='{"more-photos-hidden": !vm.scrollToGallery, "more-photos-visible": vm.scrollToGallery}'
       )
         button.btn

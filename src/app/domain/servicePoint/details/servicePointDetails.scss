@@ -3,7 +3,8 @@
 
 .service-point-details {
 
-  $background-service-point-color: darken($purple, 2%);
+  $background-service-point-color: lighten($gray-background-color, 0%); //darken($purple, 2%);
+  $header-color: darken($gray, 10%);
 
   box-shadow: $box-shadow;
 
@@ -22,7 +23,7 @@
 
     padding-bottom: 10px;
     padding-top: 10px;
-    border-bottom: 5px dotted white;
+    border-bottom: solid 2px $white;
 
     &:last-of-type {
       border-bottom: none;
@@ -35,6 +36,7 @@
       align-items: center;
       font-size: 20px;
       margin: 0 5px;
+      color: $header-color;
 
       .chapter-name {
 
@@ -42,10 +44,11 @@
 
         justify-content: center;
         align-self: center;
-        height: 25px;
+        //height: 25px;
 
         i {
           width: 22px;
+          display: none;
         }
       }
     }
@@ -54,6 +57,10 @@
   .address {
 
     background: $background-service-point-color;
+
+    .header {
+      float: right;
+    }
 
     .service-point-location {
 
@@ -91,7 +98,7 @@
 
         .site {
           font-size: 17px;
-          color: $gray;
+          //color: $gray;
         }
 
       }
@@ -273,7 +280,7 @@
       margin: 0 5px;
 
       .contact:first-of-type {
-        flex: 1;
+        //flex: 1;
       }
 
       .contact {
@@ -286,7 +293,7 @@
 
         border: 1px solid #ccc;
         max-width: 160px;
-        height: 48px;
+        //height: 48px;
         margin: 5px;
         padding: 4px;
         background: lighten($gray-background-color, 10%);

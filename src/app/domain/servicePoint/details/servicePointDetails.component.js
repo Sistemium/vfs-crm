@@ -49,11 +49,11 @@
      */
 
     function $onInit() {
-      let item = document.getElementsByClassName('more-photos');
-
-      item[0].style.visibility = 'hidden';
-
-      $timeout(500).then(() => item[0].style.visibility = 'visible');
+      // let item = document.getElementsByClassName('more-photos');
+      //
+      // item[0].style.visibility = 'hidden';
+      //
+      // $timeout(500).then(() => item[0].style.visibility = 'visible');
     }
 
     function testScroll() {
@@ -132,7 +132,7 @@
     }
 
     function addContractPerson() {
-      Editing.editModal('edit-service-point-contract', 'Pridėti Naudotoją Prie Aptarnavimo Taško')(ServicePointContact.createInstance({servicePointId: vm.servicePoint.id}));
+      Editing.editModal('edit-service-point-contract', 'Pridėti kontaktaą prie aptarnavimo taško')(ServicePointContact.createInstance({servicePointId: vm.servicePoint.id}));
     }
 
     function contactClick() {
