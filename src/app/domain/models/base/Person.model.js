@@ -27,10 +27,10 @@
       },
 
       computed: {
-        name: ['firstName', 'lastName', name]
-        // phoneNumber: ['phone', function (phone) {
-        //   return phone || '+37060010001';
-        // }]
+        name: ['firstName', 'lastName', name],
+        telHref: ['phone', function (phone) {
+          return phone ? `tel://${_.replace(phone, /[^0-9]/g,'')}` : null;
+        }]
       },
 
       methods: {

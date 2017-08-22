@@ -89,7 +89,10 @@
       ng-click='vm.editContractPerson(servicePointContact)'
       )
         span.name {{servicePointContact.person.firstName}} {{servicePointContact.person.lastName}}
-        a.phone(ng-click='vm.phoneTo($event, servicePointContact.person.phone)') {{ servicePointContact.person.phone }}
+        a.phone(
+        href='{{servicePointContact.person.telHref}}'
+        ng-click='$event.stopPropagation()'
+        ) {{ servicePointContact.person.phone }}
 
       .contact(ng-if='vm.servicePoint.servicePointContacts.length === 0')
         span.name Kontaktų nėra

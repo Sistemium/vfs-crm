@@ -26,7 +26,6 @@
       addItemClick,
       contactClick,
       addContractPerson,
-      phoneTo,
       onChangeFile,
       pictureUpload,
       photoClick,
@@ -126,11 +125,6 @@
       vm.progress = helper;
       vm.tileBusy = {promise: busy, message: 'Nuotraukos siuntimas'};
 
-    }
-
-    function phoneTo(ev, phone) {
-      ev.stopPropagation();
-      window.open('tel:' + phone, '_self');
     }
 
     function addItemClick() {
