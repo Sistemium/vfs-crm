@@ -8,7 +8,7 @@
 
   });
 
-  function servicePointDetailsController($scope, Schema, saControllerHelper, $state, Editing, PictureHelper, GalleryHelper, $document, $timeout) {
+  function servicePointDetailsController($scope, Schema, saControllerHelper, $state, Editing, PictureHelper, GalleryHelper, $timeout, $document) {
 
     const vm = saControllerHelper.setup(this, $scope)
       .use(GalleryHelper);
@@ -24,8 +24,7 @@
 
       editItemClick,
       addItemClick,
-      contactClick,
-      addContractPerson,
+      addContactClick,
       onChangeFile,
       pictureUpload,
       photoClick,
@@ -34,7 +33,7 @@
 
       editPhoto: Editing.editModal('edit-picture', 'Fotografijos Redagavimas'),
       editServicePointClick: Editing.editModal('edit-service-point', 'Aptarnavimo Taško Redagavimas'),
-      editContractPerson: Editing.editModal('edit-service-point-contract', 'Redaguoti Kontaktą')
+      servicePointContactClick: Editing.editModal('edit-service-point-contact', 'Redaguoti Kontaktą')
 
     });
 
@@ -131,12 +130,8 @@
       vm.newItem = ServiceItem.createInstance({servicePointId: vm.servicePoint.id});
     }
 
-    function addContractPerson() {
-      Editing.editModal('edit-service-point-contract', 'Pridėti kontaktaą prie aptarnavimo taško')(ServicePointContact.createInstance({servicePointId: vm.servicePoint.id}));
-    }
-
-    function contactClick() {
-      vm.clicked = !vm.clicked;
+    function addContactClick() {
+      Editing.editModal('edit-service-point-contact', 'Pridėti kontaktą prie aptarnavimo taško')(ServicePointContact.createInstance({servicePointId: vm.servicePoint.id}));
     }
 
     function refresh() {

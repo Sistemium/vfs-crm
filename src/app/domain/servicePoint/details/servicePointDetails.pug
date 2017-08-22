@@ -82,14 +82,14 @@
         span Kontaktai
 
       .button-block
-        button-add(button-click='vm.addContractPerson()')
+        button-add(button-click='vm.addContactClick()')
 
 
     .service-point-contacts
 
       .contact(
       ng-repeat='servicePointContact in vm.servicePoint.servicePointContacts track by servicePointContact.id'
-      ng-click='vm.editContractPerson(servicePointContact)'
+      ng-click='vm.servicePointContactClick(servicePointContact)'
       )
         span.name {{servicePointContact.person.firstName}} {{servicePointContact.person.lastName}}
         a.phone(
