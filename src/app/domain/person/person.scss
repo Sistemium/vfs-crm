@@ -4,10 +4,11 @@
 
   @extend %flex-table;
 
-  $width-first-name: 30%;
-  $width-last-name: 22%;
-  $width-code: 20%;
-  $width-telephone: 28%;
+  $width-first-name: 25%;
+  $width-last-name: 25%;
+  $width-code: 15%;
+  $width-telephone: 15%;
+  $width-email: 20%;
   $width-avatar-picture: 8%;
 
   .headers {

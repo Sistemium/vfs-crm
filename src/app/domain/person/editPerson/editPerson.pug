@@ -42,3 +42,14 @@
       placeholder='Telefonas'
       ng-model='vm.person.phone'
       )
+
+    .email
+      label(for='email') E-paštas
+
+      input#phone.form-control(
+      required
+      type='email'
+      autocomplete='off'
+      placeholder='E-pašto adresas'
+      ng-model='vm.person.email'
+      )

@@ -6,6 +6,7 @@
     .first-name Vardas
     .last-name Pavardė
     .code Asmens Kodas
+    .email E-paštas
     .phone Telefonas
     //.avatar-picture Fotografija
 
@@ -22,6 +23,7 @@
       .first-name {{ person.firstName }}
       .last-name {{ person.lastName }}
       .code {{ person.code }}
+      .email {{ person.email }}
       .phone
         a(href='{{ person.telHref }}' ng-click='$event.stopPropagation()') {{ person.phone }}
       //.avatar-picture
