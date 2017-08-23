@@ -34,11 +34,19 @@
     > * {
 
       .filter-system-type {
-        width: 50%;
+        width: 20%;
       }
 
-      .filter-model {
-        width: 50%;
+      .name {
+        width: 30%;
+      }
+
+      .service-price {
+        width: 25%;
+      }
+
+      .service-frequency {
+        width: 25%;
       }
 
     }

@@ -16,12 +16,16 @@
 
         .headers
           .filter-system-type Tipas
-          .filter-model Modelis
+          .name Modelis
+          .service-price Apt. kaina
+          .service-frequency Apt. dažnumas
 
         .filter-system(
         ng-repeat='filterSystem in brand.filterSystems | filter: vm.searchText | orderBy: "model" as foundFilter track by filterSystem.id'
         ng-click='vm.openModal(filterSystem)'
         )
 
-          .filter-system-type {{filterSystem.filterSystemType.name}}
-          .filter-model {{filterSystem.model}}
+          .filter-system-type {{ filterSystem.filterSystemType.name }}
+          .name {{ filterSystem.name }}
+          .service-price {{ filterSystem.servicePrice | number:2 }} €
+          .service-frequency {{ filterSystem.serviceFrequency }}

@@ -25,11 +25,46 @@
       )
 
     .model
-      label(for='model') Filtravimo Sistemos Modelis
+      label(for='name') Filtravimo Sistemos Modelis
 
-      input#model.form-control(
-      type='text'
+      input#name.form-control(
       autocomplete='off'
       placeholder='Filtro Sistemos Modelis'
-      ng-model='vm.filterSystem.model'
+      ng-model='vm.filterSystem.name'
       )
+
+    .service-frequency
+      label(for='frequency') Aptarnavimo Dažnumas
+
+      input#service-frequency.form-control(
+      autocomplete='off'
+      placeholder='Mėnesių skaičius'
+      type='number'
+      ng-model='vm.filterSystem.serviceFrequency'
+      ng-step='1'
+      ng-min='0'
+      ng-max='24'
+      )
+
+    .service-price
+      label(for='service-price') Aptarnavimo kaina
+
+      input#service-price.form-control(
+      autocomplete='off'
+      type='number'
+      placeholder='Eurų už aptarnavimą'
+      ng-model='vm.filterSystem.servicePrice'
+      ng-min='0'
+      )
+
+    .guarantee-period
+      label(for='frequency') Garantinis laikotarpis
+
+      input#frequency.form-control(
+      autocomplete='off'
+      type='number'
+      placeholder='Mėnesių skaičius'
+      ng-model='vm.filterSystem.guaranteePeriod'
+      ng-min='0'
+      )
+
