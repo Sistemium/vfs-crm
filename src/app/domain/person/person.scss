@@ -4,12 +4,11 @@
 
   @extend %flex-table;
 
-  $width-first-name: 25%;
-  $width-last-name: 25%;
-  $width-code: 15%;
-  $width-telephone: 15%;
-  $width-email: 20%;
-  $width-avatar-picture: 8%;
+  $width-first-name: 22%;
+  $width-last-name: 22%;
+  $width-code: 16%;
+  $width-phone: 20%;
+  //$width-avatar-picture: 8%;
 
   .headers {
     @extend %flex-table-headers;
@@ -30,11 +29,11 @@
     }
 
     .avatar-picture {
-      width: $width-avatar-picture;
+      //width: $width-avatar-picture;
     }
 
-    .phone {
-      width: $width-telephone;
+    .phone, .email {
+      width: $width-phone;
     }
 
   }
@@ -45,11 +44,11 @@
 
   .scroll-y {
 
-    .person-list {
+    .person {
 
       @extend %flex-table-item;
 
-      .first-name, .last-name, .phone, .code, .avatar-picture {
+      .first-name, .last-name, .phone, .code, .email, .avatar-picture {
         @extend .ellipsis;
       }
 

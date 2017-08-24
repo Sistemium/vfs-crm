@@ -15,7 +15,7 @@
   resize-offset-top='5'
   vs-repeat
   )
-    .person-list(
+    .person(
     ng-repeat='person in vm.persons | filter: vm.searchText track by person.id'
     ng-click='vm.openModal(person)'
     )
@@ -23,7 +23,8 @@
       .first-name {{ person.firstName }}
       .last-name {{ person.lastName }}
       .code {{ person.code }}
-      .email {{ person.email }}
+      .email
+        a(href='mailto:{{ person.email}}' ng-click='$event.stopPropagation()') {{ person.email }}
       .phone
         a(href='{{ person.telHref }}' ng-click='$event.stopPropagation()') {{ person.phone }}
       //.avatar-picture
