@@ -1,6 +1,6 @@
 (function (module) {
 
-  module.component('brandList', {
+  module.component('pictureList', {
 
     bindings: {
       brands: '='

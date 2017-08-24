@@ -6,6 +6,19 @@
     .config(function (stateHelperProvider) {
 
       stateHelperProvider
+
+        .state({
+
+          name: 'settings',
+          url: '/settings',
+          template: '<menu-settings></menu-settings>',
+
+          data: {
+            title: 'Nustatymai'
+          }
+
+        })
+
         .state({
 
           name: 'brand',
@@ -17,6 +30,7 @@
           }
 
         })
+
         .state({
 
           name: 'filterSystemType',
@@ -28,9 +42,10 @@
           }
 
         })
+
         .state({
 
-          name: 'Site',
+          name: 'site',
           url: '/site',
           template: '<site-master></site-master>',
 

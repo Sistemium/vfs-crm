@@ -26,9 +26,13 @@
         });
 
         function itemClick(item) {
-          if (!item.isDisabled) {
+
+          if (item.isDisabled) return;
+
+          if (item.state) {
             $state.go(item.state);
           }
+
         }
 
       },

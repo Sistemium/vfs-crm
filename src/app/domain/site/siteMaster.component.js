@@ -28,11 +28,11 @@
     function onSearch() {
 
       let {searchText} = vm;
-      vm.sitesFiltered = filterFilterSystemTypes(vm.sites, searchText);
+      vm.sitesFiltered = filterData(vm.sites, searchText);
 
     }
 
-    function filterFilterSystemTypes(data, text) {
+    function filterData(data, text) {
 
       if (!text) return data;
 

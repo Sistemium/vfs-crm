@@ -15,6 +15,7 @@
   $item-margin: 4px;
 
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 
   @mixin random-color() {
     //background-color: random-metro-color($metro-colors);
