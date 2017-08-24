@@ -8,14 +8,15 @@
 
   });
 
-  function siteMasterController($scope, Schema, saControllerHelper) {
+  function siteMasterController($scope, Schema, saControllerHelper, Editing) {
 
     const vm = saControllerHelper.setup(this, $scope);
 
     const {Site} = Schema.models();
 
     vm.use({
-      $onInit
+      $onInit,
+      addClick
     });
 
     vm.rebindAll(Site, {orderBy: ['name']}, 'vm.sites', onSearch);
@@ -24,6 +25,10 @@
     /*
      Functions
      */
+
+    function addClick() {
+      Editing.editModal('edit-site', 'Naujas Padalinys')(Site.createInstance());
+    }
 
     function onSearch() {
 
