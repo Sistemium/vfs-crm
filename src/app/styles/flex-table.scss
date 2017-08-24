@@ -15,7 +15,7 @@
       color: darken($gray, 20%);
       font-weight: 500;
       font-size: 100%;
-      padding-bottom: $cells-padding * 2;
+      padding: $cells-padding $cells-padding $cells-padding * 2;
     }
 
   }
