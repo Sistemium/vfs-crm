@@ -70,7 +70,7 @@
 
     function addItem() {
 
-      vm.newItem = vm.model.createInstance({name: vm.search});
+      vm.newItem = vm.model.createInstance(_.assign({name: vm.search}, vm.filter || {}));
 
     }
 
