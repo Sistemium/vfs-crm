@@ -1,0 +1,26 @@
+.edit-locality
+
+  .form
+
+    .district
+      label Apskritis
+
+      vfs-dropdown(
+      ng-required
+      ng-model='vm.servicePoint.districtId'
+      items-data-source-name='District'
+      items-name-property='name'
+      save-to='vm.locality'
+      save-to-property='districtId'
+      placement='bottom-left'
+      )
+
+    .name
+      label(for='name') Pavadinimas
+
+      input#name.form-control(
+      autocomplete='off'
+      placeholder='Pavadinimas'
+      ng-required
+      ng-model='vm.locality.name'
+      )
