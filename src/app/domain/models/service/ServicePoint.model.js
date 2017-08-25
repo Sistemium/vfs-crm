@@ -11,6 +11,7 @@
       relations: {
 
         hasOne: {
+
           Employee: {
             localField: 'servingMaster',
             localKey: 'servingMasterId'
@@ -19,6 +20,11 @@
           Site: {
             localField: 'site',
             localKey: 'siteId'
+          },
+
+          Street: {
+            localField: 'street',
+            localKey: 'streetId'
           }
 
         },
@@ -48,7 +54,7 @@
     });
 
     function isValid() {
-      return this.siteId && this.address && this.name;
+      return this.siteId && this.address && this.name && this.street;
     }
 
     const cache = {};

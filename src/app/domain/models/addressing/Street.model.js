@@ -6,21 +6,21 @@
 
     Schema.register({
 
-      name: 'Locality',
+      name: 'Street',
 
       relations: {
 
         hasOne: {
-          District: {
-            localField: 'district',
-            localKey: 'districtId'
+          Locality: {
+            localField: 'locality',
+            localKey: 'localityId'
           }
         }
 
       },
 
       meta:{
-        label: {add: 'Nauja gyvenomoji vieta'}
+        label: {add: 'Nauja gatvė'}
       },
 
       methods: {
@@ -30,7 +30,7 @@
     });
 
     function isValid() {
-      return this.name && this.districtId;
+      return this.name && this.localityId;
     }
 
   });

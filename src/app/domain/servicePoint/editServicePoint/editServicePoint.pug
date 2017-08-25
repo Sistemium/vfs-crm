@@ -14,7 +14,43 @@
       placement='bottom-left'
       )
 
-    .address
+    .district
+      label Apskritis
+      vfs-dropdown(
+      items-data-source-name='District'
+      items-name-property='name'
+      save-to='vm'
+      save-to-property='districtId'
+      placement='bottom-left'
+      )
+
+    .locality(ng-if='vm.districtId')
+      label Gyvenomoji Vieta
+      vfs-dropdown(
+      ng-required='true'
+      items-data-source-name='Locality'
+      items-name-property='name'
+      save-to='vm'
+      save-to-property='localityId'
+      filter='{districtId: vm.districtId}'
+      placement='bottom-left'
+      )
+
+    .locality(ng-if='vm.localityId')
+
+      label Gatvė
+
+      vfs-dropdown(
+      ng-required='true'
+      items-data-source-name='Street'
+      items-name-property='name'
+      save-to='vm.servicePoint'
+      save-to-property='streetId'
+      filter='{localityId: vm.localityId}'
+      placement='bottom-left'
+      )
+
+    //.address
       label(for='address') Adresas
       input#address.form-control(
       autocomplete='off'
