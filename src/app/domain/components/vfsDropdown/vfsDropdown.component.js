@@ -9,6 +9,7 @@
       itemsNameProperty: '@',
       itemsGroupProperty: '@',
       autoSave: '=',
+      filter: '=',
       placement: '@'
     },
 
@@ -34,8 +35,25 @@
     Editing.setupController(vm, 'newItem');
 
     vm.watchScope('vm.search', onSearch);
+    vm.watchScope('vm.isOpen', onOpen);
+    vm.watchScope('vm.filter', onFilter, true);
 
-    $scope.$watch('vm.isOpen', (nv, ov) => {
+    /*
+     Functions
+     */
+
+    function onFilter() {
+
+      vm.rebindAll(vm.model, vm.filter || {}, 'vm.data', onSearch);
+
+      vm.model.findAll(vm.filter || {}, vm.options || {})
+        .then(data => {
+          vm.currentItem = _.find(data, {id: vm.currentId});
+        });
+
+    }
+
+    function onOpen(nv, ov) {
 
       if (ov) {
         $timeout(200).then(() => {
@@ -44,11 +62,7 @@
         })
       }
 
-    });
-
-    /*
-     Functions
-     */
+    }
 
     function groupLabel(item) {
       return _.get(item, vm.itemsGroupProperty);
@@ -71,12 +85,7 @@
       vm.model = model;
       vm.newItemTitle = _.get(model, 'meta.label.add') || 'Naujas įrašas';
 
-      model.bindAll({}, $scope, 'vm.data', onSearch);
-
-      model.findAll()
-        .then(data => {
-          vm.currentItem = _.find(data, {id: vm.currentId});
-        });
+      onFilter();
 
     }
 
