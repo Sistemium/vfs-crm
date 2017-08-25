@@ -27,7 +27,7 @@
     });
 
     function isValid() {
-      return true
+      return this.name;
     }
 
     function declension() {
