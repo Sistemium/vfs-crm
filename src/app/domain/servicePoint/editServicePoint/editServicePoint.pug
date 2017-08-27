@@ -3,62 +3,96 @@
   .form
 
     .site
+
       label Aptarnaujantis padalinys
+
       vfs-dropdown(
       ng-required='true'
       ng-model='vm.servicePoint.siteId'
       items-data-source-name='Site'
       items-name-property='name'
-      save-to='vm.servicePoint'
-      save-to-property='siteId'
       placement='bottom-left'
       )
 
     .district
+
       label Apskritis
+
       vfs-dropdown(
+      ng-model='vm.districtId'
       items-data-source-name='District'
       items-name-property='name'
-      save-to='vm'
-      save-to-property='districtId'
       placement='bottom-left'
       )
 
     .locality(ng-if='vm.districtId')
+
       label Gyvenomoji Vieta
+
       vfs-dropdown(
       ng-required='true'
       items-data-source-name='Locality'
       items-name-property='name'
-      save-to='vm'
-      save-to-property='localityId'
+      ng-model='vm.localityId'
       filter='{districtId: vm.districtId}'
       placement='bottom-left'
       )
 
-    .locality(ng-if='vm.localityId')
+    .street(ng-if='vm.localityId')
 
       label Gatvė
 
       vfs-dropdown(
       ng-required='true'
+      ng-model='vm.servicePoint.streetId'
       items-data-source-name='Street'
       items-name-property='name'
-      save-to='vm.servicePoint'
-      save-to-property='streetId'
       filter='{localityId: vm.localityId}'
       placement='bottom-left'
       )
 
-    //.address
+    .field-group
+
+      .house
+
+        label(for='house') Namas
+
+        input#house.form-control(
+        autocomplete='off'
+        placeholder='Namo numeris'
+        ng-model='vm.servicePoint.house'
+        )
+
+      .apartment
+
+        label(for='apartment') Butas
+
+        input#apartment.form-control(
+        autocomplete='off'
+        placeholder='Buto numeris'
+        ng-model='vm.servicePoint.apartment'
+        )
+
+      .apartment
+
+        label(for='doorCode') Durų kodas
+
+        input#doorCode.form-control(
+        autocomplete='off'
+        placeholder='Jeigu yra'
+        ng-model='vm.servicePoint.doorCode'
+        )
+
+    .address
       label(for='address') Adresas
       input#address.form-control(
       autocomplete='off'
       placeholder='Adresas'
+      readonly
       ng-model='vm.servicePoint.address'
       )
 
-    .legal-type
+    .type
 
       label Patalpos tipas
 
@@ -73,10 +107,10 @@
         ) Negyvenomoji
 
     .name
-      label(for='name') Pavadinimas
+      label(for='name') Patalpos pavadinimas
       input#name.form-control(
       autocomplete='off'
-      placeholder='Pavadinimas'
+      placeholder='Jeigu yra'
       ng-model='vm.servicePoint.name'
       )
 
