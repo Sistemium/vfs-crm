@@ -2,13 +2,28 @@
 
 %editing-with-form {
 
+  $margin: 5px;
+
   > form, > .form {
 
     @extend %flex-column-nowrap;
 
     > * {
       width: 100%;
-      margin: 5px 0;
+      margin: $margin 0;
+    }
+
+
+    .field-group {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+
+      > * + * {
+        margin-left: $margin * 2;
+        flex: 1;
+      }
+
     }
 
   }
