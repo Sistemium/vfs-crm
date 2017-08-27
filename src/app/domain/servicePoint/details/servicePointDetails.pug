@@ -97,7 +97,7 @@
         ng-click='$event.stopPropagation()'
         ) {{ servicePointContact.person.phone }}
 
-      .contact(ng-if='vm.servicePoint.servicePointContacts.length === 0')
+      //.contact(ng-if='vm.servicePoint.servicePointContacts.length === 0')
         span.name Kontaktų nėra
         a(href ng-click='vm.addContractPerson()') Pridėti kontaktą
 
@@ -120,7 +120,7 @@
         popover-append-to-body='false'
         )
 
-    .service-point-items
+    .service-point-items(ng-if='vm.servicePoint.servingItems.length')
 
       .service-point-list
 
