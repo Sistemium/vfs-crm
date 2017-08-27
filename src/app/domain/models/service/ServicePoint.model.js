@@ -56,16 +56,16 @@
 
     function concatAddress() {
 
-      let {street, house, apartment} = this;
+      let {street, house} = this;
 
       if (!street) return null;
 
-      return `${_.get(street, 'locality.name')}, ${street.name}, ${house || ''}${apartment ? '-' + apartment : ''}`;
+      return `${_.get(street, 'locality.name')}, ${street.name}${house ? ', ' + house : ''}`;
 
     }
 
     function isValid() {
-      return this.siteId && this.address && this.name && this.street;
+      return this.siteId && this.address && this.name && this.streetId;
     }
 
     const cache = {};

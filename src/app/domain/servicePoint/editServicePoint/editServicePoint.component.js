@@ -32,10 +32,10 @@
           vm.use({
             districtId: locality.districtId,
             localityId: locality.id
-          })
+          });
+          vm.watchScope('vm.servicePoint', onChange, true);
         });
 
-      vm.watchScope('vm.servicePoint', onChange, true);
 
     }
 
