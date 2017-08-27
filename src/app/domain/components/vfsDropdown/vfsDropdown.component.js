@@ -76,6 +76,8 @@
 
     function $onInit() {
 
+      vm.itemsNameProperty = vm.itemsNameProperty || 'name';
+
       vm.editComponentName = 'edit-' + _.kebabCase(vm.itemsDataSourceName);
 
       vm.currentId = vm.saveTo[vm.saveToProperty];
