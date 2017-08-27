@@ -8,7 +8,6 @@
       itemsDataSourceName: '@',
       itemsNameProperty: '@',
       itemsGroupProperty: '@',
-      autoSave: '=',
       filter: '=',
       placement: '@'
     },
@@ -106,21 +105,9 @@
       vm.currentItem = item;
       vm.saveTo[vm.saveToProperty] = item.id;
 
-      if (!vm.autoSave) {
-        vm.isOpen = false;
-        return;
+      if (vm.saveToProperty) {
+        vm.saveTo[vm.saveToProperty] = item.id;
       }
-
-      vm.saveTo.DSCreate()
-        .then(() => {
-          // toastr.success('Pakeitimai išsaugoti');
-        })
-        .catch(() => {
-          toastr.error('Klaida. Pakeitimai neišsaugoti');
-        })
-        .finally(() => {
-          vm.isOpen = false;
-        });
 
     }
 
