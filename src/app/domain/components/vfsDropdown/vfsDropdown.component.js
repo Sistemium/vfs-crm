@@ -5,6 +5,7 @@
     bindings: {
       saveTo: '=',
       saveToProperty: '@',
+      currentId: '=?ngModel',
       itemsDataSourceName: '@',
       itemsNameProperty: '@',
       itemsGroupProperty: '@',
@@ -33,6 +34,7 @@
 
     Editing.setupController(vm, 'newItem');
 
+    vm.watchScope('vm.currentId', onCurrentId);
     vm.watchScope('vm.search', onSearch);
     vm.watchScope('vm.isOpen', onOpen);
     vm.watchScope('vm.filter', onFilter, true);
@@ -40,6 +42,17 @@
     /*
      Functions
      */
+
+    function onCurrentId(id) {
+
+      if (!id || !vm.model) {
+        vm.currentItem = null;
+        return;
+      }
+
+      vm.currentItem = vm.model.get(id);
+
+    }
 
     function onFilter() {
 
@@ -75,16 +88,15 @@
 
     function $onInit() {
 
-      vm.itemsNameProperty = vm.itemsNameProperty || 'name';
-
-      vm.editComponentName = 'edit-' + _.kebabCase(vm.itemsDataSourceName);
-
-      vm.currentId = vm.saveTo[vm.saveToProperty];
-
       let model = Schema.model(vm.itemsDataSourceName);
 
-      vm.model = model;
-      vm.newItemTitle = _.get(model, 'meta.label.add') || 'Naujas įrašas';
+      vm.use({
+        model,
+        itemsNameProperty: vm.itemsNameProperty || 'name',
+        editComponentName: 'edit-' + _.kebabCase(vm.itemsDataSourceName),
+        currentId: vm.currentId || vm.saveTo && vm.saveToProperty && vm.saveTo[vm.saveToProperty],
+        newItemTitle: _.get(model, 'meta.label.add') || 'Naujas įrašas'
+      });
 
       onFilter();
 
@@ -102,8 +114,11 @@
 
     function itemClick(item) {
 
-      vm.currentItem = item;
-      vm.saveTo[vm.saveToProperty] = item.id;
+      vm.use({
+        currentId: item.id,
+        currentItem: item,
+        isOpen: false
+      });
 
       if (vm.saveToProperty) {
         vm.saveTo[vm.saveToProperty] = item.id;
