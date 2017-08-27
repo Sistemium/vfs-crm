@@ -48,10 +48,21 @@
 
       methods: {
         servingItemsLazy,
-        isValid
+        isValid,
+        concatAddress
       }
 
     });
+
+    function concatAddress() {
+
+      let {street, house, apartment} = this;
+
+      if (!street) return null;
+
+      return `${_.get(street, 'locality.name')}, ${street.name}, ${house || ''}${apartment ? '-' + apartment : ''}`;
+
+    }
 
     function isValid() {
       return this.siteId && this.address && this.name && this.street;
