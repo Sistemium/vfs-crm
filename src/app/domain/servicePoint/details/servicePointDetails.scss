@@ -9,14 +9,7 @@ $background-service-point-color: lighten($gray-background-color, 0%);
 
   box-shadow: $box-shadow;
 
-  $width-filter-system: 40%;
-  $width-installing-master: 30%;
-  $width-serving-master: 30%;
-  //$width-service-contract: 30%;
-  $width-action-edit-button: 30px;
-
   $btn-padding: 3px 6px;
-  $action-button-margin: 5px;
 
   background: $background-service-point-color;
 
@@ -118,95 +111,14 @@ $background-service-point-color: lighten($gray-background-color, 0%);
       }
 
       .button-block {
-        .popover {
+        > .popover {
           padding: 0 !important;
           max-width: 500px;
           min-width: 500px;
         }
       }
     }
-
-    .service-point-items {
-
-      margin-top: 10px;
-
-      @extend %flex-table;
-
-      .service-point-list {
-
-        .headers {
-          padding: 5px 0 0 4px;
-          @extend %flex-table-headers;
-          border-bottom: 1px solid white;
-        }
-
-        .headers >, .service-point-item > {
-
-          .filter-system {
-            margin-left: $action-button-margin;
-            width: $width-filter-system;
-          }
-          .installing-master {
-            width: $width-filter-system;
-          }
-          .serving-master {
-            width: $width-filter-system;
-          }
-          .service-contract {
-            //width: $width-service-contract;
-          }
-          .action {
-            width: $width-action-edit-button;
-            margin-right: $action-button-margin;
-          }
-
-        }
-
-        .scroll-y {
-
-          .service-point-item {
-
-            @extend %flex-table-item;
-
-            .popover {
-              padding: 0 !important;
-              max-width: 500px;
-              min-width: 500px;
-            }
-
-            border-bottom: 1px solid white;
-            height: $small-row-height;
-            align-items: center;
-
-            &.has-changes > .action.button {
-              background-color: $state-warning-text;
-            }
-
-            .action.btn {
-
-              margin-right: $action-button-margin - 1;
-              padding: 0;
-
-              > i {
-                top: 3px;
-                right: 1px;
-              }
-
-            }
-
-            .action.btn:hover {
-              background: darken($hover-color, 10%);
-            }
-
-            .installing-master, .filter-system, .serving-master {
-              @extend .ellipsis;
-            }
-
-          }
-        }
-      }
-
-    }
+    
   }
 
 }
