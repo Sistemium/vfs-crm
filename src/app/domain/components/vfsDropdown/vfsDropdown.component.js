@@ -52,6 +52,10 @@
 
       vm.currentItem = vm.model.get(id);
 
+      if (vm.saveToProperty) {
+        vm.saveTo[vm.saveToProperty] = id;
+      }
+
     }
 
     function onFilter() {
@@ -59,8 +63,8 @@
       vm.rebindAll(vm.model, vm.filter || {}, 'vm.data', onSearch);
 
       vm.model.findAll(vm.filter || {}, vm.options || {})
-        .then(data => {
-          vm.currentItem = _.find(data, {id: vm.currentId});
+        .then(() => {
+          vm.currentItem = vm.currentId && vm.model.get(vm.currentId);
         });
 
     }
@@ -120,10 +124,6 @@
         isOpen: false
       });
 
-      if (vm.saveToProperty) {
-        vm.saveTo[vm.saveToProperty] = item.id;
-      }
-
     }
 
     function afterCancel($event) {
@@ -133,8 +133,8 @@
 
     function afterSave(saved) {
 
-      vm.currentItem = saved;
-      vm.saveTo[vm.saveToProperty] = saved.id;
+      //vm.currentItem = saved;
+      vm.currentId = saved.id;
       vm.isOpen = false;
 
     }
