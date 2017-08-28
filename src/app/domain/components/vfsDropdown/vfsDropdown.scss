@@ -111,6 +111,12 @@ vfs-dropdown {
       align-items: center;
       text-decoration: none;
 
+      .name-wrapper {
+        span + span {
+          margin-left: 10px;
+        }
+      }
+
     }
 
   }
