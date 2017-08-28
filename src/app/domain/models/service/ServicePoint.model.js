@@ -25,6 +25,11 @@
           Street: {
             localField: 'street',
             localKey: 'streetId'
+          },
+
+          ServiceContract: {
+            localField: 'currentServiceContract',
+            localKey: 'currentServiceContractId'
           }
 
         },
