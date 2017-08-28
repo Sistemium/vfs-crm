@@ -141,8 +141,10 @@
 
       vm.rebindOne(ServicePoint, id, 'vm.servicePoint');
 
+      let relations = ['ServiceItem', 'ServicePointContact', 'Picture', 'ServiceContract'];
+
       let busy = [
-        ServicePoint.findAllWithRelations({id}, {bypassCache: true})(['ServiceItem', 'ServicePointContact', 'Picture'])
+        ServicePoint.findAllWithRelations({id}, {bypassCache: true})(relations)
           .then(loadServicePointRelations)
       ];
 
@@ -154,6 +156,8 @@
       let servicePoint = _.first(data);
 
       if (!servicePoint) return;
+
+      ServicePoint.customer().DSLoadRelations();
 
       _.each(servicePoint.servingItems, serviceItem => {
         serviceItem.DSLoadRelations();
