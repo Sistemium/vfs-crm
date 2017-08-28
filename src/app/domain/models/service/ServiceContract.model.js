@@ -38,7 +38,8 @@
 
       computed: {
 
-        legalType: ['customerPersonId', 'customerLegalEntityId', legalType]
+        legalType: ['customerPersonId', 'customerLegalEntityId', legalType],
+        name: ['date', 'num', name]
 
       },
 
@@ -68,6 +69,11 @@
 
     function legalType(customerPersonId, customerLegalEntityId) {
       return customerPersonId && 'Asmuo' || customerLegalEntityId && 'Įmonė' || null;
+    }
+
+    function name(date, num) {
+      if (!date || !num) return null;
+      return `${num} nuo ${date}`;
     }
 
   });
