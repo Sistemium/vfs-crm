@@ -18,9 +18,12 @@
       .service-point-map
         img(src='images/dummyMap3.png')
 
-      .service-point-address
+      .service-point-add-info
         .point-address {{vm.servicePoint.address}}
-        .site {{vm.servicePoint.site.declension()}} padalinys
+
+        .contract {{vm.servicePoint.currentServiceContract.customer().name}} №{{vm.servicePoint.currentServiceContract.name}}
+        .currentServiceContract
+        .customer
 
   .service-point-pictures
 

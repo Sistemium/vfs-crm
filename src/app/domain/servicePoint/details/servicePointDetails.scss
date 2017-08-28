@@ -77,22 +77,21 @@ $background-service-point-color: lighten($gray-background-color, 0%);
 
       }
 
-      .service-point-address {
+      .service-point-add-info {
 
         @extend %flex-column-wrap;
         margin: 0 10px;
 
         .point-address {
           font-size: 25px;
-          line-height: 25px;
+          line-height: 30px;
           overflow: hidden;
           height: 52px;
-
         }
 
-        .site {
+        .contract {
+          color: $gray;
           font-size: 17px;
-          //color: $gray;
         }
 
       }
