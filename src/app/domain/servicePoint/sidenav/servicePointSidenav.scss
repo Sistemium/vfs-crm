@@ -21,19 +21,20 @@
       padding: 0 10px;
       position: relative;
 
-      .name {
+      .address {
         @extend .ellipsis;
         margin-top: 3px;
         font-weight: 400;
         padding-right: 22px;
       }
 
-      .address {
+      .name {
         @extend .ellipsis;
         align-self: flex-end;
         max-width: 100%;
         color: $gray;
         line-height: 30px;
+        min-height: 30px;
         font-size: smaller;
       }
 

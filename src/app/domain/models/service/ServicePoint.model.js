@@ -66,7 +66,9 @@
     }
 
     function isValid() {
-      return this.siteId && this.address && this.name && this.streetId;
+      return this.siteId &&
+        this.address &&
+        this.streetId;
     }
 
     const cache = {};

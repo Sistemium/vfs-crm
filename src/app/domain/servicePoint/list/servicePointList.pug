@@ -1,8 +1,8 @@
 .service-point-list
 
   .headers
-    .name Pavadinimas
     .address Adresas
+    .name Pavadinimas
     .serving-master Aptarnavimo Meistras
 
   .scroll-y(
@@ -15,8 +15,8 @@
     ng-repeat='servicePoint in vm.servicePoints track by servicePoint.id'
     ng-click='vm.servicePointClickFn(servicePoint, $index)'
     )
-      .name {{servicePoint.name}}
-      .address {{servicePoint.address}}
-      .serving-master {{servicePoint.servingMaster.name}}
+      .address {{ servicePoint.address }}
+      .name {{ servicePoint.name }}
+      .serving-master {{ servicePoint.servingMaster.name }}
 
   .ui-view
