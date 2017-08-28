@@ -8,7 +8,7 @@
 
   });
 
-  function servicePointDetailsController($scope, Schema, saControllerHelper, $state, Editing, PictureHelper, GalleryHelper, $timeout, $document) {
+  function servicePointDetailsController($scope, Schema, saControllerHelper, $state, Editing, PictureHelper, GalleryHelper, $document) {
 
     const vm = saControllerHelper.setup(this, $scope)
       .use(GalleryHelper);
@@ -22,9 +22,8 @@
       progress: {},
       uploadingPicture: false,
 
-      editItemClick,
-      addItemClick,
       addContactClick,
+      addServiceItemClick,
       onChangeFile,
       pictureUpload,
       photoClick,
@@ -33,7 +32,8 @@
 
       editPhoto: Editing.editModal('edit-picture', 'Fotografijos Redagavimas'),
       editServicePointClick: Editing.editModal('edit-service-point', 'Aptarnavimo Taško Redagavimas'),
-      servicePointContactClick: Editing.editModal('edit-service-point-contact', 'Redaguoti Kontaktą')
+      servicePointContactClick: Editing.editModal('edit-service-point-contact', 'Redaguoti Kontaktą'),
+      editServiceItemClick: Editing.editModal('edit-service-item', 'Redaguoti Įrenginį')
 
     });
 
@@ -48,6 +48,8 @@
      */
 
     function $onInit() {
+
+
       // let item = document.getElementsByClassName('more-photos');
       //
       // item[0].style.visibility = 'hidden';
@@ -126,8 +128,9 @@
 
     }
 
-    function addItemClick() {
-      vm.newItem = ServiceItem.createInstance({servicePointId: vm.servicePoint.id});
+    function addServiceItemClick() {
+      let item = ServiceItem.createInstance({servicePointId: vm.servicePoint.id});
+      Editing.editModal('edit-service-item', 'Naujas Įrenginys')(item);
     }
 
     function addContactClick() {
@@ -165,12 +168,6 @@
 
       testScroll();
 
-    }
-
-    function editItemClick(item) {
-      let popoverOpen = {};
-      popoverOpen[item.id] = !vm.isOpenEditPopover[item.id];
-      vm.isOpenEditPopover = popoverOpen;
     }
 
   }
