@@ -1,0 +1,7 @@
+@import "../../../styles/editing";
+
+.edit-service-item {
+
+  @extend %editing-with-form;
+
+}
