@@ -19,7 +19,6 @@
       .headers {
         padding: 5px 0 0 4px;
         @extend %flex-table-headers;
-        border-bottom: 1px solid white;
       }
 
       .headers >, .service-point-item > {
@@ -46,9 +45,17 @@
 
       .scroll-y {
 
+        background-color: $white;
+
         .service-point-item {
 
           @extend %flex-table-item;
+
+          border-bottom: 1px solid darken($border-gray, 5%);
+
+          &:first-child {
+            border-top: 1px solid darken($border-gray, 5%);
+          }
 
           .popover {
             padding: 0 !important;
@@ -56,7 +63,6 @@
             min-width: 500px;
           }
 
-          border-bottom: 1px solid white;
           height: $small-row-height;
           align-items: center;
 
