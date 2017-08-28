@@ -1,6 +1,5 @@
 .service-point-details.scroll-y(resize resize-offset-top='5')
 
-
   .address
 
     .header
@@ -21,7 +20,8 @@
       .service-point-add-info
         .point-address {{vm.servicePoint.address}}
 
-        .contract {{vm.servicePoint.currentServiceContract.customer().name}} №{{vm.servicePoint.currentServiceContract.name}}
+        .contract(ng-if='vm.servicePoint.currentServiceContract') {{vm.servicePoint.currentServiceContract.customer().name}} №{{vm.servicePoint.currentServiceContract.name}}
+
         .currentServiceContract
         .customer
 
@@ -115,12 +115,7 @@
 
       .button-block
         button-add(
-        button-click='vm.addItemClick()'
-        popover-placement='auto bottom-right'
-        popover-is-open='vm.isOpenAddPopover'
-        uib-popover-template='"/app/domain/servicePoint/details/addItem.html"'
-        popover-title='Įrenginio Papildymas'
-        popover-append-to-body='false'
+        button-click='vm.addServiceItemClick()'
         )
 
     .service-point-items(ng-if='vm.servicePoint.servingItems.length')
@@ -132,7 +127,6 @@
           .installing-master Montuotojas
           .serving-master Aptarnavimo Meistras
           //.service-contract Sutartis
-          .action
 
         .scroll-y(
         resize
@@ -141,6 +135,7 @@
           .service-point-item(
           ng-repeat='item in vm.servicePoint.servingItems track by item.id'
           ng-class='{"has-changes": item.DSHasChanges()}'
+          ng-click='vm.editServiceItemClick(item)'
           )
 
             .filter-system
@@ -154,13 +149,3 @@
             //.service-contract
               span(ng-if='item.currentServiceContract')
                 | {{ item.currentServiceContract.num }} nuo {{ item.currentServiceContract.date }}
-
-            button.btn.action.btn-default.btn-xs(
-            ng-click='vm.editItemClick(item)'
-            popover-placement='auto bottom-right'
-            popover-is-open='vm.isOpenEditPopover[item.id]'
-            uib-popover-template='"/app/domain/servicePoint/details/editItem.html"'
-            popover-title='Įrenginio Modifikavimas'
-            popover-append-to-body='false'
-            )
-              i.glyphicon.glyphicon.glyphicon-option-horizontal
