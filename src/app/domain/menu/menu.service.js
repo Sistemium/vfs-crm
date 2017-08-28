@@ -7,7 +7,7 @@
     const settings = [{
       title: 'Padaliniai',
       state: 'site',
-      icon: 'color/icons8-department.png'
+      icon: 'color/icons8-Department.png'
     }, {
       title: 'Filtravimo sistemų tipai',
       state: 'filterSystemType',
@@ -15,7 +15,7 @@
     }, {
       title: 'Prekių Ženklai',
       state: 'brand',
-      icon: 'color/icons8-filtration.png'
+      icon: 'color/icons8-Filtration.png'
     }];
 
     const items = [{
