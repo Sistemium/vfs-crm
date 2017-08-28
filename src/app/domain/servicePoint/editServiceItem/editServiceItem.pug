@@ -1,66 +1,50 @@
-form.edit-service-item
+.edit-service-item
 
-  fieldset
+  .form
 
-    .field
+    .filter-system
 
       label Filtro Sistema:
 
       vfs-dropdown(
       items-data-source-name='FilterSystem'
       items-group-property='brand.name'
-      save-to='vm.item'
+      save-to='vm.serviceItem'
       save-to-property='filterSystemId'
+      ng-model='vm.serviceItem.filterSystemId'
+      placement='bottom-left'
       )
 
-    .field
+    .installing-master
 
       label Montuotojas:
 
       vfs-dropdown(
       items-data-source-name='Employee'
       items-name-property='name'
-      save-to='vm.item'
+      save-to='vm.serviceItem'
       save-to-property='installingMasterId'
+      placement='bottom-left'
       )
 
-    .field
+    .serving-master
 
       label Aptarnavimo Meistras:
 
       vfs-dropdown(
       items-data-source-name='Employee'
       items-name-property='name'
-      save-to='vm.item'
+      save-to='vm.serviceItem'
       save-to-property='servingMasterId'
+      placement='bottom-left'
       )
 
-    .field
+    .info
 
       label(for='service-point-item-edit-info') Pastaba:
 
       input.form-control#service-point-item-edit-info(
       autocomplete='off'
-      ng-model='vm.item.info'
+      ng-model='vm.serviceItem.info'
       placeholder='Komentaras arba paaiškinimas'
       )
-
-  .footer
-
-    button.btn.btn-xs.destroy(
-    ng-click='vm.destroyClick()'
-    ng-if='vm.item.id'
-    ng-class='vm.confirmDestroy ? "btn-danger" : "btn-default"'
-    )
-      i.glyphicon.glyphicon-trash
-
-    button.btn.btn-success.btn-xs.animate-show.ng-hide.save(
-    ng-click='vm.saveClick()'
-    ng-disabled='!vm.item.isValid()'
-    ng-show='!vm.item.id || vm.item.DSHasChanges()'
-    ) Išsaugoti
-
-    button.btn.btn-default.btn-xs.cancel(
-    ng-click='vm.cancelClick()'
-    ) Atšaukti
-
