@@ -131,7 +131,8 @@
     }
 
     function addContactClick() {
-      Editing.editModal('edit-service-point-contact', 'Pridėti kontaktą prie aptarnavimo taško')(ServicePointContact.createInstance({servicePointId: vm.servicePoint.id}));
+      let contact = ServicePointContact.createInstance({servicePointId: vm.servicePoint.id});
+      Editing.editModal('edit-service-point-contact', 'Pridėti kontaktą prie aptarnavimo taško')(contact);
     }
 
     function refresh() {

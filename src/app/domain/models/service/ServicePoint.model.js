@@ -49,7 +49,8 @@
       methods: {
         servingItemsLazy,
         isValid,
-        concatAddress
+        concatAddress,
+        refreshCache
       }
 
     });
@@ -71,6 +72,11 @@
     const cache = {};
 
     // TODO: bindAll to watch changes an refresh cache
+
+    function refreshCache() {
+      delete cache[this.id];
+      this.servingItemsLazy();
+    }
 
     function servingItemsLazy() {
 

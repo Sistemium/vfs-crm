@@ -13,7 +13,7 @@
 
   });
 
-  function controller(Editing) {
+  function controller(Editing, $q) {
 
     const vm = _.assign(this, {
       $onDestroy,
@@ -26,9 +26,16 @@
      Functions
      */
 
+    function afterSave() {
+      $q.when(vm.whenDone())
+        .then(() => {
+          _.result(vm.item, 'servicePoint.refreshCache');
+        })
+    }
+
     function $onInit() {
       _.assign(vm,{
-        afterSave: vm.whenDone,
+        afterSave,
         afterCancel: vm.whenDone
       })
     }
