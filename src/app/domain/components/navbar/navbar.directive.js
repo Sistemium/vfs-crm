@@ -71,7 +71,7 @@
         title: _.get(to, 'data.title') || DEFAULT_TITLE,
         isHomeState: to.name === 'home',
         currentItem,
-        isSubRootState: _.startsWith(to.name, rootState) && to.name !== rootState,
+        isSubRootState: (_.startsWith(to.name, rootState) || rootState) && to.name !== rootState,
         currentIcon: `/images/${currentItem ? currentItem.icon : rootIcon}`
 
       });

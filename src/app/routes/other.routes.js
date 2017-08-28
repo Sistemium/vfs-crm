@@ -26,7 +26,8 @@
           template: '<brand-master></brand-master>',
 
           data: {
-            title: 'Prekių Ženklai'
+            title: 'Prekių Ženklai',
+            rootState: 'settings'
           }
 
         })
@@ -38,7 +39,8 @@
           template: '<filter-system-type-master></filter-system-type-master>',
 
           data: {
-            title: 'Filtravimo Sistemų Tipai'
+            title: 'Filtravimo Sistemų Tipai',
+            rootState: 'settings'
           }
 
         })
@@ -50,7 +52,8 @@
           template: '<site-master></site-master>',
 
           data: {
-            title: 'Padaliniai'
+            title: 'Padaliniai',
+            rootState: 'settings'
           }
 
         });
