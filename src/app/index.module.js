@@ -24,10 +24,10 @@
       'angularMoment',
       'swipe',
       'ngFileUpload',
-      'ngPinchZoom'
+      'ngPinchZoom',
+      'ngMap'
     ]);
 
   angular.module('jsd', ['sistemiumBootstrap', 'Models']);
-
 
 })();
