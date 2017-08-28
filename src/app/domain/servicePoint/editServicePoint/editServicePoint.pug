@@ -114,3 +114,15 @@
       ng-model='vm.servicePoint.name'
       )
 
+    .contract
+
+      label Sutartis
+
+      vfs-dropdown(
+      ng-model='vm.servicePoint.currentServiceContractId'
+      items-data-source-name='ServiceContract'
+      items-name-property='name'
+      placement='bottom-left'
+      filter='{siteId: vm.servicePoint.siteId}'
+      )
+
