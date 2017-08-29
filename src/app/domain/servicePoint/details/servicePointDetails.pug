@@ -15,7 +15,17 @@
     .service-point-location
 
       .service-point-map
-        img(src='images/dummyMap3.png')
+        ng-map(
+        center='[{{vm.coords.lat()}}, {{vm.coords.lng()}}]'
+        ng-if='vm.googleReady && vm.coords'
+        disable-default-u-i='true'
+        zoom='13'
+        )
+          marker(
+          position="{{vm.coords.lat()}}, {{vm.coords.lng()}}"
+          animation="DROP"
+          draggable="true"
+          )
 
       .service-point-add-info
         .point-address {{vm.servicePoint.address}}
@@ -139,7 +149,7 @@
           )
 
             .filter-system
-              span {{ item.filterSystem.brand.name }} {{ item.filterSystem.model }}
+              span {{ item.filterSystem.brand.name }} {{ item.filterSystem.name }}
               span(ng-if='!item.filterSystem.brand.name') {{ item.info }}
 
             .installing-master {{ item.installingMaster.name }}

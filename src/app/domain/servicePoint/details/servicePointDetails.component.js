@@ -8,7 +8,7 @@
 
   });
 
-  function servicePointDetailsController($scope, Schema, saControllerHelper, $state, Editing, PictureHelper, GalleryHelper, $document) {
+  function servicePointDetailsController($scope, Schema, saControllerHelper, $state, Editing, PictureHelper, GalleryHelper, $document, NgMap, mapsHelper, GeoCoder) {
 
     const vm = saControllerHelper.setup(this, $scope)
       .use(GalleryHelper);
@@ -48,7 +48,6 @@
      */
 
     function $onInit() {
-
 
       // let item = document.getElementsByClassName('more-photos');
       //
@@ -149,6 +148,7 @@
       let busy = [
         ServicePoint.findAllWithRelations({id}, {bypassCache: true})(relations)
           .then(loadServicePointRelations)
+          .then(loadGeoPosition)
       ];
 
       vm.setBusy(busy);
@@ -160,13 +160,34 @@
 
       if (!servicePoint) return;
 
-      ServicePoint.customer().DSLoadRelations();
+      //ServicePoint.customer().DSLoadRelations();
 
       _.each(servicePoint.servingItems, serviceItem => {
         serviceItem.DSLoadRelations();
       });
 
-      testScroll();
+    }
+
+    function loadGeoPosition() {
+
+      mapsHelper.loadGoogleScript()
+        .then(() => {
+          vm.googleReady = true;
+
+          GeoCoder.geocode({address: vm.servicePoint.address})
+            .then(result => {
+              vm.coords = result[0].geometry.location;
+            });
+
+          NgMap.getMap()
+            .then(map => {
+              vm.map = map;
+            })
+            .catch(err => {
+              console.warn(err);
+            })
+
+        });
 
     }
 

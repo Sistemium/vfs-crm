@@ -15,6 +15,26 @@ $background-service-point-color: lighten($gray-background-color, 0%);
 
   @extend %flex-column-nowrap;
 
+  ng-map {
+    height: 120px;
+    width: 120px;
+
+    a[href^="http://maps.google.com/maps"],
+    a[href^="https://maps.google.com/maps"],
+    a[href^="https://www.google.com/maps"] {
+      display: none !important;
+    }
+
+    .gmnoprint:not(.gm-bundled-control) {
+      display: none;
+    }
+
+    .gm-bundled-control .gmnoprint {
+      display: block;
+    }
+
+  }
+
   .address, .contacts, .items, .service-point-pictures {
 
     padding-bottom: 10px;
@@ -65,15 +85,9 @@ $background-service-point-color: lighten($gray-background-color, 0%);
       .service-point-map {
 
         margin-top: 5px;
-        margin-left: 5px;
+        margin-left: 15px;
         margin-bottom: 5px;
-
-        img {
-          object-fit: none;
-          height: 120px;
-          width: 120px;
-          border-radius: 50%;
-        }
+        margin-right: 3px;
 
       }
 
