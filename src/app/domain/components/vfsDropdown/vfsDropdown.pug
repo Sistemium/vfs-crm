@@ -7,6 +7,6 @@
   popover-placement='{{vm.placement || "bottom-right"}}'
   )
     .name-wrapper
-      span(ng-if='vm.itemsGroupProperty') {{ vm.groupLabel(vm.currentItem) }}
+      span(ng-if='vm.itemsGroupProperty && vm.currentItem') {{ vm.groupLabel(vm.currentItem) }}
       span {{ vm.currentItem[vm.itemsNameProperty] || 'Paspauskite, kad pasirinkti' }}
     span.caret
