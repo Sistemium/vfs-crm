@@ -84,10 +84,9 @@ $background-service-point-color: lighten($gray-background-color, 0%);
 
       .service-point-map {
 
-        margin-top: 5px;
-        margin-left: 15px;
-        margin-bottom: 5px;
-        margin-right: 3px;
+        margin: 0 10px;
+        min-height: 120px;
+        min-width: 120px;
 
       }
 
