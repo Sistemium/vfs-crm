@@ -147,6 +147,7 @@
 
       let busy = [
         ServicePoint.findAllWithRelations({id}, {bypassCache: true})(relations)
+          .then(_.first)
           .then(loadServicePointRelations)
           .then(loadGeoPosition)
       ];
@@ -154,13 +155,9 @@
       vm.setBusy(busy);
     }
 
-    function loadServicePointRelations(data) {
+    function loadServicePointRelations(servicePoint) {
 
-      let servicePoint = _.first(data);
-
-      if (!servicePoint) return;
-
-      //ServicePoint.customer().DSLoadRelations();
+      _.result(servicePoint, 'currentServiceContract.DSLoadRelations');
 
       _.each(servicePoint.servingItems, serviceItem => {
         serviceItem.DSLoadRelations();
