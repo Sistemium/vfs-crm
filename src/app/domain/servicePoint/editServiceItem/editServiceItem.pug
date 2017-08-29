@@ -48,3 +48,58 @@
       ng-model='vm.serviceItem.info'
       placeholder='Komentaras arba paaiškinimas'
       )
+
+    .field-group
+
+      .installing-date
+
+        label Montavimo data
+
+        sab-date-picker(
+        value='vm.serviceItem.installingDate'
+        )
+
+      .last-service-date
+
+        label Paskutinės tarnybos data
+
+        sab-date-picker(
+        value='vm.serviceItem.lastServiceDate'
+        )
+
+    .field-group
+
+      .service-frequency
+        label(for='frequency') Aptarnavimo Dažnumas
+
+        input#service-frequency.form-control(
+        autocomplete='off'
+        placeholder='Mėnesių skaičius'
+        type='number'
+        ng-model='vm.serviceItem.serviceFrequency'
+        ng-step='1'
+        ng-min='0'
+        ng-max='24'
+        )
+
+      .service-price
+        label(for='service-price') Aptarnavimo kaina
+
+        input#service-price.form-control(
+        autocomplete='off'
+        type='number'
+        placeholder='Eurų už aptarnavimą'
+        ng-model='vm.serviceItem.servicePrice'
+        ng-min='0'
+        )
+
+      .guarantee-period
+        label(for='frequency') Garantinis laikotarpis
+
+        input#frequency.form-control(
+        autocomplete='off'
+        type='number'
+        placeholder='Mėnesių skaičius'
+        ng-model='vm.serviceItem.guaranteePeriod'
+        ng-min='0'
+        )
