@@ -18,7 +18,11 @@
     })
 
     .config(uibDatepickerPopupConfig => {
-      uibDatepickerPopupConfig.datepickerPopupTemplateUrl = 'app/domain/components/datePicker/datePickerPopup.html';
+      _.assign(uibDatepickerPopupConfig, {
+        datepickerPopupTemplateUrl: 'app/domain/components/datePicker/datePickerPopup.html',
+        closeText: 'Uždaryti',
+        clearText: 'Ištrinti'
+      });
     })
 
     .config($uibTooltipProvider => {
