@@ -8,7 +8,7 @@
 
   });
 
-  function servicePointDetailsController($scope, Schema, saControllerHelper, $state, Editing, PictureHelper, GalleryHelper, $document, NgMap, mapsHelper, GeoCoder, $uibModal, OnMap) {
+  function servicePointDetailsController($scope, Schema, saControllerHelper, $state, Editing, PictureHelper, GalleryHelper, NgMap, mapsHelper, GeoCoder) {
 
     const vm = saControllerHelper.setup(this, $scope)
       .use(GalleryHelper);
@@ -27,9 +27,7 @@
       onChangeFile,
       pictureUpload,
       photoClick,
-      testScroll,
       $onInit,
-      test,
 
       editPhoto: Editing.editModal('edit-picture', 'Fotografijos Redagavimas'),
       editServicePointClick: Editing.editModal('edit-service-point', 'Aptarnavimo Taško Redagavimas'),
@@ -48,94 +46,9 @@
      Functions
      */
 
-    function test(servicePoint, coords) {
-
-      let modalInstance = $uibModal.open({
-        animation: true,
-        template: `       
-         
-        <div class="modal-header" style="padding: 0 15px">
-          <h3 style="margin-top: 10px">{{vm.servicePoint.address}}</h3>
-        </div>
-        
-        <div class="modal-body" id="modal-body" resize resize-offset-top="190" resize-property="height">
-          <ng-map
-          ng-if="vm.isReady"
-          style="height: 70%"
-          center='[{{vm.coords.lat()}}, {{vm.coords.lng()}}]'
-          zoom="13"
-          >
-            <marker 
-              position="{{vm.coords.lat()}}, {{vm.coords.lng()}}"
-              animation="DROP"
-              draggable="true">      
-            </marker>
-          </ng-map>   
-        </div>`,
-
-        size: 'lg',
-
-        controller
-
-      });
-
-      modalInstance.result
-        .then(() => {
-        }, () => {
-        });
-
-      function controller($scope) {
-
-        const vm = {};
-
-        modalInstance.rendered
-          .then(() => {
-            vm.isReady = true;
-          });
-
-        $scope.vm = vm;
-
-        vm.servicePoint = servicePoint;
-        vm.coords = coords;
-
-      }
-    }
-
     function $onInit() {
 
-      vm.openMap = OnMap.open();
-
-      // let item = document.getElementsByClassName('more-photos');
-      //
-      // item[0].style.visibility = 'hidden';
-      //
-      // $timeout(500).then(() => item[0].style.visibility = 'visible');
     }
-
-    function testScroll() {
-
-      let scrollingElem = document.getElementsByClassName('service-point-picture');
-
-      $document.ready(function () {
-        let elem = document.getElementsByClassName('picture-gallery');
-
-        if (elem[0].childNodes[1].scrollHeight > elem[0].childNodes[1].clientHeight) {
-          vm.scrollToGallery = true;
-        }
-
-        angular.element(scrollingElem).on('scroll', debounceFunc);
-
-      });
-
-      let debounceFunc = _.debounce(function ($event) {
-
-        if ($event.srcElement.scrollTop > 210) {
-          vm.scrollToGallery = false;
-        } else {
-          vm.scrollToGallery = true;
-        }
-
-      }, 100);
 
     }
 
