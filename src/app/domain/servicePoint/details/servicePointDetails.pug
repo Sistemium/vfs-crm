@@ -24,8 +24,7 @@
         max-zoom='13'
         scrollwheel='false'
         draggable='false'
-        sng-click='vm.test(vm.servicePoint, vm.coords)'
-        ng-click='vm.openMap(vm.servicePoint, vm.coords)'
+        ng-click='vm.openMapClick(vm.servicePoint, vm.coords)'
         )
           marker(
           position="{{vm.coords.lat()}}, {{vm.coords.lng()}}"

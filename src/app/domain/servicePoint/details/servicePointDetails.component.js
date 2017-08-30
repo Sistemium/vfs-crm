@@ -8,7 +8,7 @@
 
   });
 
-  function servicePointDetailsController($scope, Schema, saControllerHelper, $state, Editing, PictureHelper, GalleryHelper, $document, NgMap, mapsHelper, GeoCoder, $uibModal, OnMap) {
+  function servicePointDetailsController($scope, Schema, saControllerHelper, $state, Editing, PictureHelper, GalleryHelper, $document, NgMap, mapsHelper, GeoCoder, OnMap) {
 
     const vm = saControllerHelper.setup(this, $scope)
       .use(GalleryHelper);
@@ -29,7 +29,6 @@
       photoClick,
       testScroll,
       $onInit,
-      test,
 
       editPhoto: Editing.editModal('edit-picture', 'Fotografijos Redagavimas'),
       editServicePointClick: Editing.editModal('edit-service-point', 'Aptarnavimo Taško Redagavimas'),
@@ -48,67 +47,12 @@
      Functions
      */
 
-    function test(servicePoint, coords) {
-
-      let modalInstance = $uibModal.open({
-        animation: true,
-        template: `       
-         
-        <div class="modal-header" style="padding: 0 15px">
-          <h3 style="margin-top: 10px">{{vm.servicePoint.address}}</h3>
-        </div>
-        
-        <div class="modal-body" id="modal-body" resize resize-offset-top="190" resize-property="height">
-          <ng-map
-          ng-if="vm.isReady"
-          style="height: 70%"
-          center='[{{vm.coords.lat()}}, {{vm.coords.lng()}}]'
-          zoom="13"
-          >
-            <marker 
-              position="{{vm.coords.lat()}}, {{vm.coords.lng()}}"
-              animation="DROP"
-              draggable="true">      
-            </marker>
-          </ng-map>   
-        </div>`,
-
-        size: 'lg',
-
-        controller
-
-      });
-
-      modalInstance.result
-        .then(() => {
-        }, () => {
-        });
-
-      function controller($scope) {
-
-        const vm = {};
-
-        modalInstance.rendered
-          .then(() => {
-            vm.isReady = true;
-          });
-
-        $scope.vm = vm;
-
-        vm.servicePoint = servicePoint;
-        vm.coords = coords;
-
-      }
-    }
-
     function $onInit() {
 
-      vm.openMap = OnMap.open();
+      vm.openMapClick = OnMap.open;
 
       // let item = document.getElementsByClassName('more-photos');
-      //
       // item[0].style.visibility = 'hidden';
-      //
       // $timeout(500).then(() => item[0].style.visibility = 'visible');
     }
 

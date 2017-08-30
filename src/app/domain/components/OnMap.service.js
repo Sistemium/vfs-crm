@@ -7,21 +7,9 @@
 
   function OnMap($uibModal) {
 
-    return {open, setupController};
-
-    function setupController(vm) {
-
-      _.assign(vm, {});
-
-      /*
-       Functions
-       */
-
-    }
+    return {open};
 
     function open(servicePoint, coords) {
-
-      console.log(servicePoint, coords);
 
       let modalInstance = $uibModal.open({
         animation: true,
