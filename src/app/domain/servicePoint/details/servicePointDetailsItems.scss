@@ -10,7 +10,6 @@
     $width-installing-master: 30%;
     $width-serving-master: 30%;
     $action-button-margin: 5px;
-    $width-action-edit-button: 30px;
 
     @extend %flex-table;
 
@@ -36,10 +35,6 @@
         .service-contract {
           //width: $width-service-contract;
         }
-        .action {
-          width: $width-action-edit-button;
-          margin-right: $action-button-margin;
-        }
 
       }
 
@@ -52,6 +47,8 @@
           @extend %flex-table-item;
 
           border-bottom: 1px solid darken($border-gray, 5%);
+          height: $small-row-height;
+          align-items: center;
 
           &:first-child {
             border-top: 1px solid darken($border-gray, 5%);
@@ -62,9 +59,6 @@
             max-width: 500px;
             min-width: 500px;
           }
-
-          height: $small-row-height;
-          align-items: center;
 
           &.has-changes > .action.button {
             background-color: $state-warning-text;
@@ -88,6 +82,21 @@
 
           .installing-master, .filter-system, .serving-master {
             @extend .ellipsis;
+          }
+
+          .installing-master, .serving-master {
+
+            span {
+              height: 20px;
+            }
+
+            .date {
+              color: $gray;
+            }
+
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
           }
 
         }

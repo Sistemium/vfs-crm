@@ -20,6 +20,12 @@
         ng-if='vm.googleReady && vm.coords'
         disable-default-u-i='true'
         zoom='13'
+        min-zoom='13'
+        max-zoom='13'
+        scrollwheel='false'
+        draggable='false'
+        sng-click='vm.test(vm.servicePoint, vm.coords)'
+        ng-click='vm.openMap(vm.servicePoint, vm.coords)'
         )
           marker(
           position="{{vm.coords.lat()}}, {{vm.coords.lng()}}"
@@ -114,7 +120,6 @@
         span.name Kontaktų nėra
         a(href ng-click='vm.addContractPerson()') Pridėti kontaktą
 
-
   .items
 
     .header
@@ -152,9 +157,13 @@
               span {{ item.filterSystem.brand.name }} {{ item.filterSystem.name }}
               span(ng-if='!item.filterSystem.brand.name') {{ item.info }}
 
-            .installing-master {{ item.installingMaster.name }}
+            .installing-master
+              span.master {{ item.installingMaster.name }}
+              span.date {{ item.installingDate }}
 
-            .serving-master {{ item.servingMaster.name }}
+            .serving-master
+              span {{ item.servingMaster.name }}
+              span.date {{ item.lastServiceDate }}
 
             //.service-contract
               span(ng-if='item.currentServiceContract')
