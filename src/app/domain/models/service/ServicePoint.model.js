@@ -36,7 +36,7 @@
             Location: {
               localField: 'location',
               localKey: 'locationId'
-            },
+            }
           }
 
         },
