@@ -64,7 +64,11 @@
 
       vm.model.findAll(vm.filter || {}, vm.options || {})
         .then(() => {
-          vm.currentItem = vm.currentId && vm.model.get(vm.currentId);
+          let item = vm.currentId && vm.model.get(vm.currentId);
+          vm.currentItem = (item && _.matches(vm.filter)(item)) ? item : null;
+          if (!vm.currentItem) {
+            vm.currentId = null;
+          }
         });
 
     }
