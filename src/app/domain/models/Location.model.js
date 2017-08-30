@@ -12,12 +12,7 @@
       labels: {},
 
       relations: {
-        hasOne: {
-          ServicePoint: {
-            localField: 'servicePoint',
-            localKey: 'servicePointId'
-          },
-        }
+
       }
 
     });
