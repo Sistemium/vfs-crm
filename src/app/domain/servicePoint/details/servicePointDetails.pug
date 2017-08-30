@@ -36,7 +36,9 @@
       .service-point-add-info
         .point-address {{vm.servicePoint.address}}
 
-        .contract(ng-if='vm.servicePoint.currentServiceContract') {{vm.servicePoint.currentServiceContract.customer().name}} №{{vm.servicePoint.currentServiceContract.name}}
+        .contract(ng-if='vm.servicePoint.currentServiceContract')
+          a(href ng-click='vm.serviceContractClick()')
+            | {{vm.servicePoint.currentServiceContract.customer().name}} №{{vm.servicePoint.currentServiceContract.name}}
 
         .currentServiceContract
         .customer

@@ -28,6 +28,7 @@
       pictureUpload,
       photoClick,
       $onInit,
+      serviceContractClick,
 
       editPhoto: Editing.editModal('edit-picture', 'Fotografijos Redagavimas'),
       editServicePointClick: Editing.editModal('edit-service-point', 'Aptarnavimo Taško Redagavimas'),
@@ -50,7 +51,10 @@
 
     }
 
+    function serviceContractClick() {
+      Editing.editModal('edit-service-contract', 'Sutarties Redagavimas')(vm.servicePoint.currentServiceContract);
     }
+
 
     function onChangeFile(item) {
 
