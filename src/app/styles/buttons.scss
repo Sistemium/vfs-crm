@@ -2,6 +2,7 @@
 
 a:hover, a:focus {
   color: darken($primary-color, 12%);
+  outline: none;
 }
 
 button {
