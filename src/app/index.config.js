@@ -34,14 +34,13 @@
 
       console.log('Auth', authorization);
 
-      let appConfig =
-        // InitService.localDevMode ? {} :
-        {
-          url: {
-            socket: 'https://socket2.sistemium.com'
-          }
+      let socket = InitService.localDevMode ? 'socket2' : 'socket';
+
+      let appConfig = {
+        url: {
+          socket: `https://${socket}.sistemium.com`
         }
-      ;
+      };
 
       let org = 'vfs';
 
