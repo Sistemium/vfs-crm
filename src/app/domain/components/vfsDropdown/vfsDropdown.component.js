@@ -69,7 +69,22 @@
           if (!vm.currentItem) {
             vm.currentId = null;
           }
-        });
+        })
+        .then(setDefault);
+
+    }
+
+    function setDefault() {
+
+      if (vm.currentId) {
+        return;
+      }
+
+      let items = vm.model.filter(vm.filter);
+
+      if (items.length === 1) {
+        vm.currentId = _.first(items).id;
+      }
 
     }
 
