@@ -8,7 +8,7 @@
 
   });
 
-  function servicePointDetailsController($scope, Schema, saControllerHelper, $state, Editing, PictureHelper, GalleryHelper, NgMap, mapsHelper, GeoCoder) {
+  function servicePointDetailsController($scope, Schema, saControllerHelper, $state, Editing, PictureHelper, GalleryHelper, NgMap, mapsHelper, GeoCoder, OnMap) {
 
     const vm = saControllerHelper.setup(this, $scope)
       .use(GalleryHelper);
@@ -49,6 +49,11 @@
 
     function $onInit() {
 
+      vm.openMapClick = OnMap.open;
+
+      // let item = document.getElementsByClassName('more-photos');
+      // item[0].style.visibility = 'hidden';
+      // $timeout(500).then(() => item[0].style.visibility = 'visible');
     }
 
     function serviceContractClick() {

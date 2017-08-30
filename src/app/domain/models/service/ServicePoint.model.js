@@ -30,6 +30,13 @@
           ServiceContract: {
             localField: 'currentServiceContract',
             localKey: 'currentServiceContractId'
+          },
+
+          hasOne: {
+            Location: {
+              localField: 'location',
+              localKey: 'locationId'
+            },
           }
 
         },
