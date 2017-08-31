@@ -50,7 +50,7 @@
     }
 
     function name(firstName, lastName) {
-      return `${firstName} ${lastName}`;
+      return (firstName && lastName) ? `${firstName} ${lastName}` : null;
     }
 
   });
