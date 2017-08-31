@@ -12,6 +12,7 @@
     function open(servicePoint, coords) {
 
       let modalInstance = $uibModal.open({
+
         animation: false,
         templateUrl: 'app/domain/components/mapModal/mapModal.html',
 
@@ -36,8 +37,14 @@
 
         $scope.vm = vm;
 
-        vm.servicePoint = servicePoint;
-        vm.coords = coords;
+        _.assign(vm, {
+
+          // TODO: save zoom to localStorage and restore
+          zoom: 15,
+          coords,
+          title: servicePoint.address
+
+        });
 
         function saveCoordsClick() {
           Location.create({

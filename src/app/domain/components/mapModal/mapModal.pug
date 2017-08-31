@@ -1,21 +1,23 @@
-.modal-header(style='padding: 0 15px')
+.map-modal
 
-  h3(style='margin-top: 10px') {{vm.servicePoint.address}}
+  .modal-header
 
-#modal-body.modal-body
+    h3 {{ vm.title }}
 
-  div(resize resize-offset-top='115' resize-property='height')
-    ng-map(
-    ng-if='vm.isReady'
-    style='height: inherit;',
-    center='[{{vm.coords.lat()}}, {{vm.coords.lng()}}]'
-    zoom='13'
-    )
-      marker(
-      position='{{vm.coords.lat()}} {{vm.coords.lng()}}'
-      animation='DROP'
-      draggable='true'
+  #modal-body.modal-body
+
+    div(resize resize-offset-top='115' resize-property='height')
+      ng-map(
+      ng-if='vm.isReady'
+      style='height: inherit;',
+      center='[{{ vm.coords.lat() }}, {{ vm.coords.lng() }}]'
+      zoom='{{ vm.zoom }}'
       )
+        marker(
+        position='{{ vm.coords.lat()}} {{ vm.coords.lng() }}'
+        animation='DROP'
+        draggable='true'
+        )
 
-.modal-footer
-  button.btn.btn-success.save(ng-click='vm.saveCoordsClick()') Išsaugoti koordinates
+  .modal-footer
+    button.btn.btn-success.save(ng-click='vm.saveCoordsClick()') Išsaugoti koordinates
