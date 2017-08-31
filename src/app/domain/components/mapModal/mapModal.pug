@@ -20,4 +20,7 @@
         )
 
   .modal-footer
-    button.btn.btn-success.save(ng-click='vm.saveCoordsClick()') Išsaugoti koordinates
+    button.btn.btn-success.save(
+    ng-repeat='button in vm.buttons'
+    ng-click='button.onClick(vm)'
+    ) {{ button.title }}
