@@ -9,7 +9,9 @@
 
     return {open};
 
-    function open(servicePoint, coords) {
+    function open(config) {
+
+      let {coords, buttons, title} = config;
 
       let modalInstance = $uibModal.open({
 
@@ -24,11 +26,9 @@
 
       return modalInstance;
 
-      function mapModalController($scope, Schema) {
+      function mapModalController($scope) {
 
-        const vm = {saveCoordsClick};
-
-        const {Location} = Schema.models();
+        const vm = {};
 
         modalInstance.rendered
           .then(() => {
@@ -42,23 +42,9 @@
           // TODO: save zoom to localStorage and restore
           zoom: 15,
           coords,
-          title: servicePoint.address
-
+          buttons,
+          title
         });
-
-        function saveCoordsClick() {
-          Location.create({
-            longitude: vm.coords.lng(),
-            latitude: vm.coords.lat(),
-            altitude: 0,
-            source: vm.servicePoint.id,
-            timestamp: new Date()
-          }).then((savedLocation) => {
-            vm.servicePoint.locationId = savedLocation.id;
-            vm.servicePoint.DSCreate();
-          });
-
-        }
 
       }
     }
