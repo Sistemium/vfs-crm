@@ -9,7 +9,7 @@
   });
 
   function servicePointDetailsController($scope, Schema, saControllerHelper, $state, Editing,
-                                         PictureHelper, GalleryHelper, NgMap, mapsHelper, GeoCoder, MapModal) {
+                                         PictureHelper, GalleryHelper, NgMap, mapsHelper, GeoCoder, ServicePointMapModal) {
 
     const vm = saControllerHelper.setup(this, $scope)
       .use(GalleryHelper);
@@ -49,9 +49,15 @@
      Functions
      */
 
-
     function mapClick() {
-      MapModal.open(vm.servicePoint, vm.coords);
+
+      let instance = ServicePointMapModal.open({
+        servicePoint: vm.servicePoint,
+        coords: vm.coords
+      });
+
+      instance.result.then(_.noop, _.noop);
+
     }
 
     function $onInit() {
@@ -64,7 +70,6 @@
     function serviceContractClick() {
       Editing.editModal('edit-service-contract', 'Sutarties Redagavimas')(vm.servicePoint.currentServiceContract);
     }
-
 
     function onChangeFile(item) {
 
