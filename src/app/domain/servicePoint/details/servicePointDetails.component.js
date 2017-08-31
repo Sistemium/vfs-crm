@@ -30,6 +30,7 @@
       photoClick,
       $onInit,
       serviceContractClick,
+      mapClick,
 
       editPhoto: Editing.editModal('edit-picture', 'Fotografijos Redagavimas'),
       editServicePointClick: Editing.editModal('edit-service-point', 'Aptarnavimo Taško Redagavimas'),
@@ -48,9 +49,12 @@
      Functions
      */
 
-    function $onInit() {
 
-      vm.openMapClick = OnMap.open;
+    function mapClick() {
+      MapModal.open(vm.servicePoint, vm.coords);
+    }
+
+    function $onInit() {
 
       // let item = document.getElementsByClassName('more-photos');
       // item[0].style.visibility = 'hidden';
