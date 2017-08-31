@@ -8,7 +8,8 @@
 
   });
 
-  function servicePointDetailsController($scope, Schema, saControllerHelper, $state, Editing, PictureHelper, GalleryHelper, NgMap, mapsHelper, GeoCoder, OnMap) {
+  function servicePointDetailsController($scope, Schema, saControllerHelper, $state, Editing,
+                                         PictureHelper, GalleryHelper, NgMap, mapsHelper, GeoCoder, MapModal) {
 
     const vm = saControllerHelper.setup(this, $scope)
       .use(GalleryHelper);
