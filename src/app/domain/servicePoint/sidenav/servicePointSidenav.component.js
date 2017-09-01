@@ -7,7 +7,8 @@
       currentServicePointId: '=',
       servicePointClickFn: '=',
       currentIdx: '=',
-      promise: '='
+      promise: '=',
+      addClick: '&'
     },
 
     templateUrl: 'app/domain/servicePoint/sidenav/servicePointSidenav.html',

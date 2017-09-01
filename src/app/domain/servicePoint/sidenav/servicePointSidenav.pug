@@ -1,8 +1,10 @@
 .service-point-sidenav
 
-  vfs-searcher(
-  search='vm.searchText'
-  )
+  .search-add
+    vfs-searcher(
+    search='vm.searchText'
+    )
+    button-add(button-click='vm.addClick()')
 
   #sidenav-scroll-list.scroll-y(
   resize

@@ -7,8 +7,27 @@
   box-shadow: $box-shadow;
 
   vfs-searcher {
-    padding: 7px 10px;
     display: flex;
+  }
+
+  .search-add {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    margin-bottom: 6px;
+    padding: 8px 10px;
+
+    vfs-searcher {
+      flex: 1;
+    }
+
+    button {
+      margin-left: 6px;
+      padding: 6px 8px;
+    }
+
   }
 
   .scroll-y {
