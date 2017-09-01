@@ -24,8 +24,6 @@
 
       });
 
-      console.log(modalInstance);
-
       return modalInstance;
 
       function mapModalController($scope) {
@@ -64,7 +62,8 @@
 
         function onDragEnd(ev) {
 
-          vm.marker.coords = ev.latLng;
+          vm.marker.coords.lat = ev.latLng.lat();
+          vm.marker.coords.lng = ev.latLng.lng();
 
         }
 

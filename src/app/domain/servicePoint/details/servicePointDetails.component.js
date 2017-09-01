@@ -8,7 +8,7 @@
 
   });
 
-  function servicePointDetailsController($scope, Schema, saControllerHelper, $state, Editing,
+  function servicePointDetailsController($scope, Schema, saControllerHelper, $state, Editing, $timeout,
                                          PictureHelper, GalleryHelper, NgMap, mapsHelper, GeoCoder, ServicePointMapModal) {
 
     const vm = saControllerHelper.setup(this, $scope)
@@ -54,7 +54,7 @@
 
       let instance = ServicePointMapModal.open({
         servicePoint: vm.servicePoint,
-        coords: vm.coords
+        coords: {lng: vm.servicePoint.location.longitude, lat: vm.servicePoint.location.latitude}
       });
 
       instance.result.then(_.noop, _.noop);
@@ -158,7 +158,7 @@
     function positionMarker() {
 
       if (vm.servicePoint.location)
-        return;
+        return $timeout();
 
       return GeoCoder.geocode({address: vm.servicePoint.address})
         .then(result => {

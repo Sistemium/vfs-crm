@@ -35,8 +35,6 @@
         class: 'btn-danger'
       };
 
-      console.warn(servicePoint);
-
       if (servicePoint.locationId) {
         buttons.push(changeButton);
       } else {
@@ -77,8 +75,8 @@
       function saveCoordsClick(vm) {
 
         let locationData = {
-          longitude: vm.marker.coords.lng(),
-          latitude: vm.marker.coords.lat(),
+          longitude: vm.marker.coords.lng,
+          latitude: vm.marker.coords.lat,
           altitude: 0,
           source: 'user',
           ownerXid: servicePoint.id,

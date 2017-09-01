@@ -15,9 +15,9 @@
 
       .service-point-map
         ng-map(
-        center='[{{vm.coords.lat()}}, {{vm.coords.lng()}}]'
+        center='[{{vm.servicePoint.location.latitude}}, {{vm.servicePoint.location.longitude}}]'
         id='smallMap'
-        ng-if='vm.googleReady && vm.coords'
+        ng-if='vm.googleReady'
         disable-default-u-i='true'
         zoom='13'
         min-zoom='13'
@@ -27,9 +27,9 @@
         ng-click='vm.mapClick()'
         )
           marker(
-          position="{{vm.coords.lat()}}, {{vm.coords.lng()}}"
-          animation="DROP"
-          draggable="true"
+          position='{{vm.servicePoint.location.latitude}}, {{vm.servicePoint.location.longitude}}',
+          animation='DROP'
+          draggable='true'
           )
 
       .service-point-add-info
@@ -60,8 +60,8 @@
         ngf-select
         ngf-change='vm.onChangeFile($file)'
         ngf-accept="'image/*'"
-        ngf-max-size="10MB"
-        ng-model="vm.file"
+        ngf-max-size='10MB'
+        ng-model='vm.file'
         )
 
     .picture-gallery
