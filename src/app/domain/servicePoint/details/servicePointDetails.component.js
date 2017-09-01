@@ -61,10 +61,10 @@
     }
 
     function $onInit() {
-
-      // let item = document.getElementsByClassName('more-photos');
-      // item[0].style.visibility = 'hidden';
-      // $timeout(500).then(() => item[0].style.visibility = 'visible');
+      vm.watchScope('vm.servicePoint.address', address => {
+        if (!address) return;
+        positionMarker();
+      });
     }
 
     function serviceContractClick() {
@@ -117,7 +117,8 @@
 
     function addServiceItemClick() {
       let item = ServiceItem.createInstance({servicePointId: vm.servicePoint.id});
-      Editing.editModal('edit-service-item', 'Naujas Įrenginys')(item);
+      Editing.editModal('edit-service-item', 'Naujas Įrenginys')(item)
+        .then((serviceItem) => _.result(serviceItem, 'servicePoint.refreshCache'));
     }
 
     function addContactClick() {
@@ -153,24 +154,28 @@
 
     }
 
+    function positionMarker() {
+
+      return GeoCoder.geocode({address: vm.servicePoint.address})
+        .then(result => {
+          vm.coords = result[0].geometry.location;
+        });
+
+    }
+
     function loadGeoPosition() {
 
       mapsHelper.loadGoogleScript()
         .then(() => {
+
           vm.googleReady = true;
 
-          GeoCoder.geocode({address: vm.servicePoint.address})
-            .then(result => {
-              vm.coords = result[0].geometry.location;
-            });
-
-          NgMap.getMap()
-            .then(map => {
-              vm.map = map;
+          positionMarker()
+            .then(() => {
+              return NgMap.getMap()
+                .then(map => vm.map = map)
             })
-            .catch(err => {
-              console.warn(err);
-            })
+            .catch(err => console.error(err));
 
         });
 
