@@ -35,8 +35,12 @@
       .service-point-add-info
         .point-address {{vm.servicePoint.address}}
 
-        .contract(ng-if='vm.servicePoint.currentServiceContract')
-          a(href ng-click='vm.serviceContractClick()')
+        .contract
+          .text-warning(ng-if='vm.servicePoint.currentServiceContractId === null') Nera aptarnavimo sutarties
+          a(
+          href ng-click='vm.serviceContractClick()'
+          ng-if='vm.servicePoint.currentServiceContract'
+          )
             | {{vm.servicePoint.currentServiceContract.customer().name}} №{{vm.servicePoint.currentServiceContract.name}}
 
         .currentServiceContract
