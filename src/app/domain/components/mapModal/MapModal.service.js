@@ -24,6 +24,8 @@
 
       });
 
+      console.log(modalInstance);
+
       return modalInstance;
 
       function mapModalController($scope) {
@@ -40,16 +42,32 @@
         _.assign(vm, {
 
           // TODO: save zoom to localStorage and restore
+
           zoom: 15,
-          coords,
           buttons,
-          title
+          mapCenter: coords,
+          title,
+
+          marker: {
+            coords,
+            isDraggable: false
+          },
+
           closeModal,
+          onDragEnd
+
         });
 
         function closeModal() {
           modalInstance.close();
         }
+
+        function onDragEnd(ev) {
+
+          vm.marker.coords = ev.latLng;
+
+        }
+
       }
     }
 

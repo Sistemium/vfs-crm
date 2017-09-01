@@ -11,12 +11,12 @@
       .button-block
         button-edit(button-click='vm.editServicePointClick(vm.servicePoint)')
 
-
     .service-point-location
 
       .service-point-map
         ng-map(
         center='[{{vm.coords.lat()}}, {{vm.coords.lng()}}]'
+        id='smallMap'
         ng-if='vm.googleReady && vm.coords'
         disable-default-u-i='true'
         zoom='13'
@@ -143,7 +143,7 @@
       .service-point-list
 
         .headers
-          .filter-system Filtro Sistema
+          .filter-system Filtravimo Sistema
           .installing-master Montavimas
           .serving-master Aptarnavimas
           //.service-contract Sutartis

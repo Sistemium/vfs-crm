@@ -1,6 +1,6 @@
 .map-modal
 
-  .modal-header
+  pre {{vm| json}}
 
   .modal-header
     h3 {{ vm.title }}
@@ -11,19 +11,22 @@
 
     div(resize resize-offset-top='115' resize-property='height')
       ng-map(
+      id='largeMap'
       ng-if='vm.isReady'
       style='height: inherit;',
-      center='[{{ vm.coords.lat() }}, {{ vm.coords.lng() }}]'
+      center='[{{ vm.mapCenter.lat() }}, {{ vm.mapCenter.lng() }}]'
       zoom='{{ vm.zoom }}'
       )
         marker(
-        position='{{ vm.coords.lat()}} {{ vm.coords.lng() }}'
+        position='{{ vm.marker.coords.lat()}}, {{ vm.marker.coords.lng() }}'
         animation='DROP'
-        draggable='true'
+        draggable='{{vm.marker.isDraggable}}'
+        on-dragend='vm.onDragEnd($event)'
         )
 
   .modal-footer
-    button.btn.btn-success.save(
+    button.btn.save(
     ng-repeat='button in vm.buttons'
     ng-click='button.onClick(vm)'
+    ng-class='{ "{{button.class}}": true }'
     ) {{ button.title }}

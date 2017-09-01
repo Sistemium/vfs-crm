@@ -14,7 +14,7 @@
     const vm = saControllerHelper.setup(this, $scope)
       .use(GalleryHelper);
 
-    const {ServicePoint, FilterSystem, Brand, Person, ServiceItem, ServicePointContact, Picture} = Schema.models();
+    const {ServicePoint, FilterSystem, Brand, Person, ServiceItem, ServicePointContact, Picture, Location} = Schema.models();
 
     vm.use({
 
@@ -22,6 +22,7 @@
       tileBusy: {},
       progress: {},
       uploadingPicture: false,
+      coords: {},
 
       addContactClick,
       addServiceItemClick,
@@ -132,7 +133,7 @@
 
       vm.rebindOne(ServicePoint, id, 'vm.servicePoint');
 
-      let relations = ['ServiceItem', 'ServicePointContact', 'Picture', 'ServiceContract'];
+      let relations = ['ServiceItem', 'ServicePointContact', 'Picture', 'ServiceContract', 'Location'];
 
       let busy = [
         ServicePoint.findAllWithRelations({id}, {bypassCache: true})(relations)
@@ -156,9 +157,31 @@
 
     function positionMarker() {
 
+      if (vm.servicePoint.location)
+        return;
+
       return GeoCoder.geocode({address: vm.servicePoint.address})
         .then(result => {
+
           vm.coords = result[0].geometry.location;
+
+          let locationData = {
+            longitude: result[0].geometry.location.lng(),
+            latitude: result[0].geometry.location.lat(),
+            altitude: 0,
+            source: 'automatic',
+            ownerXid: vm.servicePoint.id,
+            timestamp: new Date()
+          };
+
+          Location.create(locationData)
+            .then(savedLocation => {
+
+              vm.servicePoint.locationId = savedLocation.id;
+              vm.servicePoint.DSCreate();
+
+            });
+
         });
 
     }
