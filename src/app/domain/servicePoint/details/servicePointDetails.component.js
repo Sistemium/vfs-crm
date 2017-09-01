@@ -62,7 +62,7 @@
 
     function $onInit() {
       vm.watchScope('vm.servicePoint.address', address => {
-        if (!address) return;
+        if (!address || !vm.googleReady) return;
         positionMarker();
       });
     }
