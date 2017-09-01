@@ -126,3 +126,11 @@
       filter='{siteId: vm.servicePoint.siteId}'
       )
 
+    .info
+
+      label(for='info') Pastaba
+
+      textarea#info.form-control(
+      placeholder='Komentaras arba paaiškinimas'
+      ng-model='vm.servicePoint.info'
+      )
