@@ -22,6 +22,11 @@
             localKey: 'siteId'
           },
 
+          Locality: {
+            localField: 'locality',
+            localKey: 'localityId'
+          },
+
           Street: {
             localField: 'street',
             localKey: 'streetId'
@@ -67,18 +72,18 @@
 
     function concatAddress() {
 
-      let {street, house} = this;
+      let {locality, street, house} = this;
 
-      if (!street) return null;
+      if (!locality) return null;
 
-      return `${_.get(street, 'locality.name')}, ${street.name}${house ? ', ' + house : ''}`;
+      return `${locality.name}${street ? ', ' + street.name : ''}${house ? ', ' + house : ''}`;
 
     }
 
     function isValid() {
       return this.siteId &&
         this.address &&
-        this.streetId;
+        this.localityId;
     }
 
     const cache = {};

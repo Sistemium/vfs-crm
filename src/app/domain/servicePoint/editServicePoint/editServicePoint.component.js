@@ -25,13 +25,11 @@
 
       let {servicePoint} = vm;
 
-      servicePoint && servicePoint.DSLoadRelations('Street')
-        .then(() => servicePoint.street && servicePoint.street.DSLoadRelations())
+      servicePoint && servicePoint.DSLoadRelations(['Street', 'Locality'])
+        .then(() => servicePoint.locality && servicePoint.locality.DSLoadRelations())
         .then(() => {
-          let locality = _.get(servicePoint, 'street.locality') || {};
           vm.use({
-            districtId: locality.districtId,
-            localityId: locality.id
+            districtId: _.get(servicePoint, 'locality.districtId')
           });
           vm.watchScope('vm.servicePoint', onChange, true);
         });

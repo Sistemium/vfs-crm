@@ -33,12 +33,12 @@
       ng-required='true'
       items-data-source-name='Locality'
       items-name-property='name'
-      ng-model='vm.localityId'
+      ng-model='vm.servicePoint.localityId'
       filter='{districtId: vm.districtId}'
       placement='bottom-left'
       )
 
-    .street(ng-if='vm.localityId')
+    .street(ng-if='vm.servicePoint.localityId')
 
       label Gatvė
 
@@ -47,7 +47,7 @@
       ng-model='vm.servicePoint.streetId'
       items-data-source-name='Street'
       items-name-property='name'
-      filter='{localityId: vm.localityId}'
+      filter='{localityId: vm.servicePoint.localityId}'
       placement='bottom-left'
       )
 
