@@ -2,14 +2,14 @@
 
 (function () {
 
-  angular.module('Models').run(function (Schema) {
+  angular.module('Models').run(function (Schema, $rootScope) {
 
     // 'num,code;date',
     // 'Person,customerPerson,nullable;LegalEntity,customerLegalEntity,nullable;Site'
     // -- Either customerPerson or customerLegalEntity is not null
     // -- Either customerPerson or customerLegalEntity is null
 
-    Schema.register({
+    const ServiceContract = Schema.register({
 
       name: 'ServiceContract',
 
@@ -58,6 +58,22 @@
 
     });
 
+    $rootScope.$watch(ifCustomerChanged, recalculateNames);
+
+    /*
+     Functions
+     */
+
+    function recalculateNames() {
+      _.each(ServiceContract.getAll(), item => {
+        ServiceContract.compute(item.id);
+      });
+    }
+
+    function ifCustomerChanged() {
+      return `${Schema.model('Person').lastModified()}|${Schema.model('LegalEntity').lastModified()}`;
+    }
+
     function isValid() {
       return this.date &&
         this.siteId &&
@@ -79,7 +95,7 @@
 
     function name(date, num) {
       if (!date || !num) return null;
-      return `${num} nuo ${date}`;
+      return `${this.customer().name} №${num} nuo ${date}`;
     }
 
   });

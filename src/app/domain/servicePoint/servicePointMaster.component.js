@@ -12,7 +12,7 @@
 
     const vm = saControllerHelper.setup(this, $scope);
 
-    const {Employee, ServicePoint} = Schema.models();
+    const {Employee, ServicePoint, ServiceContract, Person, LegalEntity} = Schema.models();
 
     vm.use({
       servicePointClick,
@@ -39,8 +39,26 @@
 
       let {searchText} = vm;
 
-      vm.servicePoints = searchText ? $filter('filter')(vm.data, searchText) : vm.data;
-      vm.servicePoints = $filter('orderBy')(vm.servicePoints, 'name');
+      vm.servicePoints = searchText ? filterServicePoints(vm.data, searchText) : vm.data;
+      vm.servicePoints = $filter('orderBy')(vm.servicePoints, 'address');
+
+    }
+
+    function filterServicePoints(data, text) {
+
+      if (!text) return data;
+
+      let re = new RegExp(_.escapeRegExp(text), 'i');
+
+      return _.filter(data, item => {
+
+        if (re.test(item.address)) return true;
+
+        let contract = _.result(item, 'currentServiceContract.name');
+
+        return re.test(contract);
+
+      });
 
     }
 
@@ -58,6 +76,9 @@
     function refresh() {
 
       let busy = [
+        Person.findAll(),
+        LegalEntity.findAll(),
+        ServiceContract.findAll(),
         Employee.findAll(),
         ServicePoint.findAll()
       ];

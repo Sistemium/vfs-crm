@@ -2,7 +2,7 @@
 
   .headers
     .address Adresas
-    .name Pavadinimas
+    .name Sutartis
     .serving-master Aptarnavimo Meistras
 
   .scroll-y(
@@ -16,7 +16,7 @@
     ng-click='vm.servicePointClickFn(servicePoint, $index)'
     )
       .address {{ servicePoint.address }}
-      .name {{ servicePoint.name }}
+      .name {{ servicePoint.currentServiceContract.name }}
       .serving-master {{ servicePoint.servingMaster.name }}
 
   .ui-view

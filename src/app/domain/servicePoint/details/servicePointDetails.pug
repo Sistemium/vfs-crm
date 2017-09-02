@@ -40,8 +40,7 @@
           a(
           href ng-click='vm.serviceContractClick()'
           ng-if='vm.servicePoint.currentServiceContract'
-          )
-            | {{vm.servicePoint.currentServiceContract.customer().name}} №{{vm.servicePoint.currentServiceContract.name}}
+          ) {{vm.servicePoint.currentServiceContract.name}}
 
         .currentServiceContract
         .customer
