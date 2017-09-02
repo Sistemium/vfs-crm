@@ -91,7 +91,7 @@ vfs-dropdown {
       //color: $warn-text;
     }
 
-    .vfs-dropdown-item:hover {
+    .vfs-dropdown-item:hover, .vfs-dropdown-item.focused {
       background: $hover-color;
       cursor: pointer;
     }

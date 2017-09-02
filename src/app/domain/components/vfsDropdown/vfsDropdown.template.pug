@@ -1,6 +1,6 @@
 .search-add(ng-hide='vm.newItem')
 
-  vfs-searcher.search(search='vm.search')
+  vfs-searcher.search(search='vm.search' ng-keydown='vm.onKeyDown($event)')
 
   button-add(button-click='vm.addClick()')
 
@@ -12,8 +12,9 @@ resize-offset-top='15'
 
   .vfs-dropdown-items(vs-repeat='34')
     .vfs-dropdown-item(
+    id='{{ item.id }}'
     ng-repeat='item in vm.filteredData track by item.id'
-    ng-class='{active : vm.currentItem.id === item.id}'
+    ng-class='{active : vm.currentItem.id === item.id, focused: vm.focused.id === item.id }'
     ng-click='vm.itemClick(item)'
     )
       span(ng-if='vm.itemsGroupProperty') {{ vm.groupLabel(item) }} &nbsp;

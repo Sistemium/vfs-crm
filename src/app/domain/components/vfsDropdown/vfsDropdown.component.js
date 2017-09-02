@@ -19,7 +19,7 @@
 
   });
 
-  function dropdownController($scope, saControllerHelper, Schema, Editing, $timeout, $filter) {
+  function dropdownController($scope, saControllerHelper, Schema, Editing, $timeout, $filter, saEtc) {
 
     const vm = saControllerHelper.setup(this, $scope);
 
@@ -29,7 +29,8 @@
       addClick,
       afterCancel,
       afterSave,
-      groupLabel
+      groupLabel,
+      onKeyDown
     });
 
     Editing.setupController(vm, 'newItem');
@@ -42,6 +43,46 @@
     /*
      Functions
      */
+
+    function onKeyDown($event) {
+      // console.warn($event.keyCode);
+      // 38 = up 40 = down
+
+      if ($event.keyCode === 13) {
+        return vm.focused && itemClick(vm.focused);
+      }
+
+      let direction = $event.keyCode === 38 && 'up' || $event.keyCode === 40 && 'down';
+
+      if (!direction) return;
+
+      let {focused} = vm;
+
+      if (direction ==='down') {
+        if (!focused) {
+          focused = _.first(vm.filteredData);
+        } else {
+          let idx = _.findIndex(vm.filteredData, focused);
+          if (idx >= vm.filteredData.length - 1) return;
+          focused = vm.filteredData[++idx];
+        }
+      } else if (direction ==='up') {
+        if (!focused) {
+          focused = _.last(vm.filteredData);
+        } else {
+          let idx = _.findIndex(vm.filteredData, focused);
+          if (!idx) return;
+          focused = vm.filteredData[--idx];
+        }
+      }
+
+      let elem = saEtc.getElementById(focused.id);
+
+      elem.parentElement.parentElement.scrollTop = _.max([0, elem.offsetTop - elem.clientHeight*2]);
+
+      vm.focused = focused;
+
+    }
 
     function onCurrentId(id) {
 
