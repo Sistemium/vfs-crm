@@ -16,11 +16,19 @@
 
     const vm = saControllerHelper.setup(this, $scope);
 
-    vm.use({});
+    vm.use({
+      $onInit
+    });
 
     /*
      Functions
      */
+
+    function $onInit() {
+      if (vm.serviceContract.siteId) {
+        vm.hideSite = true;
+      }
+    }
 
   }
 
