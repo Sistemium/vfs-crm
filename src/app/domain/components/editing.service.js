@@ -17,8 +17,8 @@
         saveClick,
         cancelClick,
         destroyClick,
-        afterSave: vm.afterSave || _.noop,
-        afterCancel: vm.afterCancel || _.noop
+        afterSave: vm.afterSave || _.identity,
+        afterCancel: vm.afterCancel || _.identity
       });
 
       /*
@@ -27,10 +27,10 @@
 
       function saveClick() {
         if (vm.saveFn) {
-          vm.saveFn()
+          return vm.saveFn()
             .then(vm.afterSave);
         } else if (_.isFunction(vm[itemProperty].DSCreate)) {
-          vm[itemProperty].DSCreate()
+          return vm[itemProperty].DSCreate()
             .then(vm.afterSave);
         }
       }
