@@ -2,7 +2,7 @@
 
   vfs-searcher.search(search='vm.search')
 
-  button-add(button-click='vm.addItem()')
+  button-add(button-click='vm.addClick()')
 
 .scroll-y(
 ng-if='!vm.newItem'
@@ -23,24 +23,6 @@ resize-offset-top='15'
     span(ng-if='vm.search') Rezultatų nerasta, gal
     span(ng-if='!vm.search') Duomenų nėra, gal
     = ' '
-    a(href ng-click='$event.stopPropagation();vm.addItem($event)') pridėti
+    a(href ng-click='$event.stopPropagation();vm.addClick($event)') pridėti
     = ' '
     span naują įrašą?
-
-.edit-block(ng-if='vm.newItem')
-
-  .title {{ vm.newItemTitle }}
-
-  transform-to-component(component-name='{{vm.editComponentName}}' instance='vm.newItem')
-
-  .button-block
-
-    button.btn.btn-success.animate-show.save.btn-sm(
-    ng-click='vm.saveClick()'
-    ng-disabled='!vm.newItem.isValid()'
-    ) Išsaugoti
-
-    button.btn.btn-default.cancel.btn-sm(
-    ng-click='vm.cancelClick($event)'
-    ) Atšaukti
-

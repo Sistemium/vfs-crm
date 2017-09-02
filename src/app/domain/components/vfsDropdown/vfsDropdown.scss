@@ -3,6 +3,8 @@
 vfs-dropdown {
 
   $padding: 5px;
+  $border-color: #ccc;
+  $height: 32px;
 
   .popover {
     min-width: 340px;
@@ -15,6 +17,43 @@ vfs-dropdown {
 
   .active {
     background: darken($hover-color, 5%);
+  }
+
+  .vfs-dropdown {
+
+    display: flex;
+
+    > a {
+
+      display: flex;
+      flex: 1;
+
+      border: 1px solid $border-color;
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+      border-radius: 4px;
+      padding: 0 $padding * 2;
+      //height: $height;
+
+      justify-content: space-between;
+      align-items: center;
+      text-decoration: none;
+
+      > .name {
+        span + span {
+          margin-left: 10px;
+        }
+      }
+
+    }
+
+    > button-add {
+      margin-left: $padding;
+      button.btn-warning {
+        border: 1px solid $border-color;
+        background-color: $white;
+      }
+    }
+
   }
 
   .search-add {
@@ -61,15 +100,50 @@ vfs-dropdown {
 
   .edit-block {
 
+    margin-top: $padding;
+    padding: $padding;
+    box-shadow: $box-shadow;
+    border-radius: $padding;
+
     .title {
 
       text-align: center;
       font-size: 120%;
       font-weight: 400;
-      padding: $padding $padding $padding*2;
+      padding: 0 0 $padding $padding * 2;
+      color: $black;
 
-      margin: 0 -5px;
       border-bottom: solid 1px $border-gray;
+
+      display: flex;
+      align-items: center;
+
+      > span {
+        flex: 1;
+        text-align: left;
+      }
+
+      > a {
+
+        display: inline-block;
+        margin-left: $padding;
+        font-weight: normal;
+        text-align: center;
+        vertical-align: middle;
+        border: 1px solid transparent;
+        white-space: nowrap;
+        padding: 3px;
+        font-size: 15px;
+
+      }
+
+      > a.save i {
+        color: lighten($state-success-text, 10%);
+      }
+
+      > a.cancel i {
+        top: 2px;
+      }
 
     }
 
@@ -85,36 +159,6 @@ vfs-dropdown {
 
       button {
         margin-left: 7px;
-      }
-
-    }
-
-  }
-}
-
-.modal-content form, .modal-content .form, .edit-block {
-  .vfs-dropdown {
-
-    $height: 32px;
-
-    border: 1px solid #ccc;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-    border-radius: 4px;
-    height: $height;
-    padding: 0 10px;
-
-    > a {
-      @extend %flex-row-nowrap;
-
-      height: 100%;
-      justify-content: space-between;
-      align-items: center;
-      text-decoration: none;
-
-      .name-wrapper {
-        span + span {
-          margin-left: 10px;
-        }
       }
 
     }

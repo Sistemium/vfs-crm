@@ -19,14 +19,14 @@
 
   });
 
-  function dropdownController($scope, saControllerHelper, Schema, toastr, Editing, $timeout, $filter) {
+  function dropdownController($scope, saControllerHelper, Schema, Editing, $timeout, $filter) {
 
     const vm = saControllerHelper.setup(this, $scope);
 
     vm.use({
       $onInit,
       itemClick,
-      addItem,
+      addClick,
       afterCancel,
       afterSave,
       groupLabel
@@ -93,7 +93,7 @@
       if (ov) {
         $timeout(200).then(() => {
           vm.search = '';
-          delete vm.newItem;
+          // delete vm.newItem;
         })
       }
 
@@ -103,9 +103,10 @@
       return _.get(item, vm.itemsGroupProperty);
     }
 
-    function addItem() {
+    function addClick() {
 
       vm.newItem = vm.model.createInstance(_.assign({name: vm.search}, vm.filter || {}));
+      vm.isOpen = false;
 
     }
 
@@ -155,6 +156,7 @@
       //vm.currentItem = saved;
       vm.currentId = saved.id;
       vm.isOpen = false;
+      delete vm.newItem;
 
     }
 
