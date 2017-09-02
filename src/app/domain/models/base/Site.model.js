@@ -22,7 +22,11 @@
         declension
       },
 
-      meta: {}
+      meta: {
+        label: {
+          add: 'Naujas padalinys'
+        }
+      }
 
     });
 

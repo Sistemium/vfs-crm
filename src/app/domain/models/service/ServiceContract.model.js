@@ -48,6 +48,12 @@
         customer,
         isValid
 
+      },
+
+      meta: {
+        label: {
+          add: 'Naujas sutartis'
+        }
       }
 
     });

@@ -66,6 +66,12 @@
         isValid,
         concatAddress,
         refreshCache
+      },
+
+      meta: {
+        label: {
+          add: 'Naujas Aptarnavimo Taškas'
+        }
       }
 
     });
