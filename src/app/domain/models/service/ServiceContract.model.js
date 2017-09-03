@@ -94,7 +94,7 @@
     }
 
     function name(date, num) {
-      if (!date || !num) return null;
+      if (!date || !num || !this.customer()) return null;
       return `${this.customer().name} №${num} nuo ${date}`;
     }
 

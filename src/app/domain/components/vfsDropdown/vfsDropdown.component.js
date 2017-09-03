@@ -54,7 +54,8 @@
 
       switch ($event.keyCode) {
 
-        case 13: return vm.focused && itemClick(vm.focused);
+        case 13:
+          return vm.focused && itemClick(vm.focused);
         case 27: {
           $event.preventDefault();
           return (vm.isOpen = false);
@@ -68,7 +69,8 @@
           break;
         }
 
-        default: return;
+        default:
+          return;
 
       }
 
@@ -78,27 +80,37 @@
         focused = vm.currentItem;
       }
 
+      if (!saEtc.getElementById(focused.id)) {
+        focused = false;
+      }
+
+      if (!focused) {
+        focused = getFirstVisibleElement();
+      }
+
+      if (!focused) return;
+
       if (direction === 1) {
-        if (!focused) {
-          focused = _.first(vm.filteredData);
-        } else {
-          let idx = _.findIndex(vm.filteredData, focused);
-          if (idx >= vm.filteredData.length - 1) return;
-          focused = vm.filteredData[++idx];
-        }
+        let idx = _.findIndex(vm.filteredData, focused);
+        if (idx >= vm.filteredData.length - 1) return;
+        focused = vm.filteredData[++idx];
       } else if (direction === -1) {
-        if (!focused) {
-          focused = _.last(vm.filteredData);
-        } else {
-          let idx = _.findIndex(vm.filteredData, focused);
-          if (!idx) return;
-          focused = vm.filteredData[--idx];
-        }
+        let idx = _.findIndex(vm.filteredData, focused);
+        if (idx < 0) return;
+        focused = vm.filteredData[--idx] || focused;
       }
 
       scrollToExistingElement(focused);
 
       vm.focused = focused;
+
+    }
+
+    function getFirstVisibleElement() {
+
+      let scroller = saEtc.getElementById(vm.id);
+
+      return _.find(vm.filteredData, {id: scroller.children[1].getAttribute('id')});
 
     }
 
