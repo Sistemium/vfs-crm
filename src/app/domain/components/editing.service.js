@@ -78,7 +78,7 @@
         `</div>` +
         `<div class="modal-footer">` +
         (item.id ? `  <button class="btn destroy" ng-class="vm.confirmDestroy ? 'btn-danger' : 'btn-default'" ng-click="vm.destroyClick()">Ištrinti</button>` : '') +
-        `  <button class="btn btn-success save" ng-disabled="!vm.item.isValid()" ng-click="vm.saveClick()">Išsaugoti</button>` +
+        `  <button class="btn btn-success save animate-show" ng-show="vm.item.DSHasChanges()" ng-disabled="!vm.item.isValid()" ng-click="vm.saveClick()">Išsaugoti</button>` +
         `  <button class="btn btn-default cancel" ng-click="vm.cancelClick()">Atšaukti</button>` +
         `</div>`,
         size: 'lg',
