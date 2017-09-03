@@ -1,5 +1,17 @@
 @import "flex";
 
+.editing.modal-header {
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  > *:first-child {
+    flex: 1;
+  }
+
+}
+
 %editing-with-form {
 
   $margin: 5px;

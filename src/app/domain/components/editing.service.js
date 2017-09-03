@@ -69,7 +69,10 @@
       let modal = $uibModal.open({
 
         animation: true,
-        template: `<div class="modal-header"><h1>{{vm.title}}</h1></div>` +
+        template: `<div class="editing modal-header">` +
+        `  <h1>{{vm.title}}</h1>` +
+        `  <a href class="close-btn" ng-click="vm.cancelClick()"><i class="glyphicon glyphicon-remove"></i></a>` +
+        `</div>` +
         `<div class="modal-body">` +
         `  <${componentName} ${itemName}="vm.item" save-fn="vm.saveFn"></${componentName}>` +
         `</div>` +
