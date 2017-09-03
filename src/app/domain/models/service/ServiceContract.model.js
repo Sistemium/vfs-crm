@@ -53,7 +53,8 @@
       meta: {
         label: {
           add: 'Naujas sutartis'
-        }
+        },
+        noDefault: true
       }
 
     });
