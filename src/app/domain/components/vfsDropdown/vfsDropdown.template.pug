@@ -4,26 +4,27 @@
 
   button-add(button-click='vm.addClick()')
 
-.scroll-y(
-ng-if='!vm.newItem'
+.scroll-y.vfs-dropdown-items(
+vs-repeat='34'
+id='{{ vm.id }}'
+ng-if='vm.id'
 resize
 resize-offset-top='15'
 )
 
-  .vfs-dropdown-items(vs-repeat='34')
-    .vfs-dropdown-item(
-    id='{{ item.id }}'
-    ng-repeat='item in vm.filteredData track by item.id'
-    ng-class='{active : vm.currentItem.id === item.id, focused: vm.focused.id === item.id }'
-    ng-click='vm.itemClick(item)'
-    )
-      span(ng-if='vm.itemsGroupProperty') {{ vm.groupLabel(item) }} &nbsp;
-      span {{item[vm.itemsNameProperty]}}
+  .vfs-dropdown-item(
+  id='{{ item.id }}'
+  ng-repeat='item in vm.filteredData track by item.id'
+  ng-class='{active : vm.currentItem.id === item.id, focused: vm.focused.id === item.id }'
+  ng-click='vm.itemClick(item)'
+  )
+    span(ng-if='vm.itemsGroupProperty') {{ vm.groupLabel(item) }} &nbsp;
+    span {{item[vm.itemsNameProperty]}}
 
-  .no-results(ng-if='!vm.filteredData.length')
-    span(ng-if='vm.search') Rezultatų nerasta, gal
-    span(ng-if='!vm.search') Duomenų nėra, gal
-    = ' '
-    a(href ng-click='$event.stopPropagation();vm.addClick($event)') pridėti
-    = ' '
-    span naują įrašą?
+.no-results(ng-if='!vm.filteredData.length')
+  span(ng-if='vm.search') Rezultatų nerasta, gal
+  span(ng-if='!vm.search') Duomenų nėra, gal
+  = ' '
+  a(href ng-click='$event.stopPropagation();vm.addClick($event)') pridėti
+  = ' '
+  span naują įrašą?

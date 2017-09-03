@@ -19,11 +19,14 @@
 
   });
 
-  function dropdownController($scope, saControllerHelper, Schema, Editing, $timeout, $filter, saEtc) {
+  function dropdownController($scope, saControllerHelper, Schema, Editing, $timeout, $filter, saEtc, UUID) {
 
     const vm = saControllerHelper.setup(this, $scope);
 
     vm.use({
+
+      id: `vfs-dropdown-${UUID.v4()}`,
+
       $onInit,
       itemClick,
       addClick,
@@ -31,6 +34,7 @@
       afterSave,
       groupLabel,
       onKeyDown
+
     });
 
     Editing.setupController(vm, 'newItem');
@@ -92,8 +96,15 @@
         }
       }
 
+      scrollToExistingElement(focused);
+
+      vm.focused = focused;
+
+    }
+
+    function scrollToExistingElement(focused) {
       let elem = saEtc.getElementById(focused.id);
-      let scroller = elem.parentElement.parentElement;
+      let scroller = elem.parentElement;
 
       let innerPosition = elem.offsetTop - scroller.scrollTop;
       let minPosition = elem.clientHeight * 3;
@@ -104,9 +115,6 @@
       } else if (innerPosition > maxPosition) {
         scroller.scrollTop = elem.offsetTop + minPosition - scroller.clientHeight;
       }
-
-      vm.focused = focused;
-
     }
 
     function onCurrentId(id) {
@@ -154,6 +162,38 @@
 
     }
 
+    const itemHeight = 34;
+
+    function scrollToCurrent() {
+
+      if (!vm.currentId) {
+        return;
+      }
+
+      let elem = saEtc.getElementById(vm.currentId);
+
+      if (!elem) {
+
+        let scroller = saEtc.getElementById(vm.id);
+
+        if (!scroller) {
+          return $timeout(200)
+            .then(scrollToCurrent);
+        }
+
+        let idx = _.findIndex(vm.filteredData, vm.currentItem);
+
+        scroller.scrollTop = (idx + 1) * itemHeight;
+
+        return $timeout(200)
+          .then(scrollToCurrent);
+
+      }
+
+      scrollToExistingElement(elem);
+
+    }
+
     function onOpen(nv, ov) {
 
       if (ov) {
@@ -161,6 +201,10 @@
           vm.search = '';
           delete vm.focused;
         })
+      }
+
+      if (nv) {
+        scrollToCurrent();
       }
 
     }
