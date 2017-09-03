@@ -39,26 +39,8 @@
 
       let {searchText} = vm;
 
-      vm.servicePoints = searchText ? filterServicePoints(vm.data, searchText) : vm.data;
+      vm.servicePoints = searchText ? ServicePoint.meta.filter(vm.data, searchText) : vm.data;
       vm.servicePoints = $filter('orderBy')(vm.servicePoints, 'address');
-
-    }
-
-    function filterServicePoints(data, text) {
-
-      if (!text) return data;
-
-      let re = new RegExp(_.escapeRegExp(text), 'i');
-
-      return _.filter(data, item => {
-
-        if (re.test(item.address)) return true;
-
-        let contract = _.result(item, 'currentServiceContract.name');
-
-        return re.test(contract);
-
-      });
 
     }
 

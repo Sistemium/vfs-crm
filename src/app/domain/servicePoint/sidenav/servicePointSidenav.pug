@@ -19,5 +19,5 @@
     ng-class='{active: servicePoint.id === vm.currentServicePointId}'
     )
       .address {{ servicePoint.address }}
-      .name {{ servicePoint.name}}
+      .name {{ servicePoint.currentServiceContract.customer().name}}
       .badge {{ servicePoint.servingItemsLazy().length }}

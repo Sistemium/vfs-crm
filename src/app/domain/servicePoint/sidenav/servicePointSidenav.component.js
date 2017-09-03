@@ -64,7 +64,7 @@
 
       let {searchText} = vm;
 
-      vm.servicePoints = searchText ? $filter('filter')(vm.data, searchText) : vm.data;
+      vm.servicePoints = searchText ? ServicePoint.meta.filter(vm.data, searchText) : vm.data;
       vm.servicePoints = $filter('orderBy')(vm.servicePoints, 'name');
 
     }

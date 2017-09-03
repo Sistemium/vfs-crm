@@ -71,10 +71,31 @@
       meta: {
         label: {
           add: 'Naujas Aptarnavimo Taškas'
-        }
+        },
+
+        filter: filterServicePoints
       }
 
     });
+
+
+    function filterServicePoints(data, text) {
+
+      if (!text) return data;
+
+      let re = new RegExp(_.escapeRegExp(text), 'i');
+
+      return _.filter(data, item => {
+
+        if (re.test(item.address)) return true;
+
+        let contract = _.result(item, 'currentServiceContract.name');
+
+        return re.test(contract);
+
+      });
+
+    }
 
     function concatAddress() {
 
