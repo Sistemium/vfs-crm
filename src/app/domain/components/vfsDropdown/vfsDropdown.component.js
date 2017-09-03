@@ -80,25 +80,29 @@
         focused = vm.currentItem;
       }
 
-      if (!saEtc.getElementById(focused.id)) {
+      if (focused && !saEtc.getElementById(focused.id)) {
         focused = false;
       }
 
       if (!focused) {
+
         focused = getFirstVisibleElement();
-      }
 
-      if (!focused) return;
+      } else if (direction === 1) {
 
-      if (direction === 1) {
         let idx = _.findIndex(vm.filteredData, focused);
         if (idx >= vm.filteredData.length - 1) return;
         focused = vm.filteredData[++idx];
+
       } else if (direction === -1) {
+
         let idx = _.findIndex(vm.filteredData, focused);
         if (idx < 0) return;
         focused = vm.filteredData[--idx] || focused;
+
       }
+
+      if (!focused) return;
 
       scrollToExistingElement(focused);
 
@@ -162,7 +166,7 @@
 
     function setDefault() {
 
-      if (vm.currentId) {
+      if (vm.currentId || vm.model.meta.noDefault) {
         return;
       }
 

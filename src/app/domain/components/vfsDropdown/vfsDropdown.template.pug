@@ -15,7 +15,7 @@ resize-offset-top='15'
   .vfs-dropdown-item(
   id='{{ item.id }}'
   ng-repeat='item in vm.filteredData track by item.id'
-  ng-class='{active : vm.currentItem.id === item.id, focused: vm.focused.id === item.id }'
+  ng-class='{active : !vm.focused && vm.currentItem.id === item.id, focused: vm.focused.id === item.id }'
   ng-click='vm.itemClick(item)'
   )
     span(ng-if='vm.itemsGroupProperty') {{ vm.groupLabel(item) }} &nbsp;
