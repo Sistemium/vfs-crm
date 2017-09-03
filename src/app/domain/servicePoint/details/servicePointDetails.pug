@@ -111,10 +111,19 @@
     .service-point-contacts
 
       .contact(
+      ng-if='vm.servicePoint.currentServiceContract.customerPersonId'
+      )
+        span.name {{ vm.servicePoint.currentServiceContract.customerPerson.name }}
+        a.phone(
+        href='{{ vm.servicePoint.currentServiceContract.customerPerson.telHref }}'
+        ng-click='$event.stopPropagation()'
+        ) {{ vm.servicePoint.currentServiceContract.customerPerson.phone }}
+
+      .contact(
       ng-repeat='servicePointContact in vm.servicePoint.servicePointContacts track by servicePointContact.id'
       ng-click='vm.servicePointContactClick(servicePointContact)'
       )
-        span.name {{servicePointContact.person.firstName}} {{servicePointContact.person.lastName}}
+        span.name {{ servicePointContact.person.name }}
         a.phone(
         href='{{servicePointContact.person.telHref}}'
         ng-click='$event.stopPropagation()'

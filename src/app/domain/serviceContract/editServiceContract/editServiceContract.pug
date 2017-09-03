@@ -67,7 +67,7 @@
       placement='bottom-left'
       )
 
-    .service-points(ng-if='vm.serviceContract.servicePoints.length')
+    .service-points(ng-if='vm.serviceContract.id && vm.serviceContract.servicePoints.length')
 
       label Aptarnavimo taškai
 
