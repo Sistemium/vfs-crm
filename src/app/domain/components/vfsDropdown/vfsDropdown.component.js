@@ -45,16 +45,28 @@
      */
 
     function onKeyDown($event) {
-      // console.warn($event.keyCode);
-      // 38 = up 40 = down
 
-      if ($event.keyCode === 13) {
-        return vm.focused && itemClick(vm.focused);
+      let direction;
+
+      switch ($event.keyCode) {
+
+        case 13: return vm.focused && itemClick(vm.focused);
+        case 27: {
+          $event.preventDefault();
+          return (vm.isOpen = false);
+        }
+        case 38: {
+          direction = 'up';
+          break;
+        }
+        case 40: {
+          direction = 'down';
+          break;
+        }
+
+        default: return;
+
       }
-
-      let direction = $event.keyCode === 38 && 'up' || $event.keyCode === 40 && 'down';
-
-      if (!direction) return;
 
       let {focused} = vm;
 
