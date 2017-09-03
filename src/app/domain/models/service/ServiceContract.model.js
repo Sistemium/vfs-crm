@@ -32,6 +32,13 @@
             localKey: 'siteId'
           }
 
+        },
+
+        hasMany: {
+          ServicePoint: {
+            localField: 'servicePoints',
+            foreignKey: 'currentServiceContractId'
+          }
         }
 
       },

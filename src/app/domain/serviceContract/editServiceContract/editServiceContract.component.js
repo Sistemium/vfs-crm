@@ -12,7 +12,7 @@
 
   });
 
-  function editServiceContract($scope, saControllerHelper) {
+  function editServiceContract($scope, saControllerHelper, Schema) {
 
     const vm = saControllerHelper.setup(this, $scope);
 
@@ -25,9 +25,25 @@
      */
 
     function $onInit() {
+
       if (vm.serviceContract.siteId) {
         vm.hideSite = true;
       }
+
+      const {Brand, FilterSystemType, FilterSystem} = Schema.models();
+
+      vm.serviceContract.DSLoadRelations()
+        .then(serviceContract => {
+          return _.map(serviceContract.servicePoints, servicePoint => {
+            return servicePoint.DSLoadRelations();
+          });
+        })
+        .then(() => {
+          Brand.findAll();
+          FilterSystemType.findAll();
+          FilterSystem.findAll();
+        });
+
     }
 
   }

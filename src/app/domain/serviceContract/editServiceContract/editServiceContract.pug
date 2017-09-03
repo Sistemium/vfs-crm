@@ -7,30 +7,29 @@
 
       vfs-dropdown(
       ng-required='true'
-      ng-model='vm.servicePoint.siteId'
+      ng-model='vm.serviceContract.siteId'
       items-data-source-name='Site'
       items-name-property='name'
-      save-to='vm.serviceContract'
-      save-to-property='siteId'
       placement='bottom-left'
       )
 
-    .date
-      label Data
+    .field-group
+      .date
+        label Data
 
-      sab-date-picker(
-      value='vm.serviceContract.date'
-      )
+        sab-date-picker(
+        value='vm.serviceContract.date'
+        )
 
-    .num
-      label(for='num') Numeris
+      .num
+        label(for='num') Numeris
 
-      input#num.form-control(
-      required
-      autocomplete='off'
-      placeholder='Numeris'
-      ng-model='vm.serviceContract.num'
-      )
+        input#num.form-control(
+        required
+        autocomplete='off'
+        placeholder='Numeris'
+        ng-model='vm.serviceContract.num'
+        )
 
     .legal-type
 
@@ -51,11 +50,9 @@
 
       vfs-dropdown(
       ng-required='true'
-      ng-model='vm.servicePoint.customerLegalEntityId'
+      ng-model='vm.serviceContract.customerLegalEntityId'
       items-data-source-name='LegalEntity'
       items-name-property='name'
-      save-to='vm.serviceContract'
-      save-to-property='customerLegalEntityId'
       placement='bottom-left'
       )
 
@@ -64,10 +61,20 @@
 
       vfs-dropdown(
       ng-required='true'
-      ng-model='vm.servicePoint.customerPersonId'
+      ng-model='vm.serviceContract.customerPersonId'
       items-data-source-name='Person'
       items-name-property='name'
-      save-to='vm.serviceContract'
-      save-to-property='customerPersonId'
       placement='bottom-left'
       )
+
+    .service-points(ng-if='vm.serviceContract.servicePoints.length')
+
+      label Aptarnavimo taškai
+
+      .list-group
+
+        .list-group-item.service-point(ng-repeat='servicePoint in vm.serviceContract.servicePoints track by servicePoint.id')
+          .list-group-item-heading.address {{ servicePoint.address }}
+          .service-item(
+          ng-repeat='serviceItem in servicePoint.servingItems track by serviceItem.id'
+          ) {{ serviceItem.filterSystem.brand.name }} {{ serviceItem.filterSystem.name }} {{ serviceItem.info }}
