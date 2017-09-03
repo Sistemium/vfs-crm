@@ -56,11 +56,11 @@
           return (vm.isOpen = false);
         }
         case 38: {
-          direction = 'up';
+          direction = -1;
           break;
         }
         case 40: {
-          direction = 'down';
+          direction = 1;
           break;
         }
 
@@ -70,7 +70,11 @@
 
       let {focused} = vm;
 
-      if (direction ==='down') {
+      if (!focused) {
+        focused = vm.currentItem;
+      }
+
+      if (direction === 1) {
         if (!focused) {
           focused = _.first(vm.filteredData);
         } else {
@@ -78,7 +82,7 @@
           if (idx >= vm.filteredData.length - 1) return;
           focused = vm.filteredData[++idx];
         }
-      } else if (direction ==='up') {
+      } else if (direction === -1) {
         if (!focused) {
           focused = _.last(vm.filteredData);
         } else {
@@ -89,8 +93,17 @@
       }
 
       let elem = saEtc.getElementById(focused.id);
+      let scroller = elem.parentElement.parentElement;
 
-      elem.parentElement.parentElement.scrollTop = _.max([0, elem.offsetTop - elem.clientHeight*2]);
+      let innerPosition = elem.offsetTop - scroller.scrollTop;
+      let minPosition = elem.clientHeight * 3;
+      let maxPosition = scroller.clientHeight - elem.clientHeight * 2;
+
+      if (innerPosition < minPosition) {
+        scroller.scrollTop = _.max([0, elem.offsetTop - minPosition]);
+      } else if (innerPosition > maxPosition) {
+        scroller.scrollTop = elem.offsetTop + minPosition - scroller.clientHeight;
+      }
 
       vm.focused = focused;
 
@@ -146,7 +159,7 @@
       if (ov) {
         $timeout(200).then(() => {
           vm.search = '';
-          // delete vm.newItem;
+          delete vm.focused;
         })
       }
 
