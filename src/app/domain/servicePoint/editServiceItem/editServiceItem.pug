@@ -74,7 +74,7 @@
 
         input#service-frequency.form-control(
         autocomplete='off'
-        placeholder='Mėnesių skaičius'
+        placeholder='{{ vm.serviceItem.filterSystem.serviceFrequency || vm.serviceItem.filterSystem.filterSystemType.serviceFrequency || "Mėnesių skaičius" }}'
         type='number'
         ng-model='vm.serviceItem.serviceFrequency'
         ng-step='1'
@@ -88,7 +88,7 @@
         input#service-price.form-control(
         autocomplete='off'
         type='number'
-        placeholder='Eurų už aptarnavimą'
+        placeholder='{{ vm.serviceItem.filterSystem.servicePrice || vm.serviceItem.filterSystem.filterSystemType.servicePrice || "Eurų už aptarnavimą" }}'
         ng-model='vm.serviceItem.servicePrice'
         ng-min='0'
         )
@@ -99,7 +99,7 @@
         input#frequency.form-control(
         autocomplete='off'
         type='number'
-        placeholder='Mėnesių skaičius'
+        placeholder='{{ vm.serviceItem.filterSystem.guaranteePeriod || vm.serviceItem.filterSystem.filterSystemType.guaranteePeriod || "Mėnesių skaičius" }}'
         ng-model='vm.serviceItem.guaranteePeriod'
         ng-min='0'
         )

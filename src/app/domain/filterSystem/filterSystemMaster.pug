@@ -27,5 +27,5 @@
 
           .filter-system-type {{ filterSystem.filterSystemType.name }}
           .name {{ filterSystem.name }}
-          .service-price {{ filterSystem.servicePrice | number:2 }} €
-          .service-frequency {{ filterSystem.serviceFrequency }}
+          .service-price {{ filterSystem.servicePrice || filterSystem.filterSystemType.servicePrice | number:2 }} €
+          .service-frequency {{ filterSystem.serviceFrequency || filterSystem.filterSystemType.serviceFrequency }}
