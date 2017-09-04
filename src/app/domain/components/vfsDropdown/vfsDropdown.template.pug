@@ -18,7 +18,7 @@ resize-offset-top='15'
   ng-class='{active : !vm.focused && vm.currentItem.id === item.id, focused: vm.focused.id === item.id }'
   ng-click='vm.itemClick(item)'
   )
-    span(ng-if='vm.itemsGroupProperty') {{ vm.groupLabel(item) }} &nbsp;
+    span(ng-if='vm.itemsGroupProperty') {{ vm.groupLabel(item) }}&nbsp;
     span {{item[vm.itemsNameProperty]}}
 
 .no-results(ng-if='!vm.filteredData.length')
