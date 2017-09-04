@@ -5,7 +5,7 @@
   angular.module('webPage')
     .service('Editing', Editing);
 
-  function Editing($uibModal, $timeout) {
+  function Editing($uibModal, $timeout, Schema) {
 
     return {editModal, setupController};
 
@@ -59,7 +59,23 @@
     }
 
     function editModal(componentName, title) {
-      return item => openEditModal(item, componentName, title);
+      return item => {
+
+        if (!title) {
+
+          let modelName = _.get(item, 'constructor.name');
+
+          let model = modelName && Schema.model(modelName);
+
+          if (!item.id) {
+            title = _.get(model, 'meta.label.add');
+          }
+
+        }
+
+        return openEditModal(item, componentName, title);
+
+      };
     }
 
     function openEditModal(item, componentName, title) {
