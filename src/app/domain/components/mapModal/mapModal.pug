@@ -2,7 +2,10 @@
 
   .modal-header
 
+  .modal-header
     h3 {{ vm.title }}
+    a(href ng-click='vm.closeModal()')
+      i.glyphicon.glyphicon-remove
 
   #modal-body.modal-body
 

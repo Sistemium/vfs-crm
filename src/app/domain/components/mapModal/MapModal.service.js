@@ -44,8 +44,12 @@
           coords,
           buttons,
           title
+          closeModal,
         });
 
+        function closeModal() {
+          modalInstance.close();
+        }
       }
     }
 
