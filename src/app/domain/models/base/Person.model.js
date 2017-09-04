@@ -27,10 +27,13 @@
       },
 
       computed: {
+
         name: ['firstName', 'lastName', name],
+
         telHref: ['phone', function (phone) {
-          return phone ? `tel://${_.replace(phone, /[^0-9]/g,'')}` : null;
+          return phone ? `tel://370${_.replace(phone, /[^0-9]/g,'')}` : null;
         }]
+
       },
 
       methods: {
@@ -40,7 +43,8 @@
       meta: {
         label: {
           add: 'Naujas asmuo'
-        }
+        },
+        mobileNumberMask: '+370 (999) 99-999'
       }
 
     });

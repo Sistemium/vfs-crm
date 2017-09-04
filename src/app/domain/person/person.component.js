@@ -15,6 +15,7 @@
     const {Person} = Schema.models();
 
     vm.use({
+      mobileNumberMask: Person.meta.mobileNumberMask,
       $onInit,
       openModal: Editing.editModal('edit-person', 'Asmens Redagavimas'),
       addClick

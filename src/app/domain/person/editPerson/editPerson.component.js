@@ -12,11 +12,14 @@
 
   });
 
-  function editPersonController($scope, saControllerHelper) {
+  function editPersonController($scope, saControllerHelper, Schema) {
 
     const vm = saControllerHelper.setup(this, $scope);
+    const {Person} = Schema.models();
 
-    vm.use({});
+    vm.use({
+      mobileNumberMask: Person.meta.mobileNumberMask
+    });
 
     /*
      Functions

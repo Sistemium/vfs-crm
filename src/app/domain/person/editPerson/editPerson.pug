@@ -40,7 +40,7 @@
       input#phone.form-control(
       required
       autocomplete='off'
-      placeholder='Telefonas'
+      ui-mask='{{ vm.mobileNumberMask }}'
       ng-model='vm.person.phone'
       )
 
