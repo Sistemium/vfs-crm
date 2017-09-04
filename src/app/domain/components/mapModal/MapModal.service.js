@@ -11,7 +11,7 @@
 
     function open(config) {
 
-      let {coords, buttons, title} = config;
+      let {coords, buttons, title, zoom, noGeo} = config;
 
       let modalInstance = $uibModal.open({
 
@@ -41,14 +41,14 @@
 
           // TODO: save zoom to localStorage and restore
 
-          zoom: 15,
+          zoom: zoom || 15,
           buttons,
           mapCenter: coords,
           title,
 
           marker: {
             coords,
-            isDraggable: false
+            isDraggable: noGeo
           },
 
           closeModal,
