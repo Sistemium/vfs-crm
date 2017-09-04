@@ -15,7 +15,8 @@
 
       .service-point-map
         ng-map(
-        center='[{{vm.servicePoint.location.latitude}}, {{vm.servicePoint.location.longitude}}]'
+        ng-class='{"no-geolocation": vm.noGeoPosition}'
+        center='[{{vm.coords.lat}}, {{vm.coords.lng}}]'
         id='smallMap'
         ng-if='vm.googleReady'
         disable-default-u-i='true'
@@ -27,10 +28,12 @@
         ng-click='vm.mapClick()'
         )
           marker(
-          position='{{vm.servicePoint.location.latitude}}, {{vm.servicePoint.location.longitude}}',
+          ng-if='!vm.noGeoPosition'
+          position='{{vm.coords.lat}}, {{vm.coords.lng}}',
           animation='DROP'
           draggable='true'
           )
+
 
       .service-point-add-info
         .point-address {{vm.servicePoint.address}}
