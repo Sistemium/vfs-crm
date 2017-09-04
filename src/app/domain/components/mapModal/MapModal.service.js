@@ -43,8 +43,8 @@
           zoom: 15,
           coords,
           buttons,
-          title
-          closeModal,
+          title,
+          closeModal
         });
 
         function closeModal() {
