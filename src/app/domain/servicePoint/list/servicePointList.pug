@@ -17,6 +17,6 @@
     )
       .address {{ servicePoint.address }}
       .name {{ servicePoint.currentServiceContract.name }}
-      .serving-master {{ servicePoint.servingMaster.name }}
+      .serving-master {{ servicePoint.recentServingMaster().name }}
 
   .ui-view
