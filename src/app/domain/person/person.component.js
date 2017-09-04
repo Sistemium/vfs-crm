@@ -40,7 +40,7 @@
     }
 
     function addClick() {
-      Editing.editModal('edit-person', 'Naujas Asmuo')(Person.createInstance())
+      Editing.editModal('edit-person')(Person.createInstance())
     }
 
   }
