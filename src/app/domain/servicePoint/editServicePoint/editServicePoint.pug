@@ -83,6 +83,21 @@
         ng-model='vm.servicePoint.doorCode'
         )
 
+      .type
+
+        label Patalpos tipas
+
+        .button-container
+          label.btn.btn-default(
+          ng-model='vm.servicePoint.type'
+          uib-btn-radio="'Gyvenomoji'" uib-uncheckable='false'
+          ) Gyvenomoji
+          label.btn.btn-default(
+          ng-model='vm.servicePoint.type'
+          uib-btn-radio="'Negyvenomoji'" uib-uncheckable='false'
+          ) Negyvenomoji
+
+
     //.address
       label(for='address') Adresas
       input#address.form-control(
@@ -92,19 +107,6 @@
       ng-model='vm.servicePoint.address'
       )
 
-    .type
-
-      label Patalpos tipas
-
-      .btn-group
-        label.btn.btn-default(
-        ng-model='vm.servicePoint.type'
-        uib-btn-radio="'Gyvenomoji'" uib-uncheckable='false'
-        ) Gyvenomoji
-        label.btn.btn-default(
-        ng-model='vm.servicePoint.type'
-        uib-btn-radio="'Negyvenomoji'" uib-uncheckable='false'
-        ) Negyvenomoji
 
     .name
       label(for='name') Patalpos pavadinimas

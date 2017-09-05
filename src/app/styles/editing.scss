@@ -25,14 +25,31 @@
       margin: $margin 0;
     }
 
-
     .field-group {
       display: flex;
       flex-direction: row;
-      justify-content: flex-start;
+      justify-content: space-between;
 
-      > * {
+      > div {
         flex: 1;
+
+        .button-container {
+          display: flex;
+          flex-flow: row nowrap;
+          justify-content: space-around;
+
+          label:first-of-type {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+          }
+
+          label:last-of-type {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+          }
+
+        }
+
       }
 
       > * + * {
