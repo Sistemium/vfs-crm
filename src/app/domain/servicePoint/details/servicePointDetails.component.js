@@ -216,7 +216,7 @@
 
           positionMarker()
             .then(() => {
-              return NgMap.getMap()
+              return NgMap.getMap('smallMap')
                 .then(map => vm.map = map)
             })
             .catch(() => {

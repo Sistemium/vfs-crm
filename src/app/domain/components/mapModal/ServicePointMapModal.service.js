@@ -26,7 +26,7 @@
       const changeButton = {
         title: 'Keisti koordinates',
         onClick: changeCoordsClick,
-        class: 'btn-info'
+        class: 'btn-info-modified'
       };
 
       const revertButton = {
