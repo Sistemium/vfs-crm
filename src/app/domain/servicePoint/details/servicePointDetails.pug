@@ -2,15 +2,6 @@
 
   .address
 
-    .header
-
-      //.chapter-name
-        //i.glyphicon.glyphicon-map-marker
-        //span Adresas
-
-      .button-block
-        button-edit(button-click='vm.editServicePointClick(vm.servicePoint)')
-
     .service-point-location
 
       .service-point-map
@@ -47,6 +38,9 @@
 
         .currentServiceContract
         .customer
+
+    .button-block
+      button-edit(button-click='vm.editServicePointClick(vm.servicePoint)')
 
   .service-point-pictures
 

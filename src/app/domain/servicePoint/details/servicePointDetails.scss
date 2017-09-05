@@ -76,8 +76,11 @@ $background-service-point-color: lighten($gray-background-color, 0%);
 
   .address {
 
-    .header {
-      float: right;
+    @extend %flex-row-nowrap;
+    justify-content: space-between;
+
+    .button-block {
+      margin: 0 8px;
     }
 
     .service-point-location {
@@ -96,20 +99,41 @@ $background-service-point-color: lighten($gray-background-color, 0%);
 
       .service-point-add-info {
 
+        min-height: 120px;
+
         @extend %flex-column-wrap;
-        margin: 0 10px;
 
         .point-address {
+
           font-size: 25px;
           line-height: 30px;
           overflow: hidden;
-          height: 52px;
+          flex: 1;
+
+          @media (max-width: $screen-md-max) {
+            font-size: 20px;
+            line-height: 25px;
+          }
+
+          @media (max-width: $screen-sm-max) {
+            font-size: 17px;
+            text-align: justify;
+            line-height: 20px;
+          }
+
         }
 
         .contract {
+
+          @extend %flex-row-wrap;
+
           color: $gray;
           font-size: 17px;
-          height: 24px;
+
+          @media (max-width: $screen-sm-max) {
+            //height: 45px;
+          }
+
         }
 
       }
