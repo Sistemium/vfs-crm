@@ -23,6 +23,12 @@
 
       methods: {
         isValid
+      },
+
+      meta: {
+        label: {
+          add: 'Nauja imonė'
+        }
       }
 
     });

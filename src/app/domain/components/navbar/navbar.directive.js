@@ -20,7 +20,7 @@
 
   function NavbarController(Menu, $scope, $rootScope, saControllerHelper, $window, localStorageService, $state) {
 
-    const DEFAULT_TITLE = 'Pagrindinis Meniu';
+    const DEFAULT_TITLE = 'VFS CRM';
     const vm = saControllerHelper.setup(this, $scope);
     const rootIcon = 'Aquafilter-lt.png';
     const rootItems = _.get(Menu.root(), 'items');

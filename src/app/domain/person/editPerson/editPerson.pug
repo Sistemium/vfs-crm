@@ -7,6 +7,7 @@
 
       input#first-name.form-control(
       required
+      auto-focus
       autocomplete='off'
       placeholder='Vardas'
       ng-model='vm.person.firstName'
@@ -39,7 +40,7 @@
       input#phone.form-control(
       required
       autocomplete='off'
-      placeholder='Telefonas'
+      ui-mask='{{ vm.mobileNumberMask }}'
       ng-model='vm.person.phone'
       )
 

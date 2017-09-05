@@ -41,8 +41,15 @@
         }
 
       },
+
       methods: {
         isValid
+      },
+
+      meta: {
+        label: {
+          add: 'Naujas Įrenginys'
+        }
       }
 
     });

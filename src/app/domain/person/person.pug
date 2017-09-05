@@ -26,7 +26,9 @@
       .email
         a(href='mailto:{{ person.email}}' ng-click='$event.stopPropagation()') {{ person.email }}
       .phone
-        a(href='{{ person.telHref }}' ng-click='$event.stopPropagation()') {{ person.phone }}
+        a(
+        href='{{ person.telHref }}' ng-click='$event.stopPropagation()'
+        ) {{ person.phone | ltphone }}
       //.avatar-picture
         span {{ person.avatarPictureId ? 'Yra' : ''}}
 

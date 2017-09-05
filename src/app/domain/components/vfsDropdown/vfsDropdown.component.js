@@ -19,17 +19,22 @@
 
   });
 
-  function dropdownController($scope, saControllerHelper, Schema, toastr, Editing, $timeout, $filter) {
+  function dropdownController($scope, saControllerHelper, Schema, Editing, $timeout, $filter, saEtc, UUID) {
 
     const vm = saControllerHelper.setup(this, $scope);
 
     vm.use({
+
+      id: `vfs-dropdown-${UUID.v4()}`,
+
       $onInit,
       itemClick,
-      addItem,
+      addClick,
       afterCancel,
       afterSave,
-      groupLabel
+      groupLabel,
+      onKeyDown
+
     });
 
     Editing.setupController(vm, 'newItem');
@@ -42,6 +47,91 @@
     /*
      Functions
      */
+
+    function onKeyDown($event) {
+
+      let direction;
+
+      switch ($event.keyCode) {
+
+        case 13:
+          return vm.focused && itemClick(vm.focused);
+        case 27: {
+          $event.preventDefault();
+          return (vm.isOpen = false);
+        }
+        case 38: {
+          direction = -1;
+          break;
+        }
+        case 40: {
+          direction = 1;
+          break;
+        }
+
+        default:
+          return;
+
+      }
+
+      let {focused} = vm;
+
+      if (!focused) {
+        focused = vm.currentItem;
+      }
+
+      if (focused && !saEtc.getElementById(focused.id)) {
+        focused = false;
+      }
+
+      if (!focused) {
+
+        focused = getFirstVisibleElement();
+
+      } else if (direction === 1) {
+
+        let idx = _.findIndex(vm.filteredData, focused);
+        if (idx >= vm.filteredData.length - 1) return;
+        focused = vm.filteredData[++idx];
+
+      } else if (direction === -1) {
+
+        let idx = _.findIndex(vm.filteredData, focused);
+        if (idx < 0) return;
+        focused = vm.filteredData[--idx] || focused;
+
+      }
+
+      if (!focused) return;
+
+      scrollToExistingElement(focused);
+
+      vm.focused = focused;
+
+    }
+
+    function getFirstVisibleElement() {
+
+      let scroller = saEtc.getElementById(vm.id);
+
+      return _.find(vm.filteredData, {id: scroller.children[1].getAttribute('id')});
+
+    }
+
+    function scrollToExistingElement(focused) {
+      let elem = saEtc.getElementById(focused.id);
+      let scroller = elem.parentElement;
+
+      let innerPosition = elem.offsetTop - scroller.scrollTop;
+      let minPosition = elem.clientHeight * 3;
+      let maxPosition = scroller.clientHeight - elem.clientHeight * 2;
+
+      if (innerPosition < minPosition) {
+        scroller.scrollTop = _.max([0, elem.offsetTop - minPosition]);
+      } else if (innerPosition > maxPosition) {
+        scroller.scrollTop = elem.offsetTop + minPosition - scroller.clientHeight;
+      }
+    }
 
     function onCurrentId(id) {
 
@@ -76,7 +166,7 @@
 
     function setDefault() {
 
-      if (vm.currentId) {
+      if (vm.currentId || vm.model.meta.noDefault) {
         return;
       }
 
@@ -88,13 +178,49 @@
 
     }
 
+    const itemHeight = 34;
+
+    function scrollToCurrent() {
+
+      if (!vm.currentId) {
+        return;
+      }
+
+      let elem = saEtc.getElementById(vm.currentId);
+
+      if (!elem) {
+
+        let scroller = saEtc.getElementById(vm.id);
+
+        if (!scroller) {
+          return $timeout(200)
+            .then(scrollToCurrent);
+        }
+
+        let idx = _.findIndex(vm.filteredData, vm.currentItem);
+
+        scroller.scrollTop = (idx + 1) * itemHeight;
+
+        return $timeout(200)
+          .then(scrollToCurrent);
+
+      }
+
+      scrollToExistingElement(elem);
+
+    }
+
     function onOpen(nv, ov) {
 
       if (ov) {
         $timeout(200).then(() => {
           vm.search = '';
-          delete vm.newItem;
+          delete vm.focused;
         })
+      }
+
+      if (nv) {
+        scrollToCurrent();
       }
 
     }
@@ -103,9 +229,10 @@
       return _.get(item, vm.itemsGroupProperty);
     }
 
-    function addItem() {
+    function addClick() {
 
       vm.newItem = vm.model.createInstance(_.assign({name: vm.search}, vm.filter || {}));
+      vm.isOpen = false;
 
     }
 
@@ -155,6 +282,7 @@
       //vm.currentItem = saved;
       vm.currentId = saved.id;
       vm.isOpen = false;
+      delete vm.newItem;
 
     }
 

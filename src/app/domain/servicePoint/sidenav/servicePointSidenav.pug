@@ -1,8 +1,10 @@
 .service-point-sidenav
 
-  vfs-searcher(
-  search='vm.searchText'
-  )
+  .search-add
+    vfs-searcher(
+    search='vm.searchText'
+    )
+    button-add(button-click='vm.addClick()')
 
   #sidenav-scroll-list.scroll-y(
   resize
@@ -17,5 +19,5 @@
     ng-class='{active: servicePoint.id === vm.currentServicePointId}'
     )
       .address {{ servicePoint.address }}
-      .name {{ servicePoint.name}}
+      .name {{ servicePoint.currentServiceContract.customer().name}}
       .badge {{ servicePoint.servingItemsLazy().length }}

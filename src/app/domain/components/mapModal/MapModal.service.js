@@ -43,8 +43,8 @@
 
           zoom: zoom || 15,
           buttons,
-          mapCenter: coords,
           title,
+          mapCenter: coords,
 
           marker: {
             coords,
