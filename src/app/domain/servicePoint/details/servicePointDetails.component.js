@@ -181,7 +181,7 @@
             longitude: result[0].geometry.location.lng(),
             latitude: result[0].geometry.location.lat(),
             altitude: 0,
-            source: 'autoSave',
+            source: 'geoCoder',
             ownerXid: vm.servicePoint.id,
             timestamp: new Date()
           };
