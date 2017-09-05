@@ -11,13 +11,14 @@
       .button-block
         button-edit(button-click='vm.editServicePointClick(vm.servicePoint)')
 
-
     .service-point-location
 
       .service-point-map
         ng-map(
-        center='[{{vm.coords.lat()}}, {{vm.coords.lng()}}]'
-        ng-if='vm.googleReady && vm.coords'
+        ng-class='{"no-geolocation": vm.noGeoPosition}'
+        center='[{{vm.coords.lat}}, {{vm.coords.lng}}]'
+        id='smallMap'
+        ng-if='vm.googleReady'
         disable-default-u-i='true'
         zoom='13'
         min-zoom='13'
@@ -27,10 +28,12 @@
         ng-click='vm.mapClick()'
         )
           marker(
-          position="{{vm.coords.lat()}}, {{vm.coords.lng()}}"
-          animation="DROP"
-          draggable="true"
+          ng-if='!vm.noGeoPosition'
+          position='{{vm.coords.lat}}, {{vm.coords.lng}}',
+          animation='DROP'
+          draggable='true'
           )
+
 
       .service-point-add-info
         .point-address {{vm.servicePoint.address}}
@@ -59,8 +62,8 @@
         ngf-select
         ngf-change='vm.onChangeFile($file)'
         ngf-accept="'image/*'"
-        ngf-max-size="10MB"
-        ng-model="vm.file"
+        ngf-max-size='10MB'
+        ng-model='vm.file'
         )
 
     .picture-gallery

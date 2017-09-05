@@ -11,7 +11,7 @@
 
     function open(config) {
 
-      let {coords, buttons, title} = config;
+      let {coords, buttons, title, zoom, noGeo} = config;
 
       let modalInstance = $uibModal.open({
 
@@ -40,16 +40,33 @@
         _.assign(vm, {
 
           // TODO: save zoom to localStorage and restore
-          zoom: 15,
-          coords,
+
+          zoom: zoom || 15,
           buttons,
           title,
-          closeModal
+          mapCenter: coords,
+
+          marker: {
+            coords,
+            isDraggable: noGeo
+          },
+
+          closeModal,
+          onDragEnd
+
         });
 
         function closeModal() {
           modalInstance.close();
         }
+
+        function onDragEnd(ev) {
+
+          vm.marker.coords.lat = ev.latLng.lat();
+          vm.marker.coords.lng = ev.latLng.lng();
+
+        }
+
       }
     }
 

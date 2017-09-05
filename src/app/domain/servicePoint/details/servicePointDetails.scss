@@ -15,6 +15,10 @@ $background-service-point-color: lighten($gray-background-color, 0%);
 
   @extend %flex-column-nowrap;
 
+  .no-geolocation {
+    box-shadow: 0px 0px 20px 0px rgba(255, 18, 18, 0.5);
+  }
+
   ng-map {
     height: 120px;
     width: 120px;
