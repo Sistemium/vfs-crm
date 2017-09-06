@@ -14,20 +14,8 @@
       placement='bottom-left'
       )
 
-    fieldset.contract(ng-disabled='!vm.servicePoint.siteId')
-
-      label Sutartis
-
-      vfs-dropdown(
-      ng-model='vm.servicePoint.currentServiceContractId'
-      items-data-source-name='ServiceContract'
-      items-name-property='name'
-      placement='bottom-left'
-      filter='{siteId: vm.servicePoint.siteId}'
-      )
-
     .field-group
-
+      
       .district
 
         label Apskritis
@@ -39,7 +27,7 @@
         placement='bottom-left'
         )
 
-      .locality.animate-show(ng-show='vm.districtId')
+      .locality(ng-if='vm.districtId')
 
         label Gyvenomoji Vieta
 
@@ -52,9 +40,9 @@
         placement='bottom-left'
         )
 
-    .field-group.animate-show(ng-show='vm.servicePoint.localityId')
+    .field-group
 
-      .street
+      .street(ng-if='vm.servicePoint.localityId')
 
         label Gatvė
 
@@ -87,7 +75,15 @@
         ng-model='vm.servicePoint.apartment'
         )
 
-    .field-group.animate-show(ng-show='vm.servicePoint.localityId')
+    .field-group
+
+      .name
+        label(for='name') Patalpos pavadinimas
+        input#name.form-control(
+        autocomplete='off'
+        placeholder='Jeigu yra'
+        ng-model='vm.servicePoint.name'
+        )
 
       .door-code
 
@@ -99,36 +95,34 @@
         ng-model='vm.servicePoint.doorCode'
         )
 
-      .name
-        label(for='name') Patalpos pavadinimas
-        input#name.form-control(
-        autocomplete='off'
-        placeholder='Jeigu yra'
-        ng-model='vm.servicePoint.name'
-        )
+      .type
 
-    //.address
-      label(for='address') Adresas
-      input#address.form-control(
-      autocomplete='off'
-      placeholder='Adresas'
-      readonly
-      ng-model='vm.servicePoint.address'
+        label Patalpos tipas
+
+        .button-container
+
+          label.btn.btn-default(
+          ng-model='vm.servicePoint.type'
+          uib-btn-radio="'Gyvenomoji'" uib-uncheckable='false'
+          ) Gyvenomoji
+
+          label.btn.btn-default(
+          ng-model='vm.servicePoint.type'
+          uib-btn-radio="'Negyvenomoji'" uib-uncheckable='false'
+          ) Negyvenomoji
+
+
+    fieldset.contract(ng-disabled='!vm.servicePoint.siteId')
+
+      label Sutartis
+
+      vfs-dropdown(
+      ng-model='vm.servicePoint.currentServiceContractId'
+      items-data-source-name='ServiceContract'
+      items-name-property='name'
+      placement='bottom-left'
+      filter='{siteId: vm.servicePoint.siteId}'
       )
-
-    .type
-
-      label Patalpos tipas
-
-      .btn-group
-        label.btn.btn-default(
-        ng-model='vm.servicePoint.type'
-        uib-btn-radio="'Gyvenomoji'" uib-uncheckable='false'
-        ) Gyvenomoji
-        label.btn.btn-default(
-        ng-model='vm.servicePoint.type'
-        uib-btn-radio="'Negyvenomoji'" uib-uncheckable='false'
-        ) Negyvenomoji
 
     .info
 
