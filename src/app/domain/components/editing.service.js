@@ -7,7 +7,9 @@
 
   function Editing($uibModal, $timeout, Schema) {
 
-    return {editModal, setupController};
+    let me = this;
+
+    return {editModal, setupController, closeModal};
 
     function setupController(vm, itemProperty) {
 
@@ -78,11 +80,15 @@
       };
     }
 
+    function closeModal() {
+      me.modal.close();
+    }
+
     function openEditModal(item, componentName, title) {
 
       let itemName = _.last(componentName.match(/edit-(.*)/));
 
-      let modal = $uibModal.open({
+      me.modal = $uibModal.open({
 
         animation: true,
         template: `<div class="editing modal-header">` +
@@ -103,14 +109,14 @@
 
       });
 
-      modal.result
+      me.modal.result
         .catch(() => {
           if (item.id) {
             item.DSRevert();
           }
         });
 
-      return modal.result;
+      return me.modal.result;
 
       function controller($scope) {
 
@@ -123,8 +129,8 @@
         _.assign(vm, {
           item,
           title,
-          afterSave: modal.close,
-          afterCancel: modal.dismiss
+          afterSave: me.modal.close,
+          afterCancel: me.modal.dismiss
         });
 
       }
