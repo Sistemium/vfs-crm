@@ -19,8 +19,6 @@
       searchText: $state.params.q,
       serviceContracts: [],
 
-      onStateChange,
-      serviceContractClick,
       addClick
 
     });
@@ -30,21 +28,18 @@
 
     refresh();
 
+    $scope.$on('$stateChangeStart', () => {
+      Editing.closeModal();
+    });
+
     /*
      Functions
      */
 
-    function onStateChange() {
-
-    }
-
     function addClick() {
-      Editing.editModal('edit-service-contract', 'Nauja Sutartis')(ServiceContract.createInstance())
+      Editing.editModal('edit-service-contract', 'Nauja Sutartis')(ServiceContract.createInstance());
     }
-
-    function serviceContractClick() {
-
-    }
+    
 
     function onSearch() {
 
