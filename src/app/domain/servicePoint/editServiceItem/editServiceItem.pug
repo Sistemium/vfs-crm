@@ -9,8 +9,6 @@
       vfs-dropdown(
       items-data-source-name='FilterSystem'
       items-group-property='brand.name'
-      save-to='vm.serviceItem'
-      save-to-property='filterSystemId'
       ng-model='vm.serviceItem.filterSystemId'
       placement='bottom-left'
       )
@@ -22,8 +20,7 @@
       vfs-dropdown(
       items-data-source-name='Employee'
       items-name-property='name'
-      save-to='vm.serviceItem'
-      save-to-property='installingMasterId'
+      ng-model='vm.serviceItem.installingMasterId'
       placement='bottom-left'
       )
 
@@ -34,8 +31,7 @@
       vfs-dropdown(
       items-data-source-name='Employee'
       items-name-property='name'
-      save-to='vm.serviceItem'
-      save-to-property='servingMasterId'
+      ng-model='vm.serviceItem.servingMasterId'
       placement='bottom-left'
       )
 
@@ -67,7 +63,7 @@
         value='vm.serviceItem.lastServiceDate'
         )
 
-    .field-group
+    .field-group.animate-show(ng-show='vm.serviceItem.filterSystemId')
 
       .service-frequency
         label(for='frequency') Aptarnavimo Dažnumas

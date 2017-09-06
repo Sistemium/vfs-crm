@@ -14,44 +14,46 @@
       placement='bottom-left'
       )
 
-    .district
+    .field-group
+      
+      .district
 
-      label Apskritis
+        label Apskritis
 
-      vfs-dropdown(
-      ng-model='vm.districtId'
-      items-data-source-name='District'
-      items-name-property='name'
-      placement='bottom-left'
-      )
+        vfs-dropdown(
+        ng-model='vm.districtId'
+        items-data-source-name='District'
+        items-name-property='name'
+        placement='bottom-left'
+        )
 
-    .locality(ng-if='vm.districtId')
+      .locality(ng-if='vm.districtId')
 
-      label Gyvenomoji Vieta
+        label Gyvenomoji Vieta
 
-      vfs-dropdown(
-      ng-required='true'
-      items-data-source-name='Locality'
-      items-name-property='name'
-      ng-model='vm.servicePoint.localityId'
-      filter='{districtId: vm.districtId}'
-      placement='bottom-left'
-      )
-
-    .street(ng-if='vm.servicePoint.localityId')
-
-      label Gatvė
-
-      vfs-dropdown(
-      ng-required='true'
-      ng-model='vm.servicePoint.streetId'
-      items-data-source-name='Street'
-      items-name-property='name'
-      filter='{localityId: vm.servicePoint.localityId}'
-      placement='bottom-left'
-      )
+        vfs-dropdown(
+        ng-required='true'
+        items-data-source-name='Locality'
+        items-name-property='name'
+        ng-model='vm.servicePoint.localityId'
+        filter='{districtId: vm.districtId}'
+        placement='bottom-left'
+        )
 
     .field-group
+
+      .street(ng-if='vm.servicePoint.localityId')
+
+        label Gatvė
+
+        vfs-dropdown(
+        ng-required='true'
+        ng-model='vm.servicePoint.streetId'
+        items-data-source-name='Street'
+        items-name-property='name'
+        filter='{localityId: vm.servicePoint.localityId}'
+        placement='bottom-left'
+        )
 
       .house
 
@@ -73,7 +75,17 @@
         ng-model='vm.servicePoint.apartment'
         )
 
-      .apartment
+    .field-group
+
+      .name
+        label(for='name') Patalpos pavadinimas
+        input#name.form-control(
+        autocomplete='off'
+        placeholder='Jeigu yra'
+        ng-model='vm.servicePoint.name'
+        )
+
+      .door-code
 
         label(for='doorCode') Durų kodas
 
@@ -88,33 +100,17 @@
         label Patalpos tipas
 
         .button-container
+
           label.btn.btn-default(
           ng-model='vm.servicePoint.type'
           uib-btn-radio="'Gyvenomoji'" uib-uncheckable='false'
           ) Gyvenomoji
+
           label.btn.btn-default(
           ng-model='vm.servicePoint.type'
           uib-btn-radio="'Negyvenomoji'" uib-uncheckable='false'
           ) Negyvenomoji
 
-
-    //.address
-      label(for='address') Adresas
-      input#address.form-control(
-      autocomplete='off'
-      placeholder='Adresas'
-      readonly
-      ng-model='vm.servicePoint.address'
-      )
-
-
-    .name
-      label(for='name') Patalpos pavadinimas
-      input#name.form-control(
-      autocomplete='off'
-      placeholder='Jeigu yra'
-      ng-model='vm.servicePoint.name'
-      )
 
     fieldset.contract(ng-disabled='!vm.servicePoint.siteId')
 

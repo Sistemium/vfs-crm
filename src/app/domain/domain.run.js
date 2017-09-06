@@ -5,10 +5,12 @@
 
       $rootScope.$on('authorized', () => {
 
-        const {Site} = Schema.models();
-        Site.findAll();
+        const {Site, FilterSystemType} = Schema.models();
 
-      })
+        Site.findAll();
+        FilterSystemType.findAll();
+
+      });
 
     });
 

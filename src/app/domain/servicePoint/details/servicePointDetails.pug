@@ -114,7 +114,7 @@
         a.phone(
         href='{{ vm.servicePoint.currentServiceContract.customerPerson.telHref }}'
         ng-click='$event.stopPropagation()'
-        ) {{ vm.servicePoint.currentServiceContract.customerPerson.phone }}
+        ) {{ vm.servicePoint.currentServiceContract.customerPerson.phone | ltphone}}
 
       .contact(
       ng-repeat='servicePointContact in vm.servicePoint.servicePointContacts track by servicePointContact.id'
@@ -124,7 +124,7 @@
         a.phone(
         href='{{servicePointContact.person.telHref}}'
         ng-click='$event.stopPropagation()'
-        ) {{ servicePointContact.person.phone }}
+        ) {{ servicePointContact.person.phone | ltphone }}
 
       //.contact(ng-if='vm.servicePoint.servicePointContacts.length === 0')
         span.name Kontaktų nėra

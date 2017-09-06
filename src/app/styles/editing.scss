@@ -26,17 +26,27 @@
     }
 
     .field-group {
+
       display: flex;
       flex-direction: row;
       justify-content: space-between;
 
       > div {
+
         flex: 1;
 
         .button-container {
+
           display: flex;
           flex-flow: row nowrap;
-          justify-content: space-around;
+
+          > * {
+            flex: 1;
+          }
+
+          > * + * {
+            margin-left: -1px;
+          }
 
           label:first-of-type {
             border-top-right-radius: 0;

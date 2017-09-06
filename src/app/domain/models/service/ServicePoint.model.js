@@ -65,7 +65,8 @@
         servingItemsLazy,
         isValid,
         concatAddress,
-        refreshCache
+        refreshCache,
+        recentServingMaster
       },
 
       meta: {
@@ -78,6 +79,9 @@
 
     });
 
+    function recentServingMaster() {
+      return _.get(_.find(this.servingItemsLazy(), 'servingMasterId'), 'servingMaster');
+    }
 
     function filterServicePoints(data, text) {
 
