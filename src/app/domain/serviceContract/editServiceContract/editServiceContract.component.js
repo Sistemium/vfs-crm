@@ -12,12 +12,13 @@
 
   });
 
-  function editServiceContract($scope, saControllerHelper, Schema) {
+  function editServiceContract($scope, saControllerHelper, Schema, $state) {
 
     const vm = saControllerHelper.setup(this, $scope);
 
     vm.use({
-      $onInit
+      $onInit,
+      listGroupItemClick
     });
 
     /*
@@ -44,6 +45,10 @@
           FilterSystem.findAll();
         });
 
+    }
+
+    function listGroupItemClick(item) {
+      $state.go('servicePoint.detailed', {servicePointId: item.id});
     }
 
   }
