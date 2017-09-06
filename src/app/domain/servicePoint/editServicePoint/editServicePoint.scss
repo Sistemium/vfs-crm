@@ -5,8 +5,12 @@
 
   @extend %editing-with-form;
 
-  .form .field-group > .street {
-    flex: 3;
+  .form .field-group {
+
+    > .house, > .apartment {
+      max-width: 120px;
+    }
+
   }
 
 }
