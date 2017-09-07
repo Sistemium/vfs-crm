@@ -27,7 +27,7 @@
         placement='bottom-left'
         )
 
-      .locality(ng-if='vm.districtId')
+      .locality(ng-disabled='!vm.districtId')
 
         label Gyvenomoji Vieta
 
@@ -42,7 +42,7 @@
 
     .field-group
 
-      .street(ng-if='vm.servicePoint.localityId')
+      .street(ng-disabled='!vm.servicePoint.localityId')
 
         label Gatvė
 
