@@ -91,7 +91,7 @@
           .then(savedLocation => {
             servicePoint.locationId = savedLocation.id;
             servicePoint.DSCreate();
-
+            vm.marker.isDraggable = false;
             _.remove(buttons, revertButton);
             _.remove(buttons, saveButton);
             buttons.push(changeButton);
