@@ -15,61 +15,61 @@
 
       let {servicePoint} = config;
 
-      let buttons = [];
-
-      const saveButton = {
-        title: 'Išsaugoti koordinates',
-        onClick: saveCoordsClick,
-        class: 'btn-success'
-      };
-
-      const changeButton = {
-        title: 'Keisti koordinates',
-        onClick: changeCoordsClick,
-        class: 'btn-info-modified'
-      };
-
-      const revertButton = {
-        title: 'Atšaukti keitimą',
-        onClick: revertCoordsClick,
-        class: 'btn-danger'
-      };
-
-      if (servicePoint.locationId) {
-        buttons.push(changeButton);
-      } else {
-        buttons.push(saveButton);
-      }
-
       _.assign(config, {
-        buttons,
-        title: servicePoint.address
+
+        title: servicePoint.address,
+
+        buttons: {
+          saveButton: {
+            title: 'Išsaugoti koordinates',
+            onClick: saveCoordsClick,
+            class: 'btn-success'
+          },
+          changeButton: {
+            title: 'Keisti koordinates',
+            onClick: changeCoordsClick,
+            class: 'btn-info-modified'
+          },
+          revertButton: {
+            title: 'Atšaukti keitimą',
+            onClick: revertCoordsClick,
+            class: 'btn-danger'
+          }
+        }
+
       });
 
       return MapModal.open(config);
 
       function changeCoordsClick(vm) {
         vm.marker.isDraggable = true;
-        _.remove(buttons, changeButton);
-        buttons.push(revertButton);
-        buttons.push(saveButton);
+
+        vm.coordsCopy = null;
+        vm.coordsCopy = _.clone(vm.marker.coords);
+
+        vm.toggleButton('btn-info-modified', false);
+        vm.toggleButton('btn-success', true);
+        vm.toggleButton('btn-danger', true);
       }
 
       function revertCoordsClick(vm) {
 
         NgMap.getMap('largeMap')
-          .then(map => {
-
-            map.setCenter(vm.mapCenter);
-            vm.marker.coords = vm.mapCenter;
+          .then((map) => {
+            map.setCenter(vm.coordsCopy);
+            vm.marker.coords = vm.coordsCopy;
             vm.marker.isDraggable = false;
+            vm.inputAddress = null;
+            vm.coordsCopy = null;
 
-            _.remove(buttons, revertButton);
-            _.remove(buttons, saveButton);
-            buttons.push(changeButton);
+            vm.toggleButton('btn-success', false);
+            vm.toggleButton('btn-danger', false);
+            vm.toggleButton('btn-info-modified', true);
 
+          })
+          .catch((err) => {
+            console.error(err);
           });
-
       }
 
       function saveCoordsClick(vm) {
@@ -91,10 +91,14 @@
           .then(savedLocation => {
             servicePoint.locationId = savedLocation.id;
             servicePoint.DSCreate();
+
             vm.marker.isDraggable = false;
-            _.remove(buttons, revertButton);
-            _.remove(buttons, saveButton);
-            buttons.push(changeButton);
+            vm.inputAddress = null;
+            vm.coordsCopy = null;
+
+            vm.toggleButton('btn-success', false);
+            vm.toggleButton('btn-danger', false);
+            vm.toggleButton('btn-info-modified', true);
 
           });
 
