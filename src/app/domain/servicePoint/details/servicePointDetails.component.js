@@ -23,6 +23,7 @@
       progress: {},
       uploadingPicture: false,
       coords: {},
+      divided: [],
 
       addContactClick,
       addServiceItemClick,
@@ -75,8 +76,13 @@
 
     function $onInit() {
       vm.watchScope('vm.servicePoint.address', address => {
+
+        if (address) vm.divided = address.split(',');
+
         if (!address || !vm.googleReady) return;
-        positionMarker();
+
+        positionMarker(vm.divided);
+
       });
 
     }
@@ -152,7 +158,7 @@
         ServicePoint.findAllWithRelations({id}, {bypassCache: true})(relations)
           .then(_.first)
           .then(loadServicePointRelations)
-          .then(loadGeoPosition)
+          .then(loadGoogleScript)
       ];
 
       vm.setBusy(busy);
@@ -170,11 +176,7 @@
 
     function positionMarker() {
 
-      if (vm.servicePoint.location) {
-        return $timeout();
-      }
-
-      return GeoCoder.geocode({address: vm.servicePoint.address})
+      return GeoCoder.geocode({'address': vm.divided.join(' ')})
         .then(result => {
 
           let locationData = {
@@ -191,40 +193,58 @@
 
               vm.servicePoint.locationId = savedLocation.id;
               vm.servicePoint.DSCreate();
+              loadGeoPosition();
 
             });
 
-        });
+        })
+        .catch(() => {
+          if (vm.divided.length) {
+            vm.divided.pop();
+            positionMarker();
+          } else {
+            vm.coords.lat = 55.322;
+            vm.coords.lng = 23.897;
+            vm.noGeoPosition = true;
+          }
+        })
 
+    }
+
+    function loadGoogleScript() {
+      mapsHelper.loadGoogleScript().then(() => {
+        vm.googleReady = true;
+        loadGeoPosition();
+      });
     }
 
     function loadGeoPosition() {
 
-      if (vm.servicePoint.location) {
+      if (_.get(vm.servicePoint, 'location')) {
         _.assign(vm.coords, {lat: vm.servicePoint.location.latitude});
         _.assign(vm.coords, {lng: vm.servicePoint.location.longitude});
+        loadMap();
       } else {
-        vm.coords.lat = 55.322;
-        vm.coords.lng = 23.897;
-        vm.noGeoPosition = true;
+        getGeoByAddress();
       }
 
-      mapsHelper.loadGoogleScript()
+    }
+
+    function loadMap() {
+      NgMap.getMap('smallMap')
+        .then(map => {
+          vm.map = map
+        })
+    }
+
+    function getGeoByAddress() {
+
+      positionMarker()
         .then(() => {
-
-          vm.googleReady = true;
-
-          positionMarker()
-            .then(() => {
-              return NgMap.getMap('smallMap')
-                .then(map => vm.map = map)
-            })
-            .catch(() => {
-              console.error('No geoposition was found by the address: ' + vm.servicePoint.address);
-            });
-
+        })
+        .catch(() => {
+          console.log('positionMarker catch')
         });
-
     }
 
   }
