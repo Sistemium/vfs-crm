@@ -2,21 +2,28 @@
 
 .vfs-login {
 
-  .title {
-    font-size: 130%;
-    margin: 5px;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  * + .login-options {
+    margin-top: 10px;
   }
 
-  &, .login-options-group {
-    display: flex;
-    flex-direction: column;
+  .login-options p {
+    color: $dark-gray;
+  }
 
-    align-items: center;
-    //justify-content: center;
+  .title {
+    font-weight: 400;
+    font-size: 150%;
+    margin-bottom: 15px ;
   }
 
   .login-options-group {
 
+    padding: 20px;
     text-align: center;
 
     background-color: $gray-background-color;
