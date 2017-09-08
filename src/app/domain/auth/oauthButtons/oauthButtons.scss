@@ -1,30 +1,21 @@
 @import "../../../styles/variables";
 
 $oab-facebook-official-color: #3b5998;
-$oab-odnoklassniki-color: #ee8208;
 $oab-mobile-color: #d87a68;
-$oab-vk-color: #587ea3;
-$oab-mailru-color: rgb(24,64,128);
-$oab-mailru-fa-color: #ee8208;
 $oab-google-bg-color: #4285f4;
 
 .oauth-buttons {
 
   background-color: $gray-background-color;
 
-  .facebook-official {
-    color: #fff;
-    background-color: $oab-facebook-official-color;
-  }
-
-  .odnoklassniki {
-    color: #fff;
-    background-color: $oab-odnoklassniki-color;
-  }
-
-  .mobile {
+  .sms {
     color: #fff;
     background-color: $oab-mobile-color;
+  }
+
+  .facebook {
+    color: #fff;
+    background-color: $oab-facebook-official-color;
   }
 
   .google {
@@ -32,52 +23,29 @@ $oab-google-bg-color: #4285f4;
     background-color: $oab-google-bg-color;
   }
 
-  .mailru {
-    color: #fff;
-    i {
-      color: $oab-mailru-fa-color;
-      font-weight: bold;
-    }
-    background-color: $oab-mailru-color;
-  }
-
-  i.fa-mobile {
-    font-size: 35px;
-  }
-
-  i.fa-mailru {
-    &:before {
-      content: "\f1fa";
-    }
-  }
-
-  .vk {
-    color: #fff;
-    background-color: $oab-vk-color;
+  img {
+    object-fit: contain;
+    height: 35px;
+    width: 35px;
   }
 
   .divider {
     border-left: 1px solid white;
     height: 36px;
-    margin: 0 5px;
-  }
-
-  button:hover .divider {
-    border-color: lighten(silver, 90);
+    margin: 0 10px;
   }
 
   .divider {
-    border-color: lighten(#f0f0f0, 10);
-  }
-
-  i.fa {
-    font-size: 25px;
-    min-width: 30px;
-    text-align: center;
+    border-color: lighten($gray-background-color, 10);
   }
 
   .oauth-button {
 
+    &:hover .divider {
+      border-color: lighten(silver, 90);
+    }
+
+    width: 100%;
 
     display: flex;
     align-items: center;

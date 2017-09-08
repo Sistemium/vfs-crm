@@ -4,17 +4,20 @@
 
   .title {
     font-size: 130%;
+    margin: 5px;
   }
 
-  &, .login-options, .login-options-group {
+  &, .login-options-group {
     display: flex;
     flex-direction: column;
 
     align-items: center;
-    justify-content: center;
+    //justify-content: center;
   }
 
   .login-options-group {
+
+    text-align: center;
 
     background-color: $gray-background-color;
     width: 300px;

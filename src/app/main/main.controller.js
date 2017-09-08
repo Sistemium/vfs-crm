@@ -24,11 +24,11 @@
 
       Auth.login(accessToken)
         .then(res => {
-          console.warn('Login success', res);
-          toastr.success('Login success');
+          toastr.success(`Jūs prisijungę kaip "${res.name}"`, 'Sveiki avykę!');
+          console.warn('Login success', res, _.map(_.get(_.first(res.orgAccounts), 'orgAccountRoles'), 'role.code'));
         })
         .catch(err => {
-          toastr.error('Ошибка авторизации', angular.toJson(err));
+          toastr.error(angular.toJson(err), 'Autentifikavimo klaida');
           console.error(err);
         });
 

@@ -20,35 +20,20 @@
       {
         url: 'facebook',
         name: 'Facebook',
-        class: 'facebook-official'
+        icon: 'images/color/icons8-facebook.png'
       },
       {
         url: 'google',
         name: 'Google',
-        class: 'google'
-      },
-      {
-        url: 'mailru',
-        name: 'Mail.ru',
-        class: 'mailru'
-      },
-      {
-        url: 'odnoklassniki',
-        name: 'Одноклассники',
-        class: 'odnoklassniki'
-      },
-      {
-        url: 'vk',
-        name: 'ВКонтакте',
-        class: 'vk'
+        icon: 'images/color/icons8-google_plus.png'
       }
     ];
 
     vm.mobile = [{
 
       url: 'sms',
-      name: 'СМС-пароль',
-      class: 'mobile'
+      name: 'SMS-kodas',
+      icon: 'images/color/icons8-cell_phone.png'
 
     }];
 

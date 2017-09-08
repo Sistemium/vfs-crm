@@ -14,7 +14,7 @@
           template: '<vfs-login></vfs-login>',
 
           data: {
-            title: 'Авторизация'
+            title: 'Autorizacija'
           }
 
         })
