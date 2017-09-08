@@ -1,0 +1,20 @@
+.vfs-login.scroll-y(
+resize resize-offset-top='15' resize-property='height'
+)
+
+  uib-alert(ng-bind='vm.error')
+
+  .login-options-group
+
+    .title Входите через
+
+    .login-options(layout='column' layout-aling='center center')
+      p Мобильный телефон:
+      oauth-buttons(buttons-config='vm.mobile')
+
+    .divider
+
+    .login-options(layout='column' layout-aling='center center')
+      p Cоциальную сеть:
+      oauth-buttons(buttons-config='vm.buttons')
+

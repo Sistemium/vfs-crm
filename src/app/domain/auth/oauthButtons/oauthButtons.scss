@@ -1,0 +1,102 @@
+@import "../../../styles/variables";
+
+$oab-facebook-official-color: #3b5998;
+$oab-odnoklassniki-color: #ee8208;
+$oab-mobile-color: #d87a68;
+$oab-vk-color: #587ea3;
+$oab-mailru-color: rgb(24,64,128);
+$oab-mailru-fa-color: #ee8208;
+$oab-google-bg-color: #4285f4;
+
+.oauth-buttons {
+
+  background-color: $gray-background-color;
+
+  .facebook-official {
+    color: #fff;
+    background-color: $oab-facebook-official-color;
+  }
+
+  .odnoklassniki {
+    color: #fff;
+    background-color: $oab-odnoklassniki-color;
+  }
+
+  .mobile {
+    color: #fff;
+    background-color: $oab-mobile-color;
+  }
+
+  .google {
+    color: #fff;
+    background-color: $oab-google-bg-color;
+  }
+
+  .mailru {
+    color: #fff;
+    i {
+      color: $oab-mailru-fa-color;
+      font-weight: bold;
+    }
+    background-color: $oab-mailru-color;
+  }
+
+  i.fa-mobile {
+    font-size: 35px;
+  }
+
+  i.fa-mailru {
+    &:before {
+      content: "\f1fa";
+    }
+  }
+
+  .vk {
+    color: #fff;
+    background-color: $oab-vk-color;
+  }
+
+  .divider {
+    border-left: 1px solid white;
+    height: 36px;
+    margin: 0 5px;
+  }
+
+  button:hover .divider {
+    border-color: lighten(silver, 90);
+  }
+
+  .divider {
+    border-color: lighten(#f0f0f0, 10);
+  }
+
+  i.fa {
+    font-size: 25px;
+    min-width: 30px;
+    text-align: center;
+  }
+
+  .oauth-button {
+
+
+    display: flex;
+    align-items: center;
+
+    margin: 5px 5px 10px;
+    padding: 0 10px;
+    cursor: pointer !important;
+    border-radius: 5px;
+
+    &:hover {
+      box-shadow: 1px 2px 5px 0 rgba(0, 0, 0, 0.5);
+    }
+
+    .name {
+      flex: 1;
+      font-weight: 500;
+    }
+
+  }
+
+}
+

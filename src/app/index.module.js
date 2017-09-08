@@ -16,6 +16,7 @@
       'ng-appcache',
       'ui.mask',
       'sistemiumBootstrap',
+      'sistemiumAngularAuth',
       'Models',
       'cgBusy',
       'vs-repeat',

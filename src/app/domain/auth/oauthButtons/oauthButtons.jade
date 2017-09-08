@@ -1,0 +1,12 @@
+.oauth-buttons
+
+  a.oauth-button(
+    ng-repeat='btn in vm.buttonsConfig'
+    ng-click='vm.oauthButtonClick(btn)'
+    class='{{btn.class}}'
+    href
+  )
+    i.fa(class='fa-{{btn.class}}')
+    .divider
+    .name(flex) {{btn.name}}
+
