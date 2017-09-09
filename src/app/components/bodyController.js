@@ -4,9 +4,9 @@
 
     angular.module('webPage').controller('BodyController', function (appcache, toastr, $window) {
 
-      var vm = this;
-      var ua = new UAParser();
-      var deviceInfo = ua.getOS();
+      const vm = this;
+      const ua = new UAParser();
+      const deviceInfo = ua.getOS();
 
       vm.cls = deviceInfo.name ? deviceInfo.name.replace (' ','') : '';
       vm.cacheStatus = function () {
@@ -14,7 +14,7 @@
       };
 
       function onUpdate () {
-        toastr.error ('Нажмите, чтобы применить его', 'Получено обновление', {
+        toastr.error ('Paspauskite, kad taikyti', 'Gautas atnaujinimas', {
           timeOut: 0,
           extendedTimeOut: 0,
           onTap: function () {
