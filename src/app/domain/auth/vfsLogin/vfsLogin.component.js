@@ -12,11 +12,9 @@
 
     });
 
-  function LoginController($stateParams) {
+  function LoginController($state) {
 
-    const vm = this;
-
-    vm.buttons = [
+    const buttons = [
       {
         url: 'facebook',
         name: 'Facebook',
@@ -29,7 +27,7 @@
       }
     ];
 
-    vm.mobile = [{
+    const mobile = [{
 
       url: 'sms',
       name: 'SMS-kodas',
@@ -38,7 +36,18 @@
 
     }];
 
-    vm.error = $stateParams.error;
+    const vm = _.assign(this, {
+      closeErrorClick,
+      buttons,
+      mobile
+    });
+
+    vm.error = $state.params.error;
+
+    function closeErrorClick() {
+      vm.error = false;
+      // $state.go('login', {}, {reload: true});
+    }
 
   }
 

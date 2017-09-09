@@ -1,8 +1,9 @@
 .vfs-login
 
-  uib-alert(ng-bind='vm.error')
 
   .login-options-group
+
+    .alert-warning(uib-alert ng-if='vm.error') {{ vm.error }}
 
     .title Įeikete per
 

@@ -34,7 +34,7 @@
     onStateChange({}, $state.current);
 
     $scope.$on('$stateChangeSuccess', onStateChange);
-    $scope.$on('$stateChangeStart', onStateChange);
+    // $scope.$on('$stateChangeStart', onStateChange);
 
     /*
      Functions

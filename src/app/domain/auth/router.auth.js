@@ -13,7 +13,7 @@
 
       let accessToken = params['access-token'] || Auth.getToken();
 
-      let publicState = to.name === 'login' || to.name === 'home';
+      let publicState = to.name === 'login';
 
       if (publicState && !accessToken || Auth.isLoggedIn()) return;
 
