@@ -1,0 +1,4 @@
+.auth-status
+  span(ng-if='vm.isLoggedIn()') Jūs esate&nbsp;
+    a(href) {{ vm.userName() }}
+  a(href ng-if='!vm.isLoggedIn()' ng-click='vm.loginClick()') Prisijungti
