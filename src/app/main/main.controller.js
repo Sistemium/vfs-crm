@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController(Menu, $state, Auth, toastr) {
+  function MainController(Menu) {
 
     const vm = this;
 
@@ -17,22 +17,6 @@
         }
       }
     );
-
-    let accessToken = $state.params['access-token'];
-
-    if (accessToken) {
-
-      Auth.login(accessToken)
-        .then(res => {
-          toastr.success(`Jūs prisijungę kaip "${res.name}"`, 'Sveiki avykę!');
-          console.warn('Login success', res, _.map(_.get(_.first(res.orgAccounts), 'orgAccountRoles'), 'role.code'));
-        })
-        .catch(err => {
-          toastr.error(angular.toJson(err), 'Autentifikavimo klaida');
-          console.error(err);
-        });
-
-    }
 
   }
 })();
