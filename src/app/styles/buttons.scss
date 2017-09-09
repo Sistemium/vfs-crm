@@ -86,19 +86,21 @@ button {
 }
 
 a[disabled], [disabled] a {
+
   color: gray;
   pointer-events: none;
+
   cursor: not-allowed;
+
 }
 
 a.disabled, .disabled a {
+
   pointer-events: none;
+  filter: grayscale(100%);
   cursor: not-allowed;
-  -moz-filter: grayscale(100%);
-  -ms-filter: grayscale(100%);
-  -o-filter: grayscale(100%);
-  filter: gray;
-  -webkit-filter: grayscale(100%);
+
+
 }
 
 .disable-click {
