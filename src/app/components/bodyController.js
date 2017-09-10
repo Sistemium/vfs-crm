@@ -2,7 +2,10 @@
 
 (function () {
 
-  angular.module('webPage').controller('BodyController', function (appcache, toastr, $window) {
+  angular.module('webPage')
+    .controller('BodyController', BodyController);
+
+  function BodyController(appcache, toastr, $window) {
 
     const vm = this;
     const ua = new UAParser();
@@ -27,6 +30,6 @@
 
     appcache.addEventListener('updateready', onUpdate, true);
 
-  });
+  }
 
 })();
