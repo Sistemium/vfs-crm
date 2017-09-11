@@ -8,7 +8,7 @@
 
   });
 
-  function servicePointDetailsController($scope, Schema, saControllerHelper, $state, Editing, $timeout,
+  function servicePointDetailsController($scope, Schema, saControllerHelper, $state, Editing,
                                          PictureHelper, GalleryHelper, NgMap, mapsHelper, GeoCoder, ServicePointMapModal) {
 
     const vm = saControllerHelper.setup(this, $scope)
@@ -24,6 +24,7 @@
       uploadingPicture: false,
       coords: {},
       divided: [],
+      busyMap: true,
 
       addContactClick,
       addServiceItemClick,
@@ -70,7 +71,14 @@
 
       let instance = ServicePointMapModal.open(mapModelConfig);
 
-      instance.result.then(_.noop, _.noop);
+      instance.result.then(_.noop, () => {
+
+        vm.rebindOne(Location, vm.servicePoint.locationId, 'vm.servicePoint.location', () => {
+          vm.coords.lat = vm.servicePoint.location.latitude;
+          vm.coords.lng = vm.servicePoint.location.longitude;
+        });
+
+      });
 
     }
 
@@ -131,7 +139,7 @@
         });
 
       vm.progress = helper;
-      vm.tileBusy = {promise: busy, message: 'Nuotraukos siuntimas'};
+      vm.tileBusy = {promise: busy, message: 'Nuotraukos parsisiuntimas'};
 
     }
 
@@ -174,6 +182,13 @@
 
     }
 
+    function noCoords() {
+      vm.coords.lat = 55.322;
+      vm.coords.lng = 23.897;
+      vm.noGeoPosition = true;
+      vm.busyMap = false;
+    }
+
     function positionMarker() {
 
       return GeoCoder.geocode({'address': vm.divided.join(' ')})
@@ -188,6 +203,8 @@
             timestamp: new Date()
           };
 
+          vm.busyMap = false;
+
           Location.create(locationData)
             .then(savedLocation => {
 
@@ -195,6 +212,10 @@
               vm.servicePoint.DSCreate();
               loadGeoPosition();
 
+            })
+            .catch((err) => {
+              console.error(err, 'whlie saving location');
+              noCoords();
             });
 
         })
@@ -203,9 +224,7 @@
             vm.divided.pop();
             positionMarker();
           } else {
-            vm.coords.lat = 55.322;
-            vm.coords.lng = 23.897;
-            vm.noGeoPosition = true;
+            noCoords();
           }
         })
 
@@ -231,9 +250,12 @@
     }
 
     function loadMap() {
+
+      vm.busyMap = false;
+
       NgMap.getMap('smallMap')
         .then(map => {
-          vm.map = map
+          vm.map = map;
         })
     }
 
@@ -242,8 +264,8 @@
       positionMarker()
         .then(() => {
         })
-        .catch(() => {
-          console.log('positionMarker catch')
+        .catch((err) => {
+          console.err(err, 'positionMarker catch')
         });
     }
 
