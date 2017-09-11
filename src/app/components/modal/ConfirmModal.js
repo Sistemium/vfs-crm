@@ -48,12 +48,12 @@
             text: 'Вы действительно хотите сделать это?',
             buttons: [
               {
-                title: 'Да',
+                title: 'Taip',
                 id: 'yes',
                 type: 'submit'
               },
               {
-                title: 'Нет',
+                title: 'Ne',
                 id: 'no',
                 type: 'cancel'
               }

@@ -158,10 +158,8 @@
           .serving-master Aptarnavimas
           //.service-contract Sutartis
 
-        .scroll-y(
-        resize
-        resize-offset-top='15'
-        )
+        .service-point-items
+
           .service-point-item(
           ng-repeat='item in vm.servicePoint.servingItems track by item.id'
           ng-class='{"has-changes": item.DSHasChanges()}'

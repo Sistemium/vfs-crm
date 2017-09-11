@@ -15,13 +15,6 @@ h2.root-navbar(ng-hide='vm.hide' ng-class='{disabled: vm.hideNavs}')
 
   syncer-indicator
 
-  fullscreen-menu(ng-show='vm.isHomeState')
-
-  // TODO: add component config option to unhardcode domain content
-  .sales-navs(ng-if='vm.isSalesState')
-
-    settings-popover(ng-if='vm.isCatalogueState')
-    campaign-popover(ng-if='vm.isCatalogueState')
-    salesman-menu
+  auth-status
 
 hr

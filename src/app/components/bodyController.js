@@ -2,31 +2,34 @@
 
 (function () {
 
-    angular.module('webPage').controller('BodyController', function (appcache, toastr, $window) {
+  angular.module('webPage')
+    .controller('BodyController', BodyController);
 
-      var vm = this;
-      var ua = new UAParser();
-      var deviceInfo = ua.getOS();
+  function BodyController(appcache, toastr, $window) {
 
-      vm.cls = deviceInfo.name ? deviceInfo.name.replace (' ','') : '';
-      vm.cacheStatus = function () {
-        return appcache.textStatus;
-      };
+    const vm = this;
+    const ua = new UAParser();
+    const deviceInfo = ua.getOS();
 
-      function onUpdate () {
-        toastr.error ('Нажмите, чтобы применить его', 'Получено обновление', {
-          timeOut: 0,
-          extendedTimeOut: 0,
-          onTap: function () {
-            $window.location.reload (true);
-          }
-        });
-      }
+    vm.cls = deviceInfo.name ? deviceInfo.name.replace(' ', '') : '';
+    vm.cacheStatus = function () {
+      return appcache.textStatus;
+    };
 
-      $window.stmAppCacheUpdated = onUpdate;
+    function onUpdate() {
+      toastr.error('Paspauskite, kad taikyti', 'Gautas atnaujinimas', {
+        timeOut: 0,
+        extendedTimeOut: 0,
+        onTap: function () {
+          $window.location.reload(true);
+        }
+      });
+    }
 
-      appcache.addEventListener('updateready', onUpdate, true);
+    $window.stmAppCacheUpdated = onUpdate;
 
-    });
+    appcache.addEventListener('updateready', onUpdate, true);
+
+  }
 
 })();

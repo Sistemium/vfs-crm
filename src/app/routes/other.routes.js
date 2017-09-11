@@ -9,6 +9,18 @@
 
         .state({
 
+          name: 'login',
+          url: '/login?error',
+          template: '<vfs-login></vfs-login>',
+
+          data: {
+            title: 'VFS CRM Autorizacija'
+          }
+
+        })
+
+        .state({
+
           name: 'settings',
           url: '/settings',
           template: '<menu-settings></menu-settings>',

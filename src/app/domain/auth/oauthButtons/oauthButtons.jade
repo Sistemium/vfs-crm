@@ -1,0 +1,12 @@
+.oauth-buttons
+
+  a.oauth-button(
+  ng-repeat='btn in vm.buttonsConfig'
+  ng-click='vm.oauthButtonClick(btn)'
+  ng-class='[btn.url, {disabled: btn.disabled}]'
+  href
+  )
+    img(ng-src='{{ btn.icon }}')
+    .divider
+    .name {{ btn.name }}
+
