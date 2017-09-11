@@ -89,6 +89,22 @@ $background-service-point-color: lighten($gray-background-color, 0%);
       justify-content: flex-start;
       align-items: center;
 
+      .loading-spinner {
+        border: 1px solid #eeeeee;
+        width: 120px;
+        height: 120px;
+        .uil-ripple-css {
+          div {
+            box-sizing: border-box;
+          }
+
+          width: 120px;
+          height: 120px;
+          position: unset;
+        }
+
+      }
+
       .service-point-map {
 
         margin: 0 10px;
