@@ -1,0 +1,70 @@
+.auth-status {
+
+  font-size: 15px;
+  padding: 1.5px 2px;
+  display: flex;
+
+  .user-pic {
+    height: 30px;
+    line-height: 30px;
+
+    img {
+      height: 90%;
+      width: 27px;
+      border-radius: 50%;
+      margin-right: 5px;
+
+      object-fit: contain;
+
+    }
+  }
+
+  .user-name {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: $primary-color;
+
+    @media (max-width: $screen-xs) {
+
+      width: 35px;
+      line-height: 35px;
+      flex-direction: row;
+
+      span:first-letter {
+        visibility: visible;
+      }
+      span {
+        visibility: hidden;
+        width: 17px;
+        font-size: 25px;
+      }
+
+      span + span {
+
+      }
+
+    }
+
+  }
+
+  .user-name:hover {
+    color: darken($primary-color, 15%);
+  }
+
+  span {
+    line-height: inherit;
+    display: inline-block;
+  }
+
+  span:first-letter {
+    color: $primary-color;
+  }
+
+  a {
+    width: 50px;
+    text-align: right;
+    display: flex;
+  }
+
+}
