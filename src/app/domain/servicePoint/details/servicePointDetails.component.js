@@ -48,6 +48,15 @@
     Brand.findAll();
     Person.findAll();
 
+    $scope.$watch('vm.servicePoint.location.ts', (nv, ov) => {
+
+      if (nv !== ov) {
+        vm.coords.lat = vm.servicePoint.location.latitude;
+        vm.coords.lng = vm.servicePoint.location.longitude;
+      }
+
+    });
+
     /*
      Functions
      */
@@ -71,14 +80,7 @@
 
       let instance = ServicePointMapModal.open(mapModelConfig);
 
-      instance.result.then(_.noop, () => {
-
-        vm.rebindOne(Location, vm.servicePoint.locationId, 'vm.servicePoint.location', () => {
-          vm.coords.lat = vm.servicePoint.location.latitude;
-          vm.coords.lng = vm.servicePoint.location.longitude;
-        });
-
-      });
+      instance.result.then(_.noop, _.noop);
 
     }
 

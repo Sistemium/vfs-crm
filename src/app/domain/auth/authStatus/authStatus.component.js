@@ -18,8 +18,19 @@
       loginClick,
       nameClick,
       userName,
-      isLoggedIn: () => !!userName(),
-      notLoggedInText
+      isLoggedIn: () => {
+
+        if (Auth.isLoggedIn()) {
+          userName();
+          return Auth.isLoggedIn();
+        } else {
+          vm.user = {};
+          return false
+        }
+
+      },
+      notLoggedInText,
+      user: {}
     });
 
     /*
@@ -47,11 +58,14 @@
     }
 
     function userName() {
-      return _.get(Auth.getCurrentUser(), 'name');
+      let splitName = Auth.getCurrentUser().name.split(' ');
+      vm.user.name = splitName[0];
+      vm.user.lastName = splitName[1];
+
+      //vm.user.name = 'Anachita';
+      //vm.user.lastName = 'Sarachmatullojeva';
     }
 
-
   }
-
 
 })();

@@ -6,6 +6,8 @@
     @return nth($list, random(10));
   }
 
+  width: 100.7%;
+
   $metro-colors: #A200FF, #FF0097, #00ABA9, #8CBF26, #A05000, #E671B8, #F09609, #1BA1E2, #E51400, #339933;
   $img-size: 70px;
   $item-length: 9;
@@ -65,7 +67,8 @@
     }
 
     @include responsive-only(xxs) {
-      width: calc(100% - 4px);
+      width: calc(100%);
+      margin: 4px 0;
     }
 
   }
