@@ -1,25 +1,21 @@
 @import "../../../styles/editing";
+@import "../../../styles/variables";
 
 .edit-service-contract {
 
   @extend %editing-with-form;
 
-  .type-select {
-
-    button {
-      background-color: transparent;
-      border: 1px solid #ccc;
-      width: 100%;
-      @extend %flex-row-nowrap;
-      justify-content: space-between;
-      align-items: center;
-
-      > * {
-        color: #1d91c4;
-      }
-
+  .service-points {
+    .address {
+      font-weight: 500;
+    }
+    .service-item {
+      color: $dark-gray;
     }
 
+    .list-group {
+      margin-bottom: 0;
+    }
   }
 
 }

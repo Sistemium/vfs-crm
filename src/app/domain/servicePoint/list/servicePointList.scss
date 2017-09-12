@@ -2,8 +2,8 @@
 
 .service-point-list {
 
-  $width-name: 30%;
-  $width-address: 50%;
+  $width-name: 40%;
+  $width-address: 40%;
   $width-serving-master: 20%;
 
   @extend %flex-table;

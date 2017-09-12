@@ -22,26 +22,26 @@
         declension
       },
 
-      meta: {}
+      meta: {
+        label: {
+          add: 'Naujas padalinys'
+        }
+      }
 
     });
 
     function isValid() {
-      return true
+      return this.name;
     }
 
+    const genitive = {
+      Vilnius: 'Vilniaus',
+      Kaunas: 'Kauno',
+      'Klaipėda': 'Klaipėdos'
+    };
+
     function declension() {
-
-      if (this.name === 'Vilnius') {
-        return 'Vilniaus'
-      } else if (this.name === 'Klaipėda') {
-        return 'Klaipėdos'
-      } else if (this.name === 'Kaunas') {
-        return 'Kauno'
-      }else{
-        return this.name
-      }
-
+      return genitive[this.name] || this.name;
     }
 
   });

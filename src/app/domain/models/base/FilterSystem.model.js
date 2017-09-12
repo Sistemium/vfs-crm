@@ -45,7 +45,7 @@
     });
 
     function isValid() {
-      return true
+      return this.filterSystemTypeId && this.brandId && this.name;
     }
 
   });

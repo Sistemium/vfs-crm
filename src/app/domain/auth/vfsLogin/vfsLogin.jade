@@ -1,0 +1,19 @@
+.vfs-login
+
+
+  .login-options-group
+
+    .alert-warning(uib-alert ng-if='vm.error') {{ vm.error }}
+
+    .title Įeikete per
+
+    .login-options
+      p Mobilųjį telefoną:
+      oauth-buttons(buttons-config='vm.mobile')
+
+    .divider
+
+    .login-options
+      p Socialinį tinklą:
+      oauth-buttons(buttons-config='vm.buttons')
+

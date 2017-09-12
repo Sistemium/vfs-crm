@@ -1,15 +1,15 @@
-.edit-service-point-contract
+.edit-service-point-contact
 
   .form
 
     .first-name
-      label Naudotojas
+      label Kontaktinis asmuo
 
       vfs-dropdown(
       ng-model='vm.servicePointContract.personId'
       items-data-source-name='Person'
       items-name-property='name'
-      save-to='vm.servicePointContract'
+      save-to='vm.servicePointContact'
       save-to-property='personId'
       placement='bottom-left'
       )

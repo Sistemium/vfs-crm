@@ -9,13 +9,14 @@
       name: 'Location',
       endpoint: 'Location',
 
-      labels: {
-        multiple: 'Геометки',
-        single: 'Геометка'
-      },
+      labels: {},
 
       relations: {
-        hasMany: {
+        hasOne: {
+          ServicePoint: {
+            localField: 'servicePoint',
+            localKey: 'servicePointId'
+          }
         }
       }
 

@@ -20,22 +20,21 @@
 
   function NavbarController(Menu, $scope, $rootScope, saControllerHelper, $window, localStorageService, $state) {
 
-    const DEFAULT_TITLE = 'Pagrindinis Meniu';
+    const DEFAULT_TITLE = 'VFS CRM';
     const vm = saControllerHelper.setup(this, $scope);
+    const rootIcon = 'Aquafilter-lt.png';
+    const rootItems = _.get(Menu.root(), 'items');
 
     vm.use({
 
-      menu: Menu.root(),
-      rootClick,
-
-      rootIcon: '/images/Aquafilter-lt.png'
+      rootClick
 
     });
 
     onStateChange({}, $state.current);
 
     $scope.$on('$stateChangeSuccess', onStateChange);
-    $scope.$on('$stateChangeStart', onStateChange);
+    // $scope.$on('$stateChangeStart', onStateChange);
 
     /*
      Functions
@@ -51,11 +50,18 @@
 
     }
 
+    function matchingItem(items, to) {
+      let res;
+      _.each(items, item => {
+        res = res || _.startsWith(to.name, item.state) && item || item.items && matchingItem(item.items, to);
+      });
+      return res;
+    }
+
     function onStateChange(event, to) {
 
       let rootState = _.get(to, 'data.rootState');
-      let currentItem = _.find(vm.menu.items, item => to.name && _.startsWith(to.name, item.state));
-
+      let currentItem = matchingItem(rootItems, to);
 
       vm.use({
 
@@ -65,8 +71,8 @@
         title: _.get(to, 'data.title') || DEFAULT_TITLE,
         isHomeState: to.name === 'home',
         currentItem,
-        isSubRootState: _.startsWith(to.name, rootState) && to.name !== rootState,
-        currentIcon: `/images/${currentItem ? 'color/' + currentItem.icon : 'Aquafilter-lt.png'}`
+        isSubRootState: (_.startsWith(to.name, rootState) || rootState) && to.name !== rootState,
+        currentIcon: `/images/${currentItem ? currentItem.icon : rootIcon}`
 
       });
     }

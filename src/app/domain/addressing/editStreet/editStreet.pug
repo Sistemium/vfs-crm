@@ -1,0 +1,38 @@
+.edit-street
+
+  .form
+
+    .district
+      label Apskritis
+
+      vfs-dropdown(
+      ng-required
+      items-data-source-name='District'
+      items-name-property='name'
+      save-to='vm'
+      save-to-property='districtId'
+      placement='bottom-left'
+      )
+
+    .locality
+      label Gyvenomoji Vieta
+
+      vfs-dropdown(
+      ng-required
+      items-data-source-name='Locality'
+      items-name-property='name'
+      save-to='vm.street'
+      save-to-property='localityId'
+      placement='bottom-left'
+      filter='{districtId: vm.districtId}'
+      )
+
+    .name
+      label(for='name') Pavadinimas
+
+      input#name.form-control(
+      autocomplete='off'
+      placeholder='Pavadinimas'
+      ng-required
+      ng-model='vm.street.name'
+      )

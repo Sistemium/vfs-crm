@@ -30,7 +30,7 @@
     });
 
     function isValid() {
-      return true;
+      return this.name;
     }
 
   });

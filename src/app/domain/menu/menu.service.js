@@ -4,72 +4,72 @@
 
   angular.module('webPage').service('Menu', function () {
 
+    const settings = [{
+      title: 'Padaliniai',
+      state: 'site',
+      icon: 'color/icons8-Department.png'
+    }, {
+      title: 'Filtravimo sistemų tipai',
+      state: 'filterSystemType',
+      icon: 'color/icons8-Plumbing.png'
+    }, {
+      title: 'Prekių Ženklai',
+      state: 'brand',
+      icon: 'color/icons8-Filtration.png'
+    }];
+
     const items = [{
       title: 'Aptarnavimo taškai',
-      state: 'servicePoint'
+      state: 'servicePoint',
+      icon: 'color/icons8-Marker.png'
     }, {
       title: 'Darbuotojai',
-      state: 'employee'
+      state: 'employee',
+      icon: 'color/icons8-Worker.png'
     }, {
       title: 'Filtravimo sistemos',
-      state: 'filterSystem'
+      state: 'filterSystem',
+      icon: 'color/icons8-Plumbing.png'
     }, {
       title: 'Aptarnavimo sutartys',
-      state: 'serviceContract'
+      state: 'serviceContract',
+      icon: 'color/icons8-Agreement.png'
     }, {
       title: 'Įmonės',
-      state: 'legalEntity'
+      state: 'legalEntity',
+      icon: 'color/icons8-Organization.png'
     }, {
       title: 'Asmenys',
-      state: 'person'
+      state: 'person',
+      icon: 'color/icons8-People.png'
     }, {
       title: 'Aptarnavimas',
       state: 'serviceOrder',
+      icon: 'color/icons8-Maintenance.png',
       disabled: true
     }, {
       title: 'Naudotojai',
       state: 'users',
+      icon: 'color/icons8-User-Folder.png',
       disabled: true
     }, {
       title: 'Nustatymai',
       state: 'settings',
-      disabled: true
+      icon: 'color/icons8-Cog.png',
+      items: settings
     }];
-
-    const icons = [
-      'icons8-Marker.png',
-      'icons8-Worker.png',
-      'icons8-Plumbing.png',
-      'icons8-Agreement.png',
-      'icons8-Organization.png',
-      'icons8-People.png',
-      'icons8-Maintenance.png',
-      'icons8-User-Folder.png',
-      'icons8-Cog.png'
-    ];
-
-    //const iconsOld = [
-    //  'color/icons8-Marker.png',
-    //  'color/icons8-Worker.png',
-    //  'color/icons8-Plumbing.png',
-    //  'color/icons8-Agreement.png',
-    //  'color/icons8-Organization.png',
-    //  'color/icons8-People.png',
-    //  'color/icons8-Maintenance.png',
-    //  'color/icons8-User-Folder.png',
-    //  'color/icons8-Cog.png'
-    //];
-
-    _.each(icons, (icon, idx) => {
-      items[idx].icon = icon;
-    });
-
 
     function setItemData(state, data) {
       _.assign(_.find(items, {state}), data);
     }
 
-    function root() {
+    function root(name) {
+
+      let state = _.find(items, {state: name});
+
+      if (state) {
+        return state;
+      }
 
       return {
 

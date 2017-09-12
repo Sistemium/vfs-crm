@@ -18,19 +18,15 @@
     const vm = saControllerHelper.setup(this, $scope);
 
     vm.use({
-      preOpen,
-      openModal: Editing.editModal('edit-service-contract', 'Sutarties Redagavimas')
+      serviceContractClick
     });
 
     /*
     Functions
      */
 
-    function preOpen(res) {
-
-      vm.serviceContract = {};
-      vm.serviceContract.type = res.legalType;
-      vm.openModal(res);
+    function serviceContractClick(serviceContract) {
+      Editing.editModal('edit-service-contract', 'Sutarties Redagavimas')(serviceContract);
     }
 
   }

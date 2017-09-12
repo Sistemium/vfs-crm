@@ -1,6 +1,6 @@
 .edit-filter-system-type
 
-  form
+  .form
 
     .name
       label(for='name') Pavadinimas
@@ -23,8 +23,35 @@
     .service-frequency
       label(for='frequency') Aptarnavimo Dažnumas
 
+      input#service-frequency.form-control(
+      autocomplete='off'
+      placeholder='Mėnesių skaičius'
+      type='number'
+      ng-model='vm.filterSystemType.serviceFrequency'
+      ng-step='1'
+      ng-min='0'
+      ng-max='24'
+      )
+
+    .service-price
+      label(for='service-price') Aptarnavimo kaina
+
+      input#service-price.form-control(
+      autocomplete='off'
+      type='number'
+      placeholder='Eurų už aptarnavimą'
+      ng-model='vm.filterSystemType.servicePrice'
+      ng-min='0'
+      )
+
+    .guarantee-period
+      label(for='frequency') Garantinis laikotarpis
+
       input#frequency.form-control(
       autocomplete='off'
-      placeholder='Aptarnavimo Dažnumas'
-      ng-model='vm.filterSystemType.serviceFrequency'
+      type='number'
+      placeholder='Mėnesių skaičius'
+      ng-model='vm.filterSystemType.guaranteePeriod'
+      ng-min='0'
       )
+

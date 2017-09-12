@@ -1,0 +1,31 @@
+.map-modal
+
+  .modal-header
+
+    h3 {{ vm.title }}
+    a(href ng-click='vm.closeModal()')
+      i.glyphicon.glyphicon-remove
+
+  #modal-body.modal-body
+
+    div(resize resize-offset-top='115' resize-property='height')
+      ng-map(
+      id='largeMap'
+      ng-if='vm.isReady'
+      style='height: inherit;',
+      center='[{{ vm.mapCenter.lat }}, {{ vm.mapCenter.lng }}]'
+      zoom='{{ vm.zoom }}'
+      )
+        marker(
+        position='{{ vm.marker.coords.lat}}, {{ vm.marker.coords.lng }}'
+        animation='DROP'
+        draggable='{{vm.marker.isDraggable}}'
+        on-dragend='vm.onDragEnd($event)'
+        )
+
+  .modal-footer
+    button.btn.save(
+    ng-repeat='button in vm.buttons'
+    ng-click='button.onClick(vm)'
+    ng-class='{ "{{button.class}}": true }'
+    ) {{ button.title }}

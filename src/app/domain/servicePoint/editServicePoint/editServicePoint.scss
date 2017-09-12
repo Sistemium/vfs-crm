@@ -5,5 +5,13 @@
 
   @extend %editing-with-form;
 
+  .form .field-group {
+
+    > .house, > .apartment {
+      max-width: 120px;
+    }
+
+  }
+
 }
 

@@ -10,7 +10,7 @@
   vs-excess='10'
   )
     .brand(
-    ng-repeat='brand in vm.brands track by brand.id'
-    ng-click='vm.openModal(brand)'
+    ng-repeat='picture in vm.picture track by picture.id'
+    ng-click='vm.openModal(picture)'
     )
-      .name {{ brand.name }}
+      .name {{ picture.id }}

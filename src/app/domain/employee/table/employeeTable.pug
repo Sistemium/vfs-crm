@@ -18,4 +18,4 @@
       .first-name {{ employee.person.firstName }}
       .last-name {{ employee.person.lastName }}
       .telephone
-        a(href='tel:{{ employee.person.phone }}' ng-click='$event.stopPropagation()') {{ employee.person.phone }}
+        a(href='{{ employee.person.telHref }}' ng-click='$event.stopPropagation()') {{ employee.person.phone }}

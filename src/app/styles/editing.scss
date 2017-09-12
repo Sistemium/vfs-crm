@@ -1,6 +1,20 @@
 @import "flex";
 
+.editing.modal-header {
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  > *:first-child {
+    flex: 1;
+  }
+
+}
+
 %editing-with-form {
+
+  $margin: 5px;
 
   > form, > .form {
 
@@ -8,7 +22,50 @@
 
     > * {
       width: 100%;
-      margin: 5px 0;
+      margin: $margin 0;
+    }
+
+    .field-group {
+
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      > div {
+
+        flex: 1;
+
+        .button-container {
+
+          display: flex;
+          flex-flow: row nowrap;
+
+          > * {
+            flex: 1;
+          }
+
+          > * + * {
+            margin-left: -1px;
+          }
+
+          label:first-of-type {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+          }
+
+          label:last-of-type {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+          }
+
+        }
+
+      }
+
+      > * + * {
+        margin-left: $margin * 2;
+      }
+
     }
 
   }

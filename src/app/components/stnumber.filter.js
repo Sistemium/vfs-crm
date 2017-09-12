@@ -1,24 +1,31 @@
-angular.module('core.services')
-  .filter('stnumber', function($filter) {
-    return function stnumberFilter (input, minDecimals) {
+(function () {
 
-      minDecimals = minDecimals || 0;
+  angular.module('core.services')
+    .filter('stnumber', function ($filter) {
 
-      var out = $filter('number') (input);
+      return function (input, minDecimals) {
 
-      if (out && minDecimals) {
-        var decimals = out.match(/.*(\.{1})([0-9]+)/) || [0, '', ''];
+        minDecimals = minDecimals || 0;
 
-        if (!decimals[1]) {
-          out += '.';
+        let out = $filter('number')(input);
+
+        if (out && minDecimals) {
+
+          const decimals = out.match(/.*(\.{1})([0-9]+)/) || [0, '', ''];
+
+          if (!decimals[1]) {
+            out += '.';
+          }
+
+          if (decimals[2].length < minDecimals) {
+            out += _.repeat('0', minDecimals - decimals[2].length);
+          }
+
         }
 
-        if (decimals[2].length < minDecimals) {
-          out += _.repeat('0',minDecimals - decimals[2].length);
-        }
-      }
+        return out;
 
-      return out;
+      };
+    });
 
-    };
-  });
+})();

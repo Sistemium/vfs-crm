@@ -1,11 +1,12 @@
 .items
 
-  .item(
+  a.item(
+  href
   ng-repeat='item in items track by $index'
-  ng-click='vm.goTo(item.state, item.disabled)'
-  ng-class='{"disabled-choice" : item.disabled}'
+  ng-click='vm.itemClick(item)'
+  ng-class="{disabled: item.disabled}"
   )
     .pic
-      img(ng-src='/images/windows/{{item.icon}}')
+      img(ng-src='/images/{{item.icon}}')
 
     span.caption {{::item.title}}

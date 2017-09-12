@@ -1,0 +1,28 @@
+@import "../../../styles/variables";
+
+.map-modal {
+
+  .modal-header {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    h3 {
+      margin: 0;
+      flex: 1;
+    }
+    a {
+      i {
+        top: 3px;
+      }
+    }
+
+  }
+
+  .btn-info-modified {
+    background-color: $primary-color;
+    color: white;
+  }
+
+}

@@ -1,0 +1,107 @@
+@import "servicePointDetails";
+
+.service-point-details {
+
+  .service-point-items {
+
+    margin-top: 10px;
+
+    $width-filter-system: 40%;
+    $width-installing-master: 30%;
+    $width-serving-master: 30%;
+    $action-button-margin: 5px;
+
+    @extend %flex-table;
+
+    .service-point-list {
+
+      .headers {
+        padding: 5px 0 0 4px;
+        @extend %flex-table-headers;
+      }
+
+      .headers >, .service-point-item > {
+
+        .filter-system {
+          margin-left: $action-button-margin;
+          width: $width-filter-system;
+        }
+        .installing-master {
+          width: $width-filter-system;
+        }
+        .serving-master {
+          width: $width-filter-system;
+        }
+        .service-contract {
+          //width: $width-service-contract;
+        }
+
+      }
+
+      .service-point-items {
+
+        background-color: $white;
+
+        .service-point-item {
+
+          @extend %flex-table-item;
+
+          border-bottom: 1px solid darken($border-gray, 5%);
+          height: $small-row-height;
+          align-items: center;
+
+          &:first-child {
+            border-top: 1px solid darken($border-gray, 5%);
+          }
+
+          .popover {
+            padding: 0 !important;
+            max-width: 500px;
+            min-width: 500px;
+          }
+
+          &.has-changes > .action.button {
+            background-color: $state-warning-text;
+          }
+
+          .action.btn {
+
+            margin-right: $action-button-margin - 1;
+            padding: 0;
+
+            > i {
+              top: 3px;
+              right: 1px;
+            }
+
+          }
+
+          .action.btn:hover {
+            background: darken($hover-color, 10%);
+          }
+
+          .installing-master, .filter-system, .serving-master {
+            @extend .ellipsis;
+          }
+
+          .installing-master, .serving-master {
+
+            span {
+              height: 20px;
+            }
+
+            .date {
+              color: $gray;
+            }
+
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+          }
+
+        }
+      }
+    }
+
+  }
+}

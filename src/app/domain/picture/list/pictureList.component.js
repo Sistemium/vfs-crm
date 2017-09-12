@@ -1,9 +1,9 @@
 (function (module) {
 
-  module.component('brandList', {
+  module.component('pictureList', {
 
     bindings: {
-      brands: '='
+      pictures: '='
     },
 
     templateUrl: 'app/domain/picture/list/pictureList.html',

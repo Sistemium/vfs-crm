@@ -8,14 +8,15 @@
 
   });
 
-  function siteMasterController($scope, Schema, saControllerHelper) {
+  function siteMasterController($scope, Schema, saControllerHelper, Editing) {
 
     const vm = saControllerHelper.setup(this, $scope);
 
     const {Site} = Schema.models();
 
     vm.use({
-      $onInit
+      $onInit,
+      addClick
     });
 
     vm.rebindAll(Site, {orderBy: ['name']}, 'vm.sites', onSearch);
@@ -25,14 +26,18 @@
      Functions
      */
 
+    function addClick() {
+      Editing.editModal('edit-site', 'Naujas Padalinys')(Site.createInstance());
+    }
+
     function onSearch() {
 
       let {searchText} = vm;
-      vm.sitesFiltered = filterFilterSystemTypes(vm.sites, searchText);
+      vm.sitesFiltered = filterData(vm.sites, searchText);
 
     }
 
-    function filterFilterSystemTypes(data, text) {
+    function filterData(data, text) {
 
       if (!text) return data;
 

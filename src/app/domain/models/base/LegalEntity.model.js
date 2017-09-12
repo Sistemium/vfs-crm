@@ -23,12 +23,18 @@
 
       methods: {
         isValid
+      },
+
+      meta: {
+        label: {
+          add: 'Nauja imonė'
+        }
       }
 
     });
 
     function isValid() {
-      return true
+      return this.name && this.code;
     }
 
   });

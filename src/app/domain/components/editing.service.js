@@ -5,9 +5,11 @@
   angular.module('webPage')
     .service('Editing', Editing);
 
-  function Editing($uibModal, $timeout) {
+  function Editing($uibModal, $timeout, Schema) {
 
-    return {editModal, setupController};
+    let me = this;
+
+    return {editModal, setupController, closeModal};
 
     function setupController(vm, itemProperty) {
 
@@ -17,8 +19,8 @@
         saveClick,
         cancelClick,
         destroyClick,
-        afterSave: vm.afterSave || _.noop,
-        afterCancel: vm.afterCancel || _.noop
+        afterSave: vm.afterSave || _.identity,
+        afterCancel: vm.afterCancel || _.identity
       });
 
       /*
@@ -27,10 +29,10 @@
 
       function saveClick() {
         if (vm.saveFn) {
-          vm.saveFn()
+          return vm.saveFn()
             .then(vm.afterSave);
         } else if (_.isFunction(vm[itemProperty].DSCreate)) {
-          vm[itemProperty].DSCreate()
+          return vm[itemProperty].DSCreate()
             .then(vm.afterSave);
         }
       }
@@ -59,23 +61,46 @@
     }
 
     function editModal(componentName, title) {
-      return item => openEditModal(item, componentName, title);
+      return item => {
+
+        if (!title) {
+
+          let modelName = _.get(item, 'constructor.name');
+
+          let model = modelName && Schema.model(modelName);
+
+          if (!item.id) {
+            title = _.get(model, 'meta.label.add');
+          }
+
+        }
+
+        return openEditModal(item, componentName, title);
+
+      };
+    }
+
+    function closeModal() {
+      me.modal.close();
     }
 
     function openEditModal(item, componentName, title) {
 
       let itemName = _.last(componentName.match(/edit-(.*)/));
 
-      let modal = $uibModal.open({
+      me.modal = $uibModal.open({
 
         animation: true,
-        template: `<div class="modal-header"><h1>{{vm.title}}</h1></div>` +
+        template: `<div class="editing modal-header">` +
+        `  <h1>{{vm.title}}</h1>` +
+        `  <a href class="close-btn" ng-click="vm.cancelClick()"><i class="glyphicon glyphicon-remove"></i></a>` +
+        `</div>` +
         `<div class="modal-body">` +
         `  <${componentName} ${itemName}="vm.item" save-fn="vm.saveFn"></${componentName}>` +
         `</div>` +
         `<div class="modal-footer">` +
         (item.id ? `  <button class="btn destroy" ng-class="vm.confirmDestroy ? 'btn-danger' : 'btn-default'" ng-click="vm.destroyClick()">Ištrinti</button>` : '') +
-        `  <button class="btn btn-success save" ng-disabled="!vm.item.isValid()" ng-click="vm.saveClick()">Išsaugoti</button>` +
+        `  <button class="btn btn-success save animate-show" ng-show="!vm.item.id || vm.item.DSHasChanges()" ng-disabled="!vm.item.isValid()" ng-click="vm.saveClick()">Išsaugoti</button>` +
         `  <button class="btn btn-default cancel" ng-click="vm.cancelClick()">Atšaukti</button>` +
         `</div>`,
         size: 'lg',
@@ -84,14 +109,14 @@
 
       });
 
-      modal.result
+      me.modal.result
         .catch(() => {
           if (item.id) {
             item.DSRevert();
           }
         });
 
-      return modal.result;
+      return me.modal.result;
 
       function controller($scope) {
 
@@ -104,8 +129,8 @@
         _.assign(vm, {
           item,
           title,
-          afterSave: modal.close,
-          afterCancel: modal.dismiss
+          afterSave: me.modal.close,
+          afterCancel: me.modal.dismiss
         });
 
       }

@@ -16,6 +16,7 @@
       'ng-appcache',
       'ui.mask',
       'sistemiumBootstrap',
+      'sistemiumAngularAuth',
       'Models',
       'cgBusy',
       'vs-repeat',
@@ -24,10 +25,10 @@
       'angularMoment',
       'swipe',
       'ngFileUpload',
-      'ngPinchZoom'
+      'ngPinchZoom',
+      'ngMap'
     ]);
 
   angular.module('jsd', ['sistemiumBootstrap', 'Models']);
-
 
 })();

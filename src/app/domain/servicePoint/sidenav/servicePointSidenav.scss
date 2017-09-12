@@ -7,8 +7,27 @@
   box-shadow: $box-shadow;
 
   vfs-searcher {
-    padding: 7px 10px;
     display: flex;
+  }
+
+  .search-add {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    margin-bottom: 6px;
+    padding: 8px 10px;
+
+    vfs-searcher {
+      flex: 1;
+    }
+
+    button {
+      margin-left: 6px;
+      padding: 6px 8px;
+    }
+
   }
 
   .scroll-y {
@@ -21,19 +40,20 @@
       padding: 0 10px;
       position: relative;
 
-      .name {
+      .address {
         @extend .ellipsis;
         margin-top: 3px;
         font-weight: 400;
         padding-right: 22px;
       }
 
-      .address {
+      .name {
         @extend .ellipsis;
         align-self: flex-end;
         max-width: 100%;
         color: $gray;
         line-height: 30px;
+        min-height: 30px;
         font-size: smaller;
       }
 

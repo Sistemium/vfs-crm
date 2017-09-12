@@ -12,7 +12,14 @@
 
   });
 
-  function siteListController() {
+  function siteListController(saControllerHelper, $scope, Editing) {
+
+    const vm = saControllerHelper.setup(this, $scope);
+
+    vm.use({
+      siteClick: Editing.editModal('edit-site', 'Padalinio redagavimas')
+    });
+
   }
 
 })(angular.module('webPage'));

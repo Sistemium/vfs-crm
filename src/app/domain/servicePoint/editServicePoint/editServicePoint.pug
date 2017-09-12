@@ -1,29 +1,134 @@
 .edit-service-point
-  form
-    .name
-      label(for='name') Pavadinimas
-      input#name.form-control(
-      autocomplete='off'
-      placeholder='Pavadinimas'
-      ng-model='vm.servicePoint.name'
-      )
 
-    .address
-      label(for='address') Adresas
-      input#address.form-control(
-      autocomplete='off'
-      placeholder='Adresas'
-      ng-model='vm.servicePoint.address'
-      )
+  .form
 
     .site
-      label Padalinys
+
+      label Aptarnaujantis padalinys
+
       vfs-dropdown(
       ng-required='true'
       ng-model='vm.servicePoint.siteId'
       items-data-source-name='Site'
       items-name-property='name'
-      save-to='vm.servicePoint'
-      save-to-property='siteId'
       placement='bottom-left'
+      )
+
+    .field-group
+
+      .district
+
+        label Apskritis
+
+        vfs-dropdown(
+        ng-model='vm.districtId'
+        items-data-source-name='District'
+        items-name-property='name'
+        placement='bottom-left'
+        )
+
+      .locality(ng-disabled='!vm.districtId')
+
+        label Gyvenomoji Vieta
+
+        vfs-dropdown(
+        ng-required='true'
+        items-data-source-name='Locality'
+        items-name-property='name'
+        ng-model='vm.servicePoint.localityId'
+        filter='{districtId: vm.districtId}'
+        placement='bottom-left'
+        )
+
+    .field-group
+
+      .street(ng-disabled='!vm.servicePoint.localityId')
+
+        label Gatvė
+
+        vfs-dropdown(
+        ng-required='true'
+        ng-model='vm.servicePoint.streetId'
+        items-data-source-name='Street'
+        items-name-property='name'
+        filter='{localityId: vm.servicePoint.localityId}'
+        placement='bottom-left'
+        )
+
+      .house
+
+        label(for='house') Namas
+
+        input#house.form-control(
+        autocomplete='off'
+        placeholder='Namo numeris'
+        ng-model='vm.servicePoint.house'
+        )
+
+      .apartment
+
+        label(for='apartment') Butas
+
+        input#apartment.form-control(
+        autocomplete='off'
+        placeholder='Buto numeris'
+        ng-model='vm.servicePoint.apartment'
+        )
+
+    .field-group
+
+      .name
+        label(for='name') Patalpos pavadinimas
+        input#name.form-control(
+        autocomplete='off'
+        placeholder='Jeigu yra'
+        ng-model='vm.servicePoint.name'
+        )
+
+      .door-code
+
+        label(for='doorCode') Durų kodas
+
+        input#doorCode.form-control(
+        autocomplete='off'
+        placeholder='Jeigu yra'
+        ng-model='vm.servicePoint.doorCode'
+        )
+
+      .type
+
+        label Patalpos tipas
+
+        .button-container
+
+          label.btn.btn-default(
+          ng-model='vm.servicePoint.type'
+          uib-btn-radio="'Gyvenomoji'" uib-uncheckable='false'
+          ) Gyvenomoji
+
+          label.btn.btn-default(
+          ng-model='vm.servicePoint.type'
+          uib-btn-radio="'Negyvenomoji'" uib-uncheckable='false'
+          ) Negyvenomoji
+
+
+    fieldset.contract(ng-disabled='!vm.servicePoint.siteId')
+
+      label Sutartis
+
+      vfs-dropdown(
+      ng-model='vm.servicePoint.currentServiceContractId'
+      items-data-source-name='ServiceContract'
+      items-name-property='name'
+      placement='bottom-left'
+      filter='{siteId: vm.servicePoint.siteId}'
+      )
+
+    .info
+
+      label(for='info') Pastaba
+
+      textarea#info.form-control(
+      placeholder='Komentaras arba paaiškinimas'
+      ng-model='vm.servicePoint.info'
       )

@@ -1,28 +1,48 @@
 @import "../../../styles/flex-table";
 @import "../../../styles/variables";
 
+$background-service-point-color: lighten($gray-background-color, 0%);
+
 .service-point-details {
 
-  $background-service-point-color: darken($purple, 2%);
+  $header-color: darken($gray, 10%);
 
   box-shadow: $box-shadow;
 
-  $width-filter-system: 30%;
-  $width-installing-master: 20%;
-  $width-serving-master: 20%;
-  $width-service-contract: 30%;
-  $width-action-edit-button: 30px;
-
   $btn-padding: 3px 6px;
-  $action-button-margin: 5px;
 
-  @extend %flex-column-nowrap;
+  background: $background-service-point-color;
 
-  .address, .users, .items, .service-point-pictures {
+
+  .no-geolocation {
+    box-shadow: 0px 0px 20px 0px rgba(255, 18, 18, 0.5);
+  }
+
+  ng-map {
+    height: 120px;
+    width: 120px;
+
+    a[href^="http://maps.google.com/maps"],
+    a[href^="https://maps.google.com/maps"],
+    a[href^="https://www.google.com/maps"] {
+      display: none !important;
+    }
+
+    .gmnoprint:not(.gm-bundled-control) {
+      display: none;
+    }
+
+    .gm-bundled-control .gmnoprint {
+      display: block;
+    }
+
+  }
+
+  .address, .contacts, .items, .service-point-pictures {
 
     padding-bottom: 10px;
     padding-top: 10px;
-    border-bottom: 5px dotted white;
+    border-bottom: solid 2px $white;
 
     &:last-of-type {
       border-bottom: none;
@@ -34,7 +54,8 @@
       justify-content: space-between;
       align-items: center;
       font-size: 20px;
-      margin: 0 5px;
+      margin: 0 8px;
+      color: $header-color;
 
       .chapter-name {
 
@@ -42,10 +63,11 @@
 
         justify-content: center;
         align-self: center;
-        height: 25px;
+        //height: 25px;
 
         i {
           width: 22px;
+          display: none;
         }
       }
     }
@@ -53,7 +75,12 @@
 
   .address {
 
-    background: $background-service-point-color;
+    @extend %flex-row-nowrap;
+    justify-content: space-between;
+
+    .button-block {
+      margin: 0 8px;
+    }
 
     .service-point-location {
 
@@ -63,257 +90,57 @@
 
       .service-point-map {
 
-        margin-top: 5px;
-        margin-left: 5px;
-        margin-bottom: 5px;
-
-        img {
-          object-fit: none;
-          height: 120px;
-          width: 120px;
-          border-radius: 50%;
-        }
+        margin: 0 10px;
+        min-height: 120px;
+        min-width: 120px;
 
       }
 
-      .service-point-address {
+      .service-point-add-info {
+
+        min-height: 120px;
 
         @extend %flex-column-wrap;
-        margin: 0 10px;
 
         .point-address {
+
           font-size: 25px;
-          line-height: 25px;
+          line-height: 30px;
           overflow: hidden;
-          height: 52px;
+          flex: 1;
 
-        }
-
-        .site {
-          font-size: 17px;
-          color: $gray;
-        }
-
-      }
-
-    }
-  }
-
-  .service-point-pictures {
-
-    background: $background-service-point-color;
-
-    .disabled-add-button {
-
-      pointer-events: none;
-      > * {
-        background: #ccc;
-        border-color: darken(#ccc, 10%);
-        color: lighten(#ccc, 40%);
-      }
-    }
-
-    .header {
-
-      .chapter-name {
-        i {
-          top: 2px;
-          margin-right: 5px;
-        }
-      }
-
-    }
-
-    .picture-gallery {
-
-      margin: 0 5px;
-
-      .service-point-picture {
-
-        max-height: 234px;
-
-        @extend %flex-row-wrap;
-
-        img, .uploading-img {
-          padding: 0 2px;
-          object-fit: contain;
-          margin: 5px;
-          width: 107px;
-          height: 107px;
-          border: 1px solid #ccc;
-          background: white;
-        }
-
-        img:hover {
-          background: darken($background-service-point-color, 5%);
-          border-color: darken($background-service-point-color, 10%);
-        }
-
-        .loading-img {
-
-          @extend %flex-column-nowrap;
-
-          justify-content: center;
-          align-items: center;
-
-          margin: 5px;
-          width: 107px;
-          height: 107px;
-          background: darken($purple, 5%);
-          border: 1px solid darken($purple, 10%);
-          color: #1d91c4;
-          border-radius: 0;
-
-          .progress-info {
-
-            height: 50px;
-
-            .loading-spinner {
-
-              margin-right: 5px;
-
-              .uil-ripple-css {
-                position: inherit;
-              }
-
-            }
-
-          }
-
-          .success-msg {
-            height: 107px;
-            span {
-            }
-          }
-
-          span {
+          @media (max-width: $screen-md-max) {
             font-size: 20px;
-            font-weight: bold;
+            line-height: 25px;
           }
 
-          .done-uploading {
-            animation: fadeout 3s linear forwards;
+          @media (max-width: $screen-sm-max) {
+            font-size: 17px;
+            text-align: justify;
+            line-height: 20px;
           }
 
         }
 
-      }
+        .contract {
 
-      @-webkit-keyframes fadein {
-        0% {
-          opacity: 0;
-        }
-        50% {
-          opacity: 0.5
-        }
-        100% {
-          opacity: 1
-        }
-      }
+          @extend %flex-row-wrap;
 
-      @keyframes fadeout {
-        0% {
-          opacity: 1;
-          height: 19px !important;
-        }
-        50% {
-          opacity: 0.5;
-          height: 9px !important;
-        }
-        100% {
-          opacity: 0;
-          height: 0 !important;
-        }
-      }
+          color: $gray;
+          font-size: 17px;
 
-      .more-photos-visible, .more-photos-hidden {
-
-        margin-top: 2px;
-
-        button {
-          width: 100%;
-          height: 5px;
-          background: darken($purple, 5%);
-          border: 1px solid darken($purple, 10%);
-          border-radius: 0;
-
-          i {
-            color: white;
-            top: -9px;
-            font-size: 10px;
-            line-height: 5px;
+          @media (max-width: $screen-sm-max) {
+            //height: 45px;
           }
-        }
-      }
 
-      .more-photos-visible {
-
-        animation: fadein 0.5s linear forwards;
-
-      }
-
-      .more-photos-hidden {
-
-        animation: fadeout 0.5s linear forwards;
-
-      }
-
-    }
-
-  }
-
-  .users {
-
-    background: $background-service-point-color;
-
-    .service-point-contacts {
-
-      @extend %flex-row-wrap;
-
-      margin: 0 5px;
-
-      .contact:first-of-type {
-        flex: 1;
-      }
-
-      .contact {
-
-        @extend %flex-column-nowrap;
-
-        > * {
-          outline: none;
         }
 
-        border: 1px solid #ccc;
-        max-width: 160px;
-        height: 48px;
-        margin: 5px;
-        padding: 4px;
-        background: lighten($gray-background-color, 10%);
-
-        .phone, .name {
-          max-width: 150px;
-          align-self: flex-end;
-          font-weight: bold;
-          @extend .ellipsis;
-        }
-
-        .add-user {
-          cursor: pointer;
-        }
-
-      }
-
-      .contact:hover {
-        background: darken($background-service-point-color, 5%);
       }
 
     }
   }
 
   .items {
-
-    background: $background-service-point-color;
 
     .header {
 
@@ -324,7 +151,7 @@
       }
 
       .button-block {
-        .popover {
+        > .popover {
           padding: 0 !important;
           max-width: 500px;
           min-width: 500px;
@@ -332,87 +159,6 @@
       }
     }
 
-    .service-point-items {
-
-      margin-top: 10px;
-
-      @extend %flex-table;
-
-      .service-point-list {
-
-        .headers {
-          padding: 5px 0 0 4px;
-          @extend %flex-table-headers;
-          border-bottom: 1px solid white;
-        }
-
-        .headers >, .service-point-item > {
-
-          .filter-system {
-            margin-left: $action-button-margin;
-            width: $width-filter-system;
-          }
-          .installing-master {
-            width: $width-filter-system;
-          }
-          .serving-master {
-            width: $width-filter-system;
-          }
-          .service-contract {
-            width: $width-service-contract;
-          }
-          .action {
-            width: $width-action-edit-button;
-            margin-right: $action-button-margin;
-          }
-
-        }
-
-        .scroll-y {
-
-          .service-point-item {
-
-            @extend %flex-table-item;
-
-            .popover {
-              padding: 0 !important;
-              max-width: 500px;
-              min-width: 500px;
-            }
-
-            border-bottom: 1px solid white;
-            height: $small-row-height;
-            align-items: center;
-
-            &.has-changes > .action.button {
-              background-color: $state-warning-text;
-            }
-
-            .action.btn {
-
-              margin-right: $action-button-margin - 1;
-              padding: 0;
-
-              > i {
-                top: 3px;
-                right: 1px;
-              }
-
-            }
-
-            .action.btn:hover {
-              background: darken($hover-color, 10%);
-            }
-
-            .installing-master, .filter-system, .serving-master {
-              @extend .ellipsis;
-            }
-
-          }
-        }
-      }
-
-    }
   }
 
 }

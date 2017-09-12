@@ -16,18 +16,23 @@
       },
 
       controller: function menuDirectiveController($state) {
+
         $rootScope.$broadcast('menu-show');
 
         let vm = this;
 
         _.assign(vm, {
-          goTo
+          itemClick
         });
 
-        function goTo(to, isDisabled) {
-          if (!isDisabled) {
-            $state.go(to);
+        function itemClick(item) {
+
+          if (item.isDisabled) return;
+
+          if (item.state) {
+            $state.go(item.state);
           }
+
         }
 
       },

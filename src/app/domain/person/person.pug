@@ -6,15 +6,16 @@
     .first-name Vardas
     .last-name Pavardė
     .code Asmens Kodas
+    .email E-paštas
     .phone Telefonas
-    .avatar-picture Fotografija
+    //.avatar-picture Fotografija
 
   .scroll-y(
   resize
   resize-offset-top='5'
   vs-repeat
   )
-    .person-list(
+    .person(
     ng-repeat='person in vm.persons | filter: vm.searchText track by person.id'
     ng-click='vm.openModal(person)'
     )
@@ -22,9 +23,13 @@
       .first-name {{ person.firstName }}
       .last-name {{ person.lastName }}
       .code {{ person.code }}
+      .email
+        a(href='mailto:{{ person.email}}' ng-click='$event.stopPropagation()') {{ person.email }}
       .phone
-        a(href='tel:{{ person.phone }}' ng-click='$event.stopPropagation()') {{ person.phone }}
-      .avatar-picture
+        a(
+        href='{{ person.telHref }}' ng-click='$event.stopPropagation()'
+        ) {{ person.phone | ltphone }}
+      //.avatar-picture
         span {{ person.avatarPictureId ? 'Yra' : ''}}
 
 

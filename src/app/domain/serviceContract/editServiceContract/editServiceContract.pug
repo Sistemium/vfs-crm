@@ -2,59 +2,57 @@
 
   .form
 
-    .date-test
-      label Data
-
-      sab-date-picker(
-      value='vm.serviceContract.date'
-      )
-
-    .num
-      label(for='num') Numeris
-
-      input#num.form-control(
-      required
-      autocomplete='off'
-      placeholder='Numeris'
-      ng-model='vm.serviceContract.num'
-      )
-
-    .site
-      label Padalinys
+    .site(ng-if='!vm.hideSite')
+      label Aptarnaujantis padalinys
 
       vfs-dropdown(
       ng-required='true'
-      ng-model='vm.servicePoint.siteId'
+      ng-model='vm.serviceContract.siteId'
       items-data-source-name='Site'
       items-name-property='name'
-      save-to='vm.serviceContract'
-      save-to-property='siteId'
       placement='bottom-left'
       )
 
-    .code
-      label Tipas
+    .field-group
+      .date
+        label Data
 
-      .type-select(uib-dropdown)
-        button.btn.dropdown-btn(type='text' uib-dropdown-toggle)
-          span {{vm.serviceContract.legalType || "Paspauskite, kad pasirinkti"}}
-          span.caret
-        ul.dropdown-menu(uib-dropdown-menu)
-          li(role='menuitem')
-            a(ng-click='vm.serviceContract.legalType = "Asmuo"') Asmuo
-          li(role='menuitem')
-            a(ng-click='vm.serviceContract.legalType = "Įmonė"') Įmonė
+        sab-date-picker(
+        value='vm.serviceContract.date'
+        )
+
+      .num
+        label(for='num') Numeris
+
+        input#num.form-control(
+        required
+        autocomplete='off'
+        placeholder='Numeris'
+        ng-model='vm.serviceContract.num'
+        )
+
+    .legal-type
+
+      label Kliento tipas
+
+      .btn-group
+        label.btn.btn-default(
+        ng-model='vm.serviceContract.legalType'
+        uib-btn-radio="'Asmuo'" uib-uncheckable='false'
+        ) Asmuo
+        label.btn.btn-default(
+        ng-model='vm.serviceContract.legalType'
+        uib-btn-radio="'Įmonė'" uib-uncheckable='false'
+        ) Įmonė
 
     .customer-legal-entity(ng-if='vm.serviceContract.legalType === "Įmonė"')
       label Įmonė
 
       vfs-dropdown(
       ng-required='true'
-      ng-model='vm.servicePoint.customerLegalEntityId'
+      ng-model='vm.serviceContract.customerLegalEntityId'
       items-data-source-name='LegalEntity'
       items-name-property='name'
-      save-to='vm.serviceContract'
-      save-to-property='customerLegalEntityId'
       placement='bottom-left'
       )
 
@@ -63,10 +61,21 @@
 
       vfs-dropdown(
       ng-required='true'
-      ng-model='vm.servicePoint.customerPersonId'
+      ng-model='vm.serviceContract.customerPersonId'
       items-data-source-name='Person'
       items-name-property='name'
-      save-to='vm.serviceContract'
-      save-to-property='customerPersonId'
       placement='bottom-left'
       )
+
+    .service-points(ng-if='vm.serviceContract.id && vm.serviceContract.servicePoints.length')
+
+      label Aptarnavimo taškai
+
+      .list-group
+
+        .list-group-item.service-point(ng-repeat='servicePoint in vm.serviceContract.servicePoints track by servicePoint.id')
+          .list-group-item-data(ng-click='vm.listGroupItemClick(servicePoint)')
+            .list-group-item-heading.address {{ servicePoint.address }}
+            .service-item(
+            ng-repeat='serviceItem in servicePoint.servingItems track by serviceItem.id'
+            ) {{ serviceItem.filterSystem.brand.name }} {{ serviceItem.filterSystem.name }} {{ serviceItem.info }}

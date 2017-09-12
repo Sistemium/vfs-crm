@@ -1,0 +1,43 @@
+@import "servicePointDetails";
+
+.service-point-details {
+
+  .contacts {
+
+    .service-point-contacts {
+
+      @extend %flex-row-wrap;
+
+      margin: 0 5px;
+
+      .contact {
+
+        @extend %flex-column-nowrap;
+
+        > * {
+          outline: none;
+        }
+
+        border: 1px solid darken($border-gray, 5%);
+        max-width: 160px;
+        margin: 5px;
+        padding: 4px;
+        background: lighten($gray-background-color, 10%);
+
+        .phone, .name {
+          max-width: 150px;
+          align-self: flex-end;
+          font-weight: bold;
+          @extend .ellipsis;
+        }
+
+      }
+
+      .contact:hover {
+        background: $hover-color;
+      }
+
+    }
+  }
+
+}
