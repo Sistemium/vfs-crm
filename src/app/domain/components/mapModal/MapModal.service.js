@@ -5,7 +5,7 @@
   angular.module('webPage')
     .service('MapModal', MapModal);
 
-  function MapModal($uibModal, NgMap) {
+  function MapModal($uibModal, NgMap, GeoCoder, toastr) {
 
     return {open};
 
@@ -100,7 +100,22 @@
 
           let place = this.getPlace();
 
-          if (!place) return;
+          if (!place.place_id) {
+
+            GeoCoder.geocode({'address': vm.inputAddress})
+              .then(result => {
+                applyMarkerPosition(result[0]);
+              })
+              .catch(() => {
+                toastr.error('Adreso koordinatės nerastos');
+              });
+          } else {
+            applyMarkerPosition(place);
+          }
+
+        }
+
+        function applyMarkerPosition(place) {
 
           NgMap.getMap('largeMap')
             .then(map => {
@@ -118,7 +133,6 @@
               toggleButton('btn-info-modified', false);
 
             })
-
         }
 
         function onDragEnd(ev) {
