@@ -16,14 +16,13 @@
     .service-point-list {
 
       .headers {
-        padding: 5px 0 0 4px;
+        padding: 0 5px;
         @extend %flex-table-headers;
       }
 
       .headers >, .service-point-item > {
 
         .filter-system {
-          margin-left: $action-button-margin;
           width: $width-filter-system;
         }
         .installing-master {
@@ -49,6 +48,12 @@
           border-bottom: 1px solid darken($border-gray, 5%);
           height: $small-row-height;
           align-items: center;
+
+          padding: 0 5px;
+
+          & > div {
+            padding: 0;
+          }
 
           &:first-child {
             border-top: 1px solid darken($border-gray, 5%);
@@ -81,6 +86,7 @@
           }
 
           .installing-master, .filter-system, .serving-master {
+            padding-left: 4px;
             @extend .ellipsis;
           }
 

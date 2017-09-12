@@ -8,7 +8,20 @@
 
   #modal-body.modal-body
 
-    div(resize resize-offset-top='115' resize-property='height')
+    label(for='address-search') Adreso Paieška:
+
+    input#address-search.form-control(
+    places-auto-complete
+    placeholder='Įveskite Adresą'
+    types="['address']"
+    component-restrictions="{country:'lt'}"
+    ng-focus='vm.disableTap($event)'
+    on-place-changed='vm.placeChanged()'
+    ng-model='vm.inputAddress'
+    )
+
+    .map-wrapper(resize resize-offset-top='115' resize-property='height')
+
       ng-map(
       id='largeMap'
       ng-if='vm.isReady'
@@ -16,6 +29,7 @@
       center='[{{ vm.mapCenter.lat }}, {{ vm.mapCenter.lng }}]'
       zoom='{{ vm.zoom }}'
       )
+
         marker(
         position='{{ vm.marker.coords.lat}}, {{ vm.marker.coords.lng }}'
         animation='DROP'
@@ -23,9 +37,11 @@
         on-dragend='vm.onDragEnd($event)'
         )
 
+
   .modal-footer
     button.btn.save(
     ng-repeat='button in vm.buttons'
     ng-click='button.onClick(vm)'
     ng-class='{ "{{button.class}}": true }'
+    ng-if='button.showButton'
     ) {{ button.title }}

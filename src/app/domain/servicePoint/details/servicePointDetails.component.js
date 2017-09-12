@@ -8,7 +8,7 @@
 
   });
 
-  function servicePointDetailsController($scope, Schema, saControllerHelper, $state, Editing, $timeout,
+  function servicePointDetailsController($scope, Schema, saControllerHelper, $state, Editing,
                                          PictureHelper, GalleryHelper, NgMap, mapsHelper, GeoCoder, ServicePointMapModal) {
 
     const vm = saControllerHelper.setup(this, $scope)
@@ -23,6 +23,8 @@
       progress: {},
       uploadingPicture: false,
       coords: {},
+      divided: [],
+      busyMap: true,
 
       addContactClick,
       addServiceItemClick,
@@ -69,14 +71,26 @@
 
       let instance = ServicePointMapModal.open(mapModelConfig);
 
-      instance.result.then(_.noop, _.noop);
+      instance.result.then(_.noop, () => {
+
+        vm.rebindOne(Location, vm.servicePoint.locationId, 'vm.servicePoint.location', () => {
+          vm.coords.lat = vm.servicePoint.location.latitude;
+          vm.coords.lng = vm.servicePoint.location.longitude;
+        });
+
+      });
 
     }
 
     function $onInit() {
       vm.watchScope('vm.servicePoint.address', address => {
+
+        if (address) vm.divided = address.split(',');
+
         if (!address || !vm.googleReady) return;
-        positionMarker();
+
+        positionMarker(vm.divided);
+
       });
 
     }
@@ -125,7 +139,7 @@
         });
 
       vm.progress = helper;
-      vm.tileBusy = {promise: busy, message: 'Nuotraukos siuntimas'};
+      vm.tileBusy = {promise: busy, message: 'Nuotraukos parsisiuntimas'};
 
     }
 
@@ -152,7 +166,7 @@
         ServicePoint.findAllWithRelations({id}, {bypassCache: true})(relations)
           .then(_.first)
           .then(loadServicePointRelations)
-          .then(loadGeoPosition)
+          .then(loadGoogleScript)
       ];
 
       vm.setBusy(busy);
@@ -168,13 +182,16 @@
 
     }
 
+    function noCoords() {
+      vm.coords.lat = 55.322;
+      vm.coords.lng = 23.897;
+      vm.noGeoPosition = true;
+      vm.busyMap = false;
+    }
+
     function positionMarker() {
 
-      if (vm.servicePoint.location) {
-        return $timeout();
-      }
-
-      return GeoCoder.geocode({address: vm.servicePoint.address})
+      return GeoCoder.geocode({'address': vm.divided.join(' ')})
         .then(result => {
 
           let locationData = {
@@ -186,45 +203,70 @@
             timestamp: new Date()
           };
 
+          vm.busyMap = false;
+
           Location.create(locationData)
             .then(savedLocation => {
 
               vm.servicePoint.locationId = savedLocation.id;
               vm.servicePoint.DSCreate();
+              loadGeoPosition();
 
+            })
+            .catch((err) => {
+              console.error(err, 'whlie saving location');
+              noCoords();
             });
 
-        });
+        })
+        .catch(() => {
+          if (vm.divided.length) {
+            vm.divided.pop();
+            positionMarker();
+          } else {
+            noCoords();
+          }
+        })
 
+    }
+
+    function loadGoogleScript() {
+      mapsHelper.loadGoogleScript().then(() => {
+        vm.googleReady = true;
+        loadGeoPosition();
+      });
     }
 
     function loadGeoPosition() {
 
-      if (vm.servicePoint.location) {
+      if (_.get(vm.servicePoint, 'location')) {
         _.assign(vm.coords, {lat: vm.servicePoint.location.latitude});
         _.assign(vm.coords, {lng: vm.servicePoint.location.longitude});
+        loadMap();
       } else {
-        vm.coords.lat = 55.322;
-        vm.coords.lng = 23.897;
-        vm.noGeoPosition = true;
+        getGeoByAddress();
       }
 
-      mapsHelper.loadGoogleScript()
+    }
+
+    function loadMap() {
+
+      vm.busyMap = false;
+
+      NgMap.getMap('smallMap')
+        .then(map => {
+          vm.map = map;
+        })
+    }
+
+    function getGeoByAddress() {
+
+      positionMarker()
         .then(() => {
-
-          vm.googleReady = true;
-
-          positionMarker()
-            .then(() => {
-              return NgMap.getMap('smallMap')
-                .then(map => vm.map = map)
-            })
-            .catch(() => {
-              console.error('No geoposition was found by the address: ' + vm.servicePoint.address);
-            });
-
+        })
+        .catch((err) => {
+          console.err(err, 'positionMarker catch')
         });
-
     }
 
   }

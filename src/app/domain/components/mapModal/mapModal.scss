@@ -20,6 +20,22 @@
 
   }
 
+  .modal-body {
+
+    #address-search {
+      margin-bottom: 15px;
+    }
+
+  }
+
+  .map-wrapper {
+
+    ng-map > div {
+      border-radius: 5px;
+    }
+
+  }
+
   .btn-info-modified {
     background-color: $primary-color;
     color: white;

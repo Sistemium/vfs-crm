@@ -5,6 +5,11 @@
     .service-point-location
 
       .service-point-map
+
+        .loading-spinner(ng-if='vm.busy')
+          .uil-ripple-css
+            div
+
         ng-map(
         ng-class='{"no-geolocation": vm.noGeoPosition}'
         center='[{{vm.coords.lat}}, {{vm.coords.lng}}]'
