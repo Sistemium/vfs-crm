@@ -31,8 +31,7 @@
 
       url: 'sms',
       name: 'SMS-kodas',
-      icon: 'images/color/icons8-cell_phone.png',
-      disabled: true
+      icon: 'images/color/icons8-cell_phone.png'
 
     }];
 
