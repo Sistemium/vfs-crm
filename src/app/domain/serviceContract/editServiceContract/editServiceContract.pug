@@ -14,16 +14,32 @@
       )
 
     .field-group
+
       .date
         label Data
+        .datepicker-new
+          input.form-control(
+          ng-class='{"wrong-date": !vm.dateTest}'
+          uib-datepicker-popup='yyyy-MM-dd'
+          ng-model='vm.dateTest'
+          datepicker-options='vm.dateOptions'
+          ng-required='true'
+          is-open='vm.isCalendarOpened'
+          close-text='Uždaryti'
+          current-text='false'
+          clear-text='false'
+          autocomplete='off'
+          maxlength=10
+          required
+          )
 
-        sab-date-picker(
-        value='vm.serviceContract.date'
-        )
+          span
+            button.btn.btn-default(ng-click='vm.isCalendarOpened = !vm.isCalendarOpened')
+              i.glyphicon.glyphicon-calendar
+
 
       .num
         label(for='num') Numeris
-
         input#num.form-control(
         required
         autocomplete='off'

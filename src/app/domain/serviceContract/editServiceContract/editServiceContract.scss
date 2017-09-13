@@ -5,10 +5,43 @@
 
   @extend %editing-with-form;
 
+  .field-group {
+
+    .wrong-date {
+      border: 1px solid red;
+    }
+
+    .datepicker-new {
+      display: flex;
+      flex-direction: row;
+
+      input {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      span {
+        width: 34px;
+
+        button {
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+          height: 34px;
+
+        }
+
+      }
+
+    }
+
+  }
+
   .service-points {
+
     .address {
       font-weight: 500;
     }
+
     .service-item {
       color: $dark-gray;
     }
@@ -16,6 +49,7 @@
     .list-group {
       margin-bottom: 0;
     }
+
   }
 
 }

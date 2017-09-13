@@ -12,20 +12,39 @@
 
   });
 
-  function editServiceContract($scope, saControllerHelper, Schema, $state) {
+  function editServiceContract($scope, saControllerHelper, Schema, $state, moment) {
 
     const vm = saControllerHelper.setup(this, $scope);
 
     vm.use({
       $onInit,
-      listGroupItemClick
+      listGroupItemClick,
+      dateTest: vm.serviceContract.date && new Date(vm.serviceContract.date) || new Date(),
+      isCalendarOpened: false,
+      dateOptions: {
+        formatYear: 'yy',
+        startingDay: 1,
+        showWeeks: false
+      }
     });
 
     /*
      Functions
      */
 
+    $scope.$watch('vm.dateTest', (nv) => {
+
+      if (typeof(nv) === 'undefined') {
+        vm.serviceContract.date = null;
+        return;
+      }
+
+      vm.serviceContract.date = moment(nv).format();
+    });
+
     function $onInit() {
+
+      vm.testDate = new Date();
 
       if (vm.serviceContract.siteId) {
         vm.hideSite = true;
@@ -40,6 +59,7 @@
           });
         })
         .then(() => {
+
           Brand.findAll();
           FilterSystemType.findAll();
           FilterSystem.findAll();
