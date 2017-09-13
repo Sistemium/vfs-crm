@@ -6,8 +6,6 @@ $oab-google-bg-color:  darken(#F4511E, 5%);
 
 .oauth-buttons {
 
-  background-color: white;
-
   .sms {
     color: #fff;
     background-color: $oab-mobile-color;
@@ -15,7 +13,6 @@ $oab-google-bg-color:  darken(#F4511E, 5%);
     img {
       height: 30px;
       width: 30px;
-      margin-right:5px;
     }
 
   }
@@ -26,7 +23,7 @@ $oab-google-bg-color:  darken(#F4511E, 5%);
 
     img {
 
-      padding-right:10px;
+      //padding-right:10px;
     }
 
   }
@@ -34,6 +31,11 @@ $oab-google-bg-color:  darken(#F4511E, 5%);
   .google {
     color: #fff;
     background-color: $oab-google-bg-color;
+  }
+
+  .image {
+    width: 40px;
+    text-align: center;
   }
 
   img {
