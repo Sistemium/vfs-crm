@@ -4,21 +4,23 @@
 
   display: flex;
   flex-direction: column;
-
   align-items: center;
 
+  $padding: 5px;
+
   .alert-warning {
+    margin: $padding $padding 0;
+    border-radius: $border-radius;
   }
 
   * + .login-options {
-
-    margin: 10px;
+    margin: $padding * 2;
   }
 
   .login-options p {
     color: $dark-gray;
     text-align: left;
-    margin: 0 0 5px 0;
+    margin: 0 0 $padding 0;
   }
 
   .title {
@@ -26,7 +28,7 @@
     font-size: 130%;
     height: 50px;
     line-height: 50px;
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid $border-gray;
 
     span {
       text-align: center;
@@ -38,12 +40,12 @@
 
   .login-options-group {
 
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    box-shadow: $box-shadow;
 
     text-align: center;
 
     width: 300px;
-    border-radius: 10px;
+    border-radius: $border-radius;
 
   }
 

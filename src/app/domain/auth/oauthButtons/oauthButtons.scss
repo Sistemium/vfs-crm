@@ -1,8 +1,8 @@
 @import "../../../styles/variables";
 
-$oab-facebook-official-color: #3F51B5;
+$oab-facebook-official-color: darken(#3F51B5, 5%);
 $oab-mobile-color: #d87a68;
-$oab-google-bg-color: #F4511E;
+$oab-google-bg-color:  darken(#F4511E, 5%);
 
 .oauth-buttons {
 
@@ -75,12 +75,11 @@ $oab-google-bg-color: #F4511E;
     }
 
     &:hover {
-      box-shadow: 1px 2px 5px 0 rgba(0, 0, 0, 0.5);
+      box-shadow: $box-shadow;
     }
 
     &:active{
-      box-shadow: 0 2px 0 gray;
-      transform: translateY(3px);
+      //box-shadow: 0 2px 0 gray;
     }
 
     .name {
