@@ -33,6 +33,9 @@
 
     function addClick() {
       Editing.editModal('edit-service-point', 'Naujas Taškas')(ServicePoint.createInstance())
+        .then(servicePoint => {
+          servicePoint.id && $state.go('servicePoint.detailed', {servicePointId: servicePoint.id})
+        });
     }
 
     function onSearch() {
