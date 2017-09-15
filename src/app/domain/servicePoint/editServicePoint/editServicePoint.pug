@@ -14,6 +14,18 @@
       placement='bottom-left'
       )
 
+    fieldset.contract(ng-disabled='!vm.servicePoint.siteId')
+
+      label Sutartis
+
+      vfs-dropdown(
+      ng-model='vm.servicePoint.currentServiceContractId'
+      items-data-source-name='ServiceContract'
+      items-name-property='name'
+      placement='bottom-left'
+      filter='{siteId: vm.servicePoint.siteId}'
+      )
+
     .field-group
 
       .district
@@ -110,19 +122,6 @@
           ng-model='vm.servicePoint.type'
           uib-btn-radio="'Negyvenomoji'" uib-uncheckable='false'
           ) Negyvenomoji
-
-
-    fieldset.contract(ng-disabled='!vm.servicePoint.siteId')
-
-      label Sutartis
-
-      vfs-dropdown(
-      ng-model='vm.servicePoint.currentServiceContractId'
-      items-data-source-name='ServiceContract'
-      items-name-property='name'
-      placement='bottom-left'
-      filter='{siteId: vm.servicePoint.siteId}'
-      )
 
     .info
 
