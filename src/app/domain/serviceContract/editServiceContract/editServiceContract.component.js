@@ -18,13 +18,7 @@
 
     vm.use({
       $onInit,
-      listGroupItemClick,
-      isCalendarOpened: false,
-      dateOptions: {
-        formatYear: 'yy',
-        startingDay: 1,
-        showWeeks: false
-      }
+      listGroupItemClick
     });
 
     /*
