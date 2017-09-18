@@ -17,7 +17,7 @@
     };
 
     function onUpdate() {
-      toastr.error('Paspauskite, kad taikyti', 'Gautas atnaujinimas', {
+      toastr.error('Paspauskite, kad pritaikyti', 'Gautas atnaujinimas', {
         timeOut: 0,
         extendedTimeOut: 0,
         onTap: function () {

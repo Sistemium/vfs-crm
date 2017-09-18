@@ -1,0 +1,81 @@
+.auth-status {
+
+  font-size: 15px;
+  padding: 1.5px 2px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .user-pic {
+
+    height: 30px;
+    line-height: 30px;
+    margin-right: 5px;
+
+    img {
+      height: 90%;
+      width: 27px;
+      border-radius: 50%;
+      border: 1px solid silver;
+      object-fit: contain
+    }
+
+  }
+
+  .user-name {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: $primary-color;
+
+    @media (max-width: $screen-xs) {
+
+      width: 35px;
+      line-height: 35px;
+      flex-direction: row;
+
+      span:first-letter {
+        visibility: visible;
+      }
+      span {
+        visibility: hidden;
+        width: 17px;
+        font-size: 25px;
+      }
+
+      span + span {
+
+      }
+
+    }
+
+  }
+
+  span {
+    line-height: inherit;
+    display: inline-block;
+  }
+
+  span:first-letter {
+    color: $primary-color;
+  }
+
+  a {
+    width: 50px;
+    text-align: right;
+    display: flex;
+  }
+
+}
+
+.auth-status:hover {
+
+  img {
+    border-color: darken($primary-color, 15%);
+  }
+
+  .user-name {
+    color: darken($primary-color, 15%);
+  }
+
+}

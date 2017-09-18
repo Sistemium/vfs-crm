@@ -10,10 +10,11 @@
 
     @extend %flex-row-nowrap;
     border-bottom: $cells-border-bottom;
+    border-width: 2px;
 
     > * {
       color: darken($gray, 20%);
-      font-weight: 500;
+      font-weight: 600;
       font-size: 100%;
       padding: $cells-padding $cells-padding $cells-padding * 2;
     }

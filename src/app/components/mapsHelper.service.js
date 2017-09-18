@@ -53,7 +53,7 @@
         script.type = 'text/javascript';
         script.src = 'https://maps.googleapis.com/maps/api/js?' +
           'v=3&callback=onNgMapReady' +
-          //'&libraries=geometry' +
+          '&libraries=geometry,places' +
           '&key=' + key +
           '&language=lt&region=lt';
         doc.body.appendChild(script);

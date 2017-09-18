@@ -40,6 +40,7 @@
           });
         })
         .then(() => {
+
           Brand.findAll();
           FilterSystemType.findAll();
           FilterSystem.findAll();

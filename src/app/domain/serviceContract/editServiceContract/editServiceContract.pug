@@ -14,16 +14,13 @@
       )
 
     .field-group
-      .date
-        label Data
 
-        sab-date-picker(
-        value='vm.serviceContract.date'
-        )
+      .date-picker
+        label Data
+        sab-date-picker-input(value='vm.serviceContract.date')
 
       .num
         label(for='num') Numeris
-
         input#num.form-control(
         required
         autocomplete='off'

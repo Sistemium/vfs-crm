@@ -6,7 +6,8 @@
   ng-class='[btn.url, {disabled: btn.disabled}]'
   href
   )
-    img(ng-src='{{ btn.icon }}')
+    .image
+      img(ng-src='{{ btn.icon }}')
     .divider
     .name {{ btn.name }}
 

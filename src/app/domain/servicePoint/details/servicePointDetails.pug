@@ -5,6 +5,11 @@
     .service-point-location
 
       .service-point-map
+
+        .loading-spinner(ng-if='vm.busy')
+          .uil-ripple-css
+            div
+
         ng-map(
         ng-class='{"no-geolocation": vm.noGeoPosition}'
         center='[{{vm.coords.lat}}, {{vm.coords.lng}}]'
@@ -111,24 +116,34 @@
       ng-if='vm.servicePoint.currentServiceContract.customerPersonId'
       )
         span.name {{ vm.servicePoint.currentServiceContract.customerPerson.name }}
+
         a.phone(
         href='{{ vm.servicePoint.currentServiceContract.customerPerson.telHref }}'
         ng-click='$event.stopPropagation()'
         ) {{ vm.servicePoint.currentServiceContract.customerPerson.phone | ltphone}}
+
+        a.email(
+        ng-if='vm.servicePoint.currentServiceContract.customerPerson.email'
+        href='mailto:{{ vm.servicePoint.currentServiceContract.customerPerson.email }}'
+        ng-click='$event.stopPropagation()'
+        ) {{ vm.servicePoint.currentServiceContract.customerPerson.email }}
 
       .contact(
       ng-repeat='servicePointContact in vm.servicePoint.servicePointContacts track by servicePointContact.id'
       ng-click='vm.servicePointContactClick(servicePointContact)'
       )
         span.name {{ servicePointContact.person.name }}
+
         a.phone(
         href='{{servicePointContact.person.telHref}}'
         ng-click='$event.stopPropagation()'
         ) {{ servicePointContact.person.phone | ltphone }}
 
-      //.contact(ng-if='vm.servicePoint.servicePointContacts.length === 0')
-        span.name Kontaktų nėra
-        a(href ng-click='vm.addContractPerson()') Pridėti kontaktą
+        a.email(
+        ng-if='servicePointContact.person.email'
+        href='mailto:{{ servicePointContact.person.email }}'
+        ng-click='$event.stopPropagation()'
+        ) {{ servicePointContact.person.email }}
 
   .items
 

@@ -1,26 +1,41 @@
 @import "../../../styles/variables";
 
-$oab-facebook-official-color: #3b5998;
+$oab-facebook-official-color: darken(#3F51B5, 5%);
 $oab-mobile-color: #d87a68;
-$oab-google-bg-color: #4285f4;
+$oab-google-bg-color:  darken(#F4511E, 5%);
 
 .oauth-buttons {
-
-  background-color: $gray-background-color;
 
   .sms {
     color: #fff;
     background-color: $oab-mobile-color;
+
+    img {
+      height: 30px;
+      width: 30px;
+    }
+
   }
 
   .facebook {
     color: #fff;
     background-color: $oab-facebook-official-color;
+
+    img {
+
+      //padding-right:10px;
+    }
+
   }
 
   .google {
     color: #fff;
     background-color: $oab-google-bg-color;
+  }
+
+  .image {
+    width: 40px;
+    text-align: center;
   }
 
   img {
@@ -45,6 +60,9 @@ $oab-google-bg-color: #4285f4;
       border-color: lighten(silver, 90);
     }
 
+    text-decoration: none;
+    text-align: left;
+
     width: 100%;
 
     display: flex;
@@ -59,7 +77,11 @@ $oab-google-bg-color: #4285f4;
     }
 
     &:hover {
-      box-shadow: 1px 2px 5px 0 rgba(0, 0, 0, 0.5);
+      box-shadow: $box-shadow;
+    }
+
+    &:active{
+      //box-shadow: 0 2px 0 gray;
     }
 
     .name {
@@ -69,5 +91,8 @@ $oab-google-bg-color: #4285f4;
 
   }
 
+  .oauth-button:first-of-type {
+    margin-top: 0;
+  }
 }
 
