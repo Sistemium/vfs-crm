@@ -31,15 +31,20 @@
           vm.use({
             districtId: _.get(servicePoint, 'locality.districtId')
           });
-          vm.watchScope('vm.servicePoint', onChange, true);
+          vm.watchScope(addressFields, onChange, true);
+          vm.ready = true;
         });
 
 
     }
 
-    function onChange(servicePoint) {
-      if (!servicePoint) return;
-      servicePoint.address = servicePoint.concatAddress();
+    function addressFields() {
+      return _.pick(vm.servicePoint, ['localityId', 'streetId', 'house']);
+    }
+
+    function onChange() {
+      if (!vm.servicePoint) return;
+      vm.servicePoint.address = vm.servicePoint.concatAddress();
     }
 
   }
