@@ -105,7 +105,7 @@
 
       //TODO: fix this.customer().name
 
-      if (!date || !num || !this.customer()) return null;
+      if (!date || !num || !this.customer()) return this.name || null;
       return `${this.customer().name} №${num} nuo ${date}`;
     }
 
