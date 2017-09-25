@@ -128,13 +128,15 @@ vfs-dropdown {
         vertical-align: middle;
         border: 1px solid transparent;
         white-space: nowrap;
-        padding: 3px;
         font-size: 15px;
+        padding: 1px 4px;
+        border-radius: 4px;
 
       }
 
-      > a.save i {
-        color: lighten($state-success-text, 10%);
+      > a.save {
+        background: lighten($state-success-text, 10%);
+        color: $white;
       }
 
       > a.cancel i {
