@@ -105,7 +105,9 @@
         `</div>`,
         size: 'lg',
 
-        controller
+        controller,
+
+        backdrop: 'static'
 
       });
 
