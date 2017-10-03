@@ -1,0 +1,129 @@
+@import "../../../styles/variables";
+
+.auth-status {
+
+  font-size: 15px;
+  padding: 1.5px 2px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .user-pic {
+
+    height: 30px;
+    line-height: 30px;
+    margin-right: 5px;
+
+    img {
+      height: 90%;
+      width: 27px;
+      border-radius: 50%;
+      border: 1px solid $gray;
+      object-fit: contain
+    }
+
+  }
+
+  .popover {
+
+    width: 140px;
+    padding: 0;
+    margin-left: 5px;
+
+    .popover-inner {
+
+      .popover-content {
+        padding: 0;
+      }
+
+    }
+
+    @media (max-width: $screen-xs) {
+      width: calc(100% - 25px);
+      max-width: 100%;
+    }
+
+  }
+
+  .user-name {
+
+    display: flex;
+    user-select: none;
+    cursor: pointer;
+    flex-direction: column;
+    align-items: flex-start;
+    color: $primary-color;
+
+    span {
+      line-height: inherit;
+      display: inline-block;
+    }
+
+    span:first-letter {
+      color: $primary-color;
+    }
+
+    @media (max-width: $screen-xs) {
+
+      width: 35px;
+      line-height: 35px;
+      flex-direction: row;
+
+      span {
+        visibility: hidden;
+        width: 17px;
+        font-size: 25px;
+      }
+
+      span:first-letter {
+        visibility: visible;
+      }
+
+    }
+
+  }
+
+  & > a {
+    width: 50px;
+    text-align: right;
+    display: flex;
+  }
+
+}
+
+@keyframes fadeInBorderColors {
+  from {
+    border: 1px solid $gray;
+  }
+
+  to {
+    border: 1px solid darken($primary-color, 15%);
+  }
+}
+
+@keyframes fadeInColors {
+
+  from {
+    color: $primary-color;
+  }
+
+  to {
+    color: darken($primary-color, 15%);
+  }
+}
+
+.auth-status:hover {
+
+  img {
+    animation-duration: 1s;
+    animation-name: fadeInBorderColors;
+    animation-fill-mode: forwards;
+  }
+
+  .user-name {
+    animation-duration: 1s;
+    animation-name: fadeInColors;
+    animation-fill-mode: forwards;
+  }
+
+}

@@ -3,8 +3,14 @@
   .user-pic
     img(ng-src='/images/color/icons8-User.png')
 
-  .user-name(ng-click='vm.nameClick()')
+  .user-name(
+  uib-popover-template='"app/domain/auth/authStatus/authDropdown.html"'
+  popover-is-open='vm.isOpened'
+  popover-placement='bottom-right'
+  ng-click='vm.userNameClick()'
+  )
     span {{ vm.user.name }}
     span {{ vm.user.lastName }}
 
   a(href ng-if='!vm.isLoggedIn()' ng-click='vm.loginClick()') {{ vm.notLoggedInText() }}
+

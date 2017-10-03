@@ -18,6 +18,12 @@
       loginClick,
       nameClick,
       userName,
+      closeClick,
+      notLoggedInText,
+      onLogOutYesClick,
+      onLogOutNoClick,
+      userNameClick,
+
       isLoggedIn: () => {
 
         if (Auth.isLoggedIn()) {
@@ -29,13 +35,26 @@
         }
 
       },
-      notLoggedInText,
-      user: {}
+
+      user: {},
+      isOpened: false
+
     });
 
     /*
     Functions
      */
+
+    function closeClick() {
+      vm.isOpened = !vm.isOpened;
+      vm.logOutClick = false;
+    }
+
+    function userNameClick() {
+      if (!vm.isOpened) {
+        vm.logOutClick = false;
+      }
+    }
 
     function notLoggedInText() {
       return $state.current.name === 'login' ? '' : 'Prisijungti';
@@ -47,7 +66,7 @@
 
     function nameClick() {
 
-      let config = {title: 'Baigti darba?', text: 'Paspauskite "Taip" kad išsiregistruoti iš sistemos'};
+      let config = {title: 'Baigti darba?', text: 'Paspauskite "Taip", kad išsiregistruoti iš sistemos'};
 
       ConfirmModal.show(config)
         .then(() => {
@@ -57,13 +76,20 @@
 
     }
 
+    function onLogOutYesClick() {
+      Auth.logout();
+      $state.go('login');
+    }
+
+    function onLogOutNoClick(event) {
+      vm.logOutClick = false;
+      event.stopPropagation();
+    }
+
     function userName() {
       let splitName = Auth.getCurrentUser().name.split(' ');
       vm.user.name = splitName[0];
       vm.user.lastName = splitName[1];
-
-      //vm.user.name = 'Anachita';
-      //vm.user.lastName = 'Sarachmatullojeva';
     }
 
   }

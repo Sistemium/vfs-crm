@@ -1,0 +1,21 @@
+.auth-dropdown
+
+  .header
+
+    .title
+      span  Meniu
+
+    .close-btn
+      a(
+      href=''
+      ng-click='vm.closeClick()'
+      )
+        i.glyphicon.glyphicon-remove
+
+  button.btn.btn-primary Profilis
+  button.btn.btn-primary(ng-click='vm.logOutClick = !vm.logOutClick; $event.stopPropagation()' ng-if='!vm.logOutClick')
+    span Atsijungti
+
+  .confirm-buttons(ng-if='vm.logOutClick')
+    button.btn.btn-primary.btn-choose-answer(ng-click='vm.onLogOutYesClick()') Taip
+    button.btn.btn-primary.btn-choose-answer(ng-click='vm.onLogOutNoClick($event)') Ne

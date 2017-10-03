@@ -1,0 +1,92 @@
+.popover-content {
+
+  .auth-dropdown {
+
+    display: flex;
+    flex-flow: column nowrap;
+
+    .header {
+
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px;
+      border-bottom: 1px solid #ccc;
+
+      .title {
+        font-weight: 500;
+      }
+
+      .close-btn {
+        width: 15px;
+        height: 15px;
+        a {
+          display: block;
+          i {
+            top: 0;
+            font-size: 12px;
+          }
+        }
+      }
+
+    }
+
+    button {
+      border-radius: 0;
+      padding: 4px 12px;
+      margin-top: -1px;
+      background-color: #fff;
+      color: #000;
+      border-color: #ccc;
+      border-right: 0;
+      border-left: 0;
+    }
+
+    > button:not(:only-of-type):not(.btn-choose-answer):last-of-type {
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      border-bottom: 0;
+    }
+
+    button:hover {
+      color: #fff;
+    }
+
+    button:focus {
+      box-shadow: none;
+    }
+
+    .confirm-buttons {
+
+      display: flex;
+      flex-flow: row nowrap;
+
+      > button {
+        width: 50%;
+        border-bottom: 0;
+      }
+
+      button:first-of-type {
+        border-bottom-left-radius: 5px;
+      }
+
+      button:last-of-type {
+        border-bottom-right-radius: 5px;
+      }
+
+      button:first-of-type:hover {
+        background: $state-success-text;
+        border-color: darken($state-success-text, 10%);
+      }
+
+      button:last-of-type:hover {
+        border-bottom-right-radius: 5px;
+        border-color: darken($primary-color, 10%);
+      }
+
+    }
+
+  }
+
+}
