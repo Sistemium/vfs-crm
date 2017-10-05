@@ -1,6 +1,5 @@
 @import "../../../styles/editing";
 
-
 .edit-service-point {
 
   @extend %editing-with-form;
@@ -9,6 +8,15 @@
 
     > .house, > .apartment {
       max-width: 120px;
+    }
+
+  }
+
+  .form > .info {
+
+    textarea {
+      resize: vertical;
+      min-height: 33px;
     }
 
   }
