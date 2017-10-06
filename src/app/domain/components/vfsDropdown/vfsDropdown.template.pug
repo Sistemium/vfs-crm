@@ -1,9 +1,3 @@
-.search-add(ng-hide='vm.newItem')
-
-  vfs-searcher.search(search='vm.search' ng-keydown='vm.onKeyDown($event)')
-
-  button-add(button-click='vm.addClick()')
-
 .scroll-y.vfs-dropdown-items(
 vs-repeat='34'
 id='{{ vm.id }}'
@@ -22,9 +16,9 @@ resize-offset-top='15'
     span {{item[vm.itemsNameProperty]}}
 
 .no-results(ng-if='!vm.filteredData.length')
-  span(ng-if='vm.search') Rezultatų nerasta, gal
-  span(ng-if='!vm.search') Duomenų nėra, gal
+  span(ng-if='vm.dropdownInput') Rezultatų nerasta, gal
+  span(ng-if='!vm.dropdownInput') Duomenų nėra, gal
   = ' '
-  a(href ng-click='$event.stopPropagation();vm.addClick($event)') pridėti
+  a(href ng-click='vm.addClick($event)') pridėti
   = ' '
   span naują įrašą?

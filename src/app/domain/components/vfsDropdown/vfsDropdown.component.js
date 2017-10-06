@@ -26,21 +26,31 @@
     vm.use({
 
       id: `vfs-dropdown-${UUID.v4()}`,
+      inputId: `vfs-dropdown-input-${UUID.v4()}`,
 
       $onInit,
       itemClick,
+      inputClick,
       addClick,
       afterCancel,
       afterSave,
       groupLabel,
-      onKeyDown
+      onKeyDown,
+      onInputFocus,
+      onInputBlur,
+
+      isOpen: false,
+      inputFocused: false
 
     });
+
+    let inputFocused = false;
+    let newItemChosen = false;
+    let unwatchSearch;
 
     Editing.setupController(vm, 'newItem');
 
     vm.watchScope('vm.currentId', onCurrentId);
-    vm.watchScope('vm.search', onSearch);
     vm.watchScope('vm.isOpen', onOpen);
     vm.watchScope('vm.filter', onFilter, true);
 
@@ -48,9 +58,54 @@
      Functions
      */
 
+    function inputClick() {
+
+      vm.isOpen = !vm.isOpen;
+      console.warn('inputClick', vm.isOpen);
+
+    }
+
+    function $onInit() {
+
+      let model = Schema.model(vm.itemsDataSourceName);
+
+      vm.use({
+        model,
+        itemsNameProperty: vm.itemsNameProperty || 'name',
+        editComponentName: 'edit-' + _.kebabCase(vm.itemsDataSourceName),
+        currentId: vm.currentId || vm.saveTo && vm.saveToProperty && vm.saveTo[vm.saveToProperty],
+        newItemTitle: _.get(model, 'meta.label.add') || 'Naujas įrašas'
+      });
+
+      onFilter();
+
+    }
+
+    function onInputFocus() {
+      inputFocused = true;
+      vm.dropdownInput = vm.dropdownInputCopy;
+    }
+
+    function onInputBlur() {
+
+      inputFocused = false;
+
+      console.log(vm.dropdownInput, 'oninput');
+
+      vm.dropdownInputCopy = vm.dropdownInput;
+
+      if (vm.currentItem) {
+        vm.dropdownInput = vm.currentItem[vm.itemsNameProperty];
+      }
+
+    }
+
     function onKeyDown($event) {
 
       let direction;
+
+      if (!vm.isOpen)
+        return;
 
       switch ($event.keyCode) {
 
@@ -154,11 +209,18 @@
 
       vm.model.findAll(vm.filter || {}, vm.options || {})
         .then(() => {
+
           let item = vm.currentId && vm.model.get(vm.currentId);
+
           vm.currentItem = (item && _.matches(vm.filter)(item)) ? item : null;
-          if (!vm.currentItem) {
+
+          if (vm.currentItem) {
+            vm.dropdownInput = vm.currentItem[vm.itemsNameProperty];
+          } else {
             vm.currentId = null;
+            vm.dropdownInput = null;
           }
+
         })
         .then(setDefault);
 
@@ -213,14 +275,25 @@
     function onOpen(nv, ov) {
 
       if (ov) {
+
+        unwatchSearch ? unwatchSearch() : _.noop();
+
         $timeout(200).then(() => {
-          vm.search = '';
           delete vm.focused;
         })
+
       }
 
       if (nv) {
+
         scrollToCurrent();
+
+        if (!inputFocused) {
+          saEtc.focusElementById(vm.inputId);
+        }
+
+        unwatchSearch = $scope.$watch('vm.dropdownInput', onSearch);
+
       }
 
     }
@@ -229,34 +302,57 @@
       return _.get(item, vm.itemsGroupProperty);
     }
 
-    function addClick() {
+    function addClick(ev) {
 
-      vm.newItem = vm.model.createInstance(_.assign({name: vm.search}, vm.filter || {}));
+      ev.preventDefault();
+
+      vm.newItem = vm.model.createInstance(_.assign({name: vm.dropdownInput}, vm.filter || {}));
+
       vm.isOpen = false;
 
     }
 
-    function $onInit() {
+    function accentLess(line) {
 
-      let model = Schema.model(vm.itemsDataSourceName);
+      let lineLowerCase = line.toLowerCase();
 
-      vm.use({
-        model,
-        itemsNameProperty: vm.itemsNameProperty || 'name',
-        editComponentName: 'edit-' + _.kebabCase(vm.itemsDataSourceName),
-        currentId: vm.currentId || vm.saveTo && vm.saveToProperty && vm.saveTo[vm.saveToProperty],
-        newItemTitle: _.get(model, 'meta.label.add') || 'Naujas įrašas'
+      let to = ['a', 'c', 'e', 'e', 'i', 's', 'u', 'u', 'z'], from = 'ąčęėįšųūž';
+
+      let regexp = new RegExp('[' + from + ']', 'ig');
+
+      return lineLowerCase.replace(regexp, (m) => {
+        return to[from.indexOf(m)];
       });
-
-      onFilter();
 
     }
 
-    function onSearch() {
+    function onSearch(nv, ov) {
 
-      let {search} = vm;
+      let search = vm.dropdownInput;
 
-      vm.filteredData = !search ? vm.data : $filter('filter')(vm.data, search);
+      if (nv !== ov) {
+        newItemChosen = false;
+      }
+
+      if (newItemChosen) {
+        search = '';
+      }
+
+      if (!inputFocused)
+        return;
+
+      //vm.filteredData = !search ? vm.data : $filter('filter')(vm.data, search);
+
+      vm.filteredData = !search ? vm.data : $filter('filter')(vm.data, (item) => {
+
+        let noAccentName = accentLess(item[vm.itemsNameProperty]);
+        let noAccentSearch = accentLess(search);
+
+        if (noAccentName.indexOf(noAccentSearch) >= 0) {
+          return item
+        }
+
+      });
 
       vm.filteredData = $filter('orderBy')(vm.filteredData, vm.itemsNameProperty);
 
@@ -264,11 +360,20 @@
 
     function itemClick(item) {
 
+      console.log(vm.dropdownInput, 'onitemclick');
+      console.log(vm.dropdownInputCopy);
+
+      //vm.dropdownInputCopy = vm.dropdownInput;
+
       vm.use({
         currentId: item.id,
-        currentItem: item,
-        isOpen: false
+        currentItem: item
       });
+
+      vm.dropdownInput = vm.currentItem[vm.itemsNameProperty];
+      newItemChosen = true;
+
+      vm.isOpen = false;
 
     }
 
@@ -279,7 +384,6 @@
 
     function afterSave(saved) {
 
-      //vm.currentItem = saved;
       vm.currentId = saved.id;
       vm.isOpen = false;
       delete vm.newItem;

@@ -16,6 +16,7 @@ vfs-dropdown {
     padding: $padding;
   }
 
+
   .active {
     background: darken($hover-color, 5%);
   }
@@ -29,20 +30,39 @@ vfs-dropdown {
       display: flex;
       flex: 1;
 
-      border: 1px solid $border-color;
-      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-      border-radius: 4px;
-      padding: 0 $padding * 2;
-      //height: $height;
-
       justify-content: space-between;
       align-items: center;
       text-decoration: none;
 
-      > .name {
-        span + span {
-          margin-left: 10px;
+      .dropdown-input {
+
+        cursor: pointer;
+        width: 100%;
+
+        > * {
+          color: $primary-color;
         }
+
+        input {
+          padding-right: 35px;
+          @extend .ellipsis;
+        }
+
+
+
+        .caret {
+          cursor: pointer;
+          position: relative;
+          line-height: $height;
+          left: -25px;
+          width: 0;
+          margin-left: 0;
+
+        }
+
+        display: flex;
+        flex-flow: row nowrap;
+
       }
 
     }
