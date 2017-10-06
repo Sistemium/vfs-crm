@@ -61,7 +61,6 @@
     function inputClick() {
 
       vm.isOpen = !vm.isOpen;
-      console.warn('inputClick', vm.isOpen);
 
     }
 
@@ -89,8 +88,6 @@
     function onInputBlur() {
 
       inputFocused = false;
-
-      console.log(vm.dropdownInput, 'oninput');
 
       vm.dropdownInputCopy = vm.dropdownInput;
 
@@ -359,11 +356,6 @@
     }
 
     function itemClick(item) {
-
-      console.log(vm.dropdownInput, 'onitemclick');
-      console.log(vm.dropdownInputCopy);
-
-      //vm.dropdownInputCopy = vm.dropdownInput;
 
       vm.use({
         currentId: item.id,
