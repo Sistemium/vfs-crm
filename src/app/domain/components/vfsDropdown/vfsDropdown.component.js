@@ -338,8 +338,6 @@
       if (!inputFocused)
         return;
 
-      //vm.filteredData = !search ? vm.data : $filter('filter')(vm.data, search);
-
       vm.filteredData = !search ? vm.data : $filter('filter')(vm.data, (item) => {
 
         let noAccentName = accentLess(item[vm.itemsNameProperty]);
