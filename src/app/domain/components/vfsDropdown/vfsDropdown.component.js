@@ -301,9 +301,7 @@
       return _.get(item, vm.itemsGroupProperty);
     }
 
-    function addClick(ev) {
-
-      ev.preventDefault();
+    function addClick() {
 
       vm.newItem = vm.model.createInstance(_.assign({name: vm.dropdownInput}, vm.filter || {}));
 
