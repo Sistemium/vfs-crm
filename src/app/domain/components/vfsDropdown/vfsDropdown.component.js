@@ -323,17 +323,9 @@
 
     }
 
-    function onSearch(nv, ov) {
+    function onSearch() {
 
       let search = vm.dropdownInput;
-
-      if (nv !== ov) {
-        newItemChosen = false;
-      }
-
-      if (newItemChosen) {
-        search = '';
-      }
 
       if (!inputFocused)
         return;
