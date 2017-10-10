@@ -85,11 +85,15 @@
     }
 
     function $onInit() {
-      vm.watchScope('vm.servicePoint.address', address => {
+      vm.watchScope('vm.servicePoint.id', () => {
 
-        if (address) vm.divided = address.split(',');
+        let {address} = vm.servicePoint;
 
-        if (!address || !vm.googleReady) return;
+        if (!address || !vm.googleReady) {
+          return;
+        }
+
+        vm.divided = address.split(',');
 
         positionMarker(vm.divided);
 
