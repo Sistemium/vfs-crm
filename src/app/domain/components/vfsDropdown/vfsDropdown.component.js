@@ -45,7 +45,7 @@
     });
 
     let inputFocused = false;
-    let newItemChosen = false;
+    let enterClicked = false;
     let unwatchSearch;
 
     Editing.setupController(vm, 'newItem');
@@ -59,9 +59,7 @@
      */
 
     function inputClick() {
-
       vm.isOpen = !vm.isOpen;
-
     }
 
     function $onInit() {
@@ -89,11 +87,15 @@
 
       inputFocused = false;
 
-      vm.dropdownInputCopy = vm.dropdownInput;
+      if (!enterClicked) {
+        vm.dropdownInputCopy = vm.dropdownInput;
+      }
 
       if (vm.currentItem) {
         vm.dropdownInput = vm.currentItem[vm.itemsNameProperty];
       }
+
+      enterClicked = false;
 
     }
 
@@ -107,7 +109,7 @@
       switch ($event.keyCode) {
 
         case 13:
-          return vm.focused && itemClick(vm.focused);
+          return vm.focused && itemClick(vm.focused, true);
         case 27: {
           $event.preventDefault();
           return (vm.isOpen = false);
@@ -345,15 +347,19 @@
 
     }
 
-    function itemClick(item) {
+    function itemClick(item, onEnterClick) {
 
       vm.use({
         currentId: item.id,
         currentItem: item
       });
 
+      if (onEnterClick) {
+        enterClicked = true;
+        vm.dropdownInputCopy = vm.dropdownInput;
+      }
+
       vm.dropdownInput = vm.currentItem[vm.itemsNameProperty];
-      newItemChosen = true;
 
       vm.isOpen = false;
 
