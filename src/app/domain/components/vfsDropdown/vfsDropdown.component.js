@@ -275,7 +275,7 @@
 
       if (ov) {
 
-        unwatchSearch ? unwatchSearch() : _.noop();
+        unwatchSearch ? unwatchSearch() : _.noop;
 
         $timeout(200).then(() => {
           delete vm.focused;
