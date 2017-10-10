@@ -3,7 +3,6 @@
   a(
   uib-popover-template='"app/domain/components/vfsDropdown/vfsDropdown.template.html"'
   popover-is-open='vm.isOpen'
-  NO-ng-click='vm.inputClick()'
   popover-placement='{{vm.placement || "bottom-right"}}'
   )
 
@@ -13,6 +12,7 @@
 
       input.form-control(
       id='{{ vm.inputId }}'
+      ng-click='vm.onInputFocus()'
       ng-attr-placeholder= 'Įveskite paieškos tekstą'
       ng-model='vm.dropdownInput'
       ng-focus='vm.onInputFocus()'
