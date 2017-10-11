@@ -40,16 +40,18 @@
       input#phone.form-control(
       required
       autocomplete='off'
-      ui-mask='{{ vm.mobileNumberMask }}'
+      ui-mask='{{vm.paste ? vm.phonePasteMask : vm.mobileNumberMask  }}'
       ng-model='vm.person.phone'
+      data-ui-options = 'vm.maskOptions'
+      ng-paste='vm.paste = true'
       )
 
     .email
       label(for='email') E-paštas
 
-      input#phone.form-control(
+      input#email.form-control(
       required
-      type='email'
+      type='text'
       autocomplete='off'
       placeholder='E-pašto adresas'
       ng-model='vm.person.email'
