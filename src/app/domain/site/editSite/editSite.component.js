@@ -3,7 +3,7 @@
   module.component('editSite', {
 
     bindings: {
-      site: '='
+      site: '=ngModel'
     },
 
     templateUrl: 'app/domain/site/editSite/editSite.html',

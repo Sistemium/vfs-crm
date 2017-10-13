@@ -3,7 +3,7 @@
   module.component('editServiceContract', {
 
     bindings: {
-      serviceContract: '='
+      serviceContract: '=ngModel'
     },
 
     templateUrl: 'app/domain/serviceContract/editServiceContract/editServiceContract.html',

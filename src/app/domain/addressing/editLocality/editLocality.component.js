@@ -3,7 +3,8 @@
   module.component('editLocality', {
 
     bindings: {
-      locality: '='
+      locality: '=ngModel',
+      readyState: '='
     },
 
     templateUrl: 'app/domain/addressing/editLocality/editLocality.html',

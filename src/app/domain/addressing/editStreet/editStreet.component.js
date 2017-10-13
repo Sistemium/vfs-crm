@@ -3,7 +3,8 @@
   module.component('editStreet', {
 
     bindings: {
-      street: '='
+      street: '=ngModel',
+      readyState: '='
     },
 
     templateUrl: 'app/domain/addressing/editStreet/editStreet.html',
