@@ -28,6 +28,9 @@
        */
 
       function saveClick() {
+
+        //:TODO check vm.readyState recursively
+
         if (vm.saveFn) {
           return vm.saveFn()
             .then(vm.afterSave);
@@ -86,21 +89,23 @@
 
     function openEditModal(item, componentName, title) {
 
-      let itemName = _.last(componentName.match(/edit-(.*)/));
+      //let itemName = _.last(componentName.match(/edit-(.*)/));
 
       me.modal = $uibModal.open({
 
         animation: true,
         template: `<div class="editing modal-header">` +
         `  <h1>{{vm.title}}</h1>` +
-        `  <a href class="close-btn" ng-click="vm.cancelClick()"><i class="glyphicon glyphicon-remove"></i></a>` +
+        `  <a href class="close-btn" ng-click="vm.cancelClick()"><i 
+class="glyphicon glyphicon-remove"></i></a>` +
         `</div>` +
         `<div class="modal-body">` +
-        `  <${componentName} ${itemName}="vm.item" save-fn="vm.saveFn"></${componentName}>` +
+        `  <pre>{{vm.readyState | json}}</pre>` +
+        ` <${componentName} ng-model="vm.item" save-fn="vm.saveFn" ready-state="vm.readyState"></${componentName}>` +
         `</div>` +
         `<div class="modal-footer">` +
         (item.id ? `  <button class="btn destroy" ng-class="vm.confirmDestroy ? 'btn-danger' : 'btn-default'" ng-click="vm.destroyClick()">Ištrinti</button>` : '') +
-        `  <button class="btn btn-success save animate-show" ng-show="!vm.item.id || vm.item.DSHasChanges()" ng-disabled="!vm.item.isValid()" ng-click="vm.saveClick()">Išsaugoti</button>` +
+        `  <button class="btn btn-success save animate-show" ng-show="vm.hasChanges()" ng-disabled="!vm.isReady()" ng-click="vm.saveClick()">Išsaugoti</button>` +
         `  <button class="btn btn-default cancel" ng-click="vm.cancelClick()">Atšaukti</button>` +
         `</div>`,
         size: 'lg',
@@ -122,7 +127,9 @@
 
       function controller($scope) {
 
-        const vm = {};
+        const vm = {
+          readyState: {}
+        };
 
         $scope.vm = vm;
 
@@ -132,8 +139,30 @@
           item,
           title,
           afterSave: me.modal.close,
-          afterCancel: me.modal.dismiss
+          afterCancel: me.modal.dismiss,
+          isReady,
+          hasChanges
         });
+
+        function hasChanges() {
+          return !vm.item.id || vm.item.DSHasChanges() || !_.isEmpty(vm.readyState);
+        }
+
+        function isReady(state) {
+
+          return !_.filter(state || vm.readyState, val => {
+
+            if (!val) {
+              return true;
+            } else if (val === true) {
+              return false;
+            }
+
+            return !isReady(val.readyState || val);
+
+          }).length && vm.item.isValid();
+
+        }
 
       }
 
