@@ -3,8 +3,9 @@
   module.component('editServicePoint', {
 
     bindings: {
-      servicePoint: '=',
-      saveFn: '='
+      servicePoint: '=ngModel',
+      saveFn: '=',
+      readyState: '=?'
     },
 
     templateUrl: 'app/domain/servicePoint/editServicePoint/editServicePoint.html',
@@ -18,7 +19,8 @@
     const vm = saControllerHelper.setup(this, $scope);
 
     vm.use({
-      $onInit
+      $onInit,
+      newItem: {}
     });
 
     function $onInit() {
@@ -34,7 +36,6 @@
           vm.watchScope(addressFields, onChange, true);
           vm.ready = true;
         });
-
 
     }
 
