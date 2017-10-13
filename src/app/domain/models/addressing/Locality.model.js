@@ -20,7 +20,7 @@
       },
 
       meta:{
-        label: {add: 'Nauja gyvenomoji vieta'}
+        label: {add: 'Nauja gyvenamoji vieta'}
       },
 
       methods: {
