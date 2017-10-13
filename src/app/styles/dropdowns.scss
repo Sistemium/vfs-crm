@@ -10,7 +10,6 @@
       border-top: solid 1px $border-gray;
     }
 
-
     // TODO: experimental
     &.active {
       font-weight: bold;
@@ -40,9 +39,28 @@
 }
 
 .dropdown[disabled], .disabled, [disabled] {
+
+  input {
+    background-color: $border-gray;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+
+  input::placeholder {
+    color: transparent;
+  }
+
   .caret {
     display: none;
   }
+
+  button {
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.65;
+    box-shadow: none;
+  }
+
 }
 
 span.caret {
