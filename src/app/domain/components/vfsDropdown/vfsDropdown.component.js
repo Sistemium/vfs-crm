@@ -10,7 +10,8 @@
       itemsNameProperty: '@',
       itemsGroupProperty: '@',
       filter: '=',
-      placement: '@'
+      placement: '@',
+      readyState: '=?'
     },
 
     templateUrl: 'app/domain/components/vfsDropdown/vfsDropdown.html',
@@ -21,14 +22,19 @@
 
   function dropdownController($scope, saControllerHelper, Schema, Editing, $timeout, $filter, saEtc, UUID) {
 
-    const vm = saControllerHelper.setup(this, $scope);
+    let vm = saControllerHelper.setup(this, $scope);
+
+    //vm = VfsDropdownHelper.setup(this, $scope);
+    //
+    //vm.watchDropdown(vm.readyState, vm.newItem);
 
     vm.use({
 
-      id: `vfs-dropdown-${UUID.v4()}`,
+      id: `vfs-dropdown-${vm.itemsDataSourceName}-${UUID.v4()}`,
       inputId: `vfs-dropdown-input-${UUID.v4()}`,
 
       $onInit,
+      $onDestroy,
       itemClick,
       inputClick,
       addClick,
@@ -40,29 +46,31 @@
       onInputBlur,
 
       isOpen: false,
-      inputFocused: false
+      isOpened: false,
+      inputFocused: false,
+      ownReadyState: {}
 
     });
 
     let inputFocused = false;
     let enterClicked = false;
     let unwatchSearch;
+    let unwatchNewItem = _.noop;
 
     Editing.setupController(vm, 'newItem');
 
     vm.watchScope('vm.currentId', onCurrentId);
     vm.watchScope('vm.isOpen', onOpen);
     vm.watchScope('vm.filter', onFilter, true);
+    $scope.$watch('vm.newItem', onNewItem);
 
     /*
      Functions
      */
 
-    function inputClick() {
-      vm.isOpen = !vm.isOpen;
-    }
-
     function $onInit() {
+
+      vm.isOpened = 'true';
 
       let model = Schema.model(vm.itemsDataSourceName);
 
@@ -75,6 +83,38 @@
       });
 
       onFilter();
+
+    }
+
+    function $onDestroy() {
+      console.log('warn');
+      delete vm.readyState[vm.id];
+    }
+
+    function inputClick() {
+      vm.isOpen = !vm.isOpen;
+    }
+
+    function onNewItem() {
+
+      if (!vm.readyState) return;
+
+      if (vm.newItem) {
+        unwatchNewItem = $scope.$watch(() => vm.newItem && vm.newItem.isValid(), onNewItemIsValid);
+      } else {
+        delete vm.readyState[vm.id];
+        unwatchNewItem();
+      }
+
+    }
+
+    function onNewItemIsValid(isValid) {
+
+      vm.readyState[vm.id] = !!isValid && {readyState: vm.ownReadyState, save: vm.saveClick};
+
+      //if (vm.readyState[vm.id]) {
+      //  vm.readyState[vm.id].readyState.func = vm.addClick;
+      //}
 
     }
 
@@ -303,7 +343,7 @@
 
     function addClick() {
 
-      vm.newItem = vm.model.createInstance(_.assign({name: vm.dropdownInput}, vm.filter || {}));
+      vm.newItem = vm.model.createInstance(_.assign({name: vm.dropdownInputCopy}, vm.filter || {}));
 
       vm.isOpen = false;
 
