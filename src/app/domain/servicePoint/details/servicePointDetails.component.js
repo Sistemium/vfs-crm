@@ -85,7 +85,11 @@
     }
 
     function $onInit() {
-      vm.watchScope('vm.servicePoint.id', () => {
+      vm.watchScope('vm.servicePoint.id', (nv) => {
+
+        if (!nv) {
+          return;
+        }
 
         let {address} = vm.servicePoint;
 
