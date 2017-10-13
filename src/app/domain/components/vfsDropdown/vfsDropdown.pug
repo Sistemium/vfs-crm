@@ -39,16 +39,8 @@
     a.cancel(href ng-click='vm.cancelClick($event)')
       i.glyphicon.glyphicon-remove
 
-  transform-to-component(component-name='{{vm.editComponentName}}' instance='vm.newItem')
-
-  //.button-block
-
-    button.btn.btn-success.animate-show.save.btn-sm(
-    ng-click='vm.saveClick()'
-    ng-disabled='!vm.newItem.isValid()'
-    ) Išsaugoti
-
-    button.btn.btn-default.cancel.btn-sm(
-    ng-click='vm.cancelClick($event)'
-    ) Atšaukti
-
+  transform-to-component(
+  component-name='{{vm.editComponentName}}'
+  ng-model='vm.newItem'
+  ready-state='vm.ownReadyState'
+  )
