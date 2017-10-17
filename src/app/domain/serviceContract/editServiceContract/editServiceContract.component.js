@@ -3,7 +3,8 @@
   module.component('editServiceContract', {
 
     bindings: {
-      serviceContract: '=ngModel'
+      serviceContract: '=ngModel',
+      readyState: '='
     },
 
     templateUrl: 'app/domain/serviceContract/editServiceContract/editServiceContract.html',
@@ -12,9 +13,9 @@
 
   });
 
-  function editServiceContract($scope, saControllerHelper, Schema, $state) {
+  function editServiceContract($scope, ReadyStateHelper, Schema, $state) {
 
-    const vm = saControllerHelper.setup(this, $scope);
+    const vm = ReadyStateHelper.setupController(this, $scope, 'serviceContract');
 
     vm.use({
       $onInit,
