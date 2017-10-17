@@ -5,7 +5,7 @@
     bindings: {
       servicePoint: '=ngModel',
       saveFn: '=',
-      readyState: '=?'
+      readyState: '='
     },
 
     templateUrl: 'app/domain/servicePoint/editServicePoint/editServicePoint.html',

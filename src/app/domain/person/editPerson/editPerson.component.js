@@ -3,7 +3,8 @@
   module.component('editPerson', {
 
     bindings: {
-      person: '='
+      person: '=ngModel',
+      readyState: '='
     },
 
     templateUrl: 'app/domain/person/editPerson/editPerson.html',
@@ -12,9 +13,9 @@
 
   });
 
-  function editPersonController($scope, saControllerHelper, Schema) {
+  function editPersonController($scope, ReadyStateHelper, Schema) {
 
-    const vm = saControllerHelper.setup(this, $scope);
+    const vm = ReadyStateHelper.setupController(this, $scope, 'person');
     const {Person} = Schema.models();
 
     vm.use({

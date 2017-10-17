@@ -3,7 +3,8 @@
   module.component('editLegalEntity', {
 
     bindings: {
-      legalEntity: '='
+      legalEntity: '=ngModel',
+      readyState: '='
     },
 
     templateUrl: 'app/domain/legalEntity/editLegalEntity/editLegalEntity.html',

@@ -3,7 +3,8 @@
   module.component('editFilterSystem', {
 
     bindings: {
-      filterSystem: '='
+      filterSystem: '=ngModel',
+      readyState: '='
     },
 
     templateUrl: 'app/domain/filterSystem/editFilterSystem/editFilterSystem.html',

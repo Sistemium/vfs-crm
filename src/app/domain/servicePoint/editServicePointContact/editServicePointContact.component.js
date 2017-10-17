@@ -3,7 +3,8 @@
   module.component('editServicePointContact', {
 
     bindings: {
-      servicePointContact: '='
+      servicePointContact: '=ngModel',
+      readyState: '='
     },
 
     templateUrl: 'app/domain/servicePoint/editServicePointContact/editServicePointContact.html',

@@ -3,7 +3,8 @@
   module.component('editServiceItem', {
 
     bindings: {
-      serviceItem: '='
+      serviceItem: '=ngModel',
+      readyState: '='
     },
 
     templateUrl: 'app/domain/servicePoint/editServiceItem/editServiceItem.html',

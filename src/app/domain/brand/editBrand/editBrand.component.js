@@ -3,7 +3,7 @@
   module.component('editBrand', {
 
     bindings: {
-      brand: '='
+      brand: '=ngModel'
     },
 
     templateUrl: 'app/domain/brand/editBrand/editBrand.html',
