@@ -1,5 +1,7 @@
 .edit-service-contract
 
+  pre {{ vm.readyState || json }}
+
   .form
 
     .site(ng-if='!vm.hideSite')
@@ -9,8 +11,6 @@
       ng-required='true'
       ng-model='vm.serviceContract.siteId'
       items-data-source-name='Site'
-      items-name-property='name'
-      placement='bottom-left'
       )
 
     .field-group
@@ -49,8 +49,7 @@
       ng-required='true'
       ng-model='vm.serviceContract.customerLegalEntityId'
       items-data-source-name='LegalEntity'
-      items-name-property='name'
-      placement='bottom-left'
+      ready-state='vm.readyState.customerLegalEntityId'
       )
 
     .customer-person(ng-if='vm.serviceContract.legalType === "Asmuo"')
@@ -60,8 +59,7 @@
       ng-required='true'
       ng-model='vm.serviceContract.customerPersonId'
       items-data-source-name='Person'
-      items-name-property='name'
-      placement='bottom-left'
+      ready-state='vm.readyState.customerPersonId'
       )
 
     .service-points(ng-if='vm.serviceContract.id && vm.serviceContract.servicePoints.length')
