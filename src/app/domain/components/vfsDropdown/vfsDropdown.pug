@@ -32,7 +32,7 @@
 
     a.save.animate-show(
     href ng-click='vm.saveClick($event)'
-    ng-show='vm.newItem.isValid()'
+    ng-show='vm.newItem.isValid(vm.readyState)'
     )
       i.glyphicon.glyphicon-ok
 
