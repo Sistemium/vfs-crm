@@ -54,7 +54,7 @@
 
     let inputFocused = false;
     let enterClicked = false;
-    let unwatchSearch;
+    let unwatchSearch = _.noop;
     let unwatchNewItem = _.noop;
 
     Editing.setupController(vm, 'newItem');
@@ -79,16 +79,18 @@
         itemsNameProperty: vm.itemsNameProperty || 'name',
         editComponentName: 'edit-' + _.kebabCase(vm.itemsDataSourceName),
         currentId: vm.currentId || vm.saveTo && vm.saveToProperty && vm.saveTo[vm.saveToProperty],
-        newItemTitle: _.get(model, 'meta.label.add') || 'Naujas įrašas'
+        newItemTitle: _.get(model, 'meta.label.add') || 'Naujas įrašas',
+        readyState: vm.readyState || {}
       });
+      
+      vm.readyState.save = vm.saveClick;
 
       onFilter();
 
     }
 
     function $onDestroy() {
-      console.log('warn');
-      delete vm.readyState[vm.id];
+      vm.readyState = {};
     }
 
     function inputClick() {
@@ -100,9 +102,9 @@
       if (!vm.readyState) return;
 
       if (vm.newItem) {
-        unwatchNewItem = $scope.$watch(() => vm.newItem && vm.newItem.isValid(), onNewItemIsValid);
+        unwatchNewItem = $scope.$watch(() => vm.newItem && vm.newItem.isValid(vm.readyState), onNewItemIsValid);
       } else {
-        delete vm.readyState[vm.id];
+        vm.readyState = {};
         unwatchNewItem();
       }
 
@@ -110,11 +112,7 @@
 
     function onNewItemIsValid(isValid) {
 
-      vm.readyState[vm.id] = !!isValid && {readyState: vm.ownReadyState, save: vm.saveClick};
-
-      //if (vm.readyState[vm.id]) {
-      //  vm.readyState[vm.id].readyState.func = vm.addClick;
-      //}
+      vm.readyState.ready = !!isValid;
 
     }
 
@@ -234,7 +232,10 @@
         return;
       }
 
+      console.log(vm.model.get(id));
+
       vm.currentItem = vm.model.get(id);
+      vm.dropdownInput = vm.currentItem.name;
 
       if (vm.saveToProperty) {
         vm.saveTo[vm.saveToProperty] = id;
@@ -315,7 +316,7 @@
 
       if (ov) {
 
-        unwatchSearch ? unwatchSearch() : _.noop;
+        unwatchSearch();
 
         $timeout(200).then(() => {
           delete vm.focused;
@@ -342,6 +343,8 @@
     }
 
     function addClick() {
+
+      console.log('addClick readyState', vm.readyState);
 
       vm.newItem = vm.model.createInstance(_.assign({name: vm.dropdownInputCopy}, vm.filter || {}));
 
