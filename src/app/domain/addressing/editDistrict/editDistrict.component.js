@@ -13,24 +13,11 @@
 
   });
 
-  function editDistrictController($scope, UUID, saControllerHelper) {
+  function editDistrictController($scope, ReadyStateHelper) {
 
-    const vm = saControllerHelper.setup(this, $scope);
+    const vm = ReadyStateHelper.setupController(this, $scope, 'district');
 
     vm.use({
-      id: `edit-district-${UUID.v4()}`
-    });
-
-    $scope.$watch(() => vm.district.isValid(), (nv) => {
-
-      if (!!nv) {
-        vm.readyState[vm.id] = true;
-      }
-
-    });
-
-    $scope.$on('$destroy', () => {
-      delete vm.readyState[vm.id]
     });
 
   }
