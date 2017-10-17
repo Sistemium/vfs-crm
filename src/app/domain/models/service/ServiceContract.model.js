@@ -82,11 +82,11 @@
       return `${Schema.model('Person').lastModified()}|${Schema.model('LegalEntity').lastModified()}`;
     }
 
-    function isValid() {
+    function isValid(data) {
       return this.date &&
         this.siteId &&
         this.num &&
-        legalType(this.customerPersonId, this.customerLegalEntityId);
+        legalType(this.customerPersonId || _.get(data, 'customerPersonId.ready'), this.customerLegalEntityId);
     }
 
     function customer() {
