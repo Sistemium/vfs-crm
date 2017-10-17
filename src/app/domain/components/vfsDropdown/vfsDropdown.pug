@@ -39,8 +39,10 @@
     a.cancel(href ng-click='vm.cancelClick($event)')
       i.glyphicon.glyphicon-remove
 
+  pre {{ vm.readyState | json }}
+
   transform-to-component(
   component-name='{{vm.editComponentName}}'
   ng-model='vm.newItem'
-  ready-state='vm.ownReadyState'
+  ready-state='vm.readyState'
   )
