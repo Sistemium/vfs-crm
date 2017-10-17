@@ -5,7 +5,7 @@
   angular.module('webPage')
     .service('Editing', Editing);
 
-  function Editing($uibModal, $timeout, Schema) {
+  function Editing($uibModal, $timeout, Schema, $q) {
 
     let me = this;
 
@@ -19,6 +19,7 @@
         saveClick,
         cancelClick,
         destroyClick,
+        saveFormDataClick,
         afterSave: vm.afterSave || _.identity,
         afterCancel: vm.afterCancel || _.identity
       });
@@ -27,9 +28,42 @@
        Functions
        */
 
-      function saveClick() {
+      function saveFormDataClick() {
+        let all = $q.all(saveFormData(vm.readyState))
+          .then(() => {
+            $timeout(() => {
+              return vm[itemProperty].DSCreate();
+            }, 1000);
 
-        //:TODO check vm.readyState recursively
+          });
+        console.warn('saveFormDataClick:', all);
+      }
+
+      function saveFormData(readyStateObj) {
+
+        return _.map(readyStateObj, (val, key) => {
+
+          if (val === true) {
+            console.warn('true', key, key);
+            return $q.resolve(key);
+          }
+
+          let {readyState} = val;
+
+          if (_.isEmpty(readyState)) {
+            console.warn('empty', key, readyState);
+            return val.save();
+          } else {
+            console.warn('not empty', key, readyState);
+            return $q.all(saveFormData(readyState))
+              .then(() => val.save());
+          }
+
+        });
+
+      }
+
+      function saveClick() {
 
         if (vm.saveFn) {
           return vm.saveFn()
@@ -38,6 +72,7 @@
           return vm[itemProperty].DSCreate()
             .then(vm.afterSave);
         }
+
       }
 
       function cancelClick(ev) {
@@ -100,12 +135,13 @@
 class="glyphicon glyphicon-remove"></i></a>` +
         `</div>` +
         `<div class="modal-body">` +
-        `  <pre>{{vm.readyState | json}}</pre>` +
-        ` <${componentName} ng-model="vm.item" save-fn="vm.saveFn" ready-state="vm.readyState"></${componentName}>` +
+        `<pre>{{vm.readyState | json}}</pre>` +
+        `<${componentName} ng-model="vm.item" 
+save-fn="vm.saveFn" ready-state="vm.readyState"></${componentName}>` +
         `</div>` +
         `<div class="modal-footer">` +
         (item.id ? `  <button class="btn destroy" ng-class="vm.confirmDestroy ? 'btn-danger' : 'btn-default'" ng-click="vm.destroyClick()">Ištrinti</button>` : '') +
-        `  <button class="btn btn-success save animate-show" ng-show="vm.hasChanges()" ng-disabled="!vm.isReady()" ng-click="vm.saveClick()">Išsaugoti</button>` +
+        `  <button class="btn btn-success save animate-show" ng-show="vm.hasChanges()" ng-disabled="!vm.isReady()" ng-click="vm.saveFormDataClick(vm.readyState)">Išsaugoti</button>` +
         `  <button class="btn btn-default cancel" ng-click="vm.cancelClick()">Atšaukti</button>` +
         `</div>`,
         size: 'lg',
@@ -149,6 +185,9 @@ class="glyphicon glyphicon-remove"></i></a>` +
         }
 
         function isReady(state) {
+          //
+          //console.log(state);
+          //console.log(vm.readyState);
 
           return !_.filter(state || vm.readyState, val => {
 
