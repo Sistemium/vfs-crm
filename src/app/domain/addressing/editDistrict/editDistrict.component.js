@@ -8,18 +8,13 @@
     },
 
     templateUrl: 'app/domain/addressing/editDistrict/editDistrict.html',
-    controller: editDistrictController,
-    controllerAs: 'vm'
+    controllerAs: 'vm',
+    controller: editDistrictController
 
   });
 
   function editDistrictController($scope, ReadyStateHelper) {
-
     const vm = ReadyStateHelper.setupController(this, $scope, 'district');
-
-    vm.use({
-    });
-
   }
 
 })(angular.module('webPage'));
