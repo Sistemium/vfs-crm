@@ -24,9 +24,6 @@
 
     let vm = saControllerHelper.setup(this, $scope);
 
-    //vm = VfsDropdownHelper.setup(this, $scope);
-    //
-    //vm.watchDropdown(vm.readyState, vm.newItem);
 
     vm.use({
 
@@ -82,7 +79,7 @@
         newItemTitle: _.get(model, 'meta.label.add') || 'Naujas įrašas',
         readyState: vm.readyState || {}
       });
-      
+
       vm.readyState.save = vm.saveClick;
 
       onFilter();
