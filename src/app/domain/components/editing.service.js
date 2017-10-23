@@ -135,7 +135,6 @@
 class="glyphicon glyphicon-remove"></i></a>` +
         `</div>` +
         `<div class="modal-body">` +
-        `<pre>{{vm.readyState | json}}</pre>` +
         `<${componentName} ng-model="vm.item" 
 save-fn="vm.saveFn" ready-state="vm.readyState"></${componentName}>` +
         `</div>` +
@@ -184,23 +183,18 @@ save-fn="vm.saveFn" ready-state="vm.readyState"></${componentName}>` +
           return !vm.item.id || vm.item.DSHasChanges() || !_.isEmpty(vm.readyState);
         }
 
-        function isReady(state) {
-          //
-          //console.log(state);
-          //console.log(vm.readyState);
-
-          return !_.filter(state || vm.readyState, val => {
-
-            if (!val) {
-              return true;
-            } else if (val === true) {
+        function isReady(property) {
+          return _.every(property || vm.readyState, (value, key) => {
+            if (key === 'ready' && value === false) {
               return false;
             }
 
-            return !isReady(val.readyState || val);
+            if (_.isObject(value)) {
+              return isReady(value);
+            }
 
-          }).length && vm.item.isValid();
-
+            return true;
+          }) && vm.item.isValid();
         }
 
       }
