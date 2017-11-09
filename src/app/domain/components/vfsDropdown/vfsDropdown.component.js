@@ -422,6 +422,8 @@
       vm.isOpen = false;
       delete vm.newItem;
 
+      return $timeout().then(saved);
+
     }
 
   }
