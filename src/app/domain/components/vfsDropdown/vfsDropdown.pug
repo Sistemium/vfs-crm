@@ -31,7 +31,7 @@
     span {{ vm.newItemTitle }}
 
     a.save.animate-show(
-    href ng-click='vm.saveClick($event)'
+    href ng-click='vm.saveByUserClick($event)'
     ng-show='vm.newItem.isValid(vm.readyState)'
     )
       i.glyphicon.glyphicon-ok
