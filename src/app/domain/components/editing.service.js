@@ -29,33 +29,32 @@
        */
 
       function saveFormDataClick() {
-        let all = $q.all(saveFormData(vm.readyState))
-          .then(() => {
-            $timeout(() => {
-              return vm[itemProperty].DSCreate();
-            }, 1000);
 
-          });
-        console.warn('saveFormDataClick:', all);
+        $q.all(saveFormData(vm.readyState))
+          .then(() => {
+
+            return vm[itemProperty].DSCreate()
+              .then(vm.afterSave);
+
+          })
+          .catch(err => {
+            console.error(err);
+          })
+
       }
 
       function saveFormData(readyStateObj) {
 
         return _.map(readyStateObj, (val, key) => {
 
-          if (val === true) {
-            console.warn('true', key, key);
+          if (val === true || _.isFunction(val)) {
             return $q.resolve(key);
           }
 
-          let {readyState} = val;
-
-          if (_.isEmpty(readyState)) {
-            console.warn('empty', key, readyState);
-            return val.save();
+          if (_.isEmpty(val)) {
+            return $q.resolve(key);
           } else {
-            console.warn('not empty', key, readyState);
-            return $q.all(saveFormData(readyState))
+            return $q.all(saveFormData(val))
               .then(() => val.save());
           }
 
@@ -68,7 +67,9 @@
         if (vm.saveFn) {
           return vm.saveFn()
             .then(vm.afterSave);
-        } else if (_.isFunction(vm[itemProperty].DSCreate)) {
+        }
+
+        if (_.isFunction(vm[itemProperty].DSCreate)) {
           return vm[itemProperty].DSCreate()
             .then(vm.afterSave);
         }
@@ -123,8 +124,6 @@
     }
 
     function openEditModal(item, componentName, title) {
-
-      //let itemName = _.last(componentName.match(/edit-(.*)/));
 
       me.modal = $uibModal.open({
 
@@ -184,7 +183,8 @@ save-fn="vm.saveFn" ready-state="vm.readyState"></${componentName}>` +
         }
 
         function isReady(property) {
-          return _.every(property || vm.readyState, (value, key) => {
+
+          let isValidForm = _.every(property || vm.readyState, (value, key) => {
             if (key === 'ready' && value === false) {
               return false;
             }
@@ -194,7 +194,11 @@ save-fn="vm.saveFn" ready-state="vm.readyState"></${componentName}>` +
             }
 
             return true;
-          }) && vm.item.isValid();
+
+          });
+
+          return isValidForm && vm.item.isValid();
+
         }
 
       }
