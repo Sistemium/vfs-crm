@@ -14,7 +14,7 @@
   });
 
   function editDistrictController($scope, ReadyStateHelper) {
-    const vm = ReadyStateHelper.setupController(this, $scope, 'district');
+    ReadyStateHelper.setupController(this, $scope, 'district');
   }
 
 })(angular.module('webPage'));

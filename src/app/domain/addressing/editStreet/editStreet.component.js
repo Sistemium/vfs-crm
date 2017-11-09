@@ -14,7 +14,7 @@
   });
 
   function editStreetController($scope, ReadyStateHelper) {
-    const vm = ReadyStateHelper.setupController(this, $scope, 'street');
+    ReadyStateHelper.setupController(this, $scope, 'street');
   }
 
 })(angular.module('webPage'));
