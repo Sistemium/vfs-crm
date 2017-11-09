@@ -40,6 +40,7 @@
       onKeyDown,
       onInputFocus,
       onInputBlur,
+      saveByUserClick,
 
       isOpen: false,
       isOpened: false,
@@ -82,6 +83,15 @@
       vm.readyState.save = vm.saveClick;
 
       onFilter();
+
+    }
+
+    function saveByUserClick() {
+
+      vm.newItem.DSCreate().then((res) => {
+        vm.dropdownInput = res.name;
+        vm.afterSave(res);
+      })
 
     }
 
