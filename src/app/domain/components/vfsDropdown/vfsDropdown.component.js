@@ -109,7 +109,10 @@
 
     function onNewItemIsValid(isValid) {
 
-      vm.readyState.ready = !!isValid;
+      let isValidBoolean = !!isValid;
+
+      vm.readyState.ready = isValidBoolean;
+      vm.readyState.save = isValidBoolean ? vm.saveClick : _.noop
 
     }
 
