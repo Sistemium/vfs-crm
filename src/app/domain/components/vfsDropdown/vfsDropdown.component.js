@@ -24,7 +24,6 @@
 
     let vm = saControllerHelper.setup(this, $scope);
 
-
     vm.use({
 
       id: `vfs-dropdown-${vm.itemsDataSourceName}-${UUID.v4()}`,
@@ -232,8 +231,6 @@
         return;
       }
 
-      console.log(vm.model.get(id));
-
       vm.currentItem = vm.model.get(id);
       vm.dropdownInput = vm.currentItem.name;
 
@@ -343,8 +340,6 @@
     }
 
     function addClick() {
-
-      console.log('addClick readyState', vm.readyState);
 
       vm.newItem = vm.model.createInstance(_.assign({name: vm.dropdownInputCopy}, vm.filter || {}));
 
