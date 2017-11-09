@@ -30,7 +30,6 @@
         deleteClick,
 
         test: () => {
-          console.log('fired');
           $scope.confirmDelete = !$scope.confirmDelete;
         },
 

@@ -24,7 +24,6 @@
 
     ServicePoint.findAll()
       .then(data => {
-        console.log('ServicePoint fired');
         vm.data = data;
       });
 
