@@ -2,6 +2,7 @@
 
   module.component('personMaster', {
 
+    // TODO: rename to personMaster
     templateUrl: 'app/domain/person/person.html',
     controller: personController,
     controllerAs: 'vm'
@@ -12,7 +13,7 @@
 
     const vm = saControllerHelper.setup(this, $scope);
 
-    const {Person} = Schema.models();
+    const {Person, Contact} = Schema.models();
 
     vm.use({
       mobileNumberMask: Person.meta.mobileNumberMask,
@@ -25,6 +26,8 @@
       orderBy: ['name']
     }, $scope, 'vm.persons');
 
+    Contact.bindAll({}, $scope, 'vm.contacts');
+
     /*
      Functions
      */
@@ -32,7 +35,8 @@
     function $onInit() {
 
       let busy = [
-        Person.findAll({}, {bypassCache: true})
+        Person.findAll({}, {bypassCache: true}),
+        Contact.findAll({}, {bypassCache: true})
       ];
 
       vm.setBusy(busy);
