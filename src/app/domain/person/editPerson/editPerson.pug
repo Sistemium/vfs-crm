@@ -34,25 +34,29 @@
       ng-model='vm.person.code'
       )
 
-    .phone
-      label(for='phone') Telefonas
+    div(
+    ng-repeat='contactMethod in vm.contactMethods track by contactMethod.id'
+    ng-class='contactMethod.code'
+    )
+      label(for='{{contactMethod.code}}') {{contactMethod.name}}
 
-      input#phone.form-control(
+      input.form-control(
+      id='{{contactMethod.code}}'
       required
       autocomplete='off'
-      ui-mask='{{vm.paste ? vm.phonePasteMask : vm.mobileNumberMask  }}'
-      ng-model='vm.person.phone'
-      data-ui-options = 'vm.maskOptions'
-      ng-paste='vm.paste = true'
+      placeholder='{{contactMethod.code === "email" ? contactMethod.name : ""}}'
+      ng-model='vm[contactMethod.code]'
+      data-ui-options='vm.maskOptions'
+      ng-paste='vm.onPaste(contactMethod.code)'
+      ui-mask='{{contactMethod.code === "email" ? contactMethod.mask : vm.paste ? vm.phonePasteMask : contactMethod' +
+      '.mask}}'
+      ng-keypress='vm.onEnterPress($event, contactMethod)'
+      ng-blur='vm.onInputBlur(contactMethod)'
       )
 
-    .email
-      label(for='email') E-paštas
-
-      input#email.form-control(
-      required
-      type='text'
-      autocomplete='off'
-      placeholder='E-pašto adresas'
-      ng-model='vm.person.email'
-      )
+      .contacts
+        .contact(
+        ng-repeat='item in vm.contactsByCode[contactMethod.code] track by $index'
+        )
+          span {{ contactMethod.code === 'phone' ? (item.address | ltphone) : item.address }}
+          span.icon.glyphicon.glyphicon-remove(ng-click='vm.deleteContactClick(item, contactMethod.code, $event)')
