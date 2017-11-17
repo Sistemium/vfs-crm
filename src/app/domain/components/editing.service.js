@@ -34,7 +34,7 @@
           .then(() => {
 
             return vm[itemProperty].DSCreate()
-              .then(vm.afterSave);
+              .then(saveClick);
 
           })
           .catch(err => {
@@ -179,7 +179,7 @@ save-fn="vm.saveFn" ready-state="vm.readyState"></${componentName}>` +
         });
 
         function hasChanges() {
-          return !vm.item.id || vm.item.DSHasChanges() || !_.isEmpty(vm.readyState);
+          return !vm.item.id || vm.item.DSHasChanges() || !_.isEmpty(_.omit(vm.readyState, 'ready'));
         }
 
         function isReady(property) {
