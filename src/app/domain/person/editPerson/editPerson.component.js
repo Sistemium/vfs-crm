@@ -242,7 +242,6 @@
 
           saveContact(code, vm.person.id, address)
             .then(() => {
-              vm[code] = null;
               findContacts()
             });
 
@@ -251,7 +250,7 @@
           vm.contactsByCode[code].push(contact);
         }
 
-        address = null;
+        vm[code] = null;
 
       } else {
 
