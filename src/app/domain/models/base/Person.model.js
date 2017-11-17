@@ -29,10 +29,7 @@
       computed: {
 
         name: ['firstName', 'lastName', name],
-
-        telHref: ['phone', function (phone) {
-          return phone ? `tel://370${_.replace(phone, /[^0-9]/g, '')}` : null;
-        }]
+        telHref: ['phone', telHref]
 
       },
 
@@ -70,6 +67,10 @@
 
     function isValid() {
       return this.firstName && this.lastName;
+    }
+
+    function telHref(phone) {
+      return phone ? `tel://370${_.replace(phone, /[^0-9]/g, '')}` : null;
     }
 
     function name(firstName, lastName) {
