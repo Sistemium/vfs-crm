@@ -86,7 +86,10 @@
       return this.date &&
         this.siteId &&
         this.num &&
-        legalType(this.customerPersonId || _.get(data, 'customerPersonId.ready'), this.customerLegalEntityId);
+        legalType(
+          this.customerPersonId || _.get(data, 'customerPersonId.ready'),
+          this.customerLegalEntityId || _.get(data, 'customerLegalEntityId.ready')
+        );
     }
 
     function customer() {
