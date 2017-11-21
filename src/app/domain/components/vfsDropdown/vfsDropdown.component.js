@@ -88,10 +88,13 @@
 
     function saveByUserClick() {
 
-      vm.newItem.DSCreate().then((res) => {
-        vm.dropdownInput = res.name;
-        vm.afterSave(res);
-      })
+      let saveFn = vm.saveFn || vm.newItem.DSCreate;
+
+      saveFn.call(vm.newItem)
+        .then((res) => {
+          vm.dropdownInput = res.name;
+          vm.afterSave(res);
+        })
 
     }
 
@@ -422,7 +425,7 @@
       vm.isOpen = false;
       delete vm.newItem;
 
-      return $timeout().then(saved);
+      return $timeout().then(() => saved);
 
     }
 
