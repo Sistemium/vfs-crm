@@ -24,11 +24,12 @@
       .last-name {{ person.lastName }}
       .code {{ person.code }}
       .email
-        a(href='mailto:{{ person.email}}' ng-click='$event.stopPropagation()') {{ person.email }}
+        a(href='{{ person.primaryEmail().href }}' ng-click='$event.stopPropagation()') {{ person.primaryEmail().address }}
+
       .phone
         a(
-        href='{{ person.telHref }}' ng-click='$event.stopPropagation()'
-        ) {{ person.phone | ltphone }}
+        href='{{ person.primaryPhone().href }}' ng-click='$event.stopPropagation()'
+        ) {{ person.primaryPhone().address | ltphone }}
       //.avatar-picture
         span {{ person.avatarPictureId ? 'Yra' : ''}}
 
