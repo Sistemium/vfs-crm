@@ -93,6 +93,8 @@
 
         let {address} = vm.servicePoint;
 
+        //TODO: Fix map onLoad coords
+
         if (!address || !vm.googleReady) {
           return;
         }

@@ -25,11 +25,10 @@
         )
           marker(
           ng-if='!vm.noGeoPosition'
-          position='{{vm.coords.lat}}, {{vm.coords.lng}}',
+          position='[{{vm.coords.lat}}, {{vm.coords.lng}}]',
           animation='DROP'
           draggable='true'
           )
-
 
       .service-point-add-info
         .point-address {{vm.servicePoint.address}}
