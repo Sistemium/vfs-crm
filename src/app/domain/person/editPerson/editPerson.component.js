@@ -5,7 +5,9 @@
     bindings: {
       person: '=ngModel',
       readyState: '=',
-      saveFn: '='
+      saveFn: '=',
+      hasChanges: '=',
+      isValid: '='
     },
 
     templateUrl: 'app/domain/person/editPerson/editPerson.html',
@@ -14,7 +16,7 @@
 
   });
 
-  function editPersonController($scope, ReadyStateHelper, Schema, $timeout, toastr, $q) {
+  function editPersonController($scope, ReadyStateHelper, Schema, $timeout, toastr) {
 
     const vm = ReadyStateHelper.setupController(this, $scope, 'person');
     const {Person, ContactMethod, Contact} = Schema.models();
@@ -31,127 +33,95 @@
         email: []
       },
 
+      errorsByCode: {},
+
+      confirmDestroy: {},
+
       $onInit,
       onPaste,
       onEnterPress,
       deleteContactClick,
-      onInputBlur
+      onInputBlur: addAddress,
+      hasChanges,
+      currentInputMask
 
     });
 
-    $scope.$watch('vm.phone', (nv, ov) => {
-
-      vm.paste = false;
-
-      if (!nv) {
-        return;
-      }
-
-      if (nv !== ov) {
-
-        let value = nv.replace(/[^0-9]/gi, '');
-
-        if (!value) {
-          vm.phone = null;
-          return;
-        }
-
-        if (value.length > 8) {
-          vm.phone = nv.slice(-8);
-        } else {
-          vm.phone = value;
-        }
-
-      }
-
-    });
+    $scope.$watch('vm.phone', onPhoneChange);
 
     /*
      Functions
      */
 
-    function onInputBlur(contactMethod) {
+    function currentInputMask(contactMethod) {
+      return contactMethod.code === "email" ? contactMethod.mask : vm.pastePhone ? vm.phonePasteMask : contactMethod.mask;
+    }
 
-      let {code, contactRegExp} = contactMethod;
+    function hasChanges() {
+      return !vm.person.id || vm.person.DSHasChanges() || unsavedContacts().length || vm.phone || vm.email;
+    }
 
-      if (!vm[code]) {
+    function unsavedContacts() {
+
+      let res = [];
+
+      _.each(vm.contactsByCode, contacts => {
+
+        _.each(contacts, contact => {
+          if (!contact.id) {
+            res.push(contact);
+          }
+        });
+
+      });
+
+      return res;
+
+    }
+
+    function onPhoneChange(nv, ov) {
+
+      vm.pastePhone = false;
+
+      if (!nv || nv === ov) {
         return;
       }
 
-      let isDuplicate = _.find(vm.contactsByCode[code], {address: vm[code]});
+      let value = nv.replace(/[^0-9]/gi, '');
 
-      if (contactRegExp.test(vm[code]) && !isDuplicate) {
-
-        let contact = Contact.createInstance({address: vm[code], ownerXid: vm.person.id || null});
-        vm.contactsByCode[code].push(contact);
-
+      if (!value) {
+        vm.phone = null;
+        return;
       }
 
-      vm[code] = null;
+      if (value.length > 8) {
+        vm.phone = nv.slice(-8);
+      } else {
+        vm.phone = value;
+      }
 
     }
 
     function saveFn() {
       return Person.create(vm.person)
-        .then((res) => {
-          return saveContact('email', res.id)
-            .then(res => {
-              console.log(res);
-            })
-            .then(() => res);
+        .then(res => {
+
+          let {id} = res;
+
+          let unsaved = unsavedContacts();
+
+          return _.map(unsaved, contact => {
+            contact.ownerXid = id;
+            return contact.DSCreate();
+          });
 
         })
-        .then((res) => {
-          return saveContact('phone', res.id)
-            .then((res) => {
-              console.log(res);
-            });
-        })
-
-    }
-
-    function saveContact(contactMethod, personId, address) {
-
-      let promises = [];
-      let contactsArr = [];
-
-      if (address) {
-
-        let itemInstance = Contact.createInstance({address});
-        contactsArr.push(itemInstance);
-
-      } else {
-        contactsArr = vm.contactsByCode[contactMethod];
-      }
-
-      _.map(contactsArr, (item) => {
-
-        if (item) {
-          console.log(item);
-        }
-
-        if (item.id) {
-          return;
-        }
-
-        let newContact = Contact.create({
-          ownerXid: personId || null,
-          address: item.address,
-          source: 'Person',
-          contactMethodId: _.find(vm.contactMethods, {code: contactMethod}).id
-        });
-
-        promises.push(newContact);
-
-      });
-
-      return $q.all(promises);
 
     }
 
     function findContacts() {
       Contact.findAll({ownerXid: vm.person.id}, {bypassCache: true})
-        .then((res) => {
+        .then(res => {
 
           if (!res.length) {
             return;
@@ -165,11 +135,14 @@
 
     function $onInit() {
 
-      ContactMethod.findAll().then((res) => {
-        vm.contactMethods = res;
-      });
+      ContactMethod.findAll()
+        .then(res => {
+          vm.contactMethods = res;
+        });
 
       vm.saveFn = saveFn;
+      vm.hasChanges = hasChanges;
+      vm.isValid = isValid;
 
       if (vm.person.id) {
         findContacts();
@@ -177,45 +150,115 @@
 
     }
 
-    function onPaste(code) {
-      if (code === 'phone') {
-        vm.paste = true;
+    function isValid() {
+      return vm.person.isValid() && isValidAddress('phone', vm.phone) && isValidAddress('email', vm.email);
+    }
+
+    function onPaste(contactMethod) {
+
+      if (contactMethod.code === 'phone') {
+        vm.pastePhone = true;
       }
+
+      $timeout().then(() => addAddress(contactMethod));
+
     }
 
     function deleteContactClick(item, code) {
 
-      let arr = vm.contactsByCode[code];
+      let itemAddress = item.address;
 
-      let itemToDelete = _.find(arr, item);
+      if (item.id) {
+        vm.confirmDestroy[itemAddress] = !vm.confirmDestroy[itemAddress];
 
-      if (itemToDelete) {
-        _.remove(arr, itemToDelete);
+        if (vm.confirmDestroy[itemAddress]) {
+          return $timeout(2000)
+            .then(() => delete vm.confirmDestroy[itemAddress]);
+        }
       }
 
-      if (vm.person.id) {
+      let contacts = vm.contactsByCode[code];
 
-        Contact.destroy(itemToDelete)
-          .then(() => {
-            toastr.success(`${item.contactMethod.name} ištrintas`);
-          })
-          .catch((err) => {
-            console.error(err);
-            toastr.error('Ištrinti nepavyko')
-          })
+      _.remove(contacts, item);
 
+      if (!item.id) {
+        return;
       }
+
+      Contact.destroy(item)
+        .then(() => {
+          toastr.success(`${item.contactMethod.name} ištrintas`);
+        })
+        .catch((err) => {
+          console.error(err);
+          toastr.error('Ištrinti nepavyko')
+        })
+        .finally(() => {
+          vm.readyToDelete = false;
+        })
 
     }
 
-    function toggleErrorClass(query) {
+    function toggleErrorClass(code, error) {
 
-      let elem = angular.element(document.querySelector(query));
-      elem.addClass('error-on-input');
+      if (error) {
+        console.warn('non-unique address', code, error);
+      }
 
-      $timeout(() => {
-        elem.removeClass('error-on-input');
-      }, 1000)
+      vm.errorsByCode[code] = error;
+
+    }
+
+    function isUniqueAddress(code, address) {
+      let data = vm.contactsByCode[code];
+      return !_.find(data, {address});
+    }
+
+    function isValidAddress(code, address) {
+
+      if (!address) {
+        return true;
+      }
+
+      return _.find(vm.contactMethods, {code}).isValidAddress(address) && isUniqueAddress(code, address);
+
+    }
+
+    function addAddress(contactMethod) {
+
+      let {code} = contactMethod;
+
+      let address = vm[code];
+
+      toggleErrorClass(code);
+
+      if (!address) {
+        console.warn('addAddress empty');
+        return;
+      }
+
+      if (!contactMethod.isValidAddress(address)) {
+        return toggleErrorClass(code, 'invalid address');
+      }
+
+      if (!isUniqueAddress(code, address)) {
+        return toggleErrorClass(code, 'non-unique address');
+      }
+
+      let contact = Contact.createInstance({
+        contactMethodId: contactMethod.id,
+        address,
+        ownerXid: vm.person.id || null,
+        source: 'Person'
+      });
+
+      if (!vm.contactsByCode[code]) {
+        vm.contactsByCode[code] = [];
+      }
+
+      vm.contactsByCode[code].push(contact);
+
+      vm[code] = null;
 
     }
 
@@ -227,36 +270,7 @@
         return;
       }
 
-      let {code, contactRegExp} = contactMethod;
-
-      let address = vm[code];
-
-      if (contactRegExp.test(address)) {
-
-        if (_.find(vm.contactsByCode[code], {address})) {
-          toggleErrorClass(`#${code}`);
-          return;
-        }
-
-        if (vm.person.id) {
-
-          saveContact(code, vm.person.id, address)
-            .then(() => {
-              findContacts()
-            });
-
-        } else {
-          let contact = Contact.createInstance({address});
-          vm.contactsByCode[code].push(contact);
-        }
-
-        vm[code] = null;
-
-      } else {
-
-        toggleErrorClass(`#${code}`);
-
-      }
+      addAddress(contactMethod);
 
     }
 
