@@ -5,9 +5,9 @@
     bindings: {
       person: '=ngModel',
       readyState: '=',
-      saveFn: '=',
-      hasChanges: '=',
-      isValid: '='
+      saveFn: '=?',
+      hasChanges: '=?',
+      isValid: '=?'
     },
 
     templateUrl: 'app/domain/person/editPerson/editPerson.html',
@@ -19,6 +19,7 @@
   function editPersonController($scope, ReadyStateHelper, Schema, $timeout, toastr) {
 
     const vm = ReadyStateHelper.setupController(this, $scope, 'person');
+
     const {Person, ContactMethod, Contact} = Schema.models();
 
     vm.use({
@@ -116,6 +117,7 @@
           });
 
         })
+        .then(() => vm.person);
 
     }
 
