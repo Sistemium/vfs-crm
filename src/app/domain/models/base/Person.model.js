@@ -14,6 +14,10 @@
           ServiceContract: {
             localField: 'serviceContracts',
             foreignKey: 'customerPersonId'
+          },
+          Contact: {
+            localField: 'contacts',
+            foreignKey: 'ownerXid'
           }
         },
 
@@ -28,13 +32,16 @@
 
       computed: {
 
-        name: ['firstName', 'lastName', name],
-        telHref: ['phone', telHref]
+        name: ['firstName', 'lastName', name]
 
       },
 
       methods: {
-        isValid
+        isValid,
+        primaryEmail,
+        primaryPhone,
+        refreshCache,
+        contactsLazy
       },
 
       meta: {
@@ -69,12 +76,45 @@
       return this.firstName && this.lastName;
     }
 
-    function telHref(phone) {
-      return phone ? `tel://370${_.replace(phone, /[^0-9]/g, '')}` : null;
-    }
-
     function name(firstName, lastName) {
       return (firstName && lastName) ? `${firstName} ${lastName}` : null;
+    }
+
+    function primaryEmail() {
+      return _.get(this.contactsLazy(), 'primaryEmail');
+    }
+
+    function primaryPhone() {
+      return _.get(this.contactsLazy(), 'primaryPhone');
+    }
+
+    const cache = {};
+
+    // TODO: bindAll to watch changes an refresh cache
+
+    function refreshCache() {
+      delete cache[this.id];
+      this.contactsLazy();
+    }
+
+    function contactsLazy() {
+
+      let cached = cache[this.id];
+
+      if (cached) return cached;
+
+      cache[this.id] = this.DSLoadRelations('Contact')
+        .then(res => {
+          cache[this.id] = {
+            primaryPhone: primaryAddress(res.contacts, 'phone'),
+            primaryEmail: primaryAddress(res.contacts, 'email')
+          };
+        });
+
+    }
+
+    function primaryAddress(contacts, code) {
+      return _.find(contacts, contact => _.get(contact, 'contactMethod.code') === code);
     }
 
   });
