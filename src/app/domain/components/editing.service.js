@@ -134,7 +134,7 @@
 class="glyphicon glyphicon-remove"></i></a>` +
         `</div>` +
         `<div class="modal-body">` +
-        `<${componentName} ng-model="vm.item" 
+        `<${componentName} ng-model="vm.item" has-changes="vm.componentHasChanges" is-valid="vm.componentIsValid"
 save-fn="vm.saveFn" ready-state="vm.readyState"></${componentName}>` +
         `</div>` +
         `<div class="modal-footer">` +
@@ -179,10 +179,19 @@ save-fn="vm.saveFn" ready-state="vm.readyState"></${componentName}>` +
         });
 
         function hasChanges() {
+
+          if (vm.componentHasChanges) {
+            return vm.componentHasChanges();
+          }
+
           return !vm.item.id || vm.item.DSHasChanges() || !_.isEmpty(_.omit(vm.readyState, 'ready'));
         }
 
         function isReady(property) {
+
+          if (vm.componentIsValid && !vm.componentIsValid()) {
+            return false;
+          }
 
           let isValidForm = _.every(property || vm.readyState, (value, key) => {
             if (key === 'ready' && value === false) {
