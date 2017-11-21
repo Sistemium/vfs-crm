@@ -9,12 +9,20 @@
       name: 'ContactMethod',
 
       computed: {
-        contactRegExp: ['validationPattern', validationPattern => new RegExp(validationPattern)
-        ]
+        contactRegExp: ['validationPattern', validationPattern => new RegExp(validationPattern)]
+      },
+
+      methods: {
+        isValidAddress
       }
 
-    })
-    ;
+    });
+
+    function isValidAddress(address) {
+
+      return this.contactRegExp.test(address);
+
+    }
 
   });
 
