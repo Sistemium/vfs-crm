@@ -5,8 +5,9 @@
 
       $rootScope.$on('authorized', () => {
 
-        const {Site, FilterSystemType} = Schema.models();
+        const {Site, FilterSystemType, ContactMethod} = Schema.models();
 
+        ContactMethod.findAll();
         Site.findAll();
         FilterSystemType.findAll();
 
