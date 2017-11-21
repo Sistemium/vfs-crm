@@ -114,15 +114,15 @@
         span.name {{ vm.servicePoint.currentServiceContract.customerPerson.name }}
 
         a.phone(
-        href='{{ vm.servicePoint.currentServiceContract.customerPerson.telHref }}'
+        href='{{ vm.servicePoint.currentServiceContract.customerPerson.primaryPhone().href }}'
         ng-click='$event.stopPropagation()'
-        ) {{ vm.servicePoint.currentServiceContract.customerPerson.phone | ltphone}}
+        ) {{ vm.servicePoint.currentServiceContract.customerPerson.primaryPhone().address | ltphone}}
 
         a.email(
-        ng-if='vm.servicePoint.currentServiceContract.customerPerson.email'
-        href='mailto:{{ vm.servicePoint.currentServiceContract.customerPerson.email }}'
+        ng-if='vm.servicePoint.currentServiceContract.customerPerson.primaryEmail()'
+        href='{{ vm.servicePoint.currentServiceContract.customerPerson.primaryEmail().href }}'
         ng-click='$event.stopPropagation()'
-        ) {{ vm.servicePoint.currentServiceContract.customerPerson.email }}
+        ) {{ vm.servicePoint.currentServiceContract.customerPerson.primaryEmail().address }}
 
       .contact(
       ng-repeat='servicePointContact in vm.servicePoint.servicePointContacts track by servicePointContact.id'
@@ -131,15 +131,15 @@
         span.name {{ servicePointContact.person.name }}
 
         a.phone(
-        href='{{servicePointContact.person.telHref}}'
+        href='{{servicePointContact.person.primaryPhone().href}}'
         ng-click='$event.stopPropagation()'
-        ) {{ servicePointContact.person.phone | ltphone }}
+        ) {{ servicePointContact.person.primaryPhone().address | ltphone }}
 
         a.email(
-        ng-if='servicePointContact.person.email'
-        href='mailto:{{ servicePointContact.person.email }}'
+        ng-if='servicePointContact.person.primaryEmail()'
+        href='{{ servicePointContact.person.primaryEmail().href }}'
         ng-click='$event.stopPropagation()'
-        ) {{ servicePointContact.person.email }}
+        ) {{ servicePointContact.person.primaryEmail().address }}
 
   .items
 
