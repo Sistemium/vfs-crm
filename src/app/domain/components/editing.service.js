@@ -206,7 +206,7 @@ save-fn="vm.saveFn" ready-state="vm.readyState"></${componentName}>` +
 
           });
 
-          return isValidForm && vm.item.isValid();
+          return isValidForm && vm.item.isValid(vm.readyState);
 
         }
 
