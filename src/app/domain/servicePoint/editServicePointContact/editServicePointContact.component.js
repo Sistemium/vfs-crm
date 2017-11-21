@@ -13,7 +13,8 @@
 
   });
 
-  function editServicePointContactController() {
+  function editServicePointContactController(ReadyStateHelper, $scope) {
+    ReadyStateHelper.setupController(this, $scope, 'servicePointContact');
   }
 
 })(angular.module('webPage'));
