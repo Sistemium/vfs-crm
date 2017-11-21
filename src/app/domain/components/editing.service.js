@@ -64,6 +64,11 @@
 
       function saveClick() {
 
+        //if (vm.componentSaveFn) {
+        //  return vm.componentSaveFn()
+        //    .then(vm.afterSave);
+        //}
+
         if (vm.saveFn) {
           return vm.saveFn()
             .then(vm.afterSave);
