@@ -13,15 +13,9 @@
 
   });
 
-  function editFilterSystemController($scope, saControllerHelper) {
+  function editFilterSystemController($scope, ReadyStateHelper) {
 
-    const vm = saControllerHelper.setup(this, $scope);
-
-    vm.use({});
-
-    /*
-     Functions
-     */
+    ReadyStateHelper.setupController(this, $scope, 'filterSystem');
 
   }
 

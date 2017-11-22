@@ -14,8 +14,9 @@
 
   });
 
-  function editServicePointController(saControllerHelper, $scope) {
+  function editServicePointController(saControllerHelper, $scope, ReadyStateHelper) {
 
+    ReadyStateHelper.setupController(this, $scope, 'servicePoint');
     const vm = saControllerHelper.setup(this, $scope);
 
     vm.use({

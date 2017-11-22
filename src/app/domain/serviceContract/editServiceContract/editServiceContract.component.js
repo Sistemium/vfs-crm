@@ -32,6 +32,8 @@
         vm.hideSite = true;
       }
 
+      vm.legalType = vm.serviceContract.legalType;
+
       const {Brand, FilterSystemType, FilterSystem} = Schema.models();
 
       vm.serviceContract.DSLoadRelations()
@@ -41,7 +43,6 @@
           });
         })
         .then(() => {
-
           Brand.findAll();
           FilterSystemType.findAll();
           FilterSystem.findAll();

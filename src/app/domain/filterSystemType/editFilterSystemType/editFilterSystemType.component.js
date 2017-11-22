@@ -13,8 +13,8 @@
 
   });
 
-  function editFilterSystemTypeController() {
-
+  function editFilterSystemTypeController(ReadyStateHelper, $scope) {
+    ReadyStateHelper.setupController(this, $scope, 'filterSystemType');
   }
 
 })(angular.module('webPage'));

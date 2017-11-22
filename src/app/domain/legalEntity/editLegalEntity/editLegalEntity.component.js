@@ -13,8 +13,8 @@
 
   });
 
-  function editLegalEntityController() {
-
+  function editLegalEntityController(ReadyStateHelper, $scope) {
+    ReadyStateHelper.setupController(this, $scope, 'legalEntity');
   }
 
 })(angular.module('webPage'));

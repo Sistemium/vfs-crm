@@ -3,7 +3,8 @@
   module.component('editSite', {
 
     bindings: {
-      site: '=ngModel'
+      site: '=ngModel',
+      readyState: '='
     },
 
     templateUrl: 'app/domain/site/editSite/editSite.html',
@@ -12,8 +13,8 @@
 
   });
 
-  function editFilterSystemTypeController() {
-
+  function editFilterSystemTypeController(ReadyStateHelper, $scope) {
+    ReadyStateHelper.setupController(this, $scope, 'site');
   }
 
 })(angular.module('webPage'));

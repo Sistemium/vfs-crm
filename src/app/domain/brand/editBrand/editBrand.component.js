@@ -3,7 +3,8 @@
   module.component('editBrand', {
 
     bindings: {
-      brand: '=ngModel'
+      brand: '=ngModel',
+      readyState: '='
     },
 
     templateUrl: 'app/domain/brand/editBrand/editBrand.html',
@@ -12,8 +13,8 @@
 
   });
 
-  function editBrandController() {
-
+  function editBrandController(ReadyStateHelper, $scope) {
+    ReadyStateHelper.setupController(this, $scope, 'brand');
   }
 
 })(angular.module('webPage'));

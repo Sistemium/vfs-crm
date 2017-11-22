@@ -13,7 +13,8 @@
 
   });
 
-  function editServiceItem() {
+  function editServiceItem(ReadyStateHelper, $scope) {
+    ReadyStateHelper.setupController(this, $scope, 'serviceItem');
   }
 
 })(angular.module('webPage'));
