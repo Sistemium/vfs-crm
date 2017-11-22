@@ -83,9 +83,7 @@
     }
 
     function isValid(data) {
-      return this.date &&
-        this.siteId &&
-        this.num &&
+      return this.date && (this.siteId ||_.get(data, 'siteId.ready')) && this.num &&
         legalType(
           this.customerPersonId || _.get(data, 'customerPersonId.ready'),
           this.customerLegalEntityId || _.get(data, 'customerLegalEntityId.ready')

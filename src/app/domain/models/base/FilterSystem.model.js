@@ -44,8 +44,10 @@
 
     });
 
-    function isValid() {
-      return this.filterSystemTypeId && this.brandId && this.name;
+    function isValid(data) {
+      return this.filterSystemTypeId || _.get(data, 'filterSystemTypeId.ready') &&
+        this.brandId || _.get(data, 'brandId.ready') &&
+        this.name;
     }
 
   });
