@@ -27,7 +27,7 @@
 
       meta: {
         label: {
-          add: 'Nauja imonė'
+          add: 'Nauja įmonė'
         }
       }
 
