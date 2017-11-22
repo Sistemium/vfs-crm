@@ -6,22 +6,18 @@
       label Prekės Ženklas
 
       vfs-dropdown(
+      ready-state='vm.readyState.brandId'
       items-data-source-name='Brand'
-      items-name-property='name'
-      save-to='vm.filterSystem'
-      save-to-property='brandId'
-      placement='bottom-left'
+      ng-model='vm.filterSystem.brandId'
       )
 
     .filter-system-type
       label Filtravimo Sistemos Tipas
 
       vfs-dropdown(
+      ready-state='vm.readyState.filterSystemTypeId'
       items-data-source-name='FilterSystemType'
-      items-name-property='name'
-      save-to='vm.filterSystem'
-      save-to-property='filterSystemTypeId'
-      placement='bottom-left'
+      ng-model='vm.filterSystem.filterSystemTypeId'
       )
 
     .name

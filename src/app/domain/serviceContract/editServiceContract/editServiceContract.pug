@@ -9,6 +9,7 @@
       ng-required='true'
       ng-model='vm.serviceContract.siteId'
       items-data-source-name='Site'
+      ready-state='vm.readyState.siteId'
       )
 
     .field-group
@@ -32,15 +33,15 @@
 
       .btn-group
         label.btn.btn-default(
-        ng-model='vm.serviceContract.legalType'
+        ng-model='vm.legalType'
         uib-btn-radio="'Asmuo'" uib-uncheckable='false'
         ) Asmuo
         label.btn.btn-default(
-        ng-model='vm.serviceContract.legalType'
+        ng-model='vm.legalType'
         uib-btn-radio="'Įmonė'" uib-uncheckable='false'
         ) Įmonė
 
-    .customer-legal-entity(ng-if='vm.serviceContract.legalType === "Įmonė"')
+    .customer-legal-entity(ng-if='vm.legalType === "Įmonė"')
       label Įmonė
 
       vfs-dropdown(
@@ -50,7 +51,7 @@
       ready-state='vm.readyState.customerLegalEntityId'
       )
 
-    .customer-person(ng-if='vm.serviceContract.legalType === "Asmuo"')
+    .customer-person(ng-if='vm.legalType === "Asmuo"')
       label Asmuo
 
       vfs-dropdown(

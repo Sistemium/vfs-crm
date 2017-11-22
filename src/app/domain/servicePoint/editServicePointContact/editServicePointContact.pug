@@ -6,10 +6,7 @@
       label Kontaktinis asmuo
 
       vfs-dropdown(
-      ng-model='vm.servicePointContract.personId'
+      ng-model='vm.servicePointContact.personId'
       items-data-source-name='Person'
-      items-name-property='name'
-      save-to='vm.servicePointContact'
-      save-to-property='personId'
-      placement='bottom-left'
+      ready-state='vm.readyState.personId'
       )
