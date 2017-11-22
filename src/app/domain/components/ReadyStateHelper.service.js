@@ -9,14 +9,14 @@
 
     return {setupController};
 
-    function setupController(vm, scope, modelName) {
+    function setupController(vm, scope, bindingName) {
 
       saControllerHelper.setup(vm, scope)
         .use({
-          id: `edit-${modelName}-${UUID.v4()}`
+          id: `edit-${bindingName}-${UUID.v4()}`
         });
 
-      scope.$watch(() => vm[modelName].isValid(vm.readyState), nv => {
+      scope.$watch(() => vm[bindingName].isValid(vm.readyState), nv => {
 
         if (vm.readyState) {
           vm.readyState.ready = !!nv;
