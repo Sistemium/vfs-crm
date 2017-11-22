@@ -31,12 +31,7 @@
       function saveFormDataClick() {
 
         $q.all(saveFormData(vm.readyState))
-          .then(() => {
-
-            return vm[itemProperty].DSCreate()
-              .then(saveClick);
-
-          })
+          .then(vm.saveClick)
           .catch(err => {
             console.error(err);
           })
@@ -64,10 +59,6 @@
 
       function saveClick() {
 
-        //if (vm.componentSaveFn) {
-        //  return vm.componentSaveFn()
-        //    .then(vm.afterSave);
-        //}
 
         if (vm.saveFn) {
           return vm.saveFn()
@@ -189,7 +180,8 @@ save-fn="vm.saveFn" ready-state="vm.readyState"></${componentName}>` +
             return vm.componentHasChanges();
           }
 
-          return !vm.item.id || vm.item.DSHasChanges() || !_.isEmpty(_.omit(vm.readyState, 'ready'));
+          return !vm.item.id || vm.item.DSHasChanges() ||
+            _.find(vm.readyState, val => !_.isEmpty(val));
         }
 
         function isReady(property) {
