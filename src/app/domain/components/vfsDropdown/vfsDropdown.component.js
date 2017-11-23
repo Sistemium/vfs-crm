@@ -425,7 +425,9 @@
       vm.isOpen = false;
       delete vm.newItem;
 
-      return $timeout().then(() => saved);
+      onCurrentId(vm.currentId);
+
+      return $timeout(10).then(() => saved);
 
     }
 
