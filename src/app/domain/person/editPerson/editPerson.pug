@@ -58,7 +58,11 @@
         ng-repeat='item in vm.contactsByCode[contactMethod.code] track by $index'
         ng-class='{"confirm-destroy" : vm.confirmDestroy[item.address]}'
         )
+
           span {{ contactMethod.code === 'phone' ? (item.address | ltphone) : item.address }}
-          span.icon.glyphicon.glyphicon-remove(
+
+          a(
+          href
           ng-click='vm.deleteContactClick(item, contactMethod.code)'
           )
+            i.glyphicon.glyphicon-remove
