@@ -26,7 +26,7 @@
       orderBy: ['name']
     }, $scope, 'vm.persons');
 
-    Contact.bindAll({}, $scope, 'vm.contacts');
+    // Contact.bindAll({}, $scope, 'vm.contacts');
 
     /*
      Functions
