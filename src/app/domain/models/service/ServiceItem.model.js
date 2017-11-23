@@ -54,8 +54,8 @@
 
     });
 
-    function isValid() {
-      return this.filterSystemId
+    function isValid(data) {
+      return this.filterSystemId || _.get(data, 'filterSystemId.ready')
     }
 
   });

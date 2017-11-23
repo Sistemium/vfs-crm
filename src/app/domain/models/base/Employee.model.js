@@ -43,8 +43,8 @@
 
     });
 
-    function isValid() {
-      return this.personId && this.siteId;
+    function isValid(data) {
+      return this.personId || _.get(data, 'personId.ready') && this.siteId || _.get(data, 'siteId.ready');
     }
 
   });
