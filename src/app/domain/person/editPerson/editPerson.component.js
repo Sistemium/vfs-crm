@@ -16,7 +16,7 @@
 
   });
 
-  function editPersonController($scope, ReadyStateHelper, Schema, $timeout, toastr) {
+  function editPersonController($scope, ReadyStateHelper, Schema, $timeout, toastr, $q) {
 
     const vm = ReadyStateHelper.setupController(this, $scope, 'person');
 
@@ -111,13 +111,16 @@
 
           let unsaved = unsavedContacts();
 
-          return _.map(unsaved, contact => {
+          return $q.all(_.map(unsaved, contact => {
             contact.ownerXid = id;
             return contact.DSCreate();
-          });
+          }));
 
         })
-        .then(() => vm.person);
+        .then(() => {
+          vm.person.refreshCache();
+          return vm.person;
+        });
 
     }
 
