@@ -34,10 +34,11 @@
       $onInit,
       serviceContractClick,
       mapClick,
+      personNameClick,
 
       editPhoto: Editing.editModal('edit-picture', 'Fotografijos Redagavimas'),
       editServicePointClick: Editing.editModal('edit-service-point', 'Aptarnavimo Taško Redagavimas'),
-      servicePointContactClick: Editing.editModal('edit-service-point-contact', 'Redaguoti Kontaktą'),
+      contactClick: Editing.editModal('edit-service-point-contact', 'Redaguoti Kontaktą'),
       editServiceItemClick: Editing.editModal('edit-service-item', 'Redaguoti Įrenginį')
 
     });
@@ -111,6 +112,11 @@
       Editing.editModal('edit-service-contract', 'Sutarties Redagavimas')(vm.servicePoint.currentServiceContract);
     }
 
+    function personNameClick(ev, item) {
+      Editing.editModal('edit-person', 'Asmens Redagavimas')(item);
+      ev.stopPropagation();
+    }
+
     function onChangeFile(item) {
 
       if (item) {
@@ -172,6 +178,8 @@
 
       vm.rebindOne(ServicePoint, id, 'vm.servicePoint');
 
+      vm.rebindAll(ServicePointContact, {servicePointId: id}, 'vm.servicePointContacts', onServicePointContact);
+
       let relations = ['ServiceItem', 'ServicePointContact', 'Picture', 'ServiceContract', 'Location'];
 
       let busy = [
@@ -182,6 +190,22 @@
       ];
 
       vm.setBusy(busy);
+    }
+
+    function onServicePointContact() {
+
+      let contractPerson = _.get(vm.servicePoint, 'currentServiceContract.customerPerson');
+
+      vm.contactPersons = _.map(vm.servicePointContacts, c => {
+        return {person: c.person, servicePointContact: c};
+      });
+
+      if (contractPerson) {
+        vm.contactPersons.push({person: contractPerson});
+      }
+
+      console.log(vm.contactPersons);
+
     }
 
     function loadServicePointRelations(servicePoint) {
