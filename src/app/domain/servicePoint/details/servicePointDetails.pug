@@ -34,7 +34,7 @@
         .point-address {{vm.servicePoint.address}}
 
         .contract
-          .text-warning(ng-if='vm.servicePoint.currentServiceContractId === null') Nera aptarnavimo sutarties
+          .text-warning(ng-if='vm.servicePoint.currentServiceContractId === null') Nėra aptarnavimo sutarties
           a(
           href ng-click='vm.serviceContractClick()'
           ng-if='vm.servicePoint.currentServiceContract'
@@ -105,41 +105,35 @@
       .button-block
         button-add(button-click='vm.addContactClick()')
 
-
     .service-point-contacts
 
       .contact(
-      ng-if='vm.servicePoint.currentServiceContract.customerPersonId'
+      ng-repeat='contact in vm.contactPersons track by $index'
       )
-        span.name {{ vm.servicePoint.currentServiceContract.customerPerson.name }}
+        a.name(
+        href
+        ng-click='vm.personNameClick($event, contact.person)'
+        ) {{ contact.person.name }}
 
-        a.phone(
-        href='{{ vm.servicePoint.currentServiceContract.customerPerson.primaryPhone().href }}'
-        ng-click='$event.stopPropagation()'
-        ) {{ vm.servicePoint.currentServiceContract.customerPerson.primaryPhone().address | ltphone}}
+        .phones(ng-if='contact.person.allPhones().length')
+          span.title Telefonai
+          a(
+          ng-repeat='phone in contact.person.allPhones() track by $index'
+          ng-click='$event.stopPropagation()'
+          href='{{phone.href}}'
+          ) {{phone.address | ltphone}}
 
-        a.email(
-        ng-if='vm.servicePoint.currentServiceContract.customerPerson.primaryEmail()'
-        href='{{ vm.servicePoint.currentServiceContract.customerPerson.primaryEmail().href }}'
-        ng-click='$event.stopPropagation()'
-        ) {{ vm.servicePoint.currentServiceContract.customerPerson.primaryEmail().address }}
 
-      .contact(
-      ng-repeat='servicePointContact in vm.servicePoint.servicePointContacts track by servicePointContact.id'
-      ng-click='vm.servicePointContactClick(servicePointContact)'
-      )
-        span.name {{ servicePointContact.person.name }}
+        .emails(ng-if='contact.person.allEmails().length')
+          span.title El. paštai
+          a(
+          ng-repeat='email in contact.person.allEmails() track by $index'
+          ng-click='$event.stopPropagation()'
+          href='{{email.href}}'
+          ) {{email.address}}
 
-        a.phone(
-        href='{{servicePointContact.person.primaryPhone().href}}'
-        ng-click='$event.stopPropagation()'
-        ) {{ servicePointContact.person.primaryPhone().address | ltphone }}
-
-        a.email(
-        ng-if='servicePointContact.person.primaryEmail()'
-        href='{{ servicePointContact.person.primaryEmail().href }}'
-        ng-click='$event.stopPropagation()'
-        ) {{ servicePointContact.person.primaryEmail().address }}
+        .delete-btn(ng-if='contact.servicePointContact')
+          i.glyphicon.glyphicon-trash
 
   .items
 
