@@ -1,6 +1,9 @@
 @import "servicePointDetails";
+@import "../../../styles/variables";
 
 .service-point-details {
+
+  $border: 1px solid darken($border-gray, 5%);
 
   .contacts {
 
@@ -12,26 +15,47 @@
 
       .contact {
 
-        @extend %flex-column-nowrap;
+        flex-flow: column nowrap;
+        display: flex;
 
-        border: 1px solid darken($border-gray, 5%);
-        max-width: 160px;
+        border: $border;
         margin: 5px;
-        padding: 4px;
         background: lighten($gray-background-color, 10%);
 
-        > * {
-          outline: none;
-          max-width: 150px;
-          align-self: flex-end;
-          font-weight: bold;
+        a {
           @extend .ellipsis;
         }
 
-      }
+        .name {
+          font-size: 15px;
+          font-weight: bold;
+          text-transform: capitalize;
+          padding: 2px 4px;
+          border-bottom: $border;
+          width: 100%;
+        }
 
-      .contact:hover {
-        background: $hover-color;
+        .phones, .emails {
+          flex-flow: column nowrap;
+          display: flex;
+          padding: 2px 5px 5px 5px;
+          border-bottom: $border;
+          .title {
+            font-weight: bold;
+          }
+        }
+
+        .emails + .delete-btn {
+          border: none;
+        }
+
+        .delete-btn {
+          padding: 5px 0;
+          margin-top: auto;
+          border-top: $border;
+          text-align: center;
+        }
+
       }
 
     }
