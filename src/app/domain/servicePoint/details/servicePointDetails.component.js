@@ -8,7 +8,7 @@
 
   });
 
-  function servicePointDetailsController($scope, Schema, saControllerHelper, $state, Editing,
+  function servicePointDetailsController($scope, Schema, saControllerHelper, $state, Editing, $timeout,
                                          PictureHelper, GalleryHelper, NgMap, mapsHelper, GeoCoder, ServicePointMapModal) {
 
     const vm = saControllerHelper.setup(this, $scope)
@@ -25,6 +25,7 @@
       coords: {},
       divided: [],
       busyMap: true,
+      confirmDestroy: [],
 
       addContactClick,
       addServiceItemClick,
@@ -35,6 +36,7 @@
       serviceContractClick,
       mapClick,
       personNameClick,
+      deleteServicePointContactClick,
 
       editPhoto: Editing.editModal('edit-picture', 'Fotografijos Redagavimas'),
       editServicePointClick: Editing.editModal('edit-service-point', 'Aptarnavimo Taško Redagavimas'),
@@ -61,6 +63,21 @@
     /*
      Functions
      */
+
+    function deleteServicePointContactClick(item) {
+
+      let itemId = item.person.id;
+
+      vm.confirmDestroy[itemId] = !vm.confirmDestroy[itemId];
+
+      if (vm.confirmDestroy[itemId]) {
+        return $timeout(2000)
+          .then(() => delete vm.confirmDestroy[itemId]);
+      }
+
+      ServicePointContact.destroy(item.servicePointContact);
+
+    }
 
     function mapClick() {
 
@@ -118,19 +135,15 @@
     }
 
     function onChangeFile(item) {
-
       if (item) {
         vm.uploadingPicture = true;
         vm.pictureUpload(item);
       }
-
     }
 
     function photoClick(photo) {
-
       $scope.imagesAll = vm.servicePoint.pictures;
       vm.thumbnailClick(photo);
-
     }
 
     function pictureUpload(item) {

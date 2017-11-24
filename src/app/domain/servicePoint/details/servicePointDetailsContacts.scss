@@ -17,7 +17,6 @@
 
         flex-flow: column nowrap;
         display: flex;
-
         border: $border;
         margin: 5px;
         background: lighten($gray-background-color, 10%);
@@ -39,21 +38,22 @@
           flex-flow: column nowrap;
           display: flex;
           padding: 2px 5px 5px 5px;
-          border-bottom: $border;
+
           .title {
             font-weight: bold;
           }
         }
 
-        .emails + .delete-btn {
-          border: none;
-        }
-
         .delete-btn {
+          border-top: $border;
           padding: 5px 0;
           margin-top: auto;
-          border-top: $border;
           text-align: center;
+        }
+
+        .confirm-destroy {
+          background-color: $state-warning-bg;
+          color: $state-warning-text;
         }
 
       }

@@ -132,7 +132,11 @@
           href='{{email.href}}'
           ) {{email.address}}
 
-        .delete-btn(ng-if='contact.servicePointContact')
+        .delete-btn(
+        ng-if='contact.servicePointContact'
+        ng-click='vm.deleteServicePointContactClick(contact)'
+        ng-class='{"confirm-destroy" : vm.confirmDestroy[contact.person.id]}'
+        )
           i.glyphicon.glyphicon-trash
 
   .items

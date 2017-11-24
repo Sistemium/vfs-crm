@@ -122,7 +122,6 @@
             allEmails: getContacts(res.contacts, 'email')
           };
         });
-
     }
 
     function primaryAddress(contacts, code) {
