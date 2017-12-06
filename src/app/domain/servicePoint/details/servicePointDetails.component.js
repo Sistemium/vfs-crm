@@ -217,8 +217,6 @@
         vm.contactPersons.push({person: contractPerson});
       }
 
-      console.log(vm.contactPersons);
-
     }
 
     function loadServicePointRelations(servicePoint) {
