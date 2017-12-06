@@ -24,7 +24,10 @@
 
   button-add(button-click='vm.addClick()')
 
-.edit-block(ng-if='vm.newItem')
+.edit-block(
+ng-if='vm.newItem'
+ng-class='vm.newItem.isValid(vm.readyState) ? "vfs-valid" : "vfs-invalid"'
+)
 
   .title
 
