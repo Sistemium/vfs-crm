@@ -121,6 +121,10 @@ vfs-dropdown {
     box-shadow: $box-shadow;
     border-radius: $padding;
 
+    &.vfs-invalid .edit-block.vfs-invalid {
+      background-color: $state-warning-bg;
+    }
+
     .title {
 
       text-align: center;
