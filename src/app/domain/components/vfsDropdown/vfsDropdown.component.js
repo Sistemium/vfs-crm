@@ -257,22 +257,28 @@
 
       vm.rebindAll(vm.model, vm.filter || {}, 'vm.data', onSearch);
 
+      if (_.filter(vm.filter, val => _.isUndefined(val) || val === null).length) {
+        return setCurrentData();
+      }
+
       vm.model.findAll(vm.filter || {}, vm.options || {})
-        .then(() => {
-
-          let item = vm.currentId && vm.model.get(vm.currentId);
-
-          vm.currentItem = (item && _.matches(vm.filter)(item)) ? item : null;
-
-          if (vm.currentItem) {
-            vm.dropdownInput = vm.currentItem[vm.itemsNameProperty];
-          } else {
-            vm.currentId = null;
-            vm.dropdownInput = null;
-          }
-
-        })
+        .then(setCurrentData)
         .then(setDefault);
+
+    }
+
+    function setCurrentData() {
+
+      let item = vm.currentId && vm.model.get(vm.currentId);
+
+      vm.currentItem = (item && _.matches(vm.filter)(item)) ? item : null;
+
+      if (vm.currentItem) {
+        vm.dropdownInput = vm.currentItem[vm.itemsNameProperty];
+      } else {
+        vm.currentId = null;
+        vm.dropdownInput = null;
+      }
 
     }
 
