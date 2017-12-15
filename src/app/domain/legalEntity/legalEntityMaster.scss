@@ -4,8 +4,10 @@
 
   @extend %flex-table;
 
-  $width-name: 50%;
-  $width-code: 50%;
+  $width-name: 44%;
+  $width-code: 25%;
+  $width-email: 16%;
+  $width-phone: 15%;
 
   .headers {
     @extend %flex-table-headers;
@@ -22,6 +24,12 @@
     .code {
       width: $width-code;
     }
+    .email {
+      width: $width-email;
+    }
+    .phone {
+      width: $width-phone;
+    }
 
   }
 
@@ -35,7 +43,7 @@
 
       @extend %flex-table-item;
 
-      .name, .code {
+      .name, .code, .email, .phone {
         @extend .ellipsis;
       }
 

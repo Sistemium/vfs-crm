@@ -5,6 +5,8 @@
   .headers
     .name Pavadinimas
     .code Įmonės kodas
+    .email E-paštas
+    .phone Telefonas
 
   .scroll-y(
   resize
@@ -18,3 +20,14 @@
 
       .name {{ legalEntity.name }}
       .code {{ legalEntity.code }}
+      .email
+        a(
+        href='{{ legalEntity.primaryEmail().href }}'
+        ng-click='$event.stopPropagation()'
+        ) {{ legalEntity.primaryEmail().address }}
+
+      .phone
+        a(
+        href='{{ legalEntity.primaryPhone().href }}'
+        ng-click='$event.stopPropagation()'
+        ) {{ legalEntity.primaryPhone().address | ltphone }}

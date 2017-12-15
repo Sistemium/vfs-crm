@@ -11,9 +11,42 @@
       )
 
     .code
-      label(for='code') Imonės kodas
+      label(for='code') Įmonės kodas
       input#code.form-control(
       autocomplete='off'
-      placeholder='Imonės kodas'
+      placeholder='Įmonės kodas'
       ng-model='vm.legalEntity.code'
       )
+
+    .contact-method(
+    ng-repeat='contactMethod in vm.contactMethods track by contactMethod.id'
+    ng-class='[contactMethod.code, {"input-error": vm.errorsByCode[contactMethod.code]}]'
+    )
+      label(for='{{contactMethod.code}}') {{contactMethod.name}}
+
+      input.form-control(
+      id='{{contactMethod.code}}'
+      required
+      autocomplete='off'
+      placeholder='{{contactMethod.code === "email" ? contactMethod.name : ""}}'
+      ng-model='vm[contactMethod.code]'
+      data-ui-options='vm.maskOptions'
+      ng-paste='vm.onPaste(contactMethod)'
+      ui-mask='{{ vm.currentInputMask(contactMethod) }}'
+      ng-keypress='vm.onEnterPress($event, contactMethod)'
+      ng-blur='vm.onInputBlur(contactMethod)'
+      )
+
+      .contacts
+        .contact(
+        ng-repeat='item in vm.contactsByCode[contactMethod.code] track by $index'
+        ng-class='{"confirm-destroy" : vm.confirmDestroy[item.address]}'
+        )
+
+          span {{ contactMethod.code === 'phone' ? (item.address | ltphone) : item.address }}
+
+          a(
+          href
+          ng-click='vm.deleteContactClick(item, contactMethod.code)'
+          )
+            i.glyphicon.glyphicon-remove
