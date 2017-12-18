@@ -107,7 +107,7 @@
 
       if (!locality) return null;
 
-      return `${locality.name}${street ? ', ' + street.name : ''}${house ? ', ' + house : ''}`;
+      return `${locality.name}${street ? ', ' + street.name : ''}${house ? ' ' + house : ''}`;
 
     }
 
