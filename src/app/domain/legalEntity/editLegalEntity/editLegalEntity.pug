@@ -38,6 +38,10 @@
       )
 
       .contacts
+
+        //.contact.placeholder(ng-if='!vm.contactsByCode[contactMethod.code].length')
+          //| Čia bus rodomi telefonų numerius
+
         .contact(
         ng-repeat='item in vm.contactsByCode[contactMethod.code] track by $index'
         ng-class='{"confirm-destroy" : vm.confirmDestroy[item.address]}'
