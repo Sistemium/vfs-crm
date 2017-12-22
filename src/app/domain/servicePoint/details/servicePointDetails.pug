@@ -6,7 +6,7 @@
 
       .service-point-map
 
-        .loading-spinner(ng-if='vm.busy')
+        .loading-spinner(ng-if='vm.busy || vm.coordsSearch')
           .uil-ripple-css
             div
 
@@ -14,7 +14,7 @@
         ng-class='{"no-geolocation": vm.noGeoPosition}'
         center='[{{vm.coords.lat}}, {{vm.coords.lng}}]'
         id='smallMap'
-        ng-if='vm.googleReady'
+        ng-if='vm.googleReady && !vm.coordsSearch'
         disable-default-u-i='true'
         zoom='13'
         min-zoom='13'
@@ -37,7 +37,7 @@
           .text-warning(ng-if='vm.servicePoint.currentServiceContractId === null') Nėra aptarnavimo sutarties
           a(
           href ng-click='vm.serviceContractClick()'
-          ng-if='vm.servicePoint.currentServiceContract'
+          ng-if='vm.servicePoint.currentServiceContractId'
           ) {{vm.servicePoint.currentServiceContract.name}}
 
     .button-block
@@ -79,7 +79,9 @@
 
           .progress-info
             .loading-spinner(
-            ng-if='vm.progress.uploading.loaded === vm.progress.uploading.total && vm.progress.uploading.loaded && vm.uploadingPicture'
+            ng-if=
+            'vm.progress.uploading.loaded === vm.progress.uploading.total &&' +
+            'vm.progress.uploading.loaded && vm.uploadingPicture'
             )
               .uil-ripple-css
                 div

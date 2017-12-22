@@ -5,7 +5,7 @@
   angular.module('webPage')
     .service('ServicePointMapModal', ServicePointMapModal);
 
-  function ServicePointMapModal(MapModal, Schema, NgMap) {
+  function ServicePointMapModal(MapModal, Schema, NgMap, $rootScope) {
 
     const {Location} = Schema.models();
 
@@ -56,9 +56,17 @@
 
         NgMap.getMap('largeMap')
           .then((map) => {
+
+            if (vm.defaultCoords.lat === vm.coordsCopy.lat && vm.defaultCoords.lng === vm.coordsCopy.lng) {
+              vm.zoom = 7;
+            } else {
+              vm.zoom = 15;
+            }
+
             map.setCenter(vm.coordsCopy);
             vm.marker.coords = vm.coordsCopy;
             vm.marker.isDraggable = false;
+
             vm.inputAddress = null;
             vm.coordsCopy = null;
 
@@ -78,7 +86,7 @@
           longitude: vm.marker.coords.lng,
           latitude: vm.marker.coords.lat,
           altitude: 0,
-          source: 'user',
+          source: 'User',
           ownerXid: servicePoint.id,
           timestamp: new Date()
         };
@@ -92,9 +100,12 @@
             servicePoint.locationId = savedLocation.id;
             servicePoint.DSCreate();
 
+            $rootScope.$broadcast('onLocationChange');
+
             vm.marker.isDraggable = false;
             vm.inputAddress = null;
             vm.coordsCopy = null;
+            vm.noGeoPosition = false;
 
             vm.toggleButton('btn-success', false);
             vm.toggleButton('btn-danger', false);

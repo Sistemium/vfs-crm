@@ -40,14 +40,13 @@
 
         _.assign(vm, {
 
-          // TODO: save zoom to localStorage and restore
-
           zoom: zoom || 15,
           buttons,
           title,
           mapCenter: coords,
           searchingAddress: null,
           coordsCopy: null,
+          defaultCoords: {lng: 23.897, lat: 55.322},
 
           marker: {
             coords,
@@ -119,6 +118,8 @@
 
           NgMap.getMap('largeMap')
             .then(map => {
+
+              vm.zoom = 15;
 
               if (!vm.coordsCopy)
                 vm.coordsCopy = _.clone(vm.marker.coords);

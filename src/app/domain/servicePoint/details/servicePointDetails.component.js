@@ -8,31 +8,35 @@
 
   });
 
-  function servicePointDetailsController($scope, Schema, saControllerHelper, $state, Editing, $timeout,
-                                         PictureHelper, GalleryHelper, NgMap, mapsHelper, GeoCoder, ServicePointMapModal) {
+  function servicePointDetailsController($scope, Schema, saControllerHelper, $state, Editing, $timeout, PictureHelper, GalleryHelper, NgMap, mapsHelper, GeoCoder, ServicePointMapModal, $q) {
 
     const vm = saControllerHelper.setup(this, $scope)
       .use(GalleryHelper);
 
-    const {ServicePoint, FilterSystem, Brand, Person, ServiceItem, ServicePointContact, Picture, Location} = Schema.models();
+    const {
+      ServicePoint, FilterSystem, Brand, Person, ServiceItem, ServicePointContact, Picture, Location
+    } = Schema.models();
+
+    const defaultCoords = {lng: 23.897, lat: 55.322};
 
     vm.use({
 
       isOpenEditPopover: {},
       tileBusy: {},
       progress: {},
-      uploadingPicture: false,
       coords: {},
+
       divided: [],
-      busyMap: true,
       confirmDestroy: [],
+
+      uploadingPicture: false,
+      noGeoPosition: true,
 
       addContactClick,
       addServiceItemClick,
       onChangeFile,
       pictureUpload,
       photoClick,
-      $onInit,
       serviceContractClick,
       mapClick,
       personNameClick,
@@ -56,6 +60,14 @@
       if (nv !== ov) {
         vm.coords.lat = vm.servicePoint.location.latitude;
         vm.coords.lng = vm.servicePoint.location.longitude;
+      }
+
+    });
+
+    $scope.$on('onLocationChange', () => {
+
+      if (vm.noGeoPosition) {
+        vm.noGeoPosition = false;
       }
 
     });
@@ -93,35 +105,17 @@
           }
         })
       } else {
-        _.assign(mapModelConfig, {coords: {lng: 23.897, lat: 55.322}}, {zoom: 7}, {noGeo: vm.noGeoPosition});
+        _.assign(mapModelConfig, {
+          coords: {
+            lng: defaultCoords.lng,
+            lat: defaultCoords.lat
+          }
+        }, {zoom: 7}, {noGeo: vm.noGeoPosition});
       }
 
-      let instance = ServicePointMapModal.open(mapModelConfig);
+      let instance = ServicePointMapModal.open(mapModelConfig, vm.noGeoPosition);
 
       instance.result.then(_.noop, _.noop);
-
-    }
-
-    function $onInit() {
-      vm.watchScope('vm.servicePoint.id', (nv) => {
-
-        if (!nv) {
-          return;
-        }
-
-        let {address} = vm.servicePoint;
-
-        //TODO: Fix map onLoad coords
-
-        if (!address || !vm.googleReady) {
-          return;
-        }
-
-        vm.divided = address.split(',');
-
-        positionMarker(vm.divided);
-
-      });
 
     }
 
@@ -193,13 +187,19 @@
 
       vm.rebindAll(ServicePointContact, {servicePointId: id}, 'vm.servicePointContacts', onServicePointContact);
 
-      let relations = ['ServiceItem', 'ServicePointContact', 'Picture', 'ServiceContract', 'Location'];
+      let relations = ['ServiceItem', 'ServicePointContact', 'Picture', 'ServiceContract', 'Location', 'Locality'];
 
       let busy = [
         ServicePoint.findAllWithRelations({id}, {bypassCache: true})(relations)
-          .then(_.first)
-          .then(loadServicePointRelations)
-          .then(loadGoogleScript)
+          .then((res) => {
+
+            let servicePoint = _.first(res);
+
+            $q.all([loadServicePointRelations(servicePoint), loadLocalityRelation(servicePoint)]).then(() => {
+              loadGoogleScript();
+            })
+
+          })
       ];
 
       vm.setBusy(busy);
@@ -221,99 +221,151 @@
 
     function loadServicePointRelations(servicePoint) {
 
-      _.result(servicePoint, 'currentServiceContract.DSLoadRelations');
+      if (!_.get(servicePoint, 'currentServiceContract')) {
+        _.result(servicePoint, 'currentServiceContract.DSLoadRelations');
+      }
 
-      _.each(servicePoint.servingItems, serviceItem => {
-        serviceItem.DSLoadRelations();
-      });
+      if (_.get(servicePoint, 'servingItems')) {
+
+        return $q.all(_.map(servicePoint.servingItems, serviceItem => {
+          return serviceItem.DSLoadRelations(['ServiceContract', 'ServiceContractItem', 'currentServiceContract']);
+        }));
+
+      }
+
+      return $q.resolve();
 
     }
 
     function noCoords() {
-      vm.coords.lat = 55.322;
-      vm.coords.lng = 23.897;
-      vm.noGeoPosition = true;
-      vm.busyMap = false;
+      vm.coords.lat = defaultCoords.lat;
+      vm.coords.lng = defaultCoords.lng;
+    }
+
+    function loadLocalityRelation(servicePoint) {
+
+      let locality = _.get(servicePoint, 'locality');
+
+      if (!locality) {
+        return $q.resolve();
+      }
+
+      return locality.DSLoadRelations('District');
+
     }
 
     function positionMarker() {
 
-      return GeoCoder.geocode({'address': vm.divided.join(' ')})
+      console.warn('Searching address', vm.divided.join(' '));
+
+      vm.coordsSearch = true;
+
+      GeoCoder.geocode({'address': vm.divided.join(' ')})
         .then(result => {
 
           let locationData = {
             longitude: result[0].geometry.location.lng(),
             latitude: result[0].geometry.location.lat(),
             altitude: 0,
-            source: 'geoCoder',
+            source: 'GeoCoder',
             ownerXid: vm.servicePoint.id,
             timestamp: new Date()
           };
-
-          vm.busyMap = false;
 
           Location.create(locationData)
             .then(savedLocation => {
 
               vm.servicePoint.locationId = savedLocation.id;
               vm.servicePoint.DSCreate();
-              loadGeoPosition();
+              assignCoords();
+              loadMap();
+              vm.noGeoPosition = false;
 
             })
             .catch((err) => {
-              console.error(err, 'whlie saving location');
+              console.error(err, 'while saving location');
               noCoords();
-            });
+            })
+            .finally(() => {
+              vm.coordsSearch = false;
+            })
 
         })
         .catch(() => {
-          if (vm.divided.length) {
+
+          if (vm.divided.length > 1) {
             vm.divided.pop();
             positionMarker();
           } else {
-            noCoords();
+            vm.coordsSearch = false;
           }
+
         })
 
     }
 
     function loadGoogleScript() {
-      mapsHelper.loadGoogleScript().then(() => {
-        vm.googleReady = true;
-        loadGeoPosition();
-      });
+
+      mapsHelper.loadGoogleScript()
+        .then(() => {
+          vm.googleReady = true;
+          loadGeoPosition();
+        });
+
+    }
+
+    function assignCoords() {
+      _.assign(vm.coords, {lat: vm.servicePoint.location.latitude});
+      _.assign(vm.coords, {lng: vm.servicePoint.location.longitude});
     }
 
     function loadGeoPosition() {
 
       if (_.get(vm.servicePoint, 'location')) {
-        _.assign(vm.coords, {lat: vm.servicePoint.location.latitude});
-        _.assign(vm.coords, {lng: vm.servicePoint.location.longitude});
+
+        assignCoords();
         loadMap();
+        vm.noGeoPosition = false;
+
       } else {
-        getGeoByAddress();
+
+        let {address} = vm.servicePoint;
+
+        if (!address) {
+          return;
+        }
+
+        let {locality} = vm.servicePoint;
+
+        let district = _.get(locality, 'district.name');
+
+        address = district + ', ' + address;
+
+        vm.divided = address.split(', ');
+
+        if (vm.divided.length === 3) {
+
+          let streetAndHouseNumber = _.last(vm.divided);
+
+          let streetAndHouseSeparated = streetAndHouseNumber.split(/ (?=[^ ]*$)/);
+
+          vm.divided.pop();
+          vm.divided.push(...streetAndHouseSeparated);
+        }
+
+        positionMarker();
+        noCoords();
+
       }
 
     }
 
     function loadMap() {
 
-      vm.busyMap = false;
-
       NgMap.getMap('smallMap')
         .then(map => {
           vm.map = map;
         })
-    }
-
-    function getGeoByAddress() {
-
-      positionMarker()
-        .then(() => {
-        })
-        .catch((err) => {
-          console.err(err, 'positionMarker catch')
-        });
     }
 
   }
