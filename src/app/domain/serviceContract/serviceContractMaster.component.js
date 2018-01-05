@@ -28,10 +28,6 @@
 
     refresh();
 
-    $scope.$on('$stateChangeStart', () => {
-      Editing.closeModal();
-    });
-
     /*
      Functions
      */
@@ -39,7 +35,7 @@
     function addClick() {
       Editing.editModal('edit-service-contract', 'Nauja Sutartis')(ServiceContract.createInstance());
     }
-    
+
 
     function onSearch() {
 

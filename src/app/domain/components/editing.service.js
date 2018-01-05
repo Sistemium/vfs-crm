@@ -153,6 +153,7 @@ save-fn="vm.saveFn" ready-state="vm.readyState"></${componentName}>` +
           }
         });
 
+
       return me.modal.result;
 
       function controller($scope) {
@@ -162,6 +163,8 @@ save-fn="vm.saveFn" ready-state="vm.readyState"></${componentName}>` +
         };
 
         $scope.vm = vm;
+
+        $scope.$on('$stateChangeSuccess', closeModal);
 
         setupController(vm);
 
