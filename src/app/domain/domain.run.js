@@ -3,7 +3,7 @@
   angular.module('webPage')
     .run((Schema, $rootScope) => {
 
-      $rootScope.$on('authorized', () => {
+      $rootScope.$on('socket:authorized', () => {
 
         const {Site, FilterSystemType, ContactMethod} = Schema.models();
 

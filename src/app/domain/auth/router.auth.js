@@ -7,7 +7,7 @@
 
     $rootScope.$on('$stateChangeStart', $stateChangeStart);
 
-    let pengingAuth;
+    let pendingAuth;
 
     function $stateChangeStart(event, to, params) {
 
@@ -20,6 +20,7 @@
       event.preventDefault();
 
       if (!accessToken) {
+        console.warn('Redirecting to login state');
         return $state.go('login');
       }
 
@@ -29,10 +30,10 @@
 
     function authorize(accessToken, to, params) {
 
-      pengingAuth = pengingAuth || Auth.login(accessToken)
+      pendingAuth = pendingAuth || Auth.login(accessToken)
         .then(res => {
 
-          pengingAuth = false;
+          pendingAuth = false;
 
           let roles = _.map(_.get(_.first(res.orgAccounts), 'orgAccountRoles'), 'role.code');
 
@@ -44,7 +45,7 @@
         })
         .catch(err => {
 
-          pengingAuth = false;
+          pendingAuth = false;
 
           toastr.error(angular.toJson(err), 'Autentifikavimo klaida');
           console.error(err);
@@ -53,7 +54,7 @@
 
         });
 
-      return pengingAuth;
+      return pendingAuth;
 
     }
 

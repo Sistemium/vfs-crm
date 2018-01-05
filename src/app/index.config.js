@@ -21,7 +21,7 @@
     return saDebug.log('stg:log');
   }
 
-  function run(Sockets, InitService, $rootScope, IOS, localStorageService, DEBUG) {
+  function run(Sockets, InitService, $rootScope, IOS, localStorageService, DEBUG, Auth) {
 
     InitService
       .then(Sockets.init)
@@ -30,11 +30,15 @@
 
     // Auth.init(IOS.isIos() ? IOS.init() : phaService).then();
 
-    function afterAuth(authorization) {
+    $rootScope.$on('logged-in', afterAuth);
 
-      console.log('Auth', authorization);
+    /*
+    Functions
+     */
 
-      let socket = InitService.localDevMode ? 'socket2' : 'socket';
+    function afterAuth() {
+
+      let socket = 'socket3';
 
       let appConfig = {
         url: {
@@ -56,18 +60,25 @@
 
       function sockAuth() {
 
-        let accessToken = 'token-1';
+        let accessToken = Auth.getToken();
 
-        Sockets.emit('authorization', {accessToken: accessToken}, function (ack) {
+        if (!accessToken) {
+          console.error('sockAuth no token');
+          return;
+        }
+
+        // if (!IOS.isIos() && !InitService.localDevMode) {
+        //   appcache.checkUpdate();
+        // }
+
+        Sockets.emit('authorization', {accessToken}, function (ack) {
           DEBUG('Socket authorization:', ack);
-          $rootScope.$broadcast('authorized')
+          $rootScope.$broadcast('socket:authorized')
         });
 
       }
 
     }
-
-    afterAuth({});
 
   }
 
