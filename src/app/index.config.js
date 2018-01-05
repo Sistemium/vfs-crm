@@ -46,7 +46,7 @@
         }
       };
 
-      let org = 'vfs';
+      let org = `vfs${ InitService.localDevMode ? '' : 'd' }`;
 
       if (!IOS.isIos()) {
         angular.extend(appConfig, {
