@@ -28,7 +28,7 @@
 
     function $onInit() {
 
-      if (vm.serviceContract.siteId) {
+      if (vm.serviceContract.hasOwnProperty('siteId')) {
         vm.hideSite = true;
       }
 
