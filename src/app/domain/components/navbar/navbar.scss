@@ -4,7 +4,8 @@
 
   @extend %flex-center;
 
-  margin: $margin-bottom-xs 0;
+  //margin-top: $margin-bottom-xs;
+  margin-bottom: $margin-bottom-xs;
   height: 37px;
 
   > .separator {

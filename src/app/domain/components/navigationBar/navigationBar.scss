@@ -6,9 +6,9 @@
 
   justify-content: space-between;
 
-  box-shadow: $box-shadow;
+  //box-shadow: $box-shadow;
   height: 50px;
-  padding: 0 10px;
+  //padding: 0 10px;
   margin-bottom: 20px;
 
   .navigation {
@@ -19,7 +19,7 @@
 
     .buttons {
 
-      margin: 0 10px;
+      //margin-right: $margin-bottom-xs / 2;
 
       .active {
         cursor: pointer;
@@ -61,7 +61,7 @@
 
     .buttons {
 
-      margin-left: 10px;
+      margin-left: $margin-bottom-xs;
 
       button {
         padding: 6px 8.5px;
