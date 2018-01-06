@@ -85,7 +85,7 @@
 
       onFilter();
 
-      if (vm.autoNew) {
+      if (vm.autoNew && !vm.currentId) {
         addClick();
       }
 
@@ -261,6 +261,8 @@
     function onFilter() {
 
       vm.rebindAll(vm.model, vm.filter || {}, 'vm.data', onSearch);
+
+      _.assign(vm.newItem, vm.filter);
 
       if (_.filter(vm.filter, val => _.isUndefined(val) || val === null).length) {
         return setCurrentData();
