@@ -17,25 +17,12 @@
 
     const {login} = auth;
 
-    auth.loginPromise = $q(resolve => {
-
-      $rootScope.$on('socket:authorized', (res) => {
-
-        console.info('socket:authorized', res);
-
-        resolve(res);
-
-      });
-
-    });
-
+    const socketAuth = $q(resolve => $rootScope.$on('socket:authorized', resolve));
 
     auth.login = (token) => {
 
       return login(token)
-        .then(res => {
-          return auth.loginPromise.then(() => res);
-        });
+        .then(authorization => socketAuth.then(() => authorization));
 
     };
 
