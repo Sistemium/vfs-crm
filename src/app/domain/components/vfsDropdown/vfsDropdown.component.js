@@ -11,7 +11,8 @@
       itemsGroupProperty: '@',
       filter: '=',
       placement: '@',
-      readyState: '=?'
+      readyState: '=?',
+      autoNew: '@'
     },
 
     templateUrl: 'app/domain/components/vfsDropdown/vfsDropdown.html',
@@ -83,6 +84,10 @@
       vm.readyState.save = vm.saveClick;
 
       onFilter();
+
+      if (vm.autoNew) {
+        addClick();
+      }
 
     }
 
