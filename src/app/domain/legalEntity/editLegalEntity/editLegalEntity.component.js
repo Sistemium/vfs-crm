@@ -238,7 +238,6 @@
       toggleErrorClass(code);
 
       if (!address) {
-        console.warn('addAddress empty');
         return;
       }
 
