@@ -6,7 +6,7 @@ vfs-dropdown {
   $border-color: #ccc;
   $height: 32px;
 
-  .vfs-invalid.edit-block .title {
+  .vfs-invalid.edit-block > .title {
     color: $red;
   }
 
@@ -126,7 +126,7 @@ vfs-dropdown {
     border-radius: $padding;
 
     &.vfs-invalid .edit-block.vfs-invalid {
-      background-color: $state-warning-bg;
+      //background-color: $state-warning-bg;
     }
 
     .title {
