@@ -124,20 +124,7 @@
       me.modal = $uibModal.open({
 
         animation: true,
-        template: `<div class="editing modal-header">` +
-        `  <h1>{{vm.title}}</h1>` +
-        `  <a href class="close-btn" ng-click="vm.cancelClick()"><i 
-class="glyphicon glyphicon-remove"></i></a>` +
-        `</div>` +
-        `<div class="modal-body">` +
-        `<${componentName} ng-model="vm.item" has-changes="vm.componentHasChanges" is-valid="vm.componentIsValid"
-save-fn="vm.saveFn" ready-state="vm.readyState"></${componentName}>` +
-        `</div>` +
-        `<div class="modal-footer">` +
-        (item.id ? `  <button class="btn destroy" ng-class="vm.confirmDestroy ? 'btn-danger' : 'btn-default'" ng-click="vm.destroyClick()">Ištrinti</button>` : '') +
-        `  <button class="btn btn-success save animate-show" ng-show="vm.hasChanges()" ng-disabled="!vm.isReady()" ng-click="vm.saveFormDataClick(vm.readyState)">Išsaugoti</button>` +
-        `  <button class="btn btn-default cancel" ng-click="vm.cancelClick()">Atšaukti</button>` +
-        `</div>`,
+        templateUrl: 'app/domain/components/editing/editing.modal.html',
         size: 'lg',
 
         controller,
@@ -159,6 +146,7 @@ save-fn="vm.saveFn" ready-state="vm.readyState"></${componentName}>` +
       function controller($scope) {
 
         const vm = {
+          componentName,
           readyState: {}
         };
 

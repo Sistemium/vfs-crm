@@ -1,0 +1,34 @@
+.editing.modal-header
+
+  h1 {{vm.title}}
+
+  a.close-btn(href='', ng-click='vm.cancelClick()')
+    i.glyphicon.glyphicon-remove
+
+.modal-body
+  transform-to-component(
+  component-name='{{vm.componentName}}'
+  ng-model='vm.item'
+  has-changes='vm.componentHasChanges'
+  is-valid='vm.componentIsValid'
+  save-fn='vm.saveFn'
+  ready-state='vm.readyState'
+  )
+
+.modal-footer
+
+  button.btn.destroy(
+  ng-if='vm.item.id'
+  ng-class="vm.confirmDestroy ? 'btn-danger' : 'btn-default'"
+  ng-click='vm.destroyClick()'
+  ) Ištrinti
+
+  button.btn.btn-success.save.animate-show(
+  ng-show='vm.hasChanges()'
+  ng-disabled='!vm.isReady()'
+  ng-click='vm.saveFormDataClick(vm.readyState)'
+  ) Išsaugoti
+
+  button.btn.btn-default.cancel(
+  ng-click='vm.cancelClick()'
+  ) Atšaukti
