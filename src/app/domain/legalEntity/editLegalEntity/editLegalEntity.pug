@@ -6,7 +6,8 @@
       label(for='name') Pavadinimas
       input#name.form-control(
       autocomplete='off'
-      placeholder='Pavadinimas'
+      required
+      placeholder='Privaloma'
       ng-model='vm.legalEntity.name'
       )
 
@@ -14,7 +15,6 @@
       label(for='code') Įmonės kodas
       input#code.form-control(
       autocomplete='off'
-      placeholder='Įmonės kodas'
       ng-model='vm.legalEntity.code'
       )
 
@@ -26,7 +26,6 @@
 
       input.form-control(
       id='{{contactMethod.code}}'
-      required
       autocomplete='off'
       placeholder='{{contactMethod.code === "email" ? contactMethod.name : ""}}'
       ng-model='vm[contactMethod.code]'

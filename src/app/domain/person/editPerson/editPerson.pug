@@ -9,7 +9,7 @@
       required
       auto-focus
       autocomplete='off'
-      placeholder='Vardas'
+      placeholder='Privaloma'
       ng-model='vm.person.firstName'
       )
 
@@ -20,7 +20,7 @@
       input#last-name.form-control(
       required
       autocomplete='off'
-      placeholder='Pavardė'
+      placeholder='Privaloma'
       ng-model='vm.person.lastName'
       )
 
@@ -28,9 +28,7 @@
       label(for='code') Asmens Kodas
 
       input#code.form-control(
-      required
       autocomplete='off'
-      placeholder='Asmens Kodas'
       ng-model='vm.person.code'
       )
 
@@ -42,7 +40,6 @@
 
       input.form-control(
       id='{{contactMethod.code}}'
-      required
       autocomplete='off'
       placeholder='{{contactMethod.code === "email" ? contactMethod.name : ""}}'
       ng-model='vm[contactMethod.code]'

@@ -16,14 +16,17 @@
 
       .date-picker
         label Data
-        sab-date-picker-input(value='vm.serviceContract.date')
+        sab-date-picker-input(
+        ng-required='true'
+        value='vm.serviceContract.date'
+        )
 
       .num
         label(for='num') Numeris
         input#num.form-control(
         required
         autocomplete='off'
-        placeholder='Numeris'
+        placeholder='Privaloma'
         ng-model='vm.serviceContract.num'
         )
 
