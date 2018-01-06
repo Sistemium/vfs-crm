@@ -29,6 +29,7 @@
   ng-click='vm.saveFormDataClick(vm.readyState)'
   ) Išsaugoti
 
-  button.btn.btn-default.cancel(
+  button.btn.cancel(
+  ng-class='vm.hasChanges() ? "btn-warning" : "btn-primary"'
   ng-click='vm.cancelClick()'
-  ) Atšaukti
+  ) {{ vm.hasChanges() ? 'Atšaukti' : 'Uždaryti' }}

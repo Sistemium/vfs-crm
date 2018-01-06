@@ -1,9 +1,10 @@
+@import "variables";
+
 form {
   input.ng-touched.ng-invalid {
     border-color: red;
   }
 }
-
 
 
 .form-group.form-group-switch {

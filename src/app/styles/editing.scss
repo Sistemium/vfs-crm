@@ -15,6 +15,21 @@
 
 %editing-with-form {
 
+
+  .ng-touched.ng-invalid {
+
+    border: solid 1px $red;
+
+    &::placeholder {
+      color: $red;
+    }
+
+    &:focus {
+      box-shadow: 0 0 8px opacify($red, 0.2);
+    }
+
+  }
+
   $margin: 5px;
 
   > form, > .form {

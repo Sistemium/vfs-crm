@@ -6,6 +6,10 @@ vfs-dropdown {
   $border-color: #ccc;
   $height: 32px;
 
+  .vfs-invalid.edit-block .title {
+    color: $red;
+  }
+
   .popover {
     min-width: 340px;
     width: 90%;
