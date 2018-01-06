@@ -24,7 +24,7 @@ $dark-blue: darken($blue, 10%);
 $gray: gray;
 $dark-gray: darken($gray, 8%);
 //$red: red;
-$red: rgb(247, 143, 143);
+$red: darken(rgb(247, 143, 143), 15%);
 $white: #fff;
 $purple: #F8F8FF;
 //$warn: #f0ad4e;
