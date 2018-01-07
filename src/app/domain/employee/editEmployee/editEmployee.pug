@@ -2,7 +2,7 @@
 
   .form
 
-    .site
+    .site(ng-if='vm.employee.id')
 
       label Padalinys
 
@@ -17,6 +17,7 @@
       label Asmuo
 
       vfs-dropdown(
+      auto-new='true'
       items-data-source-name='Person'
       ng-model='vm.employee.personId'
       ready-state='vm.readyState.personId'

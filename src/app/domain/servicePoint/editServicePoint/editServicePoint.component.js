@@ -14,19 +14,29 @@
 
   });
 
-  function editServicePointController(saControllerHelper, $scope, ReadyStateHelper) {
+  function editServicePointController(saControllerHelper, $scope, ReadyStateHelper, Schema) {
 
-    ReadyStateHelper.setupController(this, $scope, 'servicePoint');
-    const vm = saControllerHelper.setup(this, $scope);
+    const {Site} = Schema.models();
+
+    const vm = ReadyStateHelper.setupController(this, $scope, 'servicePoint');
 
     vm.use({
       $onInit,
       newItem: {}
     });
 
+
+    /*
+    Functions
+     */
+
     function $onInit() {
 
       let {servicePoint} = vm;
+
+      if (servicePoint && !servicePoint.id) {
+        servicePoint.siteId = _.get(Site.meta.getCurrent(), 'id');
+      }
 
       servicePoint && servicePoint.DSLoadRelations(['Street', 'Locality'])
         .then(() => servicePoint.locality && servicePoint.locality.DSLoadRelations())

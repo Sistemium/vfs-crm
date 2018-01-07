@@ -28,13 +28,18 @@
 
     function $onInit() {
 
-      if (vm.serviceContract.hasOwnProperty('siteId')) {
+      const {serviceContract} = vm;
+      const {Brand, FilterSystemType, FilterSystem, Site} = Schema.models();
+
+
+      if (!serviceContract.id && serviceContract.hasOwnProperty('siteId')) {
+        vm.hideSite = true;
+      } else if (serviceContract && !serviceContract.id) {
+        serviceContract.siteId = _.get(Site.meta.getCurrent(), 'id');
         vm.hideSite = true;
       }
 
-      vm.legalType = vm.serviceContract.legalType;
-
-      const {Brand, FilterSystemType, FilterSystem} = Schema.models();
+      vm.legalType = serviceContract.legalType;
 
       vm.serviceContract.DSLoadRelations()
         .then(serviceContract => {
