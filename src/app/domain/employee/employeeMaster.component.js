@@ -12,13 +12,13 @@
 
     const vm = saControllerHelper.setup(this, $scope);
 
-    const {Employee, Person, Picture} = Schema.models();
+    const {Employee, Person, Picture, Site} = Schema.models();
 
     vm.use({
       addClick
     });
 
-    vm.rebindAll(Employee, {}, 'vm.data', onSearch);
+    vm.watchScope(() => _.get(Site.meta.getCurrent(), 'id'), onSiteChange);
 
     vm.watchScope('vm.searchText', onSearch);
 
@@ -27,6 +27,20 @@
     /*
      Functions
      */
+
+    function onSiteChange(siteId) {
+
+      vm.siteId = siteId;
+
+      let filter = {};
+
+      if (siteId) {
+        filter.siteId = siteId;
+      }
+
+      vm.rebindAll(Employee, filter, 'vm.data', onSearch);
+
+    }
 
     function addClick() {
       Editing.editModal('edit-employee', 'Naujas Darbuotojas')(Employee.createInstance())

@@ -12,7 +12,7 @@
 
     const vm = saControllerHelper.setup(this, $scope);
 
-    const {ServiceContract, Person, LegalEntity} = Schema.models();
+    const {ServiceContract, Person, LegalEntity, Site} = Schema.models();
 
     vm.use({
 
@@ -23,14 +23,28 @@
 
     });
 
-    vm.rebindAll(ServiceContract, {}, 'vm.serviceContracts', onSearch);
     vm.watchScope('vm.searchText', onSearch);
+    vm.watchScope(() => _.get(Site.meta.getCurrent(), 'id'), onSiteChange);
 
     refresh();
 
     /*
      Functions
      */
+
+    function onSiteChange(siteId) {
+
+      vm.siteId = siteId;
+
+      let filter = {};
+
+      if (siteId) {
+        filter.siteId = siteId;
+      }
+
+      vm.rebindAll(ServiceContract, filter, 'vm.serviceContracts', onSearch);
+
+    }
 
     function addClick() {
       Editing.editModal('edit-service-contract', 'Nauja Sutartis')(ServiceContract.createInstance());

@@ -12,7 +12,7 @@
 
     const vm = saControllerHelper.setup(this, $scope);
 
-    const {Employee, ServicePoint, ServiceContract, Person, LegalEntity} = Schema.models();
+    const {Employee, ServicePoint, ServiceContract, Person, LegalEntity, Site} = Schema.models();
 
     vm.use({
       servicePointClick,
@@ -21,15 +21,28 @@
     });
 
     vm.watchScope('vm.searchText', onSearch);
+    vm.watchScope(() => _.get(Site.meta.getCurrent(), 'id'), onSiteChange);
 
     onStateChange($state.current, $state.params);
     refresh();
 
-    vm.rebindAll(ServicePoint, {}, 'vm.data', onSearch);
-
     /*
      Functions
      */
+
+    function onSiteChange(siteId) {
+
+      vm.siteId = siteId;
+
+      let filter = {};
+
+      if (siteId) {
+        filter.siteId = siteId;
+      }
+
+      vm.rebindAll(ServicePoint, filter, 'vm.data', onSearch);
+
+    }
 
     function addClick() {
       Editing.editModal('edit-service-point', 'Naujas Taškas')(ServicePoint.createInstance())
