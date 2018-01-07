@@ -1,0 +1,22 @@
+.site-popover {
+
+  display: flex;
+
+  align-items: center;
+
+  font-size: 15px;
+  padding: 1.5px 2px;
+
+  min-height: 37px;
+
+  .trigger {
+    //padding-bottom: 4px;
+  }
+
+  .comma {
+    position: relative;
+
+    left: -3px;
+  }
+
+}

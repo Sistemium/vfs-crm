@@ -1,0 +1,13 @@
+.site-popover
+
+  span.comma ,
+
+  a.trigger(
+  href
+  uib-popover-template='"app/domain/components/sitePopover/site.popover.template.html"'
+  popover-placement='bottom-right auto'
+  popover-is-open='vm.popoverIsOpen'
+  )
+    span(ng-if='!vm.current') pasirinkite padalinį
+    span(ng-if='vm.current') «{{ vm.current.name }}» padalinis
+    span.caret(ng-if='vm.data.length > 1')

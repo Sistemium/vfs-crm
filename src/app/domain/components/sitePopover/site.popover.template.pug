@@ -1,0 +1,5 @@
+.list-item(ng-repeat='option in vm.data track by option.id')
+  a(
+  href
+  ng-click='vm.optionClick(option)'
+  ) {{ option.name }}
