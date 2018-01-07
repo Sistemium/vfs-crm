@@ -6,7 +6,7 @@
 
     function init () {
 
-      $rootScope.$on('$destroy',$rootScope.$on('$stateChangeStart', function (event, next, nextParams) {
+      $rootScope.$on('$stateChangeStart', function (event, next, nextParams) {
 
         let needRoles = _.get(next, 'data.needRoles');
 
@@ -14,9 +14,9 @@
           event.preventDefault();
         }
 
-        console.error('routerAuth:', next, nextParams, needRoles);
+        console.error('routerAuth prevents:', next, nextParams, needRoles);
 
-      }));
+      });
 
     }
 
