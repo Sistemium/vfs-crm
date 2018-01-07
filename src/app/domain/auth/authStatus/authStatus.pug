@@ -1,9 +1,9 @@
-.auth-status(ng-if='vm.isLoggedIn()')
+.auth-status
 
-  .user-pic
+  .user-pic(ng-if='vm.isLoggedIn()')
     img(ng-src='/images/color/icons8-User.png')
 
-  .user-name(ng-click='vm.nameClick()')
+  .user-name(ng-click='vm.nameClick()' ng-if='vm.isLoggedIn()')
     span {{ vm.user.name }}
     span {{ vm.user.lastName }}
 
