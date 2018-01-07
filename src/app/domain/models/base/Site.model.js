@@ -2,9 +2,11 @@
 
 (function () {
 
-  angular.module('Models').run(function (Schema) {
+  angular.module('Models').run(function (Schema, localStorageService, $q) {
 
-    Schema.register({
+    let current;
+
+    const Site = Schema.register({
 
       name: 'Site',
 
@@ -25,10 +27,35 @@
       meta: {
         label: {
           add: 'Naujas padalinys'
-        }
+        },
+        getCurrent,
+        setCurrent,
+        initCurrent
       }
 
     });
+
+    function initCurrent() {
+
+      let id = localStorageService.get('site.current.id');
+
+      if (!id) {
+        return $q.resolve();
+      }
+
+      return Site.find(id)
+        .then(site => current = site);
+
+    }
+
+    function setCurrent(item) {
+      localStorageService.set('site.current.id', _.get(item, 'id') || null);
+      current = item;
+    }
+
+    function getCurrent() {
+      return current;
+    }
 
     function isValid() {
       return this.name && this.code;

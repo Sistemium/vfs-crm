@@ -18,7 +18,7 @@
     };
   }
 
-  function NavbarController(Menu, $scope, $rootScope, saControllerHelper, $window, localStorageService, $state) {
+  function NavbarController(Menu, $scope, $rootScope, saControllerHelper, $window, localStorageService, $state, Auth) {
 
     const DEFAULT_TITLE = 'VFS CRM';
     const vm = saControllerHelper.setup(this, $scope);
@@ -27,7 +27,8 @@
 
     vm.use({
 
-      rootClick
+      rootClick,
+      isLoggedIn
 
     });
 
@@ -39,6 +40,12 @@
     /*
      Functions
      */
+
+    function isLoggedIn() {
+
+      return Auth.isLoggedIn();
+
+    }
 
     function rootClick() {
 

@@ -22,11 +22,17 @@
         optionClick
       });
 
-    vm.rebindAll(Site, {}, 'vm.data');
+    vm.rebindAll(Site, {}, 'vm.data', initCurrent);
+
+    function initCurrent() {
+      Site.meta.initCurrent()
+        .then(modelCurrent => vm.current = modelCurrent);
+    }
 
     function optionClick(option) {
       vm.current = option;
       vm.popoverIsOpen = false;
+      Site.meta.setCurrent(option);
     }
 
   }

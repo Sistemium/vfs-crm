@@ -15,4 +15,4 @@ h2.root-navbar(ng-hide='vm.hide' ng-class='{disabled: vm.hideNavs}')
 
   auth-status
 
-  site-popover
+  site-popover(ng-if='vm.isLoggedIn()')
