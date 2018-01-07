@@ -430,6 +430,11 @@
     function afterCancel($event) {
       $event.stopPropagation();
       delete vm.newItem;
+      $timeout().then(() => {
+        saEtc.focusElementById(vm.inputId);
+        onInputFocus();
+        vm.isOpen = true;
+      });
     }
 
     function afterSave(saved) {
