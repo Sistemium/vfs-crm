@@ -1,7 +1,40 @@
+@import "variables";
+
 li.active {
   .gray {
     color: white;
   }
+}
+
+.popover-content {
+
+  padding: 0;
+
+  .list-item {
+
+    > a {
+
+      display: block;
+      padding: 8px;
+
+      &:hover {
+        background: $gray-background-color;
+      }
+    }
+
+    & + .list-item {
+      border-top: solid 1px $border-gray;
+    }
+
+    &.active a {
+
+      font-weight: bold;
+      color: $state-info-text;
+
+    }
+
+  }
+
 }
 
 .round-corners-by-type {

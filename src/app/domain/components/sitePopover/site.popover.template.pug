@@ -1,4 +1,7 @@
-.list-item(ng-repeat='option in vm.data track by option.id')
+.list-item(
+ng-repeat='option in vm.data track by option.id'
+ng-class='vm.current.id === option.id && "active"'
+)
   a(
   href
   ng-click='vm.optionClick(option)'
