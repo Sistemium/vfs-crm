@@ -9,9 +9,9 @@
   #sidenav-scroll-list.scroll-y(
   resize
   resize-offset-top='5'
-  vs-repeat
+  vs-repeat='{{::vm.servicePointHeight}}'
   vs-excess='10'
-  elem-ready='vm.restoreScrollPosition()'
+  elem-ready='vm.onScrollListReady()'
   )
     .service-point(
     ng-repeat='servicePoint in vm.servicePoints track by servicePoint.id'

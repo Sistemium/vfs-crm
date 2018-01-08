@@ -321,6 +321,10 @@
 
     function loadGeoPosition() {
 
+      if (!vm.servicePoint) {
+        return;
+      }
+
       if (_.get(vm.servicePoint, 'location')) {
 
         assignCoords();

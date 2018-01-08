@@ -3,11 +3,10 @@
   module.component('servicePointSidenav', {
 
     bindings: {
-      servicePoints: '=',
+      data: '=servicePoints',
       currentServicePointId: '=',
       servicePointClickFn: '=',
       currentIdx: '=',
-      promise: '=',
       addClick: '&'
     },
 
@@ -17,7 +16,7 @@
 
   });
 
-  function servicePointSidenav(saControllerHelper, $scope, $q, $filter, Schema, $state, $timeout, saEtc) {
+  function servicePointSidenav(saControllerHelper, $scope, $filter, Schema, $state, $timeout, saEtc) {
 
     const vm = saControllerHelper.setup(this, $scope);
     const servicePointHeight = 53;
@@ -25,10 +24,11 @@
     const {ServicePoint} = Schema.models();
 
     vm.watchScope('vm.searchText', onSearch);
-    vm.rebindAll(ServicePoint, {}, 'vm.data', onSearch);
+    $scope.$watchCollection('vm.data', onSearch);
 
     vm.use({
-      restoreScrollPosition,
+      servicePointHeight,
+      onScrollListReady: restoreScrollPosition,
       servicePointClick
     });
 
@@ -65,39 +65,28 @@
       let {searchText} = vm;
 
       vm.servicePoints = searchText ? ServicePoint.meta.filter(vm.data, searchText) : vm.data;
-      vm.servicePoints = $filter('orderBy')(vm.servicePoints, 'name');
+      vm.servicePoints = $filter('orderBy')(vm.servicePoints, 'address');
+      restoreScrollPosition();
 
     }
 
     function restoreScrollPosition() {
 
-      $q.when(vm.promise).then((res) => {
+      let idx = _.findIndex(vm.servicePoints, {id: vm.currentServicePointId});
+      let scrollingBlock = saEtc.getElementById('sidenav-scroll-list');
 
-        if (vm.servicePoints.length <= 1) {
-          vm.servicePoints = res[1];
-        }
+      console.warn('restoreScrollPosition:', idx, !!scrollingBlock);
 
-        vm.servicePoints = $filter('orderBy')(vm.servicePoints, 'name');
+      if (!scrollingBlock || idx < 0) {
+        return;
+      }
 
-        let servicePoints = _.orderBy(vm.servicePoints, ['name'], ['asc']);
-        let idx = _.findIndex(servicePoints, {id: vm.currentServicePointId});
-
-        $timeout(100).then(() => {
-
-          let scrollingBlock = saEtc.getElementById('sidenav-scroll-list');
-
-          if (!scrollingBlock) {
-            console.error('no scrollingBlock');
-            return;
-          }
-
-          scrollingBlock.scrollTop = (idx) * servicePointHeight;
+      $timeout(100)
+        .then(() => {
+          scrollingBlock.scrollTop = _.max([(idx - 2) * servicePointHeight - 1, 0]);
           vm.lastIndex = idx;
           vm.watchScope('vm.currentServicePointId', onIdxChange);
-
         });
-
-      });
 
     }
 
