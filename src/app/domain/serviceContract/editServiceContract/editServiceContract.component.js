@@ -19,7 +19,7 @@
 
     vm.use({
       $onInit,
-      listGroupItemClick
+      servicePointClick
     });
 
     /*
@@ -55,8 +55,8 @@
 
     }
 
-    function listGroupItemClick(item) {
-      $state.go('servicePoint.detailed', {servicePointId: item.id});
+    function servicePointClick(item) {
+      $state.go('servicePoint.detailed', {servicePointId: item.id}, {reload: true});
     }
 
   }

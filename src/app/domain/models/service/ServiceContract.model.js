@@ -83,7 +83,7 @@
     }
 
     function isValid(data) {
-      return this.date && (this.siteId ||_.get(data, 'siteId.ready')) && this.num &&
+      return this.date && (this.siteId ||_.get(data, 'siteId.ready')) &&
         legalType(
           this.customerPersonId || _.get(data, 'customerPersonId.ready'),
           this.customerLegalEntityId || _.get(data, 'customerLegalEntityId.ready')
@@ -106,8 +106,8 @@
 
       //TODO: fix this.customer().name
 
-      if (!date || !num || !this.customer()) return this.name || null;
-      return `${this.customer().name} №${num} nuo ${date}`;
+      if (!date || !this.customer()) return this.name || null;
+      return `${this.customer().name}${num ? ' №' + num : ''} nuo ${date}`;
     }
 
   });
