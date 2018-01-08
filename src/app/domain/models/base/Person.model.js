@@ -43,7 +43,8 @@
         refreshCache,
         contactsLazy,
         allPhones,
-        allEmails
+        allEmails,
+        setNames
       },
 
       meta: {
@@ -55,24 +56,30 @@
 
       beforeCreateInstance: function (model, person) {
 
-        let hasSpace = /(.+) (.+)/;
-
-        if (hasSpace.test(person.name)) {
-
-          let names = person.name.match(hasSpace);
-
-          _.assign(person, {
-            firstName: _.upperFirst(names[1]),
-            lastName: _.upperFirst(names[2])
-          });
-
-        }
+        setNames.call(person, person.name);
 
         return person;
 
       }
 
     });
+
+    function setNames(name) {
+
+      let hasSpace = /(.+) (.+)/;
+
+      if (hasSpace.test(name)) {
+
+        let names = name.match(hasSpace);
+
+        _.assign(this, {
+          firstName: _.upperFirst(names[1]),
+          lastName: _.upperFirst(names[2])
+        });
+
+      }
+
+    }
 
     function isValid() {
       return this.firstName && this.lastName;

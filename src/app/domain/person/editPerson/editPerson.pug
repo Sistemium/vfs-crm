@@ -11,6 +11,7 @@
       autocomplete='off'
       placeholder='Privaloma'
       ng-model='vm.person.firstName'
+      ng-paste='vm.onPasteFirstName($event)'
       )
 
     .last-name
@@ -25,7 +26,7 @@
       )
 
     .code
-      label(for='code') Asmens Kodas
+      label(for='code') Asmens kodas
 
       input#code.form-control(
       autocomplete='off'

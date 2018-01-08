@@ -40,6 +40,7 @@
 
       $onInit,
       onPaste,
+      onPasteFirstName,
       onEnterPress,
       deleteContactClick,
       onInputBlur: addAddress,
@@ -167,6 +168,11 @@
 
       $timeout().then(() => addAddress(contactMethod));
 
+    }
+
+    function onPasteFirstName() {
+      $timeout()
+        .then(() => vm.person.setNames(vm.person.firstName));
     }
 
     function deleteContactClick(item, code) {
