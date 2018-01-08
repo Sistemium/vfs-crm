@@ -1,22 +1,38 @@
+@import "../../../styles/variables";
+
 .site-popover {
 
   display: flex;
-
   align-items: center;
-
   font-size: 15px;
-  padding: 1.5px 2px;
 
-  min-height: 37px;
+  > a {
+
+    display: flex;
+    align-items: center;
+
+    padding: 2px;
+
+    min-height: 37px;
+  }
 
   .trigger {
     //padding-bottom: 4px;
   }
 
-  .comma {
-    position: relative;
+  @include responsive-only(xxs) {
+    .suffix, .comma {
+      display: none;
+    }
 
-    left: -3px;
+  }
+
+  .comma {
+
+    margin-left: 1px;
+    margin-right: 3px;
+    color: $gray;
+
   }
 
 }

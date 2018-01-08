@@ -3,21 +3,21 @@
 .auth-status {
 
   font-size: 15px;
-  padding: 1.5px 2px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  min-height: 37px;
+
+  > a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    min-height: 37px;
+  }
 
   .user-pic {
 
     height: 30px;
-    line-height: 30px;
     margin-right: 5px;
 
     img {
-      height: 90%;
-      width: 27px;
+      height: 30px;
       border-radius: 50%;
       border: 1px solid $border-gray;
       object-fit: contain
@@ -35,21 +35,22 @@
 
     @media (max-width: $screen-xs) {
 
-      width: 35px;
-      line-height: 35px;
+      //width: 35px;
+      //line-height: 35px;
+      display: none;
 
-      span:first-letter {
-        visibility: visible;
-      }
-      span {
-        visibility: hidden;
-        width: 17px;
-        font-size: 25px;
-      }
-
-      span + span {
-
-      }
+      //span:first-letter {
+      //  visibility: visible;
+      //}
+      //span {
+      //  font-size: 25px;
+      //  visibility: hidden;
+      //  width: 17px;
+      //}
+      //
+      //span + span {
+      //
+      //}
 
     }
 

@@ -9,5 +9,6 @@
   popover-is-open='vm.popoverIsOpen'
   )
     span(ng-if='!vm.current') pasirinkite padalinį
-    span(ng-if='vm.current') «{{ vm.current.name }}» padalinys
-    span.caret(ng-if='vm.data.length > 1')
+    span(ng-if='vm.current')
+      span.name «{{ vm.current.name }}»
+      span.suffix &nbsp;padalinys

@@ -1,10 +1,12 @@
 .auth-status
 
-  .user-pic(ng-if='vm.isLoggedIn()')
-    img(ng-src='/images/color/icons8-User.png')
+  a(href ng-click='vm.nameClick()' ng-if='vm.isLoggedIn()')
 
-  .user-name(ng-click='vm.nameClick()' ng-if='vm.isLoggedIn()')
-    span {{ vm.user.name }}
-    span {{ vm.user.lastName }}
+    .user-pic
+      img(ng-src='/images/color/icons8-User.png')
+
+    .user-name
+      span {{ vm.user.name }}
+      span {{ vm.user.lastName }}
 
   a(href ng-if='!vm.isLoggedIn()' ng-click='vm.loginClick()') {{ vm.notLoggedInText() }}
