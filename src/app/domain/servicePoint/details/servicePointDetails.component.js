@@ -8,7 +8,9 @@
 
   });
 
-  function servicePointDetailsController($scope, Schema, saControllerHelper, $state, Editing, $timeout, PictureHelper, GalleryHelper, NgMap, mapsHelper, GeoCoder, ServicePointMapModal, $q) {
+  function servicePointDetailsController($scope, Schema, saControllerHelper, $state, Editing,
+                                         $timeout, PictureHelper, GalleryHelper, NgMap, mapsHelper,
+                                         GeoCoder, ServicePointMapModal, $q) {
 
     const vm = saControllerHelper.setup(this, $scope)
       .use(GalleryHelper);
@@ -215,6 +217,12 @@
 
       if (contractPerson) {
         vm.contactPersons.push({person: contractPerson});
+      }
+
+      let contractLegalentity = _.get(vm.servicePoint, 'currentServiceContract.customerLegalEntity');
+
+      if (contractLegalentity) {
+        vm.contactPersons.push({person: contractLegalentity});
       }
 
     }
