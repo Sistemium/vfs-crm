@@ -75,7 +75,7 @@
       let idx = _.findIndex(vm.servicePoints, {id: vm.currentServicePointId});
       let scrollingBlock = saEtc.getElementById('sidenav-scroll-list');
 
-      console.warn('restoreScrollPosition:', idx, !!scrollingBlock);
+      // console.warn('restoreScrollPosition:', idx, !!scrollingBlock);
 
       if (!scrollingBlock || idx < 0) {
         return;

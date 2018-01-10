@@ -44,9 +44,8 @@
       icon: 'color/icons8-People.png'
     }, {
       title: 'Aptarnavimas',
-      state: 'serviceOrder',
-      icon: 'color/icons8-Maintenance.png',
-      disabled: true
+      state: 'servicePlanning',
+      icon: 'color/icons8-Maintenance.png'
     }, {
       title: 'Naudotojai',
       state: 'users',
