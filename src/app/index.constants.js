@@ -34,6 +34,7 @@
     .config(uibDatepickerPopupConfig => {
       _.assign(uibDatepickerPopupConfig, {
         datepickerPopupTemplateUrl: 'app/domain/components/datePicker/datePickerPopup.html',
+        currentText: 'Šiandien',
         closeText: 'Uždaryti',
         clearText: 'Ištrinti'
       });
