@@ -11,12 +11,9 @@
 
   function servicePlanningController($scope, saControllerHelper, Schema, moment) {
 
-    const monthFormat = 'YYYY.MM';
-
     const vm = saControllerHelper.setup(this, $scope)
       .use({
-        monthFormat,
-        monthDate: new Date(moment().format())
+        monthDate: new Date(moment().format('YYYY.MM'))
       });
 
     const {
@@ -62,8 +59,31 @@
 
       return vm.setBusy(busy)
         .then(() => {
-          vm.rebindAll(ServicePlanning, {where}, 'vm.data');
+          vm.rebindAll(ServicePlanning, {where}, 'vm.data', groupByServingMaster);
         });
+
+    }
+
+    function groupByServingMaster() {
+
+      let groups = _.groupBy(vm.data, 'servingMasterId');
+      let res = [];
+
+      _.each(groups, (data, servingMasterId) => {
+
+        res.push({
+          cls: 'group',
+          id: servingMasterId,
+          servingMaster: Employee.get(servingMasterId)
+        });
+
+        data = _.sortBy(data, 'nextServiceDate');
+
+        res.push(...data);
+
+      });
+
+      vm.groupedData = res;
 
     }
 

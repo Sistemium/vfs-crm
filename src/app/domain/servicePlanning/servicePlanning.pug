@@ -27,7 +27,7 @@
 
       .service-point Klientas
       .filter-system Filtravimo sistema
-      .serving-master Aptarnavimo meistras
+      //.serving-master Aptarnavimo meistras
       .last-service-date Paskutinis aptarnavimas
       .next-service-date Kitas aptarnavimas
 
@@ -36,13 +36,15 @@
     vs-repeat
     )
       .service-item(
-      ng-repeat='item in vm.data track by item.id'
+      ng-repeat='item in vm.groupedData track by item.id'
       ng-class='{overdue: vm.month > item.nextServiceDate}'
+      ng-switch='item.cls'
       )
-        .service-point
+        h4.serving-master(ng-switch-when='group') {{ item.servingMaster.name }}
+
+        .service-point(ng-switch-default)
           .name {{ item.serviceItem.servicePoint.currentServiceContract.customer().name }}
           .address {{ item.serviceItem.servicePoint.address }}
-        .filter-system {{ item.serviceItem.filterSystem.name }}
-        .serving-master {{ item.servingMaster.name }}
-        .last-service-date {{ ::item.lastServiceDate | amDateFormat:'YYYY.MM.DD' }}
-        .next-service-date {{ ::item.nextServiceDate | amDateFormat:'YYYY.MM.DD' }}
+        .filter-system(ng-switch-default) {{ item.serviceItem.filterSystem.name }}
+        .last-service-date(ng-switch-default) {{ ::item.lastServiceDate | amDateFormat:'YYYY.MM.DD' }}
+        .next-service-date(ng-switch-default) {{ ::item.nextServiceDate | amDateFormat:'YYYY.MM.DD' }}
