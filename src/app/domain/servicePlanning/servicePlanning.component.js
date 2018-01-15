@@ -19,7 +19,9 @@
       });
 
     const {
-      ServicePlanning, Employee, Person, FilterSystem, Brand, ServicePoint, ServiceItem, ServiceContract, LegalEntity
+      ServicePlanning, Employee, Person, FilterSystem, Brand, ServicePoint,
+      ServiceItem, ServiceContract, LegalEntity,
+      Site
     } = Schema.models('');
 
     vm.watchScope('vm.monthDate', () => {
@@ -27,6 +29,7 @@
     });
 
     vm.watchScope('vm.month', onMonthChange);
+    vm.watchScope(() => _.get(Site.meta.getCurrent(), 'id'), onMonthChange);
 
     /*
     Functions
@@ -37,21 +40,28 @@
     }
 
     function filterSystemClick(item) {
-      Editing.editModal('edit-service-item', 'Redaguoti Įrenginį')(item.serviceItem);
+      Editing.editModal('edit-service-item', 'Redaguoti Įrenginį')(item.serviceItem)
+        .then(item => {
+          if (item.id) {
+            ServicePlanning.findAll({id: item.id}, {bypassCache: true});
+          }
+        });
     }
 
     function onMonthChange() {
       console.info(vm.month);
-      if (vm.month) {
+      if (vm.month && Site.meta.getCurrent()) {
         refresh();
       }
     }
 
     function refresh() {
 
+      let siteId = Site.meta.getCurrent().id;
       let monthEnd = moment(vm.monthDate).add(1, 'month').add(-1, 'day').format();
 
       let where = {
+        siteId: {'==': siteId},
         nextServiceDate: {'<=': monthEnd}
       };
 

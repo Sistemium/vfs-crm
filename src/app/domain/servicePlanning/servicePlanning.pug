@@ -40,7 +40,7 @@
       ng-class='{overdue: vm.month > item.nextServiceDate}'
       ng-switch='item.cls'
       )
-        h4.serving-master(ng-switch-when='group') {{ item.servingMaster.name }}
+        h4.serving-master(ng-switch-when='group') {{ item.servingMaster.name || 'Aptarnavimo meistras nepaskirtas' }}
 
         .service-point(ng-switch-default)
           a(href ng-click='vm.servicePointClick(item)')
@@ -51,5 +51,5 @@
 
         )
           a(href ng-click='vm.filterSystemClick(item)') {{ item.serviceItem.filterSystem.name }}
-        .last-service-date(ng-switch-default) {{ ::item.lastServiceDate | amDateFormat:'YYYY.MM.DD' }}
-        .next-service-date(ng-switch-default) {{ ::item.nextServiceDate | amDateFormat:'YYYY.MM.DD' }}
+        .last-service-date(ng-switch-default) {{ item.lastServiceDate | amDateFormat:'YYYY.MM.DD' }}
+        .next-service-date(ng-switch-default) {{ item.nextServiceDate | amDateFormat:'YYYY.MM.DD' }}
