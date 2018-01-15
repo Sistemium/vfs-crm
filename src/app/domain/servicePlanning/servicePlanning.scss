@@ -1,0 +1,76 @@
+@import "../../styles/flex-table";
+
+.service-planning {
+
+  .filters {
+
+    > .month {
+
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      > .input-group {
+        max-width: 200px;
+      }
+
+      > label {
+        margin: 0 10px 0 3px;
+      }
+    }
+
+    margin-bottom: 10px;
+  }
+
+  .planning {
+
+    @extend %flex-table;
+
+    .headers {
+      @extend %flex-table-headers;
+      align-items: center;
+    }
+
+    .service-item {
+
+      @extend %flex-table-item;
+
+      &.overdue {
+        .last-service-date, .next-service-date {
+          color: $red;
+        }
+      }
+
+    }
+
+    .service-item, .headers {
+
+      > .service-point {
+        flex: 30;
+        > .address {
+          color: $gray;
+        }
+      }
+
+      > .filter-system {
+        flex: 20;
+      }
+
+      > .serving-master {
+        flex: 20;
+      }
+
+      > .last-service-date {
+        flex: 15;
+      }
+
+      > .next-service-date {
+        flex: 15;
+      }
+
+    }
+
+  }
+
+
+}

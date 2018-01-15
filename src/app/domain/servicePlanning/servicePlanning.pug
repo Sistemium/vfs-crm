@@ -1,3 +1,48 @@
 .service-planning
 
-  h1 servicePlanning
+  .filters
+
+    .month
+
+      label(for='monthPicker') Mėnuo:
+
+      .input-group
+
+        input.form-control#monthPicker(
+        type='text'
+        uib-datepicker-popup='yyyy.MM'
+        ng-model='vm.monthDate'
+        is-open='vm.monthPickerOpen'
+        datepicker-options="{minMode: 'month'}"
+        datepicker-mode="'month'"
+        )
+
+        span.input-group-btn
+          button.btn.btn-default(type='button' ng-click='vm.monthPickerOpen = !vm.monthPickerOpen')
+            i.glyphicon.glyphicon-calendar
+
+  .planning
+
+    .headers
+
+      .service-point Klientas
+      .filter-system Filtravimo sistema
+      .serving-master Aptarnavimo meistras
+      .last-service-date Paskutinis aptarnavimas
+      .next-service-date Kitas aptarnavimas
+
+    .scroll-y(
+    resize resize-offset-top='5'
+    vs-repeat
+    )
+      .service-item(
+      ng-repeat='item in vm.data track by item.id'
+      ng-class='{overdue: vm.month > item.nextServiceDate}'
+      )
+        .service-point
+          .name {{ item.serviceItem.servicePoint.currentServiceContract.customer().name }}
+          .address {{ item.serviceItem.servicePoint.address }}
+        .filter-system {{ item.serviceItem.filterSystem.name }}
+        .serving-master {{ item.servingMaster.name }}
+        .last-service-date {{ ::item.lastServiceDate | amDateFormat:'YYYY.MM.DD' }}
+        .next-service-date {{ ::item.nextServiceDate | amDateFormat:'YYYY.MM.DD' }}
