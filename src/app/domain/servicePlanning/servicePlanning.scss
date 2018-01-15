@@ -47,9 +47,10 @@
 
       > .service-point {
         flex: 30;
-        > .address {
+        a > .address {
           color: $gray;
         }
+        a {display: inline-block}
       }
 
       > .filter-system {

@@ -9,11 +9,13 @@
 
     });
 
-  function servicePlanningController($scope, saControllerHelper, Schema, moment) {
+  function servicePlanningController($scope, saControllerHelper, Schema, moment, Editing) {
 
     const vm = saControllerHelper.setup(this, $scope)
       .use({
-        monthDate: new Date(moment().format('YYYY.MM'))
+        monthDate: new Date(moment().format('YYYY.MM')),
+        filterSystemClick,
+        servicePointClick
       });
 
     const {
@@ -29,6 +31,14 @@
     /*
     Functions
      */
+
+    function servicePointClick(item) {
+      Editing.editModal('edit-service-point', 'Aptarnavimo Taško Redagavimas')(item.serviceItem.servicePoint);
+    }
+
+    function filterSystemClick(item) {
+      Editing.editModal('edit-service-item', 'Redaguoti Įrenginį')(item.serviceItem);
+    }
 
     function onMonthChange() {
       console.info(vm.month);
