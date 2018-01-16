@@ -67,12 +67,16 @@
 
           maxLength = _.max([maxLength, val.toString().length]);
 
+          cell.s = {
+            alignment: {vertical: 'top', wrapText: true}
+          };
+
           setCell(ws, cell, {c: colIdx, r: rowIdx + 1});
 
         });
 
         wsCols.push({
-          wch: maxLength + 2
+          wch: col.maxLength || (maxLength + 2)
         });
 
       });

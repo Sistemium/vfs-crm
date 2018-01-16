@@ -13,7 +13,8 @@
 
     });
 
-  function servicePlanningController($scope, saControllerHelper, Schema, moment, Editing, ExportConfig, ExportExcel) {
+  function servicePlanningController($scope, saControllerHelper, Schema, moment, Editing,
+                                     ExportConfig, ExportExcel, $filter, $q) {
 
     const vm = saControllerHelper.setup(this, $scope)
       .use({
@@ -28,6 +29,8 @@
       ServiceItem, ServiceContract, LegalEntity,
       Site
     } = Schema.models('');
+
+    const ltphone = $filter('ltphone');
 
     vm.watchScope('vm.monthDate', () => {
       vm.month = moment(vm.monthDate).format('YYYY-MM');
@@ -48,14 +51,29 @@
       data = _.map(data, item => {
 
         let {serviceItem} = item;
-        let {filterSystem} = serviceItem;
+        let {filterSystem, servicePoint} = serviceItem;
         let {servicePrice = filterSystem.servicePrice || filterSystem.filterSystemType.servicePrice} = serviceItem;
 
-        return _.assign(item, {
-          customerName: serviceItem.servicePoint.currentServiceContract.customer().name,
-          servicePrice,
-          lastServiceDateLT: moment(item.lastServiceDate).toDate()
+        let customer = servicePoint.currentServiceContract.customer();
+        let allPhones = _.clone(customer.allPhones()) || [];
+
+        _.each(servicePoint.servicePointContacts, contact => {
+          allPhones.push(...contact.person.allPhones());
         });
+
+        let contacts = _.map(allPhones, phone => ltphone(phone.address)).join('\r');
+
+        return _.defaults({
+
+          lastServiceDate: moment(item.lastServiceDate).toDate(),
+          servicePoint,
+          serviceItem,
+          filterSystem,
+          customer,
+          servicePrice,
+          contacts
+
+        }, item);
 
       });
 
@@ -90,13 +108,13 @@
       };
 
       let busy = [
-        Employee.findAll(),
         Person.findAll(),
+        LegalEntity.findAll(),
         FilterSystem.findAll(),
         Brand.findAll(),
-        ServicePoint.findAll(),
-        ServiceContract.findAll(),
-        LegalEntity.findAll(),
+        Employee.findAll(),
+        ServicePoint.findAll({siteId}),
+        ServiceContract.findAll({siteId}),
         ServiceItem.findAll(),
         ServicePlanning.findAllWithRelations({where}, {bypassCache: true})('ServiceItem')
       ];
@@ -113,9 +131,23 @@
       let groups = _.groupBy(vm.data, 'servingMasterId');
       let res = [];
 
+      let busy = [];
+
       _.each(groups, (data, servingMasterId) => {
 
         data = _.sortBy(data, 'nextServiceDate');
+
+        _.each(data, item => {
+
+          let servicePointContacts = item.serviceItem.servicePoint.DSLoadRelations('ServicePointContact')
+            .then(servicePoint => {
+              busy.push(servicePoint.currentServiceContract.customer().contactsLazy());
+              return $q.all(_.map(servicePoint.servicePointContacts, contact => contact.person.contactsLazy()));
+            });
+
+          busy.push(servicePointContacts);
+
+        });
 
         res.push({
           cls: 'group',
@@ -127,6 +159,8 @@
         res.push(...data);
 
       });
+
+      vm.setBusy(busy);
 
       vm.groupedData = res;
 

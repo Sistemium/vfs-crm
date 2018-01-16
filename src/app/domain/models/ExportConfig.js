@@ -9,21 +9,27 @@
       ServicePlanning: [
         {
           title: 'Klientas',
-          property: 'customerName'
+          property: 'customer.name'
+        }, {
+          title: 'Kontaktai',
+          property: 'contacts',
+          maxLength: 20
         }, {
           title: 'Adresas',
-          property: 'serviceItem.servicePoint.address'
+          property: 'servicePoint.address',
+          maxLength: 35
         }, {
           title: 'Sistema',
-          property: 'serviceItem.filterSystem.name'
+          property: 'filterSystem.name'
         }, {
           title: 'Paskutinis apt.',
-          property: 'lastServiceDateLT',
+          property: 'lastServiceDate',
           type: 'date',
-          format: 'yyyy.mm.dd'
+          format: 'yyyy.mm.dd',
+          maxLength: 15
         }, {
           title: 'Dovanos',
-          property: 'serviceItem.servicePoint.gifts'
+          property: 'servicePoint.gifts'
         }, {
           title: 'Kaina',
           property: 'servicePrice',
