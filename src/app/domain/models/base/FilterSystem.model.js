@@ -38,7 +38,7 @@
 
       meta: {
         label: {
-          add: 'Nauja filtro sistema'
+          add: 'Nauja filtravimo sistema'
         }
       }
 
