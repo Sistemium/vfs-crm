@@ -74,9 +74,19 @@
     }
 
     h4.serving-master {
+
       background: $gray-background-color;
       margin: 0;
       padding: 15px 10px 16px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .export {
+        font-size: 75%;
+      }
+
     }
 
   }

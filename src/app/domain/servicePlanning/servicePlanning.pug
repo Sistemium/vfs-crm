@@ -41,16 +41,20 @@
       ng-class='{overdue: vm.month > item.nextServiceDate}'
       ng-switch='item.cls'
       )
-        h4.serving-master(ng-switch-when='group') {{ item.servingMaster.name || 'Aptarnavimo meistras nepaskirtas' }}
+        h4.serving-master(ng-switch-when='group')
+          .name {{ item.servingMaster.name || 'Aptarnavimo meistras nepaskirtas' }}
+          .export
+            a(href ng-click='vm.exportClick(item)' title='Atsisiųsti Excel')
+              i.glyphicon.glyphicon-download-alt
 
         .service-point(ng-switch-default)
           a(href ng-click='vm.servicePointClick(item)')
             .name {{ item.serviceItem.servicePoint.currentServiceContract.customer().name }}
             .address {{ item.serviceItem.servicePoint.address }}
-        .filter-system(
-        ng-switch-default
 
-        )
+        .filter-system(ng-switch-default)
           a(href ng-click='vm.filterSystemClick(item)') {{ item.serviceItem.filterSystem.name }}
+
         .last-service-date(ng-switch-default) {{ item.lastServiceDate | amDateFormat:'YYYY.MM.DD' }}
+
         .next-service-date(ng-switch-default) {{ item.nextServiceDate | amDateFormat:'YYYY.MM.DD' }}

@@ -13,13 +13,14 @@
 
     });
 
-  function servicePlanningController($scope, saControllerHelper, Schema, moment, Editing) {
+  function servicePlanningController($scope, saControllerHelper, Schema, moment, Editing, ExportConfig, ExportExcel) {
 
     const vm = saControllerHelper.setup(this, $scope)
       .use({
         monthDate: new Date(this.month),
         filterSystemClick,
-        servicePointClick
+        servicePointClick,
+        exportClick
       });
 
     const {
@@ -38,6 +39,29 @@
     /*
     Functions
      */
+
+    function exportClick(group) {
+
+      let {data} = group;
+      let name = `${vm.month} - ${group.servingMaster.name}`;
+
+      data = _.map(data, item => {
+
+        let {serviceItem} = item;
+        let {filterSystem} = serviceItem;
+        let {servicePrice = filterSystem.servicePrice || filterSystem.filterSystemType.servicePrice} = serviceItem;
+
+        return _.assign(item, {
+          customerName: serviceItem.servicePoint.currentServiceContract.customer().name,
+          servicePrice,
+          lastServiceDateLT: moment(item.lastServiceDate).toDate()
+        });
+
+      });
+
+      ExportExcel.exportArrayWithConfig(data, ExportConfig.ServicePlanning, name);
+
+    }
 
     function servicePointClick(item) {
       Editing.editModal('edit-service-point', 'Aptarnavimo Taško Redagavimas')(item.serviceItem.servicePoint);
@@ -91,13 +115,14 @@
 
       _.each(groups, (data, servingMasterId) => {
 
+        data = _.sortBy(data, 'nextServiceDate');
+
         res.push({
           cls: 'group',
           id: servingMasterId,
-          servingMaster: Employee.get(servingMasterId)
+          servingMaster: Employee.get(servingMasterId),
+          data
         });
-
-        data = _.sortBy(data, 'nextServiceDate');
 
         res.push(...data);
 
