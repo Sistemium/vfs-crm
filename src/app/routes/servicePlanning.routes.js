@@ -8,8 +8,11 @@
         .state({
 
           name: 'servicePlanning',
-          url: '/servicePlanning',
-          template: '<service-planning></service-planning>',
+          url: '/servicePlanning?month',
+          template: '<service-planning month="vm.month"></service-planning>',
+
+          controller: servicePlanningRouterController,
+          controllerAs: 'vm',
 
           data: {
             title: 'Aptarnavimų planavimas'
@@ -18,5 +21,15 @@
         });
 
     });
+
+  function servicePlanningRouterController($state, moment, $scope) {
+
+    this.month = $state.params.month || moment().format('YYYY.MM');
+
+    $scope.$watch('vm.month', month => {
+      $state.go('.', {month}, {notify: false});
+    });
+
+  }
 
 })();

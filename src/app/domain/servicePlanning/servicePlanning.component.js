@@ -3,6 +3,10 @@
   angular.module('webPage')
     .component('servicePlanning', {
 
+      bindings: {
+        month: '='
+      },
+
       templateUrl: 'app/domain/servicePlanning/servicePlanning.html',
       controller: servicePlanningController,
       controllerAs: 'vm'
@@ -13,7 +17,7 @@
 
     const vm = saControllerHelper.setup(this, $scope)
       .use({
-        monthDate: new Date(moment().format('YYYY.MM')),
+        monthDate: new Date(this.month),
         filterSystemClick,
         servicePointClick
       });
@@ -25,7 +29,7 @@
     } = Schema.models('');
 
     vm.watchScope('vm.monthDate', () => {
-      vm.month = moment(vm.monthDate).format();
+      vm.month = moment(vm.monthDate).format('YYYY-MM');
     });
 
     vm.watchScope('vm.month', onMonthChange);
@@ -41,11 +45,7 @@
 
     function filterSystemClick(item) {
       Editing.editModal('edit-service-item', 'Redaguoti Įrenginį')(item.serviceItem)
-        .then(item => {
-          if (item.id) {
-            ServicePlanning.findAll({id: item.id}, {bypassCache: true});
-          }
-        });
+        .then(item => item.id && ServicePlanning.find(item.id, {bypassCache: true}));
     }
 
     function onMonthChange() {
