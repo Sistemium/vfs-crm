@@ -22,6 +22,7 @@
 
       span.caret()
 
+  button-edit(ng-if='vm.currentItem.id' button-click='vm.editClick()')
   button-add(button-click='vm.addClick()')
 
 .edit-block(
@@ -31,7 +32,7 @@ ng-class='vm.newItem.isValid(vm.readyState) ? "vfs-valid" : "vfs-invalid"'
 
   .title
 
-    span {{ vm.newItemTitle }}
+    span {{ vm.newItem.id ? '' : vm.newItemTitle }}
 
     a.save.animate-show(
     href ng-click='vm.saveByUserClick($event)'
@@ -49,3 +50,5 @@ ng-class='vm.newItem.isValid(vm.readyState) ? "vfs-valid" : "vfs-invalid"'
   save-fn='vm.saveFn'
   is-valid='vm.componentIsValid'
   )
+
+  // TODO: bind component's hasChanges

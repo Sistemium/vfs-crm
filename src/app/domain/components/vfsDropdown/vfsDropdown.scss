@@ -71,7 +71,7 @@ vfs-dropdown {
 
     }
 
-    > button-add {
+    > button-add, > button-edit {
       margin-left: $padding;
       button.btn-warning {
         border: 1px solid $border-color;

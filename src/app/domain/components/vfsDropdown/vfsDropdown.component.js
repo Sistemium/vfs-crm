@@ -35,6 +35,7 @@
       itemClick,
       inputClick,
       addClick,
+      editClick,
       afterCancel,
       afterSave,
       groupLabel,
@@ -94,6 +95,11 @@
     function saveByUserClick() {
 
       let saveFn = vm.saveFn || vm.newItem.DSCreate;
+
+      if (vm.newItem.id && !vm.newItem.DSHasChanges()) {
+        delete vm.newItem;
+        return;
+      }
 
       saveFn.call(vm.newItem)
         .then((res) => {
@@ -373,6 +379,14 @@
 
     }
 
+    function editClick() {
+
+      vm.newItem = vm.currentItem;
+
+      vm.isOpen = false;
+
+    }
+
     function accentLess(line) {
 
       let lineLowerCase = line.toLowerCase();
@@ -428,13 +442,20 @@
     }
 
     function afterCancel($event) {
+
       $event.stopPropagation();
       delete vm.newItem;
+
+      if (vm.currentItem) {
+        return;
+      }
+
       $timeout(100).then(() => {
         saEtc.focusElementById(vm.inputId);
         onInputFocus();
         vm.isOpen = true;
       });
+
     }
 
     function afterSave(saved) {
