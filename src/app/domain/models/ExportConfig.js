@@ -19,6 +19,12 @@
           property: 'servicePoint.address',
           maxLength: 35
         }, {
+          title: 'Butas',
+          property: 'servicePoint.apartment'
+        }, {
+          title: 'Durų kodas',
+          property: 'servicePoint.doorCode'
+        }, {
           title: 'Sistema',
           property: 'filterSystem.name'
         }, {
