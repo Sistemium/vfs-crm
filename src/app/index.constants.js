@@ -1,7 +1,6 @@
 'use strict';
 
-/* global moment:false uuid:false geolib:false */
-
+/* global moment:false uuid:false geolib:false XLSX:false */
 (function () {
 
 
@@ -15,6 +14,7 @@
 
     .constant('moment', moment)
     .constant('UUID', uuid)
+    .constant('XLSX', XLSX)
     .constant('geolib', geolib)
 
     .constant('saaAppConfig', {
