@@ -28,6 +28,14 @@
           format: 'yyyy.mm.dd',
           maxLength: 15
         }, {
+          title: 'Sistemos pastabos',
+          property: 'serviceItem.info',
+          maxLength: 30
+        }, {
+          title: 'Taško pastabos',
+          property: 'servicePoint.info',
+          maxLength: 30
+        }, {
           title: 'Dovanos',
           property: 'servicePoint.gifts'
         }, {

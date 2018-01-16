@@ -76,7 +76,7 @@
         });
 
         wsCols.push({
-          wch: col.maxLength || (maxLength + 2)
+          wch: _.min([col.maxLength, maxLength + 2])
         });
 
       });

@@ -52,7 +52,9 @@
 
         let {serviceItem} = item;
         let {filterSystem, servicePoint} = serviceItem;
-        let {servicePrice = filterSystem.servicePrice || filterSystem.filterSystemType.servicePrice} = serviceItem;
+        let {servicePrice} = serviceItem;
+
+        servicePrice = servicePrice || filterSystem.servicePrice || filterSystem.filterSystemType.servicePrice;
 
         let customer = servicePoint.currentServiceContract.customer();
         let allPhones = _.clone(customer.allPhones()) || [];
