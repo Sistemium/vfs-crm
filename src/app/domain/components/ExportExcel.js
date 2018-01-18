@@ -52,6 +52,12 @@
 
           let val = _.get(row, col.property);
 
+          let etc = val;
+
+          if (_.isObject(val)) {
+            val = val.val;
+          }
+
           if (val === null || _.isUndefined(val)) return;
 
           let cell = {
@@ -70,6 +76,10 @@
           cell.s = {
             alignment: {vertical: 'top', wrapText: true}
           };
+
+          if (etc.style) {
+            _.assign(cell.s, etc.style);
+          }
 
           setCell(ws, cell, {c: colIdx, r: rowIdx + 1});
 
