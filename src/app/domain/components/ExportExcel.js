@@ -25,9 +25,11 @@
     }
 
     function worksheetFromArrayWithConfig(data, config) {
-      let ws = {};
 
+      let ws = {};
       let wsCols = [];
+
+      let notNumberRe = /[^0-9]/;
 
       _.each(config, (col, idx) => {
 
@@ -60,22 +62,30 @@
 
           if (val === null || _.isUndefined(val)) return;
 
-          let cell = {
-            v: val,
-            t: _.isNumber(val) ? 'n' : 's'
-          };
+          let isNumber = _.isNumber(val) || !notNumberRe.test(val);
 
-          if (val instanceof Date) {
-            cell.t = 'n';
-            cell.z = col.format || 'yyyy.mm.dd';
-            cell.v = dateNum(val, true);
+          if (isNumber && !_.isNumber(val)) {
+            val = parseInt(val);
           }
 
-          maxLength = _.max([maxLength, val.toString().length]);
+          let cell = {
+            v: val,
+            t: isNumber ? 'n' : 's'
+          };
 
           cell.s = {
             alignment: {vertical: 'top', wrapText: true}
           };
+
+          if (val instanceof Date) {
+            cell.t = 'n';
+            cell.s.numFmt = col.format || 'yyyy.mm.dd';
+            cell.v = dateNum(val, true);
+          } else if (cell.t === 'n' && col.type !== 'number') {
+            cell.s.numFmt = '@';
+          }
+
+          maxLength = _.max([maxLength, val.toString().length]);
 
           if (etc.style) {
             _.assign(cell.s, etc.style);
