@@ -56,13 +56,15 @@
 
           let etc = val;
 
-          if (_.isObject(val)) {
+          let isDate = val instanceof Date;
+
+          if (!isDate && _.isObject(val)) {
             val = val.val;
           }
 
           if (val === null || _.isUndefined(val) || val === '') return;
 
-          let isNumber = _.isNumber(val) || !notNumberRe.test(val);
+          let isNumber = !isDate && (_.isNumber(val) || !notNumberRe.test(val));
 
           if (isNumber && !_.isNumber(val)) {
             val = parseInt(val);

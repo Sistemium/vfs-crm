@@ -51,7 +51,7 @@
       data = _.map(data, item => {
 
         let {serviceItem} = item;
-        let {filterSystem, servicePoint, installingDate} = serviceItem;
+        let {filterSystem, servicePoint, installingDate, lastServiceDate} = serviceItem;
         let {servicePrice, guaranteePeriod} = serviceItem;
         let {filterSystemType} = filterSystem;
 
@@ -72,7 +72,7 @@
 
         return _.defaults({
 
-          lastServiceDate: moment(item.lastServiceDate).toDate(),
+          lastServiceDate: lastServiceDate && moment(lastServiceDate).toDate(),
           installingDate,
           guaranteeEnd: {
             val: guaranteeEnd,
