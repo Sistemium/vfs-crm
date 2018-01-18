@@ -60,7 +60,7 @@
             val = val.val;
           }
 
-          if (val === null || _.isUndefined(val)) return;
+          if (val === null || _.isUndefined(val) || val === '') return;
 
           let isNumber = _.isNumber(val) || !notNumberRe.test(val);
 
