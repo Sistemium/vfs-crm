@@ -22,11 +22,8 @@
           property: 'servicePoint.address',
           maxLength: 35
         }, {
-          title: 'Butas',
-          property: 'servicePoint.apartment'
-        }, {
-          title: 'Durų kodas',
-          property: 'servicePoint.doorCode'
+          title: 'Butas (DK)',
+          property: 'apartmentAndDoorCode'
         }, {
           title: 'Sistema',
           property: 'filterSystem.name'
@@ -43,6 +40,13 @@
           format: 'yyyy.mm.dd',
           maxLength: 15
         }, {
+          title: 'X',
+          property: 'serviceFrequency',
+          type: 'number',
+          style: {
+            alignment: {horizontal: 'center'}
+          }
+        }, {
           title: 'Sistemos pastabos',
           property: 'serviceItem.info',
           maxLength: 30
@@ -57,6 +61,9 @@
           title: 'Kaina',
           property: 'servicePrice',
           type: 'number'
+        }, {
+          title: 'Apt. data',
+          maxLength: 20
         }
       ]
 

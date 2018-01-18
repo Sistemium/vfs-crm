@@ -50,7 +50,7 @@
 
       data = _.map(data, item => {
 
-        let {serviceItem} = item;
+        let {serviceItem, serviceFrequency} = item;
         let {filterSystem, servicePoint, installingDate, lastServiceDate} = serviceItem;
         let {servicePrice, guaranteePeriod} = serviceItem;
         let {filterSystemType} = filterSystem;
@@ -70,6 +70,10 @@
 
         let contacts = _.map(allPhones, phone => _.replace(ltphone(phone.address), /[ ]/g, '')).join(' ');
 
+        let {apartment, doorCode} = servicePoint;
+        let apartmentAndDoorCode = apartment &&
+          `${apartment}${doorCode ? ' (' + doorCode + ')' : ''}`;
+
         return _.defaults({
 
           lastServiceDate: lastServiceDate && moment(lastServiceDate).toDate(),
@@ -80,6 +84,8 @@
               font: {strike: guaranteeEnd < vm.monthDate}
             }
           },
+          apartmentAndDoorCode,
+          serviceFrequency,
           servicePoint,
           serviceItem,
           filterSystem,
