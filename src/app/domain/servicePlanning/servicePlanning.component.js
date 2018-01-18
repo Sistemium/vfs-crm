@@ -47,7 +47,6 @@
 
       let {data} = group;
       let name = `${vm.month} - ${group.servingMaster.name}`;
-      let now = new Date();
 
       data = _.map(data, item => {
 
