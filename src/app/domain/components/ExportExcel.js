@@ -93,6 +93,8 @@
             _.assign(cell.s, etc.style);
           }
 
+          _.defaultsDeep(cell.s, col.style);
+
           setCell(ws, cell, {c: colIdx, r: rowIdx + 1});
 
         });
