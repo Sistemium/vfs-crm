@@ -27,7 +27,7 @@
     const {
       ServicePlanning, Employee, Person, FilterSystem, Brand, ServicePoint,
       ServiceItem, ServiceContract, LegalEntity,
-      Site
+      Site, District
     } = Schema.models('');
 
     const ltphone = $filter('ltphone');
@@ -47,14 +47,20 @@
 
       let {data} = group;
       let name = `${vm.month} - ${group.servingMaster.name}`;
+      let now = new Date();
 
       data = _.map(data, item => {
 
         let {serviceItem} = item;
-        let {filterSystem, servicePoint} = serviceItem;
-        let {servicePrice} = serviceItem;
+        let {filterSystem, servicePoint, installingDate} = serviceItem;
+        let {servicePrice, guaranteePeriod} = serviceItem;
+        let {filterSystemType} = filterSystem;
 
-        servicePrice = servicePrice || filterSystem.servicePrice || filterSystem.filterSystemType.servicePrice;
+        servicePrice = servicePrice || filterSystem.servicePrice || filterSystemType.servicePrice;
+
+        guaranteePeriod = guaranteePeriod || filterSystem.guaranteePeriod || filterSystemType.guaranteePeriod;
+
+        let guaranteeEnd = installingDate && moment(installingDate).add(guaranteePeriod, 'months').toDate();
 
         let customer = servicePoint.currentServiceContract.customer();
         let allPhones = _.clone(customer.allPhones()) || [];
@@ -63,11 +69,18 @@
           allPhones.push(...contact.person.allPhones());
         });
 
-        let contacts = _.map(allPhones, phone => ltphone(phone.address)).join('\r');
+        let contacts = _.map(allPhones, phone => _.replace(ltphone(phone.address), /[ ]/g, '')).join(' ');
 
         return _.defaults({
 
           lastServiceDate: moment(item.lastServiceDate).toDate(),
+          installingDate,
+          guaranteeEnd: {
+            val: guaranteeEnd,
+            style: {
+              font: {strike: guaranteeEnd < vm.monthDate}
+            }
+          },
           servicePoint,
           serviceItem,
           filterSystem,
@@ -115,9 +128,10 @@
         FilterSystem.findAll(),
         Brand.findAll(),
         Employee.findAll(),
-        ServicePoint.findAll({siteId}),
+        ServicePoint.findAllWithRelations({siteId})('Locality'),
         ServiceContract.findAll({siteId}),
         ServiceItem.findAll(),
+        District.findAll(),
         ServicePlanning.findAllWithRelations({where}, {bypassCache: true})('ServiceItem')
       ];
 
@@ -137,7 +151,7 @@
 
       _.each(groups, (data, servingMasterId) => {
 
-        data = _.sortBy(data, 'nextServiceDate');
+        data = _.orderBy(data, ['serviceItem.servicePoint.locality.district.name', 'nextServiceDate']);
 
         _.each(data, item => {
 

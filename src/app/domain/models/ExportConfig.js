@@ -13,7 +13,10 @@
         }, {
           title: 'Kontaktai',
           property: 'contacts',
-          maxLength: 20
+          maxLength: 15
+        }, {
+          title: 'Apskritis',
+          property: 'servicePoint.locality.district.name'
         }, {
           title: 'Adresas',
           property: 'servicePoint.address',
@@ -27,6 +30,12 @@
         }, {
           title: 'Sistema',
           property: 'filterSystem.name'
+        }, {
+          title: 'Garantija iki',
+          property: 'guaranteeEnd',
+          type: 'date',
+          format: 'yyyy.mm.dd',
+          maxLength: 15
         }, {
           title: 'Paskutinis apt.',
           property: 'lastServiceDate',
