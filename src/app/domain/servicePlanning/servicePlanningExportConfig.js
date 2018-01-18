@@ -2,9 +2,8 @@
 
 (function () {
 
-  angular
-    .module('webPage')
-    .constant('ExportConfig', {
+  angular.module('webPage')
+    .constant('servicePlanningExportConfig', {
 
       ServicePlanning: [
         {
@@ -47,12 +46,12 @@
             alignment: {horizontal: 'center'}
           }
         }, {
-          title: 'Sistemos pastabos',
-          property: 'serviceItem.info',
+          title: 'Papildomas aptarnavimas',
+          property: 'serviceItem.additionalServiceInfo',
           maxLength: 30
         }, {
-          title: 'Taško pastabos',
-          property: 'servicePoint.info',
+          title: 'Pastabos',
+          property: 'serviceItemPointInfo',
           maxLength: 30
         }, {
           title: 'Dovanos',

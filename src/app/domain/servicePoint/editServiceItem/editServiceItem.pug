@@ -61,6 +61,14 @@
         value='vm.serviceItem.lastServiceDate'
         )
 
+    .additional-service-info
+
+      label(for='additionalServiceInfo') Papildomas aptarnavimas
+
+      textarea#additionalServiceInfo.form-control(
+      ng-model='vm.serviceItem.additionalServiceInfo'
+      )
+
     .field-group.animate-show(ng-show='vm.serviceItem.filterSystemId')
 
       .service-frequency

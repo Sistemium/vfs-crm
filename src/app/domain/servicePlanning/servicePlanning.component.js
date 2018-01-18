@@ -14,7 +14,7 @@
     });
 
   function servicePlanningController($scope, saControllerHelper, Schema, moment, Editing,
-                                     ExportConfig, ExportExcel, $filter, $q) {
+                                     servicePlanningExportConfig, ExportExcel, $filter, $q) {
 
     const vm = saControllerHelper.setup(this, $scope)
       .use({
@@ -74,6 +74,8 @@
         let apartmentAndDoorCode = apartment &&
           `${apartment}${doorCode ? ' (' + doorCode + ')' : ''}`;
 
+        let serviceItemPointInfo = _.filter([servicePoint.info, serviceItem.info]).join(' ');
+
         return _.defaults({
 
           lastServiceDate: lastServiceDate && moment(lastServiceDate).toDate(),
@@ -91,13 +93,14 @@
           filterSystem,
           customer,
           servicePrice,
-          contacts
+          contacts,
+          serviceItemPointInfo
 
         }, item);
 
       });
 
-      ExportExcel.exportArrayWithConfig(data, ExportConfig.ServicePlanning, name);
+      ExportExcel.exportArrayWithConfig(data, servicePlanningExportConfig.ServicePlanning, name);
 
     }
 
