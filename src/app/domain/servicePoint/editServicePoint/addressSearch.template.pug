@@ -1,0 +1,18 @@
+.address-search-results.scroll-y(resize resize-offset-top='10')
+
+  .no-results(ng-if='!vm.matchingAddresses.length')
+    span(ng-if='vm.addressSearch') Nėra panašių adresų
+    span(ng-if='!vm.addressSearch') Įveskite paieškos tekstą
+
+  a.address(
+  href
+  ng-repeat='address in vm.matchingAddresses track by $index'
+  ng-click='vm.applyAddress(address)'
+  )
+
+    .district {{ address.district.name }}
+    .locality {{ address.locality.name }}
+    .street {{ address.street.name }}
+    .house
+      span {{ address.house }}
+      span(ng-if='address.apartment') -{{ address.apartment }}

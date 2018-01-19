@@ -29,6 +29,19 @@
       ready-state='vm.readyState.currentServiceContractId'
       )
 
+    .address-search
+
+      input.form-control(
+      autocomplete='off'
+      ng-keyup='vm.onAddressSearchKeyPress($event)'
+      ng-model='vm.addressSearch'
+      ng-model-options='{debounce: 300}'
+      placeholder='Adresų paieška'
+      uib-popover-template='"app/domain/servicePoint/editServicePoint/addressSearch.template.html"'
+      popover-is-open='vm.isAddressSearchOpen'
+      popover-placement='bottom-left'
+      )
+
     .field-group
 
       .district
