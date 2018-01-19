@@ -50,6 +50,7 @@
 
         vfs-dropdown(
         ng-model='vm.districtId'
+        disable-edit='true'
         items-data-source-name='District'
         items-name-property='name'
         placement='bottom-left'
@@ -64,6 +65,7 @@
         ng-required='true'
         items-data-source-name='Locality'
         items-name-property='name'
+        disable-edit='true'
         ng-model='vm.servicePoint.localityId'
         filter='{districtId: vm.districtId}'
         placement='bottom-left'
@@ -80,6 +82,7 @@
         ng-required='true'
         ng-model='vm.servicePoint.streetId'
         items-data-source-name='Street'
+        disable-edit='true'
         items-name-property='name'
         filter='{localityId: vm.servicePoint.localityId}'
         placement='bottom-left'

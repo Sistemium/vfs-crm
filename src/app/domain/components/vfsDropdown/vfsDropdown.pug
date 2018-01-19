@@ -22,7 +22,7 @@
 
       span.caret()
 
-  button-edit(ng-if='vm.currentItem.id' button-click='vm.editClick()')
+  button-edit(ng-if='vm.currentItem.id && !vm.disableEdit' button-click='vm.editClick()')
   button-add(button-click='vm.addClick()')
 
 .edit-block(

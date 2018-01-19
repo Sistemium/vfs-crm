@@ -12,7 +12,8 @@
       filter: '=',
       placement: '@',
       readyState: '=?',
-      autoNew: '@'
+      autoNew: '@',
+      disableEdit: '='
     },
 
     templateUrl: 'app/domain/components/vfsDropdown/vfsDropdown.html',
