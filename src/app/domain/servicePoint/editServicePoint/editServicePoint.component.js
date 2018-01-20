@@ -90,7 +90,7 @@
 
       let {addressSearch} = vm;
 
-      if (!addressSearch) {
+      if (!_.get(addressSearch, 'length') > 4) {
         vm.matchingAddresses = [];
         return;
       }
@@ -160,6 +160,8 @@
 
     function splitAddress(addressSearch) {
 
+      addressSearch = _.replace(addressSearch, / - /g, '-');
+
       let parts = _.map(addressSearch.split(','), _.trim);
 
       let streetIndex = _.findIndex(parts, part => part.match(/[ ](g|pr|tak)([. ]|$)/));
@@ -170,7 +172,7 @@
 
       let {street, locality, district, house, apartment} = {};
 
-      let streetPart = false;
+      let streetPart, housePart;
 
       if (streetIndex >= 0) {
 
@@ -185,23 +187,42 @@
         }
 
       } else if (parts.length === 2) {
-        locality = matchLocality(parts[1]);
-        district = matchDistrict(parts[0]);
+
+        let matchLocalityName = parts[1].match(/(.*) (m|k|km)([. ]|$)(.*)/);
+
+        if (matchLocalityName) {
+          locality = matchLocalityName[1];
+          housePart = matchLocalityName[4];
+          district = matchDistrict(parts[0]);
+        } else {
+          streetPart = parts[1];
+          locality = matchLocality(parts[0]);
+        }
+
       } else if (parts.length === 1) {
-        streetPart = parts[0];
+
+        let part = parts[0];
+
+        let matchLocalityName = part.match(/(.*) (m|k|km)([. ]|$)(.*)/);
+
+        if (matchLocalityName) {
+          locality = matchLocalityName[1];
+          housePart = matchLocalityName[4];
+        } else {
+          streetPart = part;
+        }
+
       }
 
       if (streetPart) {
-
         street = matchStreet(streetPart);
-        let housePart = matchHousePart(streetPart);
+        housePart = matchHousePart(streetPart);
+      }
 
-        if (housePart) {
-          let houseApt = matchHouseApt(housePart);
-          house = houseApt.house;
-          apartment = houseApt.apartment;
-        }
-
+      if (housePart) {
+        let houseApt = matchHouseApt(housePart);
+        house = houseApt.house;
+        apartment = houseApt.apartment;
       }
 
       return {house, street, locality, district, apartment};
@@ -236,7 +257,7 @@
 
         let apartment = null, house = null;
 
-        let match = string.match(/(^[^-]*)([-]|$)([0-9]*)/);
+        let match = _.trim(string).match(/(^[^-]*)([-]|$)([0-9]*)/);
 
         if (match) {
           house = match[1];
@@ -249,14 +270,14 @@
 
       function matchHousePart(string) {
 
-        let street = matchStreet(string);
+        let res = matchStreet(string);
 
-        if (street) {
-          street = _.trim(_.replace(string, street, ''));
-          street = _.replace(street, /^(g|pr|tak)[. -]*/i, '');
+        if (res) {
+          res = _.trim(_.replace(string, res, ''));
+          res = _.replace(res, /^(g|pr|tak)[. -]*/i, '');
         }
 
-        return street;
+        return _.trim(res);
 
       }
 
