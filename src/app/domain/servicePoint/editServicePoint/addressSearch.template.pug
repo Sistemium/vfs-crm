@@ -12,7 +12,8 @@
 
     .district {{ address.district.name }}
     .locality {{ address.locality.name }}
-    .street {{ address.street.name }}
+    .street(ng-if='address.street') {{ address.street.name }}
+    i.glyphicon.glyphicon-alert(ng-if='!address.street && address.locality.streetCount')
     .house
       span {{ address.house }}
       span(ng-if='address.apartment') -{{ address.apartment }}

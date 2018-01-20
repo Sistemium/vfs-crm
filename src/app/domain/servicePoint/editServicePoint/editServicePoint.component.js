@@ -16,7 +16,7 @@
 
   function editServicePointController(saControllerHelper, $scope, ReadyStateHelper, Schema) {
 
-    const {Site, Street, District} = Schema.models();
+    const {Site, Street, Locality, District} = Schema.models();
 
     const vm = ReadyStateHelper.setupController(this, $scope, 'servicePoint');
 
@@ -99,39 +99,75 @@
 
       console.warn(addressSearch, split);
 
-      let {street, locality, house, apartment} = split;
+      let {street, locality, house, apartment, district} = split;
+      let busy = false;
 
       if (street) {
-
-        vm.isAddressSearchOpen = true;
-
-        let where = {
-          name: {'like': `%${likeLt(street)}%`}
-        };
-
-        return Street.findAllWithRelations({where}, {limit: 30})('Locality')
-          .then(res => _.map(res, street => {
-
-            let {locality} = street;
-            let {district} = locality;
-            return {street, locality, district, house, apartment};
-
-          }))
-          .then(addresses => {
-
-            if (locality) {
-              let re = new RegExp(likeLt(locality), 'i');
-              return _.filter(addresses, address => address.locality.name.match(re));
-            }
-
-            return addresses;
-
-          })
-          .then(res => vm.matchingAddresses = res);
-
+        busy = findAddressesByStreet(street, locality, house, apartment);
+      } else if (locality) {
+        busy = findAddressesByLocality(locality, district, house, apartment);
+      } else {
+        vm.matchingAddresses = [];
+        return;
       }
 
-      vm.matchingAddresses = [];
+      busy.then(res => {
+        vm.matchingAddresses = res;
+        vm.isAddressSearchOpen = true;
+      });
+
+    }
+
+    function findAddressesByLocality(locality, district, house, apartment) {
+
+      let where = {
+        name: {'like': `%${likeLt(locality)}%`}
+      };
+
+      return Locality.findAll({where}, {limit: 30})
+        .then(res => _.map(res, locality => {
+
+          let {district} = locality;
+          return {locality, district, house, apartment};
+
+        }))
+        .then(addresses => {
+
+          if (district) {
+            let re = new RegExp(likeLt(district), 'i');
+            return _.filter(addresses, address => address.district.name.match(re));
+          }
+
+          return addresses;
+
+        });
+
+    }
+
+    function findAddressesByStreet(street, locality, house, apartment) {
+
+      let where = {
+        name: {'like': `%${likeLt(street)}%`}
+      };
+
+      return Street.findAllWithRelations({where}, {limit: 30})('Locality')
+        .then(res => _.map(res, street => {
+
+          let {locality} = street;
+          let {district} = locality;
+          return {street, locality, district, house, apartment};
+
+        }))
+        .then(addresses => {
+
+          if (locality) {
+            let re = new RegExp(likeLt(locality), 'i');
+            return _.filter(addresses, address => address.locality.name.match(re));
+          }
+
+          return addresses;
+
+        });
 
     }
 
