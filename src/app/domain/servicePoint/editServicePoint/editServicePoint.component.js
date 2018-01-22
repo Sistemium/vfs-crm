@@ -111,9 +111,10 @@
         return;
       }
 
-      busy.then(res => {
+      vm.addressesBusy = busy.then(res => {
         vm.matchingAddresses = res;
         vm.isAddressSearchOpen = true;
+        vm.addressesBusy = false;
       });
 
     }
@@ -124,23 +125,17 @@
         name: {'like': `%${likeLt(locality)}%`}
       };
 
+      if (district) {
+        where['district.name'] = {'like': `%${likeLt(district)}%`};
+      }
+
       return Locality.findAll({where}, {limit: 30})
         .then(res => _.map(res, locality => {
 
           let {district} = locality;
           return {locality, district, house, apartment};
 
-        }))
-        .then(addresses => {
-
-          if (district) {
-            let re = new RegExp(likeLt(district), 'i');
-            return _.filter(addresses, address => address.district.name.match(re));
-          }
-
-          return addresses;
-
-        });
+        }));
 
     }
 
@@ -150,24 +145,20 @@
         name: {'like': `%${likeLt(street)}%`}
       };
 
-      return Street.findAllWithRelations({where}, {limit: 30})('Locality')
+      if (locality) {
+        where['locality.name'] = {'like': `%${likeLt(locality)}%`};
+      }
+
+      let options = {limit: 30, cacheResponse: false};
+
+      return Street.findAllWithRelations({where}, options)('Locality')
         .then(res => _.map(res, street => {
 
           let {locality} = street;
           let {district} = locality;
           return {street, locality, district, house, apartment};
 
-        }))
-        .then(addresses => {
-
-          if (locality) {
-            let re = new RegExp(likeLt(locality), 'i');
-            return _.filter(addresses, address => address.locality.name.match(re));
-          }
-
-          return addresses;
-
-        });
+        }));
 
     }
 
