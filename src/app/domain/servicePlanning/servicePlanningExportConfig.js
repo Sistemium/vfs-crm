@@ -30,13 +30,13 @@
           title: 'Garantija iki',
           property: 'guaranteeEnd',
           type: 'date',
-          format: 'yyyy.mm.dd',
+          format: 'yyyy-mm-dd',
           maxLength: 15
         }, {
           title: 'Paskutinis apt.',
           property: 'lastServiceDate',
           type: 'date',
-          format: 'yyyy.mm.dd',
+          format: 'yyyy-mm-dd',
           maxLength: 15
         }, {
           title: 'X',
@@ -62,7 +62,7 @@
           type: 'number'
         }, {
           title: 'Apt. data',
-          maxLength: 20
+          maxLength: 30
         }
       ]
 

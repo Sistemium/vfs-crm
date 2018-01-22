@@ -21,13 +21,14 @@
         monthDate: new Date(this.month),
         filterSystemClick,
         servicePointClick,
-        exportClick
+        exportClick,
+        saveItemService
       });
 
     const {
       ServicePlanning, Employee, Person, FilterSystem, Brand, ServicePoint,
       ServiceItem, ServiceContract, LegalEntity,
-      Site, District
+      Site, District, ServiceItemService
     } = Schema.models('');
 
     const ltphone = $filter('ltphone');
@@ -42,6 +43,40 @@
     /*
     Functions
      */
+
+    function saveItemService(item) {
+
+      let {serviceItemId, newServiceDate, additionalServiceInfo} = item;
+
+      ServiceItemService.create({
+        serviceItemId,
+        date: newServiceDate,
+        info: additionalServiceInfo
+      })
+        .then(() => {
+
+          let {serviceItem} = item;
+
+          if (additionalServiceInfo) {
+            let info = `${serviceItem.additionalServiceInfo || ''} ${newServiceDate}: ${additionalServiceInfo}`;
+            serviceItem.additionalServiceInfo = _.trim(info);
+          }
+
+          _.assign(serviceItem, {
+            lastServiceDate: newServiceDate
+          });
+
+          return serviceItem.DSCreate();
+
+        })
+        .then(() => {
+          ServicePlanning.find(item.id, {bypassCache: true})
+            .then(() => {
+              delete item.newServiceDate;
+              delete item.additionalServiceInfo;
+            })
+        });
+    }
 
     function exportClick(group) {
 
