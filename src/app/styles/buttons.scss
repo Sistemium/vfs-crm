@@ -1,7 +1,7 @@
 @import "variables";
 
 a:hover, a:focus {
-  color: darken($primary-color, 12%);
+  color: $link-hover-color;
   outline: none;
 }
 
