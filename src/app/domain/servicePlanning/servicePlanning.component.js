@@ -22,6 +22,7 @@
         filterSystemClick,
         servicePointClick,
         exportClick,
+        exportAllClick,
         saveItemService
       });
 
@@ -32,6 +33,8 @@
     } = Schema.models('');
 
     const ltphone = $filter('ltphone');
+
+    const exportConfig = servicePlanningExportConfig.ServicePlanning;
 
     vm.watchScope('vm.monthDate', () => {
       vm.month = moment(vm.monthDate).format('YYYY-MM');
@@ -78,12 +81,38 @@
         });
     }
 
+    function exportAllClick() {
+
+      let groups = _.filter(vm.groupedData, {cls: 'group'});
+
+      if (!groups.length) {
+        return;
+      }
+
+      let sheets = _.map(groups, group => {
+        let data = exportData(group.data);
+        return {
+          name: group.servingMaster.name,
+          sheet: ExportExcel.worksheetFromArrayWithConfig(data, exportConfig)
+        }
+      });
+
+      ExportExcel.exportWorksheetsAs(sheets, `Aptarnavimas ${vm.month}`);
+
+    }
+
     function exportClick(group) {
 
       let {data} = group;
       let name = `${vm.month} - ${group.servingMaster.name}`;
 
-      data = _.map(data, item => {
+      ExportExcel.exportArrayWithConfig(exportData(data), exportConfig, name);
+
+    }
+
+    function exportData(data) {
+
+      return _.map(data, item => {
 
         let {serviceItem, serviceFrequency} = item;
         let {filterSystem, servicePoint, installingDate, lastServiceDate} = serviceItem;
@@ -134,8 +163,6 @@
         }, item);
 
       });
-
-      ExportExcel.exportArrayWithConfig(data, servicePlanningExportConfig.ServicePlanning, name);
 
     }
 

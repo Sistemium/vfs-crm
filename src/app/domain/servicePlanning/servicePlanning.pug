@@ -22,6 +22,14 @@
           button.btn.btn-default(type='button' ng-click='vm.monthPickerOpen = !vm.monthPickerOpen')
             i.glyphicon.glyphicon-calendar
 
+    .space
+
+    .buttons
+      a(href ng-click='vm.exportAllClick()' title='Atsisiųsti Excel')
+        i.glyphicon.glyphicon-download-alt
+        span Atsisiųsti viską
+
+
   .planning(cg-busy='vm.cgBusy')
 
     .headers

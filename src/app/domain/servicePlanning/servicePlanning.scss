@@ -4,6 +4,14 @@
 
   .filters {
 
+    display: flex;
+    align-items: center;
+    margin: 10px 0 25px;
+
+    .space {
+      flex: 1;
+    }
+
     > .month {
 
       display: flex;
@@ -20,7 +28,9 @@
 
     }
 
-    margin: 10px 0 25px;
+    > .buttons {
+
+    }
 
   }
 
