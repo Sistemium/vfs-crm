@@ -5,7 +5,9 @@
   function ExportExcel(moment, XLSX, FileSaver) {
 
     return {
-      exportArrayWithConfig
+      exportArrayWithConfig,
+      worksheetFromArrayWithConfig,
+      exportWorksheetsAs
     };
 
     function Workbook() {
@@ -116,15 +118,29 @@
 
     function exportArrayWithConfig(data, config, name) {
 
-      let wb = new Workbook();
-
       name = name || 'Таблица';
 
-      wb.SheetNames.push(name);
-      wb.Sheets[name] = worksheetFromArrayWithConfig(data, config);
+      let ws = {
+        name,
+        sheet: worksheetFromArrayWithConfig(data, config)
+      };
+
+      exportWorksheetsAs([ws], name);
+
+    }
+
+    function exportWorksheetsAs(sheets, name) {
+
+      let wb = new Workbook();
+
+      _.each(sheets, ws => {
+        let {name, sheet} = ws;
+        wb.SheetNames.push(name);
+        wb.Sheets[name] = sheet;
+      });
 
       let wbOut = XLSX.write(wb, {bookType: 'xlsx', bookSST: false, type: 'binary'});
-      let fileName = name + '.xlsx';
+      let fileName = `${name}.xlsx`;
 
       FileSaver.saveWorkBookAs(wbOut, fileName);
 
