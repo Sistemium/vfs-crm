@@ -47,7 +47,7 @@
       editPhoto: Editing.editModal('edit-picture', 'Fotografijos Redagavimas'),
       editServicePointClick: Editing.editModal('edit-service-point', 'Aptarnavimo Taško Redagavimas'),
       contactClick: Editing.editModal('edit-service-point-contact', 'Redaguoti Kontaktą'),
-      editServiceItemClick: Editing.editModal('edit-service-item', 'Redaguoti Įrenginį')
+      editServiceItemClick
 
     });
 
@@ -77,6 +77,13 @@
     /*
      Functions
      */
+
+    function editServiceItemClick(item) {
+
+      Editing.editModal('edit-service-item', 'Redaguoti Įrenginį')(item)
+        .then(() => vm.servicePoint.refreshCache());
+
+    }
 
     function deleteServicePointContactClick(item) {
 

@@ -146,10 +146,13 @@
 
       let cached = cache[this.id];
 
-      if (cached) return cached;
+      if (!cached) {
+        cache[this.id] = [];
+        this.DSLoadRelations('ServiceItem')
+          .then(res => cache[this.id] = _.orderBy(res.servingItems, ['lastServiceDate'], ['desc']));
+      }
 
-      cache[this.id] = this.DSLoadRelations('ServiceItem')
-        .then(res => cache[this.id] = res.servingItems);
+      return cache[this.id];
 
     }
 
