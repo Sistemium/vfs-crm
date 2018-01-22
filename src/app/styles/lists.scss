@@ -51,8 +51,14 @@ li.active {
 
 }
 
-.list-group li {
-  list-style: none;
+.list-group {
+
+  margin-bottom: 0;
+
+  li {
+    list-style: none;
+  }
+  
 }
 
 .block-to-collapse {
