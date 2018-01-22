@@ -40,14 +40,15 @@
       padding: 0 10px;
       position: relative;
 
-      .address {
+      .name {
         @extend .ellipsis;
         margin-top: 3px;
         font-weight: 400;
         padding-right: 22px;
+        min-height: 19px;
       }
 
-      .name {
+      .address {
         @extend .ellipsis;
         align-self: flex-end;
         max-width: 100%;

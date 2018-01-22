@@ -18,6 +18,6 @@
     ng-click='vm.servicePointClick(servicePoint)'
     ng-class='{active: servicePoint.id === vm.currentServicePointId}'
     )
-      .address {{ servicePoint.address }}
       .name {{ servicePoint.currentServiceContract.customer().name}}
+      .address {{ servicePoint.address }}
       .badge {{ servicePoint.servingItemsLazy().length }}

@@ -74,10 +74,20 @@
           add: 'Naujas Aptarnavimo Taškas'
         },
 
-        filter: filterServicePoints
+        filter: filterServicePoints,
+        orderBy
       }
 
     });
+
+    function orderBy(point) {
+
+      let customer = _.result(point, 'currentServiceContract.customer');
+      let name = _.get(customer, 'name') || '';
+
+      return `${name}|${point.address}`;
+
+    }
 
     function recentServingMaster() {
       return _.get(_.find(this.servingItemsLazy(), 'servingMasterId'), 'servingMaster');
@@ -87,7 +97,9 @@
 
       if (!text) return data;
 
-      let re = new RegExp(_.escapeRegExp(text), 'i');
+      text = _.replace(_.escapeRegExp(_.trim(text)), /[ ]/g, '.*');
+
+      let re = new RegExp(text, 'i');
 
       return _.filter(data, item => {
 
@@ -95,7 +107,11 @@
 
         let contract = _.result(item, 'currentServiceContract.name');
 
-        return re.test(contract);
+        return re.test(contract) ||
+          _.find(item.servingItems, serviceItem => {
+            return re.test(_.get(serviceItem, 'servingMaster.name')) ||
+              re.test(_.get(serviceItem, 'filterSystem.name'));
+          });
 
       });
 

@@ -21,10 +21,12 @@
     });
 
     vm.watchScope('vm.searchText', onSearch);
-    vm.watchScope(() => _.get(Site.meta.getCurrent(), 'id'), onSiteChange);
 
-    onStateChange($state.current, $state.params);
-    refresh();
+    refresh()
+      .then(() => {
+        vm.watchScope(() => _.get(Site.meta.getCurrent(), 'id'), onSiteChange);
+        onStateChange($state.current, $state.params);
+      });
 
     /*
      Functions
@@ -56,7 +58,7 @@
       let {searchText} = vm;
 
       vm.servicePoints = searchText ? ServicePoint.meta.filter(vm.data, searchText) : vm.data;
-      vm.servicePoints = $filter('orderBy')(vm.servicePoints, 'address');
+      vm.servicePoints = $filter('orderBy')(vm.servicePoints, ServicePoint.meta.orderBy);
 
     }
 
@@ -81,7 +83,7 @@
         ServicePoint.findAll()
       ];
 
-      vm.promise = vm.setBusy(busy);
+      return (vm.promise = vm.setBusy(busy));
 
     }
 

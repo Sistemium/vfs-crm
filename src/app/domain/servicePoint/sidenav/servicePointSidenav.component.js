@@ -65,7 +65,7 @@
       let {searchText} = vm;
 
       vm.servicePoints = searchText ? ServicePoint.meta.filter(vm.data, searchText) : vm.data;
-      vm.servicePoints = $filter('orderBy')(vm.servicePoints, 'address');
+      vm.servicePoints = $filter('orderBy')(vm.servicePoints, ServicePoint.meta.orderBy);
       restoreScrollPosition();
 
     }
