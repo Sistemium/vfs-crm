@@ -105,3 +105,20 @@
         ng-model='vm.serviceItem.guaranteePeriod'
         ng-min='0'
         )
+
+    .service-item-services(ng-if='vm.serviceItemServices.length')
+
+      label Aptarnavimų istorija
+
+      .list-group
+
+        .list-group-item.service-item-service(ng-repeat='service in vm.serviceItemServices track by service.id')
+          .date {{ service.date | amDateFormat }}
+          .info {{ service.info }}
+          .buttons
+            a.remove(
+            href ng-click='vm.deleteServiceClick(service)'
+            title='Ištrinti serviso įrašą'
+            ng-class='{confirmation: vm.deleteConfirm === service.id}'
+            )
+              i.glyphicon.glyphicon-remove

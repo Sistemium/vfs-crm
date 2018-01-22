@@ -37,6 +37,10 @@
           ServiceContractItem: {
             localField: 'serviceContractItems',
             foreignKey: 'serviceItemId'
+          },
+          ServiceItemService: {
+            localField: 'services',
+            foreignKey: 'serviceItemId'
           }
         }
 
