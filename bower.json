@@ -17,7 +17,7 @@
     "ng-appcache": "^2.0.1",
     "angular-ui-mask": "^1.8.7",
     "sistemium-angular": "^0.8.6",
-    "sistemium-angular-bootstrap": "^0.5.5",
+    "sistemium-angular-bootstrap": "^0.5.6",
     "angular-busy": "^4.1.4",
     "angular-vs-repeat": "Sistemium/angular-vs-repeat#stm-1.1.9",
     "angular-moment": "^1.0.1",
