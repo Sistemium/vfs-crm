@@ -2,7 +2,7 @@
 
   .address
 
-    .service-point-location
+    .service-point-title
 
       .service-point-map
 
@@ -31,7 +31,9 @@
           )
 
       .service-point-add-info
-        .point-address {{vm.servicePoint.address}}
+
+        .address {{vm.servicePoint.address}}
+        .info {{vm.servicePoint.info}}
 
         .contract
           .text-warning(ng-if='vm.servicePoint.currentServiceContractId === null') Nėra aptarnavimo sutarties

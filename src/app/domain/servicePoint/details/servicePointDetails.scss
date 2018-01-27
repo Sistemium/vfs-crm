@@ -37,7 +37,7 @@ $background-service-point-color: lighten($gray-background-color, 0%);
 
   }
 
-  .address, .contacts, .items, .service-point-pictures {
+  > .address, .contacts, .items, .service-point-pictures {
 
     padding-bottom: 10px;
     padding-top: 10px;
@@ -72,7 +72,7 @@ $background-service-point-color: lighten($gray-background-color, 0%);
     }
   }
 
-  .address {
+  > .address {
 
     @extend %flex-row-nowrap;
     justify-content: space-between;
@@ -81,7 +81,7 @@ $background-service-point-color: lighten($gray-background-color, 0%);
       margin: 0 8px;
     }
 
-    .service-point-location {
+    .service-point-title {
 
       @extend %flex-row-nowrap;
       justify-content: flex-start;
@@ -115,39 +115,24 @@ $background-service-point-color: lighten($gray-background-color, 0%);
 
         min-height: 120px;
 
-        @extend %flex-column-wrap;
+        display: flex;
+        flex-direction: column;
+        font-size: 125%;
 
-        .point-address {
+        .address {
+          @extend .ellipsis;
+          order: 2;
+        }
 
-          font-size: 25px;
-          line-height: 30px;
-          overflow: hidden;
-          flex: 1;
-
-          @media (max-width: $screen-md-max) {
-            font-size: 20px;
-            line-height: 25px;
-          }
-
-          @media (max-width: $screen-sm-max) {
-            font-size: 17px;
-            text-align: justify;
-            line-height: 20px;
-          }
-
+        .info {
+          color: $gray;
+          font-size: 80%;
+          @extend .ellipsis;
+          order: 3;
         }
 
         .contract {
-
-          @extend %flex-row-wrap;
-
-          color: $gray;
-          font-size: 17px;
-
-          @media (max-width: $screen-sm-max) {
-            //height: 45px;
-          }
-
+          order: 1;
         }
 
       }
