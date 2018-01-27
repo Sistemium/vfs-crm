@@ -133,8 +133,15 @@
     }
 
     function personNameClick(ev, item) {
-      Editing.editModal('edit-person', 'Asmens Redagavimas')(item);
+
       ev.stopPropagation();
+
+      let component = `edit-${_.kebabCase(item.constructor.name)}`;
+      let model = Schema.model(item.constructor.name);
+      let title = `${model.meta.label.genitive} Redagavimas`;
+
+      Editing.editModal(component, title)(item);
+
     }
 
     function onChangeFile(item) {

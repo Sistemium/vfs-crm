@@ -49,7 +49,8 @@
 
       meta: {
         label: {
-          add: 'Naujas asmuo'
+          add: 'Naujas asmuo',
+          genitive: 'Asmens'
         },
         mobileNumberMask: '+370 (999) 99-999'
       },

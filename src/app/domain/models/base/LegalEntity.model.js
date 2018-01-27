@@ -37,7 +37,8 @@
 
       meta: {
         label: {
-          add: 'Nauja įmonė'
+          add: 'Nauja įmonė',
+          genitive: 'Įmonės'
         }
       }
 
