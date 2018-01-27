@@ -174,15 +174,15 @@
 
             .filter-system
               span {{ item.filterSystem.brand.name }} {{ item.filterSystem.name }}
-              span(ng-if='!item.filterSystem.brand.name') {{ item.info }}
+              .info(ng-if='item.info') {{ item.info }}
 
             .installing-master
               span.master {{ item.installingMaster.name }}
-              span.date {{ item.installingDate }}
+              span.date(ng-if='item.installingDate') {{ item.installingDate }}
 
             .serving-master
               span {{ item.servingMaster.name }}
-              span.date {{ item.lastServiceDate }}
+              span.date(ng-if='item.lastServiceDate') {{ item.lastServiceDate }}
 
             //.service-contract
               span(ng-if='item.currentServiceContract')

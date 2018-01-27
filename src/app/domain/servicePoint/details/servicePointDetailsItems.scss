@@ -90,14 +90,14 @@
             @extend .ellipsis;
           }
 
+          .date, .info {
+            color: $gray;
+          }
+
           .installing-master, .serving-master {
 
             span {
               height: 20px;
-            }
-
-            .date {
-              color: $gray;
             }
 
             display: flex;
