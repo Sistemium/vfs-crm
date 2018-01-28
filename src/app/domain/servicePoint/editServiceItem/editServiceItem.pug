@@ -2,46 +2,28 @@
 
   .form
 
-    .filter-system
+    .field-group
 
-      label Filtravimo sistema
+      .filter-system
 
-      vfs-dropdown(
-      items-data-source-name='FilterSystem'
-      items-group-property='brand.name'
-      ng-model='vm.serviceItem.filterSystemId'
-      ready-state='vm.readyState.filterSystemId'
-      )
+        label Filtravimo sistema
 
-    .installing-master
+        vfs-dropdown(
+        items-data-source-name='FilterSystem'
+        items-group-property='brand.name'
+        ng-model='vm.serviceItem.filterSystemId'
+        ready-state='vm.readyState.filterSystemId'
+        )
 
-      label Montuotojas
+      .info
 
-      vfs-dropdown(
-      items-data-source-name='Employee'
-      ng-model='vm.serviceItem.installingMasterId'
-      ready-state='vm.readyState.installingMasterId'
-      )
+        label(for='service-point-item-edit-info') Pastaba
 
-    .serving-master
-
-      label Aptarnavimo meistras
-
-      vfs-dropdown(
-      items-data-source-name='Employee'
-      ng-model='vm.serviceItem.servingMasterId'
-      ready-state='vm.readyState.servingMasterId'
-      )
-
-    .info
-
-      label(for='service-point-item-edit-info') Pastaba
-
-      input.form-control#service-point-item-edit-info(
-      autocomplete='off'
-      ng-model='vm.serviceItem.info'
-      placeholder='Komentaras arba paaiškinimas'
-      )
+        input.form-control#service-point-item-edit-info(
+        autocomplete='off'
+        ng-model='vm.serviceItem.info'
+        placeholder='Komentaras arba paaiškinimas'
+        )
 
     .field-group
 
@@ -53,12 +35,34 @@
         value='vm.serviceItem.installingDate'
         )
 
+      .installing-master
+
+        label Montuotojas
+
+        vfs-dropdown(
+        items-data-source-name='Employee'
+        ng-model='vm.serviceItem.installingMasterId'
+        ready-state='vm.readyState.installingMasterId'
+        )
+
+    .field-group
+
       .last-service-date
 
         label Paskutinė aptarnavimo data
 
         sab-date-picker-input(
         value='vm.serviceItem.lastServiceDate'
+        )
+
+      .serving-master
+
+        label Aptarnavimo meistras
+
+        vfs-dropdown(
+        items-data-source-name='Employee'
+        ng-model='vm.serviceItem.servingMasterId'
+        ready-state='vm.readyState.servingMasterId'
         )
 
     .additional-service-info
@@ -69,7 +73,7 @@
       ng-model='vm.serviceItem.additionalServiceInfo'
       )
 
-    .field-group.animate-show(ng-show='vm.serviceItem.filterSystemId')
+    .field-group.animate-show(ng-disabled='!vm.serviceItem.filterSystemId')
 
       .service-frequency
         label(for='frequency') Aptarnavimo dažnumas
