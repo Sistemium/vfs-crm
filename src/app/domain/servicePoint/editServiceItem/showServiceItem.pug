@@ -1,11 +1,6 @@
 .show-service-item
 
-  button.btn.btn-link.toggle-editing(ng-click='vm.editing = !vm.editing')
-    i.glyphicon.glyphicon-edit
-
-  edit-service-item(ng-if='vm.editing' ng-model='vm.serviceItem' ready-state='vm.readyState')
-
-  fieldset(ng-if='!vm.editing')
+  fieldset
 
     .lead.filter-system
       span {{ vm.serviceItem.filterSystem.name }}
@@ -15,9 +10,6 @@
       strong {{ vm.serviceItem.installingMaster.name || 'Nežinoma kas' }}
       span montavo
       strong {{ vm.serviceItem.installingDate | amDateFormat }}
-
-    //.field(ng-if='!vm.serviceItem.lastServiceDate && !vm.serviceItem.servingMaster')
-    //  span Ne
 
     .field.serving-master
       strong {{ vm.serviceItem.servingMaster.name || 'Nežinoma kas' }}

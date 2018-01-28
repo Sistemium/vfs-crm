@@ -96,6 +96,7 @@
     }
 
     function editModal(componentName, title) {
+
       return item => {
 
         if (!title) {
@@ -113,6 +114,7 @@
         return openEditModal(item, componentName, title);
 
       };
+
     }
 
     function closeModal() {
@@ -146,6 +148,8 @@
       function controller($scope) {
 
         const vm = {
+          editingEnabled: /show/.test(componentName),
+          editing: /edit/.test(componentName),
           componentName,
           readyState: {}
         };
@@ -153,6 +157,8 @@
         $scope.vm = vm;
 
         $scope.$on('$stateChangeSuccess', closeModal);
+
+        $scope.$watch('vm.editing', onEditing);
 
         setupController(vm);
 
@@ -164,6 +170,14 @@
           isReady,
           hasChanges
         });
+
+        function onEditing(editing, oldEditing) {
+          if (editing && !oldEditing) {
+            vm.componentName = _.replace(vm.componentName, 'show', 'edit');
+          } else if (!editing && oldEditing) {
+            vm.componentName = _.replace(vm.componentName, 'edit', 'show');
+          }
+        }
 
         function hasChanges() {
 

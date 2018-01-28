@@ -120,7 +120,7 @@
         ) {{ contact.person.name }}
 
         .phones(ng-if='contact.person.allPhones().length')
-          span.title Telefonai
+
           a(
           ng-repeat='phone in contact.person.allPhones() track by $index'
           ng-click='$event.stopPropagation()'
@@ -129,7 +129,7 @@
 
 
         .emails(ng-if='contact.person.allEmails().length')
-          span.title El. paštai
+
           a(
           ng-repeat='email in contact.person.allEmails() track by $index'
           ng-click='$event.stopPropagation()'

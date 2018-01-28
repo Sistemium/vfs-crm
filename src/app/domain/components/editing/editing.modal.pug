@@ -5,9 +5,10 @@
   a.close-btn(href='', ng-click='vm.cancelClick()')
     i.glyphicon.glyphicon-remove
 
-.modal-body
+.modal-body(ng-repeat='componentName in [vm.componentName] track by componentName')
+
   transform-to-component(
-  component-name='{{vm.componentName}}'
+  component-name='{{ componentName }}'
   ng-model='vm.item'
   has-changes='vm.componentHasChanges'
   is-valid='vm.componentIsValid'
@@ -18,10 +19,15 @@
 .modal-footer
 
   button.btn.destroy(
-  ng-if='vm.item.id'
+  ng-if='vm.editing && vm.item.id'
   ng-class="vm.confirmDestroy ? 'btn-danger' : 'btn-default'"
   ng-click='vm.destroyClick()'
   ) Ištrinti
+
+  button.btn.btn-default.editing(
+  ng-if='vm.editingEnabled'
+  ng-click="vm.editing = !vm.editing"
+  ) {{ vm.editing ? 'Parodyti' : 'Keisti' }}
 
   button.btn.btn-success.save.animate-show(
   ng-show='vm.hasChanges()'
