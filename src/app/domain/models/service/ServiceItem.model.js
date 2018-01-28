@@ -2,7 +2,7 @@
 
 (function () {
 
-  angular.module('Models').run(function (Schema) {
+  angular.module('Models').run(function (Schema, moment) {
 
     Schema.register({
 
@@ -47,7 +47,9 @@
       },
 
       methods: {
-        isValid
+        isValid,
+        guaranteeEnd,
+        guaranteePeriodFn
       },
 
       meta: {
@@ -57,6 +59,22 @@
       }
 
     });
+
+    function guaranteePeriodFn() {
+
+      let {guaranteePeriod} = this;
+
+      return _.isNumber(guaranteePeriod) ? guaranteePeriod : (
+        _.get(this.filterSystem, 'guaranteePeriod') ||
+        _.get(this.filterSystem, 'filterSystemType.guaranteePeriod')
+      );
+
+    }
+
+    function guaranteeEnd() {
+      let {installingDate} = this;
+      return installingDate && moment(installingDate).add(this.guaranteePeriodFn(), 'months');
+    }
 
     function isValid(data) {
       return this.filterSystemId || _.get(data, 'filterSystemId.ready')
