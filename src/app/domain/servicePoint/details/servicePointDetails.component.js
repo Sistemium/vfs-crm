@@ -80,7 +80,7 @@
 
     function editServiceItemClick(item) {
 
-      Editing.editModal('edit-service-item', 'Redaguoti Įrenginį')(item)
+      Editing.editModal('show-service-item', `«${vm.servicePoint.address}» irenginys`)(item)
         .then(() => vm.servicePoint.refreshCache());
 
     }
