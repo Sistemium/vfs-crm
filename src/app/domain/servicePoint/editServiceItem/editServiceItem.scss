@@ -1,5 +1,33 @@
 @import "../../../styles/editing";
 
+.show-service-item {
+
+  .toggle-editing {
+
+    position: absolute;
+    top: -43px;
+    right: 35px;
+
+  }
+
+  .lead {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+
+  fieldset {
+    > .field {
+      label {
+        font-weight: normal;
+      }
+      > * + * {
+        margin-left: 6px;
+      }
+    }
+  }
+
+}
+
 .edit-service-item {
 
   @extend %editing-with-form;

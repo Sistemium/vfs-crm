@@ -1,0 +1,47 @@
+.show-service-item
+
+  button.btn.btn-link.toggle-editing(ng-click='vm.editing = !vm.editing')
+    i.glyphicon.glyphicon-edit
+
+  edit-service-item(ng-if='vm.editing' ng-model='vm.serviceItem' ready-state='vm.readyState')
+
+  fieldset(ng-if='!vm.editing')
+
+    .lead.filter-system
+      span {{ vm.serviceItem.filterSystem.name }}
+      small(ng-if='vm.serviceItem.info') &nbsp;({{ vm.serviceItem.info }})
+
+    .field.installing-master
+      strong {{ vm.serviceItem.installingMaster.name || 'Nežinoma kas' }}
+      span montavo
+      strong {{ vm.serviceItem.installingDate | amDateFormat }}
+
+    //.field(ng-if='!vm.serviceItem.lastServiceDate && !vm.serviceItem.servingMaster')
+    //  span Ne
+
+    .field.serving-master
+      strong {{ vm.serviceItem.servingMaster.name || 'Nežinoma kas' }}
+      span {{ vm.serviceItem.lastServiceDate ? 'aptarnavo' : 'bus aptarnauti' }}
+      strong {{ vm.serviceItem.lastServiceDate | amDateFormat }}
+
+    .field
+      span {{ vm.serviceItem.servicePrice ? 'Ypatinga' : 'Standartinė' }}
+      span aptarnvimo kaina
+      strong {{ vm.serviceItem.servicePrice || vm.serviceItem.filterSystem.servicePrice || vm.serviceItem.filterSystem.filterSystemType.servicePrice }}
+      span €
+
+    .field
+      span {{ vm.serviceItem.serviceFrequency ? 'Ypatingas' : 'Standartinis' }}
+      span aptarnvimo dažnumas kas
+      strong {{ vm.serviceItem.serviceFrequency || vm.serviceItem.filterSystem.serviceFrequency || vm.serviceItem.filterSystem.filterSystemType.serviceFrequency }}
+      span mėn.
+
+    .field(ng-if='!vm.serviceItem.guaranteePeriodFn()')
+      label Garantijos nėra
+
+    .field(ng-if='vm.serviceItem.guaranteePeriodFn()')
+      span {{ vm.serviceItem.guaranteePeriod ? 'Ypatingas' : 'Standartinis' }}
+      span garantinis laikotarpis
+      strong {{ vm.serviceItem.guaranteePeriodFn() }}
+      span mėn. {{ vm.serviceItem.installingDate ? 'iki' : '' }}
+      strong {{ vm.serviceItem.guaranteeEnd() | amCalendar }}
