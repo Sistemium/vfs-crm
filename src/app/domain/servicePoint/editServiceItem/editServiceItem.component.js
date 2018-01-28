@@ -13,6 +13,19 @@
 
   });
 
+  module.component('showServiceItem', {
+
+    bindings: {
+      serviceItem: '=ngModel',
+      readyState: '='
+    },
+
+    templateUrl: 'app/domain/servicePoint/editServiceItem/showServiceItem.html',
+    controllerAs: 'vm',
+    controller: editServiceItem
+
+  });
+
   function editServiceItem(ReadyStateHelper, $scope, $timeout) {
 
     const vm = ReadyStateHelper.setupController(this, $scope, 'serviceItem')
