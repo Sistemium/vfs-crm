@@ -15,17 +15,6 @@
     margin-bottom: 10px;
   }
 
-  fieldset {
-    > .field {
-      label {
-        font-weight: normal;
-      }
-      > * + * {
-        margin-left: 6px;
-      }
-    }
-  }
-
 }
 
 .edit-service-item {

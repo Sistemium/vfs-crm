@@ -8,10 +8,27 @@ form {
 
 form, .form, fieldset {
 
-  .field {
+  .field, .subtitle {
     & + * {
       margin-top: 6px;
     }
+
+    label {
+      font-weight: normal;
+    }
+
+    > * + * {
+      margin-left: 6px;
+    }
+
+  }
+
+  .subtitle {
+
+    font-size: 115%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
   }
 
 }

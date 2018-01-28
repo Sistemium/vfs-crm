@@ -171,7 +171,7 @@
     }
 
     function filterSystemClick(item) {
-      Editing.editModal('edit-service-item', 'Redaguoti Įrenginį')(item.serviceItem)
+      Editing.editModal('show-service-item', `«${item.serviceItem.servicePoint.address}» irenginys`)(item.serviceItem)
         .then(item => item.id && ServicePlanning.find(item.id, {bypassCache: true}));
     }
 

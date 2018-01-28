@@ -37,3 +37,11 @@
       strong {{ vm.serviceItem.guaranteePeriodFn() }}
       span mėn. {{ vm.serviceItem.installingDate ? 'iki' : '' }}
       strong {{ vm.serviceItem.guaranteeEnd() | amCalendar }}
+
+    .service-item-services(ng-if='vm.serviceItemServices.length')
+
+      .lead Aptarnavimų istorija:
+
+      .field.service-item-service(ng-repeat='service in vm.serviceItemServices track by service.id')
+        strong {{ service.date | amDateFormat }}
+        strong.gray {{ service.info }}
