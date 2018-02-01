@@ -34,6 +34,10 @@
 
     .service-point {
 
+      &.not-ready .address {
+        color: $red;
+      }
+
       @extend %flex-column-nowrap;
 
       border-bottom: 1px solid $border-gray;

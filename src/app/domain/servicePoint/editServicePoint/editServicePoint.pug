@@ -161,3 +161,12 @@
       textarea#gifts.form-control(
       ng-model='vm.servicePoint.gifts'
       )
+
+    .flags
+      .is-ready
+        label Patikritna?
+        toggle-switch(
+        ng-model='vm.servicePoint.isReady'
+        on-label='Taip'
+        off-label='Ne'
+        )

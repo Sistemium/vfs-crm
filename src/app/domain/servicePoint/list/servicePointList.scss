@@ -40,6 +40,10 @@
         @extend .ellipsis;
       }
 
+      &.not-ready .address {
+        color: $red;
+      }
+
     }
 
   }

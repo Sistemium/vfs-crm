@@ -8,6 +8,16 @@ form {
 
 form, .form, fieldset {
 
+  .flags {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  label + .ats-switch {
+    margin-left: 6px;
+  }
+
   .field, .subtitle {
     & + * {
       margin-top: 6px;

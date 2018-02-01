@@ -16,7 +16,7 @@
     .service-point(
     ng-repeat='servicePoint in vm.servicePoints track by servicePoint.id'
     ng-click='vm.servicePointClick(servicePoint)'
-    ng-class='{active: servicePoint.id === vm.currentServicePointId}'
+    ng-class='{active: servicePoint.id === vm.currentServicePointId, "not-ready": !servicePoint.isReady}'
     )
       .name {{ servicePoint.currentServiceContract.customer().name}}
       .address {{ servicePoint.address }}
