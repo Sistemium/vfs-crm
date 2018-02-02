@@ -39,6 +39,13 @@
 
       let parsed = _.assign({}, params);
 
+      if (params.orderBy) {
+        parsed['x-order-by:'] = _.map(params.orderBy, order => {
+          let [col, dir] = order;
+          return `${dir.match(/desc/i) ? '-' : ''}${col}`;
+        }).join(',');
+      }
+
       if (params.limit) {
         parsed['x-page-size:'] = params.limit;
       }
@@ -69,6 +76,7 @@
       delete parsed.where;
       delete parsed.offset;
       delete parsed.limit;
+      delete parsed.orderBy;
 
       return parsed;
     }
