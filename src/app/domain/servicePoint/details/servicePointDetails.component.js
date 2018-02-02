@@ -201,19 +201,24 @@
 
       vm.rebindOne(ServicePoint, id, 'vm.servicePoint');
 
-      vm.rebindAll(ServicePointContact, {servicePointId: id}, 'vm.servicePointContacts', onServicePointContact);
-
       let relations = ['ServiceItem', 'ServicePointContact', 'Picture', 'ServiceContract', 'Location', 'Locality'];
 
       let busy = [
         ServicePoint.findAllWithRelations({id}, {bypassCache: true})(relations)
-          .then((res) => {
+          .then(res => {
 
             let servicePoint = _.first(res);
 
-            $q.all([loadServicePointRelations(servicePoint), loadLocalityRelation(servicePoint)]).then(() => {
-              loadGoogleScript();
-            })
+            $q.all([
+              loadServicePointRelations(servicePoint),
+              loadLocalityRelation(servicePoint)
+            ])
+              .then(() => {
+
+                loadGoogleScript();
+                vm.rebindAll(ServicePointContact, {servicePointId: id}, 'vm.servicePointContacts', onServicePointContact);
+
+              });
 
           })
       ];

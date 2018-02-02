@@ -37,19 +37,28 @@
     ng-repeat='contactMethod in vm.contactMethods track by contactMethod.id'
     ng-class='[contactMethod.code, {"input-error": vm.errorsByCode[contactMethod.code]}]'
     )
-      label(for='{{contactMethod.code}}') {{contactMethod.name}}
+      .field-group
 
-      input.form-control(
-      id='{{contactMethod.code}}'
-      autocomplete='off'
-      placeholder='{{contactMethod.code === "email" ? contactMethod.name : ""}}'
-      ng-model='vm[contactMethod.code]'
-      data-ui-options='vm.maskOptions'
-      ng-paste='vm.onPaste(contactMethod)'
-      ui-mask='{{ vm.currentInputMask(contactMethod) }}'
-      ng-keypress='vm.onEnterPress($event, contactMethod)'
-      ng-blur='vm.onInputBlur(contactMethod)'
-      )
+        label(for='edit-person-{{::contactMethod.code}}-address') {{contactMethod.name}}
+
+        input.form-control(
+        id='edit-person-{{::contactMethod.code}}-address'
+        autocomplete='off'
+        placeholder='{{contactMethod.code === "email" ? contactMethod.name : ""}}'
+        ng-model='vm[contactMethod.code].address'
+        data-ui-options='vm.maskOptions'
+        ng-paste='vm.onPaste(contactMethod, $event)'
+        ui-mask='{{ vm.currentInputMask(contactMethod) }}'
+        sa-enter-key='vm.onEnterPress($event, contactMethod)'
+        )
+
+        input.form-control(
+        id='edit-person-{{::contactMethod.code}}-info'
+        autocomplete='off'
+        ng-model='vm[contactMethod.code].info'
+        sa-enter-key='vm.onEnterPress($event, contactMethod)'
+        placeholder='pastaba'
+        )
 
       .contacts
         .contact(
@@ -57,9 +66,11 @@
         ng-class='{"confirm-destroy" : vm.confirmDestroy[item.address]}'
         )
 
-          span {{ contactMethod.code === 'phone' ? (item.address | ltphone) : item.address }}
+          a.edit(href ng-click='vm.contactEditClick(item)')
+            span {{ contactMethod.code === 'phone' ? (item.address | ltphone) : item.address }}
+            small.gray(ng-if='item.info') ({{ item.info }})
 
-          a(
+          a.remove(
           href
           ng-click='vm.deleteContactClick(item, contactMethod.code)'
           )

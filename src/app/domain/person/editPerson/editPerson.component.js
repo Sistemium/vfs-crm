@@ -16,7 +16,7 @@
 
   });
 
-  function editPersonController($scope, ReadyStateHelper, Schema, $timeout, toastr, $q) {
+  function editPersonController($scope, ReadyStateHelper, Schema, $timeout, toastr, $q, saEtc) {
 
     const vm = ReadyStateHelper.setupController(this, $scope, 'person');
 
@@ -45,22 +45,26 @@
       deleteContactClick,
       onInputBlur: addAddress,
       hasChanges,
-      currentInputMask
+      currentInputMask,
+      contactEditClick
 
     });
 
-    $scope.$watch('vm.phone', onPhoneChange);
+    $scope.$watch('vm.phone.address', onPhoneChange);
 
     /*
      Functions
      */
 
     function currentInputMask(contactMethod) {
-      return contactMethod.code === "email" ? contactMethod.mask : vm.pastePhone ? vm.phonePasteMask : contactMethod.mask;
+      return contactMethod.code === 'email' ? contactMethod.mask : vm.pastePhone ? vm.phonePasteMask : contactMethod.mask;
     }
 
     function hasChanges() {
-      return !vm.person.id || vm.person.DSHasChanges() || unsavedContacts().length || vm.phone || vm.email;
+      return !vm.person.id || vm.person.DSHasChanges() ||
+        unsavedContacts().length ||
+        (vm.phone.address && !vm.phone.id) ||
+        (vm.email.address && !vm.email.id);
     }
 
     function unsavedContacts() {
@@ -70,7 +74,7 @@
       _.each(vm.contactsByCode, contacts => {
 
         _.each(contacts, contact => {
-          if (!contact.id) {
+          if (!contact.id || contact.DSHasChanges()) {
             res.push(contact);
           }
         });
@@ -92,14 +96,14 @@
       let value = nv.replace(/[^0-9]/gi, '');
 
       if (!value) {
-        vm.phone = null;
+        vm.phone.address = null;
         return;
       }
 
       if (value.length > 8) {
-        vm.phone = nv.slice(-8);
+        vm.phone.address = nv.slice(-8);
       } else {
-        vm.phone = value;
+        vm.phone.address = value;
       }
 
     }
@@ -144,6 +148,7 @@
       ContactMethod.findAll()
         .then(res => {
           vm.contactMethods = res;
+          _.each(res, method => vm[method.code] = {});
         });
 
       vm.saveFn = saveFn;
@@ -157,16 +162,26 @@
     }
 
     function isValid() {
-      return vm.person.isValid() && isValidAddress('phone', vm.phone) && isValidAddress('email', vm.email);
+      return vm.person.isValid() &&
+        isValidAddress('phone', vm.phone.address) &&
+        isValidAddress('email', vm.email.address);
     }
 
-    function onPaste(contactMethod) {
+    // const infoRe = /[^\d]+$/;
 
-      if (contactMethod.code === 'phone') {
+    function onPaste(contactMethod, ev) {
+
+      let {code} = contactMethod;
+
+      if (code === 'phone') {
         vm.pastePhone = true;
       }
 
-      $timeout().then(() => addAddress(contactMethod));
+      $timeout().then(() => {
+
+        onEnterPress(ev, contactMethod);
+
+      });
 
     }
 
@@ -231,7 +246,8 @@
         return true;
       }
 
-      return _.find(vm.contactMethods, {code}).isValidAddress(address) && isUniqueAddress(code, address);
+      return _.find(vm.contactMethods, {code}).isValidAddress(address) &&
+        (vm[code].id || isUniqueAddress(code, address));
 
     }
 
@@ -239,7 +255,11 @@
 
       let {code} = contactMethod;
 
-      let address = vm[code];
+      if (!vm[code]) {
+        return;
+      }
+
+      let {address, info, id} = vm[code];
 
       toggleErrorClass(code);
 
@@ -252,13 +272,14 @@
         return toggleErrorClass(code, 'invalid address');
       }
 
-      if (!isUniqueAddress(code, address)) {
+      if (!id && !isUniqueAddress(code, address)) {
         return toggleErrorClass(code, 'non-unique address');
       }
 
-      let contact = Contact.createInstance({
+      let contact = id ? vm[code]: Contact.createInstance({
         contactMethodId: contactMethod.id,
         address,
+        info,
         ownerXid: vm.person.id || null,
         source: 'Person'
       });
@@ -267,22 +288,37 @@
         vm.contactsByCode[code] = [];
       }
 
-      vm.contactsByCode[code].push(contact);
+      !id && vm.contactsByCode[code].push(contact);
 
-      vm[code] = null;
+      vm[code] = {address: null, info: null};
 
     }
 
+    const nameRe = /[^-]+$/;
+
     function onEnterPress(ev, contactMethod) {
 
-      let keyCode = ev.which || ev.keyCode || 0;
+      let {id = ''} = ev.target;
 
-      if (keyCode !== 13) {
+      let name = _.first(id.match(nameRe));
+
+      if (!name) {
         return;
+      }
+
+      if (name === 'address') {
+        return saEtc.focusElementById(_.replace(id, nameRe, 'info'));
       }
 
       addAddress(contactMethod);
 
+      return saEtc.focusElementById(_.replace(id, nameRe, 'address'));
+
+    }
+
+    function contactEditClick(contact) {
+      let {code} = contact.contactMethod;
+      vm[code] = contact;
     }
 
   }

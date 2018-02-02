@@ -125,7 +125,9 @@
           ng-repeat='phone in contact.person.allPhones() track by $index'
           ng-click='$event.stopPropagation()'
           href='{{phone.href}}'
-          ) {{phone.address | ltphone}}
+          )
+            span.address {{phone.address | ltphone}}
+            small.gray(ng-if='phone.info') ({{ phone.info }})
 
 
         .emails(ng-if='contact.person.allEmails().length')
@@ -134,7 +136,9 @@
           ng-repeat='email in contact.person.allEmails() track by $index'
           ng-click='$event.stopPropagation()'
           href='{{email.href}}'
-          ) {{email.address}}
+          )
+            span {{ email.address }}
+            small.gray(ng-if='email.info') ({{ email.info }})
 
         .delete-btn(
         ng-if='contact.servicePointContact'
