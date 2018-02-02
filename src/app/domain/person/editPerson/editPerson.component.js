@@ -63,8 +63,8 @@
     function hasChanges() {
       return !vm.person.id || vm.person.DSHasChanges() ||
         unsavedContacts().length ||
-        (vm.phone.address && !vm.phone.id) ||
-        (vm.email.address && !vm.email.id);
+        (vm.phone && vm.phone.address && !vm.phone.id) ||
+        (vm.email && vm.email.address && !vm.email.id);
     }
 
     function unsavedContacts() {
@@ -145,7 +145,7 @@
 
     function $onInit() {
 
-      ContactMethod.findAll()
+      ContactMethod.findAll({orderBy: [['code', 'DESC']]})
         .then(res => {
           vm.contactMethods = res;
           _.each(res, method => vm[method.code] = {});
@@ -163,8 +163,8 @@
 
     function isValid() {
       return vm.person.isValid() &&
-        isValidAddress('phone', vm.phone.address) &&
-        isValidAddress('email', vm.email.address);
+        isValidAddress('phone', _.get(vm.phone, 'address')) &&
+        isValidAddress('email', _.get(vm.email, 'address'));
     }
 
     // const infoRe = /[^\d]+$/;
