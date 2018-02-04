@@ -110,19 +110,14 @@
         ng-min='0'
         )
 
-    .service-item-services(ng-if='vm.serviceItemServices.length')
+    sab-form-list.service-item-services(
+    ng-if='vm.serviceItem.id'
+    data-title='Aptarnavimų istorija'
+    ready-state='{vm.readyState.services}'
+    data-filter='{serviceItemId: vm.serviceItem.id}'
+    model-name='ServiceItemService'
+    )
 
-      label Aptarnavimų istorija
-
-      .list-group
-
-        .list-group-item.service-item-service(ng-repeat='service in vm.serviceItemServices track by service.id')
-          .date {{ service.date | amDateFormat }}
-          .info {{ service.info }}
-          .buttons
-            a.remove(
-            href ng-click='vm.deleteServiceClick(service)'
-            title='Ištrinti serviso įrašą'
-            ng-class='{confirmation: vm.deleteConfirm === service.id}'
-            )
-              i.glyphicon.glyphicon-remove
+      .field.service-item-service(ng-repeat='service in vm.serviceItemServices track by service.id')
+        strong {{ service.date | amDateFormat }}
+        strong.gray {{ service.info }}

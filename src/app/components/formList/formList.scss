@@ -30,7 +30,7 @@ sab-form-list {
 
         .buttons {
           white-space: nowrap;
-          .save + .cancel {
+          .save:not(.ng-hide) + .cancel {
             color: $gray;
           }
         }
@@ -39,9 +39,14 @@ sab-form-list {
     }
 
     .lead {
+
       display: flex;
       justify-content: flex-start;
       align-items: center;
+
+      margin-top: 0;
+      margin-bottom: 10px;
+
     }
 
     ng-transclude {
