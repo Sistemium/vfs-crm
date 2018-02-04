@@ -1,0 +1,35 @@
+.form-list
+
+  .lead
+    .title {{ vm.title }}
+    a.btn.btn-link.add(href ng-click='vm.addClick()' ng-if='!vm.newItem') pridėti
+
+  .edit-block(
+  ng-if='vm.newItem'
+  ng-class='vm.newItem.isValid(vm.readyState) ? "vfs-valid" : "vfs-invalid"'
+  )
+
+    .title
+
+      strong Nauja iraša
+
+      .buttons
+
+        a.btn.btn-link.save.animate-show(
+        href ng-click='vm.saveClick($event)'
+        ng-show='vm.newItem.isValid(vm.readyState)'
+        )
+          | išsaugoti
+
+        a.btn.btn-link.cancel(href ng-click='vm.newItem = null')
+          | atšaukti
+
+    transform-to-component(
+    component-name='{{vm.componentName()}}'
+    ng-model='vm.newItem'
+    ready-state='vm.readyState'
+    save-fn='vm.saveFn'
+    )
+
+  ng-transclude
+

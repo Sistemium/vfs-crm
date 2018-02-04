@@ -1,0 +1,48 @@
+@import "variables";
+
+sab-form-list {
+
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+
+  > .form-list {
+
+    > .edit-block {
+
+      margin-bottom: 6px;
+      border: solid 1px $border-gray;
+      padding: 0 6px 12px;
+      border-radius: $border-radius;
+
+      .title {
+        display: flex;
+        justify-content: flex-start;
+        //align-items: center;
+        padding: 6px;
+      }
+    }
+
+    .lead {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    ng-transclude {
+      display: block;
+      margin-left: 10px;
+    }
+
+  }
+
+  .buttons .btn, .btn.add {
+
+    line-height: 1;
+    border-bottom: dashed $primary-color 1px;
+    padding: 2px 4px;
+    margin-left: 10px;
+
+  }
+
+}
