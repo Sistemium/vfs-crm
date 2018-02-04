@@ -26,7 +26,7 @@
 
   });
 
-  function editServiceItem(ReadyStateHelper, $scope, $timeout) {
+  function editServiceItem(ReadyStateHelper, $scope, $timeout, Schema) {
 
     const vm = ReadyStateHelper.setupController(this, $scope, 'serviceItem')
       .use({
@@ -57,8 +57,16 @@
         return;
       }
 
-      vm.serviceItem.DSLoadRelations('ServiceItemService')
-        .then(() => vm.serviceItemServices = _.sortBy(vm.serviceItem.services, 'date'));
+      let serviceItemId = vm.serviceItem.id;
+
+      if (!serviceItemId) return;
+
+      let orderBy = [['date', 'DESC']];
+
+      vm.serviceItem.DSLoadRelations('ServiceItemService');
+
+      vm.rebindAll(Schema.model('ServiceItemService'), {serviceItemId, orderBy}, 'vm.serviceItemServices');
+
     }
 
   }

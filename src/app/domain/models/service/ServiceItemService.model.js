@@ -19,9 +19,17 @@
             localKey: 'serviceItemId'
           }
         }
+      },
+
+      methods: {
+        isValid
       }
 
     });
+
+    function isValid(data) {
+      return this.date && (this.serviceItemId || _.get(data, 'serviceItemId.ready'));
+    }
 
   });
 
