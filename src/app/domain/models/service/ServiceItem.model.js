@@ -49,7 +49,9 @@
       methods: {
         isValid,
         guaranteeEnd,
-        guaranteePeriodFn
+        guaranteePeriodFn,
+        serviceFrequencyFn,
+        servicePriceFn
       },
 
       meta: {
@@ -59,6 +61,26 @@
       }
 
     });
+
+    function servicePriceFn() {
+
+      let {servicePrice} = this;
+
+      return _.isNumber(servicePrice) ? servicePrice : (
+        _.get(this.filterSystem, 'servicePrice') ||
+        _.get(this.filterSystem, 'filterSystemType.servicePrice')
+      );
+
+    }
+
+    function serviceFrequencyFn() {
+      let {serviceFrequency} = this;
+
+      return _.isNumber(serviceFrequency) ? serviceFrequency : (
+        _.get(this.filterSystem, 'serviceFrequency') ||
+        _.get(this.filterSystem, 'filterSystemType.serviceFrequency')
+      );
+    }
 
     function guaranteePeriodFn() {
 

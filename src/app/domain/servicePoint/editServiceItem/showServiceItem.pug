@@ -19,13 +19,13 @@
     .field
       span {{ vm.serviceItem.servicePrice ? 'Ypatinga' : 'Standartinė' }}
       span aptarnvimo kaina
-      strong {{ vm.serviceItem.servicePrice || vm.serviceItem.filterSystem.servicePrice || vm.serviceItem.filterSystem.filterSystemType.servicePrice }}
+      strong {{ vm.serviceItem.servicePriceFn() }}
       span €
 
     .field
       span {{ vm.serviceItem.serviceFrequency ? 'Ypatingas' : 'Standartinis' }}
       span aptarnavimo dažnumas kas
-      strong {{ vm.serviceItem.serviceFrequency || vm.serviceItem.filterSystem.serviceFrequency || vm.serviceItem.filterSystem.filterSystemType.serviceFrequency }}
+      strong {{ vm.serviceItem.serviceFrequencyFn() }}
       span mėn.
 
     .field(ng-if='!vm.serviceItem.guaranteePeriodFn()')
@@ -38,9 +38,17 @@
       span mėn. {{ vm.serviceItem.installingDate ? 'iki' : '' }}
       strong {{ vm.serviceItem.guaranteeEnd() | amCalendar }}
 
-    .service-item-services(ng-if='vm.serviceItemServices.length')
+    .field(ng-if='vm.serviceItem.additionalServiceInfo')
+      span Papildomai aptarnaudavome
+      strong {{ vm.serviceItem.additionalServiceInfo }}
 
-      .lead Aptarnavimų istorija:
+    sab-form-list.service-item-services(
+    ng-if='vm.serviceItemServices.length'
+    data-title='Aptarnavimų istorija'
+    ready-state='{vm.readyState.services}'
+    data-filter='{serviceItemId: vm.serviceItem.id}'
+    model-name='ServiceItemService'
+    )
 
       .field.service-item-service(ng-repeat='service in vm.serviceItemServices track by service.id')
         strong {{ service.date | amDateFormat }}

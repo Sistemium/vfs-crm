@@ -24,8 +24,17 @@
     const vm = _.assign(this, {
       addClick,
       saveClick,
-      componentName
+      componentName,
+      editTitle
     });
+
+    function editTitle() {
+      return `Naujas įrasas apie ${_.get(model(), 'meta.label.about')}`;
+    }
+
+    function model() {
+      return Schema.model(vm.modelName);
+    }
 
     function saveClick() {
       vm.newItem.DSCreate()

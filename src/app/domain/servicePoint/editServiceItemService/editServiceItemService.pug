@@ -1,13 +1,15 @@
 .edit-service-item-service
 
-  .field
-    sab-date-picker-input(
-    value='vm.serviceItemService.date'
-    placeholder='Aptarnavimo data'
-    )
+  .field-group
 
-  .field
-    input.info.form-control(
-    placeholder='Pastaba aptarnavimui'
-    ng-model='vm.serviceItemService.info'
-    )
+    .field.date
+      sab-date-picker-input(
+      value='vm.serviceItemService.date'
+      placeholder='Aptarnavimo data'
+      )
+
+    .field.info
+      input.form-control(
+      placeholder='Pastaba aptarnavimui'
+      ng-model='vm.serviceItemService.info'
+      )

@@ -8,18 +8,33 @@ sab-form-list {
 
   > .form-list {
 
+    width: 100%;
+
     > .edit-block {
 
       margin-bottom: 6px;
       border: solid 1px $border-gray;
       padding: 0 6px 12px;
       border-radius: $border-radius;
+      box-shadow: 0 0 3px 1px $border-gray;
 
       .title {
+
         display: flex;
         justify-content: flex-start;
-        //align-items: center;
         padding: 6px;
+
+        > strong {
+          color: $state-warning-text;
+        }
+
+        .buttons {
+          white-space: nowrap;
+          .save + .cancel {
+            color: $gray;
+          }
+        }
+
       }
     }
 
@@ -42,6 +57,38 @@ sab-form-list {
     border-bottom: dashed $primary-color 1px;
     padding: 2px 4px;
     margin-left: 10px;
+
+  }
+
+  .field-group {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    @include responsive-only(xxs) {
+
+      flex-direction: column;
+
+      > * {
+        margin-bottom: 6px;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    @include responsive-only(gt-xxs) {
+
+      > * {
+        flex: 1;
+        margin-right: 6px;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+
+    }
 
   }
 

@@ -23,6 +23,13 @@
 
       methods: {
         isValid
+      },
+
+      meta: {
+        label: {
+          add: 'Naujas įrenginio aptarnavimas',
+          about: 'įrenginio aptarnavimo'
+        }
       }
 
     });
