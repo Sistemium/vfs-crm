@@ -19,10 +19,18 @@
 
   .contact-method {
     .field-group {
+
       align-items: center;
-      label {
-        min-width: 70px;
+
+      .address {
+        flex:2;
       }
+
+      .info {
+        flex:1;
+        min-width: 40px;
+      }
+
     }
   }
 
@@ -47,9 +55,10 @@
       margin-top: 5px;
       padding: 6px;
       border-radius: 4px;
+      margin-right: 6px;
 
-      & + .contact {
-        margin-left: 6px;
+      &:last-child {
+        margin-right: 0;
       }
 
       > small {

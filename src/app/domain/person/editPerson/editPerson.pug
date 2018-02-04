@@ -2,76 +2,80 @@
 
   .form
 
-    .first-name
-      label(for='first-name') Vardas
+    .field-group
 
-      input#first-name.form-control(
-      required
-      auto-focus
-      autocomplete='off'
-      placeholder='Privaloma'
-      ng-model='vm.person.firstName'
-      ng-paste='vm.onPasteFirstName($event)'
+      .first-name
+        label(for='first-name') Vardas
+
+        input#first-name.form-control(
+        required
+        auto-focus
+        autocomplete='off'
+        placeholder='Privaloma'
+        ng-model='vm.person.firstName'
+        ng-paste='vm.onPasteFirstName($event)'
+        )
+
+      .last-name
+
+        label(for='last-name') Pavardė
+
+        input#last-name.form-control(
+        required
+        autocomplete='off'
+        placeholder='Privaloma'
+        ng-model='vm.person.lastName'
+        )
+
+      .code
+        label(for='code') Asmens kodas
+
+        input#code.form-control(
+        autocomplete='off'
+        ng-model='vm.person.code'
+        )
+
+
+    .contact-methods.field-group
+      .contact-method(
+      ng-repeat='contactMethod in vm.contactMethods track by contactMethod.id'
+      ng-class='[contactMethod.code, {"input-error": vm.errorsByCode[contactMethod.code]}]'
       )
-
-    .last-name
-
-      label(for='last-name') Pavardė
-
-      input#last-name.form-control(
-      required
-      autocomplete='off'
-      placeholder='Privaloma'
-      ng-model='vm.person.lastName'
-      )
-
-    .code
-      label(for='code') Asmens kodas
-
-      input#code.form-control(
-      autocomplete='off'
-      ng-model='vm.person.code'
-      )
-
-    .contact-method(
-    ng-repeat='contactMethod in vm.contactMethods track by contactMethod.id'
-    ng-class='[contactMethod.code, {"input-error": vm.errorsByCode[contactMethod.code]}]'
-    )
-      .field-group
-
         label(for='edit-person-{{::contactMethod.code}}-address') {{contactMethod.name}}
 
-        input.form-control(
-        id='edit-person-{{::contactMethod.code}}-address'
-        autocomplete='off'
-        placeholder='{{contactMethod.code === "email" ? contactMethod.name : ""}}'
-        ng-model='vm[contactMethod.code].address'
-        data-ui-options='vm.maskOptions'
-        ng-paste='vm.onPaste(contactMethod, $event)'
-        ui-mask='{{ vm.currentInputMask(contactMethod) }}'
-        sa-enter-key='vm.onEnterPress($event, contactMethod)'
-        )
+        .field-group
 
-        input.form-control(
-        id='edit-person-{{::contactMethod.code}}-info'
-        autocomplete='off'
-        ng-model='vm[contactMethod.code].info'
-        sa-enter-key='vm.onEnterPress($event, contactMethod)'
-        placeholder='pastaba'
-        )
-
-      .contacts
-        .contact(
-        ng-repeat='item in vm.contactsByCode[contactMethod.code] track by $index'
-        ng-class='{"confirm-destroy" : vm.confirmDestroy[item.address]}'
-        )
-
-          a.edit(href ng-click='vm.contactEditClick(item)')
-            span {{ contactMethod.code === 'phone' ? (item.address | ltphone) : item.address }}
-            small.gray(ng-if='item.info') ({{ item.info }})
-
-          a.remove(
-          href
-          ng-click='vm.deleteContactClick(item, contactMethod.code)'
+          input.form-control.address(
+          id='edit-person-{{::contactMethod.code}}-address'
+          autocomplete='off'
+          placeholder='{{contactMethod.code === "email" ? contactMethod.name : ""}}'
+          ng-model='vm[contactMethod.code].address'
+          data-ui-options='vm.maskOptions'
+          ng-paste='vm.onPaste(contactMethod, $event)'
+          ui-mask='{{ vm.currentInputMask(contactMethod) }}'
+          sa-enter-key='vm.onEnterPress($event, contactMethod)'
           )
-            i.glyphicon.glyphicon-remove
+
+          input.form-control.info(
+          id='edit-person-{{::contactMethod.code}}-info'
+          autocomplete='off'
+          ng-model='vm[contactMethod.code].info'
+          sa-enter-key='vm.onEnterPress($event, contactMethod)'
+          placeholder='pastaba'
+          )
+
+        .contacts
+          .contact(
+          ng-repeat='item in vm.contactsByCode[contactMethod.code] track by $index'
+          ng-class='{"confirm-destroy" : vm.confirmDestroy[item.address]}'
+          )
+
+            a.edit(href ng-click='vm.contactEditClick(item)')
+              span {{ contactMethod.code === 'phone' ? (item.address | ltphone) : item.address }}
+              small.gray(ng-if='item.info') ({{ item.info }})
+
+            a.remove(
+            href
+            ng-click='vm.deleteContactClick(item, contactMethod.code)'
+            )
+              i.glyphicon.glyphicon-remove
