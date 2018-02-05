@@ -71,13 +71,19 @@
 
       let res = [];
 
-      _.each(vm.contactsByCode, contacts => {
+      _.each(vm.contactsByCode, (contacts, code) => {
 
         _.each(contacts, contact => {
           if (!contact.id || contact.DSHasChanges()) {
             res.push(contact);
           }
         });
+
+        let unsaved = vm[code];
+
+        if (!unsaved.id && unsaved.isValid()) {
+          res.push(unsaved);
+        }
 
       });
 
@@ -117,6 +123,7 @@
           let unsaved = unsavedContacts();
 
           return $q.all(_.map(unsaved, contact => {
+            contact.source = 'Person';
             contact.ownerXid = id;
             return contact.DSCreate();
           }));
@@ -148,7 +155,14 @@
       ContactMethod.findAll({orderBy: [['code', 'DESC']]})
         .then(res => {
           vm.contactMethods = res;
-          _.each(res, method => vm[method.code] = {});
+          _.each(res, method => {
+
+            vm[method.code] = Contact.createInstance({
+              contactMethodId: method.id,
+              source: 'Person'
+            });
+
+          });
         });
 
       vm.saveFn = saveFn;
@@ -259,7 +273,7 @@
         return;
       }
 
-      let {address, info, id} = vm[code];
+      let {address, id} = vm[code];
 
       toggleErrorClass(code);
 
@@ -276,21 +290,16 @@
         return toggleErrorClass(code, 'non-unique address');
       }
 
-      let contact = id ? vm[code]: Contact.createInstance({
-        contactMethodId: contactMethod.id,
-        address,
-        info,
-        ownerXid: vm.person.id || null,
-        source: 'Person'
-      });
+      let contact = vm[code];
 
       if (!vm.contactsByCode[code]) {
         vm.contactsByCode[code] = [];
       }
 
+      // FIXME: find if it's already there
       !id && vm.contactsByCode[code].push(contact);
 
-      vm[code] = {address: null, info: null};
+      vm[code] = Contact.createInstance({address: null, info: null});
 
     }
 

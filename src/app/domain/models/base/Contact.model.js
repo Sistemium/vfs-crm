@@ -19,9 +19,17 @@
 
       computed: {
         href: ['address', 'contactMethodId', href]
+      },
+
+      methods: {
+        isValid
       }
 
     });
+
+    function isValid() {
+      return this.address && this.contactMethodId;
+    }
 
     function href(address, contactMethodId) {
 
