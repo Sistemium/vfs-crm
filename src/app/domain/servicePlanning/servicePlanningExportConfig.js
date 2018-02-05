@@ -47,7 +47,7 @@
           }
         }, {
           title: 'Papildomas aptarnavimas',
-          property: 'serviceItem.additionalServiceInfo',
+          property: 'additionalServiceInfo',
           maxLength: 30
         }, {
           title: 'Pastabos',

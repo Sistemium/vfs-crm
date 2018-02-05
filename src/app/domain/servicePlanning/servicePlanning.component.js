@@ -57,14 +57,8 @@
         date: newServiceDate,
         info: additionalServiceInfo
       })
-        .then(() => {
-
-          let {serviceItem} = item;
-
-          if (additionalServiceInfo) {
-            let info = `${serviceItem.additionalServiceInfo || ''} ${newServiceDate}: ${additionalServiceInfo}`;
-            serviceItem.additionalServiceInfo = _.trim(info);
-          }
+        .then(() => ServiceItem.find(serviceItemId, {bypassCache: true}))
+        .then(serviceItem => {
 
           _.assign(serviceItem, {
             lastServiceDate: newServiceDate
