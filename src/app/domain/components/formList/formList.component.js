@@ -1,24 +1,23 @@
-(function () {
+(function (module) {
 
-  angular.module('sistemiumBootstrap.directives')
-    .component('sabFormList', {
+  module.component('sabFormList', {
 
-      transclude: true,
+    transclude: true,
 
-      bindings: {
-        title: '@',
-        modelName: '@',
-        addClick: '&',
-        editing: '<',
-        filter: '<',
-        defaults: '<'
-      },
+    bindings: {
+      title: '@',
+      modelName: '@',
+      addClick: '&',
+      editing: '<',
+      filter: '<',
+      defaults: '<'
+    },
 
-      templateUrl: 'app/components/formList/formList.html',
-      controller: sabFormListController,
-      controllerAs: 'vm'
+    templateUrl: 'app/domain/components/formList/formList.html',
+    controller: sabFormListController,
+    controllerAs: 'vm'
 
-    });
+  });
 
   function sabFormListController(Schema) {
 
@@ -52,4 +51,4 @@
 
   }
 
-})();
+})(angular.module('webPage'));
