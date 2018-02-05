@@ -8,7 +8,7 @@
       title: '@',
       modelName: '@',
       addClick: '&',
-      editing: '<',
+      newItem: '=editing',
       filter: '<',
       defaults: '<'
     },
@@ -24,16 +24,26 @@
     const vm = _.assign(this, {
       addClick,
       saveClick,
+      cancelClick,
       componentName,
       editTitle
     });
 
     function editTitle() {
-      return `Naujas įrasas apie ${_.get(model(), 'meta.label.about')}`;
+      let isNew = !_.get(vm.newItem, 'id');
+      let about = _.get(model(), 'meta.label.about');
+      return `${isNew ? 'Naujas įrašas' : 'Įrašo'} apie ${about}${isNew ? '' : ' redagavimas'}`;
     }
 
     function model() {
       return Schema.model(vm.modelName);
+    }
+
+    function cancelClick() {
+      if (vm.newItem.id) {
+        vm.newItem.DSRevert();
+      }
+      vm.newItem = null;
     }
 
     function saveClick() {

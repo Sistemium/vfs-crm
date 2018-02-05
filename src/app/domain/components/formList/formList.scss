@@ -2,6 +2,8 @@
 
 sab-form-list {
 
+  $border-dashed: dashed $primary-color 1px;
+
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
@@ -54,14 +56,41 @@ sab-form-list {
       margin-left: 10px;
     }
 
+    .editable-list-item {
+
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      cursor: pointer;
+
+      > a {
+        display: none;
+      }
+
+      &:hover {
+
+        background: $gray-background-color;
+
+        > a {
+          display: inline-block;
+        }
+      }
+
+    }
+
   }
 
-  .buttons .btn, .btn.add {
+  .buttons .btn, .btn.add, .editable-list-item > a {
 
     line-height: 1;
-    border-bottom: dashed $primary-color 1px;
+    border-bottom: $border-dashed;
     padding: 2px 4px;
     margin-left: 10px;
+
+    &.confirm-destroy {
+      color: $red;
+      font-weight: bold;
+    }
 
   }
 

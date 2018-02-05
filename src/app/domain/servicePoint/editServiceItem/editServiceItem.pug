@@ -117,9 +117,17 @@
     data-filter='{serviceItemId: vm.serviceItem.id}'
     data-defaults='{servingMasterId: vm.serviceItem.servingMasterId}'
     model-name='ServiceItemService'
+    data-editing='vm.serviceItemServiceEditing'
     )
 
-      show-service-item-service(
-      ng-repeat='service in vm.serviceItemServices track by service.id'
-      ng-model='service'
-      )
+      .editable-list-item(ng-repeat='service in vm.serviceItemServices track by service.id')
+
+        show-service-item-service(ng-model='service')
+
+        a.edit(href ng-click='vm.serviceItemServiceEditing = service') keisti
+
+        a.delete(
+        href ng-click='vm.deleteServiceItemServiceClick(service)'
+        ng-class='{"confirm-destroy": vm.deleteConfirm === service.id}'
+        )
+          | {{ vm.deleteConfirm === service.id ? 'patvirtinti ištrynimą' : 'trinti' }}

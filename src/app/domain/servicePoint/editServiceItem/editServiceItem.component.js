@@ -30,7 +30,7 @@
 
     const vm = ReadyStateHelper.setupController(this, $scope, 'serviceItem')
       .use({
-        deleteServiceClick
+        deleteServiceItemServiceClick
       });
 
     vm.watchScope('vm.serviceItem.id', onServiceItemChange);
@@ -39,7 +39,7 @@
     Functions
      */
 
-    function deleteServiceClick(service) {
+    function deleteServiceItemServiceClick(service) {
 
       let promise = (vm.deleteConfirm === service.id) ?
         service.DSDestroy().then(onServiceItemChange) :$timeout(2000);
