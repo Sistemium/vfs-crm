@@ -119,7 +119,7 @@
     model-name='ServiceItemService'
     )
 
-      .field-composite.service-item-service(ng-repeat='service in vm.serviceItemServices track by service.id')
-        strong {{ service.date | amDateFormat }}
-        span {{ service.servingMaster.name }}
-        strong.gray {{ service.info }}
+      show-service-item-service(
+      ng-repeat='service in vm.serviceItemServices track by service.id'
+      ng-model='service'
+      )

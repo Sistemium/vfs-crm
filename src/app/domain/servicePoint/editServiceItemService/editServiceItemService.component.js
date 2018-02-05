@@ -1,6 +1,6 @@
 (function (module) {
 
-  module.component('editServiceItemService', {
+  const component = {
 
     bindings: {
       serviceItemService: '=ngModel',
@@ -12,7 +12,14 @@
     controller: editServiceItemServiceController,
     controllerAs: 'vm'
 
-  });
+  };
+
+  module
+    .component('editServiceItemService', component)
+    .component('showServiceItemService', _.defaults({
+      controller: null,
+      templateUrl: 'app/domain/servicePoint/editServiceItemService/showServiceItemService.html',
+    }, component));
 
   function editServiceItemServiceController(ReadyStateHelper, $scope) {
     ReadyStateHelper.setupController(this, $scope, 'serviceItemService');
