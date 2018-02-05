@@ -6,49 +6,52 @@
       span {{ vm.serviceItem.filterSystem.name }}
       small(ng-if='vm.serviceItem.info') &nbsp;({{ vm.serviceItem.info }})
 
-    .field.installing-master
+    .field-composite.installing-master
       strong {{ vm.serviceItem.installingMaster.name || 'Nežinoma kas' }}
       span montavo
       strong {{ vm.serviceItem.installingDate | amDateFormat }}
 
-    .field.serving-master
+    .field-composite.serving-master
       strong {{ vm.serviceItem.servingMaster.name || 'Nežinoma kas' }}
       span {{ vm.serviceItem.lastServiceDate ? 'aptarnavo' : 'bus aptarnauti' }}
       strong {{ vm.serviceItem.lastServiceDate | amDateFormat }}
 
-    .field
+    .field-composite
       span {{ vm.serviceItem.servicePrice ? 'Ypatinga' : 'Standartinė' }}
       span aptarnvimo kaina
       strong {{ vm.serviceItem.servicePriceFn() }}
       span €
 
-    .field
+    .field-composite
       span {{ vm.serviceItem.serviceFrequency ? 'Ypatingas' : 'Standartinis' }}
       span aptarnavimo dažnumas kas
       strong {{ vm.serviceItem.serviceFrequencyFn() }}
       span mėn.
 
-    .field(ng-if='!vm.serviceItem.guaranteePeriodFn()')
+    .field-composite(ng-if='!vm.serviceItem.guaranteePeriodFn()')
       label Garantijos nėra
 
-    .field(ng-if='vm.serviceItem.guaranteePeriodFn()')
+    .field-composite(ng-if='vm.serviceItem.guaranteePeriodFn()')
       span {{ vm.serviceItem.guaranteePeriod ? 'Ypatingas' : 'Standartinis' }}
       span garantinis laikotarpis
       strong {{ vm.serviceItem.guaranteePeriodFn() }}
       span mėn. {{ vm.serviceItem.installingDate ? 'iki' : '' }}
       strong {{ vm.serviceItem.guaranteeEnd() | amCalendar }}
 
-    .field(ng-if='vm.serviceItem.additionalServiceInfo')
+    .field-composite(ng-if='vm.serviceItem.additionalServiceInfo')
       span Papildomai aptarnaudavome
       strong {{ vm.serviceItem.additionalServiceInfo }}
 
-    sab-form-list.service-item-services(
-    data-title='Aptarnavimų istorija'
-    ready-state='{vm.readyState.services}'
-    data-filter='{serviceItemId: vm.serviceItem.id}'
-    model-name='ServiceItemService'
-    )
+  sab-form-list.service-item-services(
+  data-title='Aptarnavimų istorija'
+  ready-state='{vm.readyState.services}'
+  data-filter='{serviceItemId: vm.serviceItem.id}'
+  data-defaults='{servingMasterId: vm.serviceItem.servingMasterId}'
+  model-name='ServiceItemService'
+  )
 
-      .field.service-item-service(ng-repeat='service in vm.serviceItemServices track by service.id')
-        strong {{ service.date | amDateFormat }}
-        strong.gray {{ service.info }}
+    .field-composite.service-item-service(ng-repeat='service in vm.serviceItemServices track by service.id')
+
+      strong {{ service.date | amDateFormat }}
+      span {{ service.servingMaster.name }}
+      strong.gray {{ service.info }}

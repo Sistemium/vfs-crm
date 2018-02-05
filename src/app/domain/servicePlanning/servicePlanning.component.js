@@ -49,10 +49,11 @@
 
     function saveItemService(item) {
 
-      let {serviceItemId, newServiceDate, additionalServiceInfo} = item;
+      let {serviceItemId, newServiceDate, additionalServiceInfo, servingMasterId} = item;
 
       ServiceItemService.create({
         serviceItemId,
+        servingMasterId,
         date: newServiceDate,
         info: additionalServiceInfo
       })

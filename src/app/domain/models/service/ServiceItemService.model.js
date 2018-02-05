@@ -10,10 +10,10 @@
 
       relations: {
         hasOne: {
-          // Employee: {
-          //   localField: 'servingMaster',
-          //   localKey: 'servingMasterId'
-          // },
+          Employee: {
+            localField: 'servingMaster',
+            localKey: 'servingMasterId'
+          },
           ServiceItem: {
             localField: 'serviceItem',
             localKey: 'serviceItemId'

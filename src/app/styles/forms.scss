@@ -6,7 +6,7 @@ form {
   }
 }
 
-form, .form, fieldset {
+form, .form, fieldset, sab-form-list {
 
   .flags {
     display: flex;
@@ -18,14 +18,7 @@ form, .form, fieldset {
     margin-left: 6px;
   }
 
-  .field, .subtitle {
-    & + * {
-      //margin-top: 6px;
-    }
-
-    label {
-      font-weight: normal;
-    }
+  .field-composite {
 
     > * + * {
       margin-left: 6px;

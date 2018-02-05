@@ -13,41 +13,5 @@
 }
 
 .edit-service-item {
-
   @extend %editing-with-form;
-
-  .service-item-service {
-
-    display: flex;
-
-    > * + * {
-      margin-left: 10px;
-    }
-
-    > .buttons {
-
-      max-width: 40px;
-
-      a {
-
-        color: $border-gray;
-
-        &.confirmation {
-          color: $red !important;
-        }
-
-        &:hover {
-          color: $link-hover-color;
-        }
-
-        .glyphicon {
-          top: 2px;
-        }
-      }
-
-
-    }
-
-  }
-
 }

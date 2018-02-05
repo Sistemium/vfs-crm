@@ -78,8 +78,11 @@
 
       }
 
-      > * + * {
-        margin-left: $margin * 2;
+      > * {
+        margin-right: $margin * 2;
+        &:last-child {
+          margin-right: 0;
+        }
       }
 
     }

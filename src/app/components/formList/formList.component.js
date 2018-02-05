@@ -10,7 +10,8 @@
         modelName: '@',
         addClick: '&',
         editing: '<',
-        filter: '<'
+        filter: '<',
+        defaults: '<'
       },
 
       templateUrl: 'app/components/formList/formList.html',
@@ -42,7 +43,7 @@
     }
 
     function addClick() {
-      vm.newItem = Schema.model(vm.modelName).createInstance(vm.filter || {});
+      vm.newItem = Schema.model(vm.modelName).createInstance(_.assign({}, vm.filter, vm.defaults));
     }
 
     function componentName() {

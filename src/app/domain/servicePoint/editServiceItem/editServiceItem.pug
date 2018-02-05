@@ -115,9 +115,11 @@
     data-title='Aptarnavimų istorija'
     ready-state='{vm.readyState.services}'
     data-filter='{serviceItemId: vm.serviceItem.id}'
+    data-defaults='{servingMasterId: vm.serviceItem.servingMasterId}'
     model-name='ServiceItemService'
     )
 
-      .field.service-item-service(ng-repeat='service in vm.serviceItemServices track by service.id')
+      .field-composite.service-item-service(ng-repeat='service in vm.serviceItemServices track by service.id')
         strong {{ service.date | amDateFormat }}
+        span {{ service.servingMaster.name }}
         strong.gray {{ service.info }}
