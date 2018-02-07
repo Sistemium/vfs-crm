@@ -32,6 +32,7 @@
       showItemComponentName,
       editTitle,
       $onInit,
+      $onDestroy,
       deleteItemClick,
       unsaved: []
     });
@@ -56,6 +57,13 @@
       currentModel.findAll(vm.filter);
       currentModel.bindAll(vm.filter, $scope, 'vm.savedItems', onItemsChange);
 
+    }
+
+    function $onDestroy() {
+      _.each(readyStates, readyState => {
+        let {item} = readyState;
+        item && item.id && item.DSRevert();
+      });
     }
 
     function deleteItemClick(item) {
@@ -138,7 +146,8 @@
 
       let readyState = {
         postSave: () => {
-          return _.assign(item, vm.filter).DSCreate();
+          return _.assign(item, vm.filter).DSCreate()
+            .then(() => _.remove(vm.unsaved, item));
         }
       };
 
