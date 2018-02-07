@@ -2,17 +2,8 @@
 
   .form
 
-    .brand
-      label Prekės Ženklas
-
-      vfs-dropdown(
-      ready-state='vm.readyState.brandId'
-      items-data-source-name='Brand'
-      ng-model='vm.filterSystem.brandId'
-      )
-
     .filter-system-type
-      label Filtravimo Sistemos Tipas
+      label Filtravimo sistemos Tipas
 
       vfs-dropdown(
       ready-state='vm.readyState.filterSystemTypeId'
@@ -20,17 +11,26 @@
       ng-model='vm.filterSystem.filterSystemTypeId'
       )
 
+    .brand
+      label Prekės ženklas
+
+      vfs-dropdown(
+      ready-state='vm.readyState.brandId'
+      items-data-source-name='Brand'
+      ng-model='vm.filterSystem.brandId'
+      )
+
     .name
-      label(for='name') Filtravimo Sistemos Modelis
+      label(for='name') Modelis
 
       input#name.form-control(
       autocomplete='off'
-      placeholder='Filtravimo Sistemos Modelis'
+      placeholder='Modelio numeris'
       ng-model='vm.filterSystem.name'
       )
 
     .service-frequency
-      label(for='frequency') Aptarnavimo Dažnumas
+      label(for='frequency') Aptarnavimo dažnumas
 
       input#service-frequency.form-control(
       autocomplete='off'

@@ -10,6 +10,12 @@
 
   }
 
+  .lead {
+    * + * {
+      margin-left: 6px;
+    }
+  }
+
 }
 
 .edit-service-item {

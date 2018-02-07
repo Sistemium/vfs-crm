@@ -18,7 +18,7 @@
     .component('editServiceItemService', component)
     .component('showServiceItemService', _.defaults({
       controller: null,
-      templateUrl: 'app/domain/servicePoint/editServiceItemService/showServiceItemService.html',
+      templateUrl: 'app/domain/servicePoint/editServiceItemService/showServiceItemService.html'
     }, component));
 
   function editServiceItemServiceController(ReadyStateHelper, $scope) {

@@ -16,7 +16,7 @@
       itemProperty = itemProperty || 'item';
 
       _.assign(vm, {
-        saveClick,
+        // saveClick,
         cancelClick,
         destroyClick,
         saveFormDataClick,
@@ -31,11 +31,27 @@
       function saveFormDataClick() {
 
         $q.all(saveFormData(vm.readyState))
-          .then(vm.saveClick)
-          .catch(err => {
-            console.error(err);
-          })
+          .then(saveComponent)
+          .then(() => postSave(vm.readyState))
+          .then(vm.afterSave)
+          .catch(err => console.error(err));
 
+      }
+
+      function postSave(readyStateObj) {
+        return _.map(readyStateObj, (val) => {
+
+          if (val && val.postSave) {
+            return val.postSave();
+          }
+
+          if (!val || _.isEmpty(val)) {
+            return $q.resolve(val);
+          }
+
+          return postSave(val);
+
+        });
       }
 
       function saveFormData(readyStateObj) {
@@ -50,24 +66,26 @@
             return $q.resolve(key);
           } else {
             return $q.all(saveFormData(val))
-              .then(() => val.save());
+              .then(() => val.save && val.save());
           }
 
         });
 
       }
 
-      function saveClick() {
+      // function saveClick() {
+      //   return saveComponent()
+      //     .then(vm.afterSave);
+      // }
 
+      function saveComponent() {
 
         if (vm.saveFn) {
-          return vm.saveFn()
-            .then(vm.afterSave);
+          return vm.saveFn();
         }
 
         if (_.isFunction(vm[itemProperty].DSCreate)) {
-          return vm[itemProperty].DSCreate()
-            .then(vm.afterSave);
+          return vm[itemProperty].DSCreate();
         }
 
       }
@@ -185,9 +203,23 @@
             return vm.componentHasChanges();
           }
 
-          return !vm.item.id || vm.item.DSHasChanges() ||
-            _.find(vm.readyState, val => !_.isEmpty(val));
+          if (!vm.item.id) {
+            return true;
+          }
+
+          return vm.item.DSHasChanges() || _.find(vm.readyState, val => !_.isFunction(val) && !_.isEmpty(val));
+
         }
+
+        // function readyStateHasChanges(readyState) {
+        //   return _.find(readyState, val => {
+        //
+        //     if (_.isFunction(val) || _.isEmpty(val)) {
+        //       return false;
+        //     }
+        //
+        //   });
+        // }
 
         function isReady(property) {
 

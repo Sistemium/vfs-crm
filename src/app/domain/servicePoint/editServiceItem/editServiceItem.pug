@@ -22,7 +22,7 @@
         input.form-control#service-point-item-edit-info(
         autocomplete='off'
         ng-model='vm.serviceItem.info'
-        placeholder='Komentaras arba paaiškinimas'
+        placeholder='Komentaras šitai sistemai'
         )
 
     .field-group
@@ -111,23 +111,11 @@
         )
 
     sab-form-list.service-item-services(
-    ng-if='vm.serviceItem.id'
     data-title='Aptarnavimų istorija'
-    ready-state='{vm.readyState.services}'
+    ready-state='vm.readyState.services'
     data-filter='{serviceItemId: vm.serviceItem.id}'
     data-defaults='{servingMasterId: vm.serviceItem.servingMasterId}'
     model-name='ServiceItemService'
     data-editing='vm.serviceItemServiceEditing'
+    data-items='vm.serviceItemServices'
     )
-
-      .editable-list-item(ng-repeat='service in vm.serviceItemServices track by service.id')
-
-        show-service-item-service(ng-model='service')
-
-        a.edit(href ng-click='vm.serviceItemServiceEditing = service') keisti
-
-        a.delete(
-        href ng-click='vm.deleteServiceItemServiceClick(service)'
-        ng-class='{"confirm-destroy": vm.deleteConfirm === service.id}'
-        )
-          | {{ vm.deleteConfirm === service.id ? 'patvirtinti ištrynimą' : 'trinti' }}

@@ -10,7 +10,9 @@
       addClick: '&',
       newItem: '=editing',
       filter: '<',
-      defaults: '<'
+      defaults: '<',
+      readyState: '=?',
+      items: '=?'
     },
 
     templateUrl: 'app/domain/components/formList/formList.html',
@@ -19,15 +21,75 @@
 
   });
 
-  function sabFormListController(Schema) {
+  function sabFormListController(Schema, $scope, $timeout) {
 
     const vm = _.assign(this, {
       addClick,
       saveClick,
       cancelClick,
-      componentName,
-      editTitle
+      editClick,
+      editItemComponentName,
+      showItemComponentName,
+      editTitle,
+      $onInit,
+      deleteItemClick,
+      unsaved: []
     });
+
+    const readyStates = [];
+
+    /*
+    Functions
+     */
+
+    function $onInit() {
+
+      let currentModel = model();
+
+      vm.readyState = vm.readyState || [];
+
+      if (_.filter(vm.filter, _.isUndefined).length) {
+        vm.savedItems = [];
+        return onItemsChange()
+      }
+
+      currentModel.findAll(vm.filter);
+      currentModel.bindAll(vm.filter, $scope, 'vm.savedItems', onItemsChange);
+
+    }
+
+    function deleteItemClick(item) {
+
+      let {id} = item;
+
+      if (!id) {
+        _.remove(vm.unsaved, item);
+        _.remove(readyStates, {item});
+        vm.readyState = _.map(readyStates, 'readyState');
+        onItemsChange();
+        return;
+      }
+
+      let promise = (vm.deleteConfirm === id) ?
+        item.DSDestroy() :
+        $timeout(2000);
+
+      vm.deleteConfirm = id;
+
+      promise.then(() => vm.deleteConfirm === id && (vm.deleteConfirm = false));
+
+    }
+
+    function onItemsChange() {
+
+      let {savedItems} = vm;
+      let items = [...savedItems];
+
+      items.push(...vm.unsaved);
+
+      vm.items = _.orderBy(items, ['date'], ['desc']);
+
+    }
 
     function editTitle() {
       let isNew = !_.get(vm.newItem, 'id');
@@ -40,23 +102,74 @@
     }
 
     function cancelClick() {
+
       if (vm.newItem.id) {
         vm.newItem.DSRevert();
       }
+
+      _.remove(readyStates, {item: vm.readyState[0]});
+      vm.readyState.splice(0, 1);
+
+      _.remove(vm.unsaved, vm.newItem);
       vm.newItem = null;
+
     }
 
     function saveClick() {
+
+      onItemsChange();
+
+      if (!vm.newItem.isValid()) {
+        vm.newItem = false;
+        return;
+      }
+
       vm.newItem.DSCreate()
-        .then(() => vm.newItem = false);
+        .then(() => {
+          vm.readyState.splice(0, 1);
+          _.remove(readyStates, {item: vm.newItem});
+          _.remove(vm.unsaved, vm.newItem);
+          vm.newItem = false;
+        });
+
+    }
+
+    function editClick(item) {
+
+      let readyState = {
+        postSave: () => {
+          return _.assign(item, vm.filter).DSCreate();
+        }
+      };
+
+      _.each(vm.filter, (val, key) => {
+        readyState[key] = {ready: true};
+      });
+
+      readyStates.push({readyState, item});
+
+      vm.readyState.splice(0, 0, readyState);
+      vm.newItem = item;
+
     }
 
     function addClick() {
-      vm.newItem = Schema.model(vm.modelName).createInstance(_.assign({}, vm.filter, vm.defaults));
+
+      let newItem = Schema.model(vm.modelName)
+        .createInstance(_.assign({}, vm.filter, vm.defaults));
+
+      vm.unsaved.push(newItem);
+
+      editClick(newItem);
+
     }
 
-    function componentName() {
-      return `edit-${_.kebabCase(vm.modelName)}`
+    function editItemComponentName() {
+      return `edit-${_.kebabCase(vm.modelName)}`;
+    }
+
+    function showItemComponentName() {
+      return `show-${_.kebabCase(vm.modelName)}`
     }
 
   }

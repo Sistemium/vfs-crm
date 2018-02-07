@@ -6,7 +6,7 @@
 
   .edit-block(
   ng-if='vm.newItem'
-  ng-class='vm.newItem.isValid(vm.readyState) ? "vfs-valid" : "vfs-invalid"'
+  ng-class='vm.newItem.isValid(vm.readyState[0]) ? "vfs-valid" : "vfs-invalid"'
   )
 
     .title
@@ -17,7 +17,7 @@
 
         a.btn.btn-link.save.animate-show(
         href ng-click='vm.saveClick($event)'
-        ng-show='vm.newItem.isValid(vm.readyState)'
+        ng-show='vm.newItem.isValid(vm.readyState[0])'
         )
           | išsaugoti
 
@@ -25,11 +25,25 @@
           | atšaukti
 
     transform-to-component(
-    component-name='{{vm.componentName()}}'
+    component-name='{{ ::vm.editItemComponentName() }}'
     ng-model='vm.newItem'
-    ready-state='vm.readyState'
-    save-fn='vm.saveFn'
+    ready-state='vm.readyState[0]'
     )
 
-  ng-transclude
+  .form-list-items
 
+    .editable-list-item(
+    ng-repeat='item in vm.items track by $index'
+    )
+
+      transform-to-component(
+      component-name='{{ ::vm.showItemComponentName() }}'
+      ng-model='item'
+      )
+
+      a.edit(href ng-click='vm.editClick(item)') keisti
+
+      a.delete(
+      href ng-click='vm.deleteItemClick(item)'
+      ng-class='{"confirm-destroy": !item.id || vm.deleteConfirm === item.id}'
+      ) {{ (item.id && vm.deleteConfirm === item.id) ? 'patvirtinti ištrynimą' : 'trinti' }}

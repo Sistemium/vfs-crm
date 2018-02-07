@@ -3,8 +3,9 @@
   fieldset
 
     .lead.filter-system
+      span {{ vm.serviceItem.filterSystem.brand.name }}
       span {{ vm.serviceItem.filterSystem.name }}
-      small(ng-if='vm.serviceItem.info') &nbsp;({{ vm.serviceItem.info }})
+      small(ng-if='vm.serviceItem.info') ({{ vm.serviceItem.info }})
 
     .field-composite.installing-master
       strong {{ vm.serviceItem.installingMaster.name || 'Nežinoma kas' }}
@@ -44,13 +45,10 @@
 
   sab-form-list.service-item-services(
   data-title='Aptarnavimų istorija'
-  ready-state='{vm.readyState.services}'
+  ready-state='vm.readyState.services'
   data-filter='{serviceItemId: vm.serviceItem.id}'
   data-defaults='{servingMasterId: vm.serviceItem.servingMasterId}'
+  data-editing='vm.serviceItemServiceEditing'
   model-name='ServiceItemService'
+  data-items='vm.serviceItemServices'
   )
-
-    show-service-item-service(
-    ng-repeat='service in vm.serviceItemServices track by service.id'
-    ng-model='service'
-    )

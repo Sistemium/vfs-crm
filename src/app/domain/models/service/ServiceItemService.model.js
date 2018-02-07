@@ -34,8 +34,8 @@
 
     });
 
-    function isValid(data) {
-      return this.date && (this.serviceItemId || _.get(data, 'serviceItemId.ready'));
+    function isValid(readyState) {
+      return this.date && (this.serviceItemId || _.get(readyState, 'serviceItemId.ready'));
     }
 
   });
