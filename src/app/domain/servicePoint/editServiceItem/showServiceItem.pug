@@ -14,8 +14,8 @@
 
     .field-composite.serving-master
       strong {{ vm.serviceItem.servingMaster.name || 'Nežinoma kas' }}
-      span {{ vm.serviceItem.lastServiceDate ? 'aptarnavo' : 'bus aptarnauti' }}
-      strong {{ vm.serviceItem.lastServiceDate | amDateFormat }}
+      span {{ vm.serviceItem.lastServiceDate ? 'aptarnauja' : 'bus aptarnauti' }}
+      //strong {{ vm.serviceItem.lastServiceDate | amDateFormat }}
 
     .field-composite
       span {{ vm.serviceItem.servicePrice ? 'Ypatinga' : 'Standartinė' }}

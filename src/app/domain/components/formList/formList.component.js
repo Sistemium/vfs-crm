@@ -12,7 +12,8 @@
       filter: '<',
       defaults: '<',
       readyState: '=?',
-      items: '=?'
+      items: '=?',
+      autoNew: '<'
     },
 
     templateUrl: 'app/domain/components/formList/formList.html',
@@ -51,11 +52,15 @@
 
       if (_.filter(vm.filter, _.isUndefined).length) {
         vm.savedItems = [];
-        return onItemsChange()
+        onItemsChange()
+      } else {
+        currentModel.findAll(vm.filter);
+        currentModel.bindAll(vm.filter, $scope, 'vm.savedItems', onItemsChange);
       }
 
-      currentModel.findAll(vm.filter);
-      currentModel.bindAll(vm.filter, $scope, 'vm.savedItems', onItemsChange);
+      if (vm.autoNew) {
+        addClick();
+      }
 
     }
 

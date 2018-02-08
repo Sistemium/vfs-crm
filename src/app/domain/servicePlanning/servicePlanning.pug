@@ -71,7 +71,7 @@
           value='item.newServiceDate'
           )
           .input-group(ng-if='item.newServiceDate')
-            input.info.form-control(placeholder='Papildomas aptarnavimas' ng-model='item.additionalServiceInfo')
+            input.info.form-control(placeholder='Papildomas aptarnavimas' ng-model='item.newServiceInfo')
             span.input-group-btn
               button.btn.btn-success(
               ng-click='vm.saveItemService(item)'

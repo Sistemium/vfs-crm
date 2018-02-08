@@ -49,29 +49,29 @@
 
     function saveItemService(item) {
 
-      let {serviceItemId, newServiceDate, additionalServiceInfo, servingMasterId} = item;
+      let {serviceItemId, newServiceDate, newServiceInfo, servingMasterId} = item;
 
       ServiceItemService.create({
         serviceItemId,
         servingMasterId,
         date: newServiceDate,
-        info: additionalServiceInfo
+        info: newServiceInfo
       })
         .then(() => ServiceItem.find(serviceItemId, {bypassCache: true}))
-        .then(serviceItem => {
-
-          _.assign(serviceItem, {
-            lastServiceDate: newServiceDate
-          });
-
-          return serviceItem.DSCreate();
-
-        })
+        // .then(serviceItem => {
+        //
+        //   _.assign(serviceItem, {
+        //     lastServiceDate: newServiceDate
+        //   });
+        //
+        //   return serviceItem.DSCreate();
+        //
+        // })
         .then(() => {
           ServicePlanning.find(item.id, {bypassCache: true})
             .then(() => {
               delete item.newServiceDate;
-              delete item.additionalServiceInfo;
+              delete item.newServiceInfo;
             })
         });
     }
@@ -209,7 +209,7 @@
 
     function groupByServingMaster() {
 
-      let groups = _.groupBy(vm.data, 'servingMasterId');
+      let groups = _.groupBy(_.filter(vm.data, 'servingMasterId'), 'servingMasterId');
       let res = [];
 
       let busy = [];
@@ -222,7 +222,11 @@
 
           let servicePointContacts = item.serviceItem.servicePoint.DSLoadRelations('ServicePointContact')
             .then(servicePoint => {
-              busy.push(servicePoint.currentServiceContract.customer().contactsLazy());
+              let {currentServiceContract} = servicePoint;
+              if (!currentServiceContract) {
+                return;
+              }
+              busy.push(currentServiceContract.customer().contactsLazy());
               return $q.all(_.map(servicePoint.servicePointContacts, contact => contact.person.contactsLazy()));
             });
 

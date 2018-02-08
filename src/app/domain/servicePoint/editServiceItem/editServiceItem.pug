@@ -47,13 +47,13 @@
 
     .field-group
 
-      .last-service-date
-
-        label Paskutinė aptarnavimo data
-
-        sab-date-picker-input(
-        value='vm.serviceItem.lastServiceDate'
-        )
+      //.last-service-date
+      //
+      //  label Paskutinė aptarnavimo data
+      //
+      //  sab-date-picker-input(
+      //  value='vm.serviceItem.lastServiceDate'
+      //  )
 
       .serving-master
 
@@ -65,7 +65,7 @@
         ready-state='vm.readyState.servingMasterId'
         )
 
-    .additional-service-info
+    //.additional-service-info
 
       label(for='additionalServiceInfo') Papildomas aptarnavimas
 
@@ -111,6 +111,7 @@
         )
 
     sab-form-list.service-item-services(
+    ng-if='vm.serviceItem.servingMasterId'
     data-title='Aptarnavimų istorija'
     ready-state='vm.readyState.services'
     data-filter='{serviceItemId: vm.serviceItem.id}'
@@ -118,4 +119,5 @@
     model-name='ServiceItemService'
     data-editing='vm.serviceItemServiceEditing'
     data-items='vm.serviceItemServices'
+    data-auto-new='!vm.serviceItem.id'
     )

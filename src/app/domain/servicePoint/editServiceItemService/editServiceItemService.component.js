@@ -21,6 +21,7 @@
       templateUrl: 'app/domain/servicePoint/editServiceItemService/showServiceItemService.html'
     }, component));
 
+  /** @ngInject */
   function editServiceItemServiceController(ReadyStateHelper, $scope) {
     ReadyStateHelper.setupController(this, $scope, 'serviceItemService');
   }

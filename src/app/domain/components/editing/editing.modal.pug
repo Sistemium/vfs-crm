@@ -7,6 +7,8 @@
 
 .modal-body(ng-repeat='componentName in [vm.componentName] track by componentName')
 
+  //p {{ vm.readyState | json }}
+
   transform-to-component(
   component-name='{{ componentName }}'
   ng-model='vm.item'

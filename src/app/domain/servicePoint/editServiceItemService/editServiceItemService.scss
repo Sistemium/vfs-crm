@@ -1,4 +1,7 @@
+@import "editing";
+
 .edit-service-item-service {
+  @extend %editing-with-form;
   .field.date {
     max-width: 190px;
   }

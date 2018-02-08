@@ -28,19 +28,36 @@
         ng-model='vm.serviceContract.num'
         )
 
-    .legal-type
+    .field-group.flags
 
-      label Kliento tipas
+      .legal-type
 
-      .btn-group
-        label.btn.btn-default(
-        ng-model='vm.legalType'
-        uib-btn-radio="'Asmuo'" uib-uncheckable='false'
-        ) Asmuo
-        label.btn.btn-default(
-        ng-model='vm.legalType'
-        uib-btn-radio="'Įmonė'" uib-uncheckable='false'
-        ) Įmonė
+        label Kliento tipas
+
+        .btn-group
+          label.btn.btn-default(
+          ng-model='vm.legalType'
+          uib-btn-radio="'Asmuo'" uib-uncheckable='false'
+          ) Asmuo
+          label.btn.btn-default(
+          ng-model='vm.legalType'
+          uib-btn-radio="'Įmonė'" uib-uncheckable='false'
+          ) Įmonė
+
+      .payment-method
+
+        label Atsiskaitymas
+
+        .btn-group
+          label.btn.btn-default(
+          ng-model='vm.serviceContract.paymentMethod'
+          uib-btn-radio="'cash'" uib-uncheckable='false'
+          ) Grynais
+
+          label.btn.btn-default(
+          ng-model='vm.serviceContract.paymentMethod'
+          uib-btn-radio="'bank'" uib-uncheckable='false'
+          ) Pavedimui
 
     .customer-legal-entity(ng-if='vm.legalType === "Įmonė"')
       label Įmonė
