@@ -16,7 +16,7 @@
     "ua-parser-js": "^0.7.10",
     "ng-appcache": "^2.0.1",
     "angular-ui-mask": "^1.8.7",
-    "sistemium-angular": "^0.8.6",
+    "sistemium-angular": "^0.8.11",
     "sistemium-angular-bootstrap": "^0.5.6",
     "angular-busy": "^4.1.4",
     "angular-vs-repeat": "Sistemium/angular-vs-repeat#stm-1.1.9",
@@ -29,6 +29,7 @@
     "angular-pinch-zoom": "Sistemium/angular-pinch-zoom",
     "ngmap": "1.18.4",
     "sistemium-angular-auth": "^0.1.10",
+    "socket.io-client": "^2.1.0",
     "js-xlsx-style": "^0.8.6",
     "file-saver": "^1.3.4"
   },
@@ -64,6 +65,11 @@
     "angular-i18n": {
       "main": [
         "angular-locale_ru.js"
+      ]
+    },
+    "socket.io-client": {
+      "main": [
+        "dist/socket.io.js"
       ]
     }
   }
