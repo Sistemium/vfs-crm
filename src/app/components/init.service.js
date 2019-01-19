@@ -4,13 +4,13 @@
 
   function InitService($rootScope, $q) {
 
-    var me = this;
-    var isInitialized = false;
-    var localDevMode = !!location.port;
+    const me = this;
+    let isInitialized = false;
+    const localDevMode = !!location.port;
 
     me.initializedEvent = 'init-service-ready';
 
-    var state = {
+    const state = {
       localDevMode: localDevMode,
       url: {
         socket: localDevMode ? 'http://localhost:8000' : 'https://socket.sistemium.com',
