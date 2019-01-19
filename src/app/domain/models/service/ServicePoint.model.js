@@ -69,6 +69,10 @@
         recentServingMaster
       },
 
+      defaultValues: {
+        type: 'Gyvenamoji'
+      },
+
       meta: {
         label: {
           add: 'Naujas Aptarnavimo Taškas'

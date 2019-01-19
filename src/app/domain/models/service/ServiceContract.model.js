@@ -57,6 +57,10 @@
 
       },
 
+      defaultValues: {
+        paymentMethod: 'cash'
+      },
+
       meta: {
         label: {
           add: 'Naujas sutartis'
