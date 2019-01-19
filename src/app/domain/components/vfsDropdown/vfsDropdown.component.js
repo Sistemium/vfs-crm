@@ -95,11 +95,13 @@
 
     function saveByUserClick() {
 
-      let saveFn = vm.saveFn || vm.newItem.DSCreate;
+      let saveFn = vm.saveFn || vm.saveClick;
 
-      if (vm.newItem.id && !vm.newItem.DSHasChanges()) {
+      if (!saveFn && (vm.newItem.id && !vm.newItem.DSHasChanges())) {
         delete vm.newItem;
         return;
+      } else if (!saveFn) {
+        saveFn = vm.newItem.DSCreate;
       }
 
       saveFn.call(vm.newItem)

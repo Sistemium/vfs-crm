@@ -16,7 +16,7 @@
       itemProperty = itemProperty || 'item';
 
       _.assign(vm, {
-        // saveClick,
+        saveClick,
         cancelClick,
         destroyClick,
         saveFormDataClick,
@@ -73,10 +73,10 @@
 
       }
 
-      // function saveClick() {
-      //   return saveComponent()
-      //     .then(vm.afterSave);
-      // }
+      function saveClick() {
+        return saveComponent()
+          .then(vm.afterSave);
+      }
 
       function saveComponent() {
 
