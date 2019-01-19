@@ -235,6 +235,7 @@
         })
         .finally(() => {
           vm.readyToDelete = false;
+          vm.person.refreshCache();
         })
 
     }

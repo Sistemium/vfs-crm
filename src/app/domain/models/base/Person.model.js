@@ -61,6 +61,12 @@
 
         return person;
 
+      },
+
+      afterCreate: function (model, person) {
+
+        return person.refreshCache();
+
       }
 
     });

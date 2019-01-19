@@ -200,6 +200,7 @@
         })
         .finally(() => {
           vm.readyToDelete = false;
+          vm.legalEntity.refreshCache();
         })
 
     }

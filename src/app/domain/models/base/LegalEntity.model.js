@@ -40,6 +40,12 @@
           add: 'Nauja įmonė',
           genitive: 'Įmonės'
         }
+      },
+
+      afterCreate: function (model, instance) {
+
+        return instance.refreshCache();
+
       }
 
     });
