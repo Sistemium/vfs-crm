@@ -110,6 +110,26 @@
         ng-min='0'
         )
 
+    .field-group
+
+      .next-service-date
+
+        label Kitas aptarnavimas
+
+        sab-date-picker-input(
+        value='vm.serviceItem.nextServiceDate'
+        )
+
+    .field-group
+
+      .additional-service-info
+
+        label(for='additionalServiceInfo') Papildoma aptarnavimo pastaba
+
+        textarea#additionalServiceInfo.form-control(
+        ng-model='vm.serviceItem.additionalServiceInfo'
+        )
+
     sab-form-list.service-item-services(
     ng-if='vm.serviceItem.servingMasterId'
     data-title='Aptarnavimų istorija'

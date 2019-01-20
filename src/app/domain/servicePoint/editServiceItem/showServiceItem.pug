@@ -39,8 +39,12 @@
       span mėn. {{ vm.serviceItem.installingDate ? 'iki' : '' }}
       strong {{ vm.serviceItem.guaranteeEnd() | amCalendar }}
 
+    .field-composite(ng-if='vm.serviceItem.nextServiceDate')
+      span Kitas aptarnavimas
+      strong {{ vm.serviceItem.nextServiceDate | amDateFormat  }}
+
     .field-composite(ng-if='vm.serviceItem.additionalServiceInfo')
-      span Papildomai aptarnaudavome
+      span Papildoma aptarnavimo pastaba
       strong {{ vm.serviceItem.additionalServiceInfo }}
 
   sab-form-list.service-item-services(
