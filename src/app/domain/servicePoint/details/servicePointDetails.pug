@@ -168,7 +168,7 @@
           .filter-system Filtravimo Sistema
           .installing-master Montavimas
           .serving-master Paskutinis apt.
-          //.service-contract Sutartis
+          .next-service Kitas apt.
 
         .service-point-items
 
@@ -190,6 +190,5 @@
               span {{ item.servingMaster.name }}
               span.date(ng-if='item.lastServiceDate') {{ item.lastServiceDate }}
 
-            //.service-contract
-              span(ng-if='item.currentServiceContract')
-                | {{ item.currentServiceContract.num }} nuo {{ item.currentServiceContract.date }}
+            .next-service
+              span.date {{ item.plannedServiceDate }}

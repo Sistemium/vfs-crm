@@ -6,9 +6,10 @@
 
     margin-top: 10px;
 
-    $width-filter-system: 40%;
-    $width-installing-master: 30%;
-    $width-serving-master: 30%;
+    $width-filter-system: 30%;
+    $width-installing-master: 25%;
+    $width-serving-master: 25%;
+    $width-serving: 20%;
     $action-button-margin: 5px;
 
     @extend %flex-table;
@@ -31,8 +32,8 @@
         .serving-master {
           width: $width-filter-system;
         }
-        .service-contract {
-          //width: $width-service-contract;
+        .next-service {
+          width: $width-serving;
         }
 
       }
