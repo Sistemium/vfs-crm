@@ -42,11 +42,11 @@
         }
       },
 
-      afterCreate: function (model, instance) {
-
-        return instance.refreshCache();
-
-      }
+      // afterCreate: function (model, instance) {
+      //
+      //   return _.result(instance, 'refreshCache');
+      //
+      // }
 
     });
 

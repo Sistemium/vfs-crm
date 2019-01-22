@@ -63,11 +63,11 @@
 
       },
 
-      afterCreate: function (model, person) {
-
-        return person.refreshCache();
-
-      }
+      // afterCreate: function (model, person) {
+      //
+      //   return _.result(person, 'refreshCache');
+      //
+      // }
 
     });
 
