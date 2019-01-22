@@ -81,7 +81,11 @@
     function editServiceItemClick(item) {
 
       Editing.editModal('show-service-item', `«${vm.servicePoint.address}» irenginys`)(item)
-        .then(() => vm.servicePoint.refreshCache());
+        .then(() => {
+          vm.servicePoint.refreshCache();
+          return item && item.DSRefresh();
+        })
+        .catch(_.noop);
 
     }
 
@@ -187,7 +191,11 @@
     function addServiceItemClick() {
       let item = ServiceItem.createInstance({servicePointId: vm.servicePoint.id});
       Editing.editModal('edit-service-item', 'Naujas Įrenginys')(item)
-        .then((serviceItem) => _.result(serviceItem, 'servicePoint.refreshCache'));
+        .then(() => {
+          _.result(item, 'servicePoint.refreshCache');
+          return item.DSRefresh();
+        })
+        .catch(_.noop);
     }
 
     function addContactClick() {

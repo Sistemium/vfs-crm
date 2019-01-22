@@ -39,7 +39,7 @@
       }
 
       function postSave(readyStateObj) {
-        return _.map(readyStateObj, (val) => {
+        const res = _.map(readyStateObj, (val) => {
 
           if (val && val.postSave) {
             return val.postSave();
@@ -52,6 +52,7 @@
           return postSave(val);
 
         });
+        return $q.all(res);
       }
 
       function saveFormData(readyStateObj) {
