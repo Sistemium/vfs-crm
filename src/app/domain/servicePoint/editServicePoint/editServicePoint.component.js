@@ -97,7 +97,7 @@
 
       let split = splitAddress(addressSearch);
 
-      console.warn(addressSearch, split);
+      // console.warn(addressSearch, split);
 
       let {street, locality, house, apartment, district} = split;
       let busy = false;
@@ -311,7 +311,7 @@
     }
 
     function addressFields() {
-      return _.pick(vm.servicePoint, ['localityId', 'streetId', 'house']);
+      return _.pick(vm.servicePoint, ['locality.name', 'street.name', 'house']);
     }
 
     function onChange() {
