@@ -259,6 +259,11 @@
       }
 
       vm.currentItem = vm.model.get(id);
+
+      if (!vm.currentItem) {
+        return;
+      }
+
       vm.dropdownInput = vm.currentItem.name;
 
       if (vm.saveToProperty) {
