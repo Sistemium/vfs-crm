@@ -19,7 +19,7 @@
 
     .field-composite
       span {{ vm.serviceItem.servicePrice ? 'Ypatinga' : 'Standartinė' }}
-      span aptarnvimo kaina
+      span aptarnavimo kaina
       strong {{ vm.serviceItem.servicePriceFn() }}
       span €
 
@@ -44,7 +44,7 @@
       strong {{ vm.serviceItem.nextServiceDate | amDateFormat  }}
 
     .field-composite(ng-if='vm.serviceItem.additionalServiceInfo')
-      span Papildoma aptarnavimo pastaba
+      span Aptarnavimo pastaba
       strong {{ vm.serviceItem.additionalServiceInfo }}
 
   sab-form-list.service-item-services(
