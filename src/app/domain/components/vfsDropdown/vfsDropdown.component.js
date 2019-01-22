@@ -192,7 +192,7 @@
 
       }
 
-      let {focused} = vm;
+      let { focused } = vm;
 
       if (!focused) {
         focused = vm.currentItem;
@@ -232,7 +232,7 @@
 
       let scroller = saEtc.getElementById(vm.id);
 
-      return _.find(vm.filteredData, {id: scroller.children[1].getAttribute('id')});
+      return _.find(vm.filteredData, { id: scroller.children[1].getAttribute('id') });
 
     }
 
@@ -376,7 +376,7 @@
 
     function addClick() {
 
-      vm.newItem = vm.model.createInstance(_.assign({name: vm.dropdownInputCopy}, vm.filter || {}));
+      vm.newItem = vm.model.createInstance(_.assign({ name: vm.dropdownInputCopy }, vm.filter || {}));
 
       vm.isOpen = false;
 
