@@ -47,9 +47,12 @@
     }
 
     function addClick() {
-      Editing.editModal('edit-service-point', 'Naujas Taškas')(ServicePoint.createInstance())
-        .then(servicePoint => {
-          servicePoint && servicePoint.id && $state.go('servicePoint.detailed', {servicePointId: servicePoint.id})
+      const servicePoint = ServicePoint.createInstance();
+      Editing.editModal('edit-service-point', 'Naujas Taškas')(servicePoint)
+        .then(() => {
+          if (servicePoint && servicePoint.id) {
+            $state.go('servicePoint.detailed', {servicePointId: servicePoint.id});
+          }
         });
     }
 
