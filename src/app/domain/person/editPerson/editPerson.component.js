@@ -268,7 +268,7 @@
 
     function addAddress(contactMethod) {
 
-      let {code} = contactMethod;
+      let {code, id: contactMethodId} = contactMethod;
 
       if (!vm[code]) {
         return;
@@ -300,7 +300,7 @@
       // FIXME: find if it's already there
       !id && vm.contactsByCode[code].push(contact);
 
-      vm[code] = Contact.createInstance({address: null, info: null});
+      vm[code] = Contact.createInstance({address: null, info: null, contactMethodId});
 
     }
 
