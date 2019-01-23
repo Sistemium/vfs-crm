@@ -161,13 +161,14 @@
 
     }
 
-    function servicePointClick(item) {
-      Editing.editModal('edit-service-point', 'Aptarnavimo Taško Redagavimas')(item.serviceItem.servicePoint);
+    function servicePointClick({ serviceItem }) {
+      Editing.editModal('edit-service-point', 'Aptarnavimo Taško Redagavimas')(serviceItem.servicePoint);
     }
 
-    function filterSystemClick(item) {
-      Editing.editModal('show-service-item', `«${item.serviceItem.servicePoint.address}» irenginys`)(item.serviceItem)
-        .then(item => item.id && ServicePlanning.find(item.id, {bypassCache: true}));
+    function filterSystemClick({ serviceItem }) {
+      Editing.editModal('show-service-item', `«${serviceItem.servicePoint.address}» irenginys`)(serviceItem)
+        .then(() => serviceItem.id && ServicePlanning.find(serviceItem.id, {bypassCache: true}))
+        .catch(_.noop);
     }
 
     function onMonthChange() {

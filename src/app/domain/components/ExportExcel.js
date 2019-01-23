@@ -58,7 +58,7 @@
 
           let etc = val;
 
-          let isDate = val instanceof Date;
+          let isDate = _.isDate(val);
 
           if (!isDate && _.isObject(val)) {
             val = val.val;
@@ -81,10 +81,10 @@
             alignment: {vertical: 'top', wrapText: true}
           };
 
-          if (val instanceof Date) {
+          if (_.isDate(val)) {
             cell.t = 'n';
             cell.s.numFmt = col.format || 'yyyy.mm.dd';
-            cell.v = dateNum(val, true);
+            cell.v = dateNum(val, false);
           } else if (cell.t === 'n' && col.type !== 'number') {
             cell.s.numFmt = '@';
           }
