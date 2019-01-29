@@ -28,7 +28,19 @@
 
   function editServiceItem(ReadyStateHelper, $scope) {
 
-    ReadyStateHelper.setupController(this, $scope, 'serviceItem');
+    const vm = ReadyStateHelper.setupController(this, $scope, 'serviceItem');
+    const  itemServicesDefault = {};
+
+    _.assign(vm, {
+
+      itemServicesDefaults() {
+        return _.assign(itemServicesDefault, {
+          servingMasterId: _.get(vm.serviceItem, 'servingMasterId'),
+          serviceSchema: !!(_.get(vm.serviceItem, 'smallServicePrice') || _.get(vm.serviceItem, 'filterSystem.smallServicePrice')),
+        });
+      },
+
+    });
 
   }
 

@@ -51,7 +51,7 @@
   data-title='Aptarnavimų istorija'
   ready-state='vm.readyState.services'
   data-filter='{serviceItemId: vm.serviceItem.id}'
-  data-defaults='{servingMasterId: vm.serviceItem.servingMasterId}'
+  data-defaults='vm.itemServicesDefaults()'
   data-editing='vm.serviceItemServiceEditing'
   model-name='ServiceItemService'
   data-items='vm.serviceItemServices'

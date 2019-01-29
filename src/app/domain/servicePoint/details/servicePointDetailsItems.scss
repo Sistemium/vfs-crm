@@ -93,6 +93,9 @@
 
           .date, .info {
             color: $gray;
+            & + * {
+              margin-left: 4px;
+            }
           }
 
           .installing-master, .serving-master {

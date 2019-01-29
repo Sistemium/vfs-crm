@@ -192,3 +192,4 @@
 
             .next-service
               span.date {{ item.plannedServiceDate }}
+              span(ng-if="item.plannedServiceType") ({{ item.plannedServiceType }})

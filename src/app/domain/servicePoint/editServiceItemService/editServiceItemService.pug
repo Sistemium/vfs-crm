@@ -13,6 +13,16 @@
       placeholder='privaloma'
       )
 
+    .field.serving-master(ng-if="vm.serviceItemService.serviceType || vm.serviceItemService.serviceSchema")
+
+      label Aptarnavimo tipas
+
+      vfs-dropdown(
+      items-data-source-name='ServiceType'
+      ng-model='vm.serviceItemService.serviceType'
+      ready-state='vm.readyState.serviceType'
+      )
+
     .field.serving-master
 
       label Aptarnavimo meistras

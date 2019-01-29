@@ -20,7 +20,7 @@
 
 .edit-service-item {
   @extend %editing-with-form;
-  .installing-date {
+  .installing-date, .installing-price {
     max-width: 150px;
   }
 }

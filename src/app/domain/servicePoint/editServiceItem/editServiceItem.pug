@@ -35,6 +35,17 @@
         value='vm.serviceItem.installingDate'
         )
 
+      .installing-price
+        label(for='installing-price') Pardavimo kaina
+
+        input#installing-price.form-control(
+        autocomplete='off'
+        type='number'
+        placeholder='Eurų už sistemą'
+        ng-model='vm.serviceItem.installingPrice'
+        ng-min='0'
+        )
+
       .installing-master
 
         label Montuotojas
@@ -99,6 +110,17 @@
         ng-min='0'
         )
 
+      .small-service-price(ng-if="vm.serviceItem.filterSystem.smallServicePrice")
+        label(for='small-service-price') Pusmetinio kaina
+
+        input#small-service-price.form-control(
+        autocomplete='off'
+        type='number'
+        placeholder='{{ vm.serviceItem.filterSystem.smallServicePrice || "Eurų už aptarnavimą" }}'
+        ng-model='vm.serviceItem.smallServicePrice'
+        ng-min='0'
+        )
+
       .guarantee-period
         label(for='frequency') Garantinis laikotarpis
 
@@ -124,7 +146,7 @@
 
       .additional-service-info
 
-        label(for='additionalServiceInfo') Papildoma aptarnavimo pastaba
+        label(for='additionalServiceInfo') Aptarnavimo pastaba
 
         textarea#additionalServiceInfo.form-control(
         ng-model='vm.serviceItem.additionalServiceInfo'
@@ -135,7 +157,7 @@
     data-title='Aptarnavimų istorija'
     ready-state='vm.readyState.services'
     data-filter='{serviceItemId: vm.serviceItem.id}'
-    data-defaults='{servingMasterId: vm.serviceItem.servingMasterId}'
+    data-defaults='vm.itemServicesDefaults()'
     model-name='ServiceItemService'
     data-editing='vm.serviceItemServiceEditing'
     data-items='vm.serviceItemServices'

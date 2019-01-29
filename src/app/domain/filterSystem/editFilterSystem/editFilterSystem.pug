@@ -53,6 +53,17 @@
       ng-min='0'
       )
 
+    .small-service-price
+      label(for='small-service-price') Pusmetinio aptarnavimo kaina
+
+      input#small-service-price.form-control(
+      autocomplete='off'
+      type='number'
+      placeholder='{{ vm.filterSystem.filterSystemType.servicePrice || "Eurų už aptarnavimą" }}'
+      ng-model='vm.filterSystem.smallServicePrice'
+      ng-min='0'
+      )
+
     .guarantee-period
       label(for='frequency') Garantinis laikotarpis
 
