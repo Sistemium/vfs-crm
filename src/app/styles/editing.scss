@@ -11,6 +11,11 @@
     flex: 1;
   }
 
+  .lead {
+    font-size: 80%;
+    margin: 5px 0 0;
+  }
+
 }
 
 %editing-with-form {
@@ -80,6 +85,7 @@
 
       > * {
         margin-right: $margin * 2;
+
         &:last-child {
           margin-right: 0;
         }

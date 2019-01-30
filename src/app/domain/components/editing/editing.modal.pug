@@ -1,6 +1,7 @@
 .editing.modal-header
 
   h1 {{vm.title}}
+    .lead(ng-if="vm.lead") {{ vm.lead }}
 
   a.close-btn(href='', ng-click='vm.cancelClick()')
     i.glyphicon.glyphicon-remove

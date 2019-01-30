@@ -114,7 +114,7 @@
 
     }
 
-    function editModal(componentName, title) {
+    function editModal(componentName, title, lead) {
 
       return item => {
 
@@ -130,7 +130,7 @@
 
         }
 
-        return openEditModal(item, componentName, title);
+        return openEditModal(item, componentName, title, lead);
 
       };
 
@@ -140,7 +140,7 @@
       me.modal.close();
     }
 
-    function openEditModal(item, componentName, title) {
+    function openEditModal(item, componentName, title, lead) {
 
       me.modal = $uibModal.open({
 
@@ -184,6 +184,7 @@
         _.assign(vm, {
           item,
           title,
+          lead,
           afterSave: me.modal.close,
           afterCancel: me.modal.dismiss,
           isReady,

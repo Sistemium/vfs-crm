@@ -80,7 +80,10 @@
 
     function editServiceItemClick(item) {
 
-      Editing.editModal('show-service-item', `«${vm.servicePoint.address}» irenginys`)(item)
+      const title = _.get(vm.servicePoint, 'currentServiceContract.name');
+      const lead = vm.servicePoint.address;
+
+      Editing.editModal('show-service-item', title, lead)(item)
         .then(() => {
           vm.servicePoint.refreshCache();
           return item && item.DSRefresh();
