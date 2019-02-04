@@ -20,6 +20,8 @@
       ng-keydown='vm.onKeyDown($event)'
       )
 
+      span.clear(ng-click="vm.clearInputClick($event)" ng-show="vm.currentId")
+        i.glyphicon.glyphicon-remove
       span.caret()
 
   button-edit(ng-if='vm.currentItem.id && !vm.disableEdit' button-click='vm.editClick()')

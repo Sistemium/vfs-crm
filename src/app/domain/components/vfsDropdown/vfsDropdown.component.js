@@ -44,6 +44,7 @@
       onInputFocus,
       onInputBlur,
       saveByUserClick,
+      clearInputClick,
 
       isOpen: false,
       isOpened: false,
@@ -118,6 +119,14 @@
 
     function inputClick() {
       vm.isOpen = !vm.isOpen;
+    }
+
+    function clearInputClick($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+      vm.currentId = null;
+      vm.isOpen = false;
+      setCurrentData();
     }
 
     function onNewItem() {
