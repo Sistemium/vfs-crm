@@ -18,10 +18,18 @@
       ng-model='vm.legalEntity.code'
       )
 
-    .contact-method(
-    ng-repeat='contactMethod in vm.contactMethods track by contactMethod.id'
-    ng-class='[contactMethod.code, {"input-error": vm.errorsByCode[contactMethod.code]}]'
+    entity-contacts.contact-methods.field-group(
+    source="LegalEntity"
+    entity="vm.legalEntity"
+    save-fn="vm.saveContacts"
+    is-valid="vm.contactsIsValid"
+    has-changes="vm.contactsHasChanges"
     )
+
+    //.contact-method(
+    //ng-repeat='contactMethod in vm.contactMethods track by contactMethod.id'
+    //ng-class='[contactMethod.code, {"input-error": vm.errorsByCode[contactMethod.code]}]'
+    //)
       label(for='{{contactMethod.code}}') {{contactMethod.name}}
 
       input.form-control(
