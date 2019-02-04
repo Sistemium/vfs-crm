@@ -34,9 +34,12 @@
     _.assign(vm, {
 
       itemServicesDefaults() {
+
+        const ownPrice = _.get(vm.serviceItem, 'smallServicePrice');
+
         return _.assign(itemServicesDefault, {
           servingMasterId: _.get(vm.serviceItem, 'servingMasterId'),
-          serviceSchema: !!(_.get(vm.serviceItem, 'smallServicePrice') || _.get(vm.serviceItem, 'filterSystem.smallServicePrice')),
+          serviceSchema: ownPrice === 0 ? false : (ownPrice || _.get(vm.serviceItem, 'filterSystem.smallServicePrice')),
         });
       },
 
