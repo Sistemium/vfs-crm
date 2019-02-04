@@ -53,7 +53,8 @@
           if (servicePoint && servicePoint.id) {
             $state.go('servicePoint.detailed', {servicePointId: servicePoint.id});
           }
-        });
+        })
+        .catch(_.noop);
     }
 
     function onSearch() {
