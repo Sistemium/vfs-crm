@@ -36,11 +36,17 @@
         )
 
 
-    .contact-methods.field-group
-      .contact-method(
-      ng-repeat='contactMethod in vm.contactMethods track by contactMethod.id'
-      ng-class='[contactMethod.code, {"input-error": vm.errorsByCode[contactMethod.code]}]'
-      )
+    entity-contacts.contact-methods.field-group(
+    source="Person"
+    entity="vm.person"
+    save-fn="vm.saveContacts"
+    is-valid="vm.contactsIsValid"
+    has-changes="vm.contactsHasChanges"
+    )
+      //.contact-method(
+      //ng-repeat='contactMethod in vm.contactMethods track by contactMethod.id'
+      //ng-class='[contactMethod.code, {"input-error": vm.errorsByCode[contactMethod.code]}]'
+      //)
         label(for='edit-person-{{::contactMethod.code}}-address') {{contactMethod.name}}
 
         .field-group
