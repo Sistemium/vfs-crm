@@ -14,7 +14,7 @@
     });
 
   function servicePlanningController($scope, saControllerHelper, Schema, moment, Editing,
-                                     servicePlanningExportConfig, ExportExcel, $filter, $q) {
+                                     servicePlanningExportConfig, ExportExcel, $filter, $q, saEtc) {
 
     const vm = saControllerHelper.setup(this, $scope)
       .use({
@@ -42,10 +42,49 @@
 
     vm.watchScope('vm.month', onMonthChange);
     vm.watchScope(() => _.get(Site.meta.getCurrent(), 'id'), onMonthChange);
+    vm.watchScope('vm.searchText', saEtc.debounce(onSearch, 400));
 
     /*
     Functions
      */
+
+    function onSearch() {
+
+      const { searchText } = vm;
+
+      if (!searchText) {
+        vm.groupedDataFiltered = vm.groupedData;
+        return;
+      }
+
+      const re = new RegExp(_.escapeRegExp(searchText), 'i');
+
+      vm.groupedDataFiltered = $filter('filter')(vm.groupedData, searchText, filterService);
+
+      function filterService(item) {
+
+        const servicePoint = _.get(item, 'serviceItem.servicePoint');
+
+        if (!servicePoint) {
+          return;
+        }
+
+        let res;
+
+        res = re.test(servicePoint.address);
+
+        if (res) {
+          return res;
+        }
+
+        res = re.test(servicePoint.currentServiceContract.customer().name);
+
+        return res;
+
+      }
+
+    }
+
 
     function saveItemService(item) {
 
@@ -249,6 +288,7 @@
       vm.setBusy(busy);
 
       vm.groupedData = res;
+      onSearch();
 
     }
 

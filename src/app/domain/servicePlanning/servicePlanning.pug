@@ -24,7 +24,10 @@
 
     .space
 
-    .buttons
+    .search
+      vfs-searcher(search='vm.searchText')
+
+    //.buttons
       a(href ng-click='vm.exportAllClick()' title='Atsisiųsti Excel')
         i.glyphicon.glyphicon-download-alt
         span Atsisiųsti viską
@@ -45,7 +48,7 @@
     vs-repeat
     )
       .service-item(
-      ng-repeat='item in vm.groupedData track by item.id'
+      ng-repeat='item in vm.groupedDataFiltered track by item.id'
       ng-class='{overdue: vm.month > item.nextServiceDate}'
       ng-switch='item.cls'
       )
