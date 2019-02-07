@@ -49,7 +49,7 @@
 
     function saveItemService(item) {
 
-      let {serviceItemId, newServiceDate, newServiceInfo, servingMasterId} = item;
+      let { serviceItemId, newServiceDate, newServiceInfo, servingMasterId } = item;
 
       ServiceItemService.create({
         serviceItemId,
@@ -57,7 +57,7 @@
         date: newServiceDate,
         info: newServiceInfo
       })
-        .then(() => ServiceItem.find(serviceItemId, {bypassCache: true}))
+        .then(() => ServiceItem.find(serviceItemId, { bypassCache: true }))
         // .then(serviceItem => {
         //
         //   _.assign(serviceItem, {
@@ -68,7 +68,7 @@
         //
         // })
         .then(() => {
-          ServicePlanning.find(item.id, {bypassCache: true})
+          ServicePlanning.find(item.id, { bypassCache: true })
             .then(() => {
               delete item.newServiceDate;
               delete item.newServiceInfo;
@@ -78,7 +78,7 @@
 
     function exportAllClick() {
 
-      let groups = _.filter(vm.groupedData, {cls: 'group'});
+      let groups = _.filter(vm.groupedData, { cls: 'group' });
 
       if (!groups.length) {
         return;
@@ -98,7 +98,7 @@
 
     function exportClick(group) {
 
-      let {data} = group;
+      let { data } = group;
       let name = `${vm.month} - ${group.servingMaster.name}`;
 
       ExportExcel.exportArrayWithConfig(exportData(data), exportConfig, name);
@@ -109,10 +109,10 @@
 
       return _.map(data, item => {
 
-        let {serviceItem, serviceFrequency} = item;
-        let {filterSystem, servicePoint, installingDate, lastServiceDate} = serviceItem;
-        let {servicePrice, guaranteePeriod} = serviceItem;
-        let {filterSystemType} = filterSystem;
+        let { serviceItem, serviceFrequency } = item;
+        let { filterSystem, servicePoint, installingDate, lastServiceDate } = serviceItem;
+        let { servicePrice, guaranteePeriod } = serviceItem;
+        let { filterSystemType } = filterSystem;
 
         servicePrice = servicePrice || filterSystem.servicePrice || filterSystemType.servicePrice;
 
@@ -129,7 +129,7 @@
 
         let contacts = _.map(allPhones, phone => _.replace(ltphone(phone.address), /[ ]/g, '')).join(' ');
 
-        let {apartment, doorCode} = servicePoint;
+        let { apartment, doorCode } = servicePoint;
         let apartmentAndDoorCode = apartment &&
           `${apartment}${doorCode ? ' (' + doorCode + ')' : ''}`;
 
@@ -142,7 +142,7 @@
           guaranteeEnd: {
             val: guaranteeEnd,
             style: {
-              font: {strike: guaranteeEnd < vm.monthDate}
+              font: { strike: guaranteeEnd < vm.monthDate }
             }
           },
           apartmentAndDoorCode,
@@ -167,7 +167,7 @@
 
     function filterSystemClick({ serviceItem }) {
       Editing.editModal('show-service-item', `«${serviceItem.servicePoint.address}» irenginys`)(serviceItem)
-        .then(() => serviceItem.id && ServicePlanning.find(serviceItem.id, {bypassCache: true}))
+        .then(() => serviceItem.id && ServicePlanning.find(serviceItem.id, { bypassCache: true }))
         .catch(_.noop);
     }
 
@@ -184,8 +184,8 @@
       let monthEnd = moment(vm.monthDate).add(1, 'month').add(-1, 'day').format();
 
       let where = {
-        siteId: {'==': siteId},
-        nextServiceDate: {'<=': monthEnd}
+        siteId: { '==': siteId },
+        nextServiceDate: { '<=': monthEnd }
       };
 
       let busy = [
@@ -194,16 +194,16 @@
         FilterSystem.findAll(),
         Brand.findAll(),
         Employee.findAll(),
-        ServicePoint.findAllWithRelations({siteId})('Locality'),
-        ServiceContract.findAll({siteId}),
+        ServicePoint.findAllWithRelations({ siteId })('Locality'),
+        ServiceContract.findAll({ siteId }),
         ServiceItem.findAll(),
         District.findAll(),
-        ServicePlanning.findAllWithRelations({where}, {bypassCache: true})('ServiceItem')
+        ServicePlanning.findAllWithRelations({ where }, { bypassCache: true })('ServiceItem')
       ];
 
       return vm.setBusy(busy)
         .then(() => {
-          vm.rebindAll(ServicePlanning, {where}, 'vm.data', groupByServingMaster);
+          vm.rebindAll(ServicePlanning, { where }, 'vm.data', groupByServingMaster);
         });
 
     }
@@ -223,7 +223,7 @@
 
           let servicePointContacts = item.serviceItem.servicePoint.DSLoadRelations('ServicePointContact')
             .then(servicePoint => {
-              let {currentServiceContract} = servicePoint;
+              let { currentServiceContract } = servicePoint;
               if (!currentServiceContract) {
                 return;
               }
