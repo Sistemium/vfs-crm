@@ -67,6 +67,9 @@
           color: $gray;
         }
         a {display: inline-block}
+        .not-ready .address {
+          color: $red;
+        }
       }
 
       > .filter-system {

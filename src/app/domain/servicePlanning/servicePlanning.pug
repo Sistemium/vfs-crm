@@ -56,7 +56,10 @@
               i.glyphicon.glyphicon-download-alt
 
         .service-point(ng-switch-default)
-          a(href ng-click='vm.servicePointClick(item)')
+          a(
+          href ng-click='vm.servicePointClick(item)'
+          ng-class='{"not-ready": !item.serviceItem.servicePoint.isReady}'
+          )
             .name {{ item.serviceItem.servicePoint.currentServiceContract.customer().name }}
             .address {{ item.serviceItem.servicePoint.address }}
 
