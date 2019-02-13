@@ -88,13 +88,14 @@
 
     function saveItemService(item) {
 
-      let { serviceItemId, newServiceDate, newServiceInfo, servingMasterId } = item;
+      let { serviceItemId, newServiceDate, newServiceInfo, servingMasterId, nextServiceInfo } = item;
 
       ServiceItemService.create({
         serviceItemId,
         servingMasterId,
+        nextServiceInfo,
         date: newServiceDate,
-        info: newServiceInfo
+        info: newServiceInfo,
       })
         .then(() => ServiceItem.find(serviceItemId, { bypassCache: true }))
         // .then(serviceItem => {
@@ -111,6 +112,7 @@
             .then(() => {
               delete item.newServiceDate;
               delete item.newServiceInfo;
+              delete item.nextServiceInfo;
             })
         });
     }

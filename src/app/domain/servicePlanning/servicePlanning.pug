@@ -76,8 +76,15 @@
           placeholder='{{item.nextServiceDate}}'
           value='item.newServiceDate'
           )
-          .input-group(ng-if='item.newServiceDate')
+          .form-group-1(ng-if='item.newServiceDate')
             input.info.form-control(placeholder='Papildomas aptarnavimas' ng-model='item.newServiceInfo')
+            //span.input-group-btn
+              button.btn.btn-success(
+              ng-click='vm.saveItemService(item)'
+              )
+                i.glyphicon.glyphicon-ok
+          .input-group(ng-if='item.newServiceDate')
+            input.info.form-control(placeholder='Sekančiam aptarnavimui' ng-model='item.nextServiceInfo')
             span.input-group-btn
               button.btn.btn-success(
               ng-click='vm.saveItemService(item)'
