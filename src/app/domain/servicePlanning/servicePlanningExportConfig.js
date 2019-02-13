@@ -53,9 +53,9 @@
           title: 'Pastabos',
           property: 'serviceItemPointInfo',
           maxLength: 30
-        }, {
-          title: 'Dovanos',
-          property: 'servicePoint.gifts'
+        // }, {
+        //   title: 'Dovanos',
+        //   property: 'servicePoint.gifts'
         }, {
           title: 'Kaina',
           property: 'servicePrice',

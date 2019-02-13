@@ -174,7 +174,7 @@
         let apartmentAndDoorCode = apartment &&
           `${apartment}${doorCode ? ' (' + doorCode + ')' : ''}`;
 
-        let serviceItemPointInfo = _.filter([servicePoint.info, serviceItem.info]).join(' ');
+        let serviceItemPointInfo = _.filter([serviceItem.serviceInfo, serviceItem.additionalServiceInfo]).join('\n');
 
         return _.defaults({
 
