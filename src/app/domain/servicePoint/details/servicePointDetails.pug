@@ -191,5 +191,6 @@
               span.date(ng-if='item.lastServiceDate') {{ item.lastServiceDate }}
 
             .next-service
-              span.date {{ item.plannedServiceDate }}
-              span(ng-if="item.plannedServiceType") ({{ item.plannedServiceType }})
+              .date {{ item.plannedServiceDate }}
+                span(ng-if="item.plannedServiceType") &nbsp;({{ item.plannedServiceType }})
+              .next-service-info(ng-if="item.serviceInfo") {{ item.serviceInfo }}
