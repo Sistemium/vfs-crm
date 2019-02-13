@@ -39,7 +39,6 @@
 
       $onInit,
       onPaste,
-      onPasteFirstName,
       onEnterPress,
       deleteContactClick,
       onInputBlur: addAddress,
@@ -186,11 +185,6 @@
 
       });
 
-    }
-
-    function onPasteFirstName() {
-      $timeout()
-        .then(() => vm.entity.setNames(vm.entity.firstName));
     }
 
     function deleteContactClick(item, code) {

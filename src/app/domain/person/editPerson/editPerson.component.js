@@ -16,7 +16,7 @@
 
   });
 
-  function editPersonController($scope, ReadyStateHelper, Schema) {
+  function editPersonController($scope, ReadyStateHelper, Schema, $timeout) {
 
     const vm = ReadyStateHelper.setupController(this, $scope, 'person');
 
@@ -28,6 +28,7 @@
 
       $onInit,
       hasChanges,
+      onPasteFirstName,
       saveContacts: _.noop,
       contactsIsValid: _.noop,
       contactsHasChanges: _.noop,
@@ -62,6 +63,11 @@
 
     function isValid() {
       return vm.person.isValid() && vm.contactsIsValid();
+    }
+
+    function onPasteFirstName() {
+      $timeout()
+        .then(() => vm.person.setNames(vm.person.firstName));
     }
 
   }
