@@ -46,6 +46,10 @@
       margin: $margin 0;
     }
 
+    sab-form-list + .field-group {
+      margin-top: $margin * 2;
+    }
+
     .field-group {
 
       display: flex;

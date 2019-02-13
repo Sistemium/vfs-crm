@@ -16,6 +16,10 @@
     }
   }
 
+  .service-item-services + * {
+    margin-top: $margin-default;
+  }
+
 }
 
 .edit-service-item {

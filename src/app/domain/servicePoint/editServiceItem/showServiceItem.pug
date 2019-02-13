@@ -56,3 +56,9 @@
   model-name='ServiceItemService'
   data-items='vm.serviceItemServices'
   )
+
+  fieldset
+    .field-composite(ng-if='vm.serviceItem.serviceInfo')
+      span Pastaba sekančiam aptarnavimui:
+      strong {{ vm.serviceItem.serviceInfo }}
+

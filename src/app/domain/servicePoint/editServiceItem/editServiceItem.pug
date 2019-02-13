@@ -163,3 +163,13 @@
     data-items='vm.serviceItemServices'
     data-auto-new='!vm.serviceItem.id'
     )
+
+    .field-group
+
+      .additional-service-info
+
+        label(for='serviceInfo') Pastaba sekančiam aptarnavimui
+
+        textarea#serviceInfo.form-control(
+        ng-model='vm.serviceItem.serviceInfo'
+        )
