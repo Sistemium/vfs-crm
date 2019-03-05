@@ -43,6 +43,7 @@
     vm.watchScope('vm.month', onMonthChange);
     vm.watchScope(() => _.get(Site.meta.getCurrent(), 'id'), onMonthChange);
     vm.watchScope('vm.searchText', saEtc.debounce(onSearch, 400));
+    vm.watchScope('vm.servingMasterId', onSearch);
 
     /*
     Functions
@@ -50,23 +51,28 @@
 
     function onSearch() {
 
-      const { searchText } = vm;
+      const { searchText, servingMasterId } = vm;
 
-      if (!searchText) {
+      if (!searchText && !servingMasterId) {
         vm.groupedDataFiltered = vm.groupedData;
         return;
       }
 
       const re = new RegExp(_.escapeRegExp(searchText), 'i');
 
-      vm.groupedDataFiltered = $filter('filter')(vm.groupedData, searchText, filterService);
+      vm.groupedDataFiltered = _.filter(vm.groupedData, filterService);
 
       function filterService(item) {
 
         const servicePoint = _.get(item, 'serviceItem.servicePoint');
+        const masterId = item.servingMasterId || item.id;
+
+        if (servingMasterId && masterId !== servingMasterId) {
+          return false;
+        }
 
         if (!servicePoint) {
-          return;
+          return servingMasterId && masterId === servingMasterId;
         }
 
         let res;
@@ -297,4 +303,5 @@
   }
 
 
-})();
+})
+();

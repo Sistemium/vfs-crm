@@ -22,6 +22,18 @@
           button.btn.btn-default(type='button' ng-click='vm.monthPickerOpen = !vm.monthPickerOpen')
             i.glyphicon.glyphicon-calendar
 
+    .serving-master
+
+      //label Meistras
+
+      vfs-dropdown(
+      items-data-source-name='Employee'
+      ng-model='vm.servingMasterId'
+      placeholder="Pasirintike Meistrą"
+      disable-edit="true"
+      disable-add="true"
+      )
+
     .space
 
     .search
