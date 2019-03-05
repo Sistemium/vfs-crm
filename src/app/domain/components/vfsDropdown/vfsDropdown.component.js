@@ -9,11 +9,13 @@
       itemsDataSourceName: '@',
       itemsNameProperty: '@',
       itemsGroupProperty: '@',
+      placeholder: '@',
       filter: '=',
       placement: '@',
       readyState: '=?',
       autoNew: '@',
-      disableEdit: '='
+      disableEdit: '<',
+      disableAdd: '<',
     },
 
     templateUrl: 'app/domain/components/vfsDropdown/vfsDropdown.html',
@@ -81,7 +83,8 @@
         editComponentName: 'edit-' + _.kebabCase(vm.itemsDataSourceName),
         currentId: vm.currentId || vm.saveTo && vm.saveToProperty && vm.saveTo[vm.saveToProperty],
         newItemTitle: _.get(model, 'meta.label.add') || 'Naujas įrašas',
-        readyState: vm.readyState || {}
+        readyState: vm.readyState || {},
+        placeholder: vm.placeholder || 'Įveskite paieškos tekstą',
       });
 
       vm.readyState.save = vm.saveClick;

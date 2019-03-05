@@ -13,7 +13,7 @@
       input.form-control(
       id='{{ vm.inputId }}'
       ng-click='vm.onInputFocus()'
-      ng-attr-placeholder= 'Įveskite paieškos tekstą'
+      ng-attr-placeholder="{{::vm.placeholder}}"
       ng-model='vm.dropdownInput'
       ng-focus='vm.onInputFocus()'
       ng-blur='vm.onInputBlur()'
@@ -25,7 +25,10 @@
       span.caret()
 
   button-edit(ng-if='vm.currentItem.id && !vm.disableEdit' button-click='vm.editClick()')
-  button-add(button-click='vm.addClick()')
+  button-add(
+  ng-if='!vm.disableAdd'
+  button-click='vm.addClick()'
+  )
 
 .edit-block(
 ng-if='vm.newItem'
