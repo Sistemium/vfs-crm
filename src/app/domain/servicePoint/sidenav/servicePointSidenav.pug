@@ -18,6 +18,8 @@
     ng-click='vm.servicePointClick(servicePoint)'
     ng-class='{active: servicePoint.id === vm.currentServicePointId, "not-ready": !servicePoint.isReady}'
     )
-      .name {{ servicePoint.currentServiceContract.customer().name}}
+      .name
+        span.is-paused(ng-if="servicePoint.isPaused") ⏸
+        span {{ servicePoint.currentServiceContract.customer().name}}
       .address {{ servicePoint.address }}
       .badge {{ servicePoint.servingItemsLazy().length }}

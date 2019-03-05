@@ -163,6 +163,14 @@
       )
 
     .flags
+      .is-paused
+        label Sustabdytas?
+        toggle-switch(
+        ng-model='vm.servicePoint.isPaused'
+        on-label='Taip'
+        off-label='Ne'
+        )
+
       .is-ready
         label Patikrinta?
         toggle-switch(

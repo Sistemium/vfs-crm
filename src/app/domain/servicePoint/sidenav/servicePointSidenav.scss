@@ -52,6 +52,10 @@
         min-height: 19px;
       }
 
+      .is-paused {
+        margin-right: 6px;
+      }
+
       .address {
         @extend .ellipsis;
         align-self: flex-end;

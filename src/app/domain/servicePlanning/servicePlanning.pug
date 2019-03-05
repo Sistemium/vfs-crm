@@ -71,7 +71,9 @@
 
         .last-service-date(ng-switch-default) {{ item.lastServiceDate | amDateFormat }}
 
-        .next-service-date(ng-switch-default)
+        .next-service-date(ng-switch-default ng-if="item.serviceItem.servicePoint.isPaused")
+          span.is-paused Sustabdytas nuo {{ item.serviceItem.servicePoint.ts | amDateFormat: "YYYY/MM/DD" }}
+        .next-service-date(ng-switch-default ng-if="!item.serviceItem.servicePoint.isPaused")
           sab-date-picker-input(
           placeholder='{{item.nextServiceDate}}'
           value='item.newServiceDate'

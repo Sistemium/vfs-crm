@@ -57,8 +57,9 @@
         }
       }
 
-      .last-service-date, .filter-system {
+      .last-service-date, .filter-system, .is-paused {
         margin-top: 8px;
+        display: block;
       }
 
     }
