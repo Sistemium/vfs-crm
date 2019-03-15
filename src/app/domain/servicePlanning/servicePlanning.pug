@@ -83,24 +83,31 @@
 
         .last-service-date(ng-switch-default) {{ item.lastServiceDate | amDateFormat }}
 
-        .next-service-date(ng-switch-default ng-if="item.serviceItem.servicePoint.isPaused")
-          span.is-paused Sustabdytas nuo {{ item.serviceItem.servicePoint.ts | amDateFormat: "YYYY/MM/DD" }}
-        .next-service-date(ng-switch-default ng-if="!item.serviceItem.servicePoint.isPaused")
-          sab-date-picker-input(
-          placeholder='{{item.nextServiceDate}}'
-          value='item.newServiceDate'
-          )
-          .form-group-1(ng-if='item.newServiceDate')
-            input.info.form-control(placeholder='Papildomas aptarnavimas' ng-model='item.newServiceInfo')
-            //span.input-group-btn
-              button.btn.btn-success(
-              ng-click='vm.saveItemService(item)'
-              )
-                i.glyphicon.glyphicon-ok
-          .input-group(ng-if='item.newServiceDate')
-            input.info.form-control(placeholder='Sekančiam aptarnavimui' ng-model='item.nextServiceInfo')
-            span.input-group-btn
-              button.btn.btn-success(
-              ng-click='vm.saveItemService(item)'
-              )
-                i.glyphicon.glyphicon-ok
+        .next-service-date(ng-switch-default ng-switch="item.serviceStatus")
+
+          .served(ng-switch-when="served") Aptarnautas {{ ::item.service.date | amDateFormat }}
+
+          span.is-paused(
+          ng-switch-when="paused"
+          ) Sustabdytas nuo {{ item.serviceItem.pausedFrom | amDateFormat }}
+
+          .serving(ng-switch-when="serving")
+            sab-date-picker-input(
+            placeholder='{{item.nextServiceDate}}'
+            value='item.newServiceDate'
+            init-date="vm.monthDate"
+            )
+            .form-group-1(ng-if='item.newServiceDate')
+              input.info.form-control(placeholder='Papildomas aptarnavimas' ng-model='item.newServiceInfo')
+              //span.input-group-btn
+                button.btn.btn-success(
+                ng-click='vm.saveItemService(item)'
+                )
+                  i.glyphicon.glyphicon-ok
+            .input-group(ng-if='item.newServiceDate')
+              input.info.form-control(placeholder='Sekančiam aptarnavimui' ng-model='item.nextServiceInfo')
+              span.input-group-btn
+                button.btn.btn-success(
+                ng-click='vm.saveItemService(item)'
+                )
+                  i.glyphicon.glyphicon-ok

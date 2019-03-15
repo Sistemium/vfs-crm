@@ -85,7 +85,8 @@
 
       Editing.editModal('show-service-item', title, lead)(item)
         .then(() => {
-          vm.servicePoint.refreshCache();
+          vm.servicePoint.DSRefresh()
+            .then(point => point.refreshCache());
           return item && item.DSRefresh();
         })
         .catch(_.noop);

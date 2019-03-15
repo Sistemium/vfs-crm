@@ -213,8 +213,17 @@
     }
 
     function filterSystemClick({ serviceItem }) {
-      Editing.editModal('show-service-item', `«${serviceItem.servicePoint.address}» irenginys`)(serviceItem)
-        .then(() => serviceItem.id && ServicePlanning.find(serviceItem.id, { bypassCache: true }))
+      const etc = { monthDate: vm.monthDate };
+      const filter = dateFilter({ id: serviceItem.id });
+      Editing.editModal('show-service-item', `«${serviceItem.servicePoint.address}» irenginys`)(serviceItem, etc)
+        .then(() => {
+          if (serviceItem.id) {
+            return ServicePlanning.findAll(filter, { bypassCache: true })
+              .then(([item]) => {
+                item.serviceStatus = serviceStatus(item);
+              });
+          }
+        })
         .catch(_.noop);
     }
 
@@ -225,17 +234,38 @@
       }
     }
 
+    function dateFilter(filter) {
+
+      const date = moment(vm.monthDate);
+
+      if (!date.isValid()) {
+        return;
+      }
+
+      const dateB = date.format();
+
+      const monthEnd = date.add(1, 'month').add(-1, 'day');
+
+      const dateE = monthEnd.format();
+
+      return _.assign({ dateB, dateE }, filter);
+
+    }
+
     function refresh() {
 
-      let siteId = Site.meta.getCurrent().id;
-      let monthEnd = moment(vm.monthDate).add(1, 'month').add(-1, 'day').format();
+      const siteId = Site.meta.getCurrent().id;
+      const where = dateFilter({ siteId });
 
-      let where = {
-        siteId: { '==': siteId },
-        nextServiceDate: { '<=': monthEnd }
+      if (!where) {
+        return;
+      }
+
+      const serviceFilter = {
+        where: { date: { '>=': where.dateB, '<=': where.dateE } },
       };
 
-      let busy = [
+      const busy = [
         Person.findAll(),
         LegalEntity.findAll(),
         FilterSystem.findAll(),
@@ -245,22 +275,38 @@
         ServiceContract.findAll({ siteId }),
         ServiceItem.findAll(),
         District.findAll(),
-        ServicePlanning.findAllWithRelations({ where }, { bypassCache: true })('ServiceItem')
+        ServiceItemService.findAll(serviceFilter, { bypassCache: true }),
+        ServicePlanning.findAllWithRelations(where, { bypassCache: true })('ServiceItem')
+          .then(res => (vm.data = res))
       ];
 
       return vm.setBusy(busy)
         .then(() => {
-          vm.rebindAll(ServicePlanning, { where }, 'vm.data', groupByServingMaster);
+          vm.rebindAll(ServiceItemService, serviceFilter, 'vm.services', () => groupByServingMaster(serviceFilter));
         });
 
     }
 
-    function groupByServingMaster() {
+    function serviceStatus(item) {
+      if (!item.service && item.serviceItem.pausedFrom) {
+        return 'paused';
+      } else if (item.service) {
+        return 'served';
+      }
+
+      return 'serving';
+    }
+
+    function groupByServingMaster(serviceFilter) {
 
       let groups = _.groupBy(_.filter(vm.data, 'servingMasterId'), 'servingMasterId');
       let res = [];
 
       let busy = [];
+
+      let services = ServiceItemService.filter(serviceFilter);
+
+      let servicesByItem = _.keyBy(services, 'serviceItemId');
 
       _.each(groups, (data, servingMasterId) => {
 
@@ -268,7 +314,12 @@
 
         _.each(data, item => {
 
-          let servicePointContacts = item.serviceItem.servicePoint.DSLoadRelations('ServicePointContact')
+          const { serviceItem } = item;
+          item.service = servicesByItem[item.id];
+
+          item.serviceStatus = serviceStatus(item);
+
+          let servicePointContacts = serviceItem.servicePoint.DSLoadRelations('ServicePointContact')
             .then(servicePoint => {
               let { currentServiceContract } = servicePoint;
               if (!currentServiceContract) {
@@ -303,5 +354,4 @@
   }
 
 
-})
-();
+})();

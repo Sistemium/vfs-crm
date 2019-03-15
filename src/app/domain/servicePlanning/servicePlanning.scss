@@ -64,7 +64,7 @@
         }
       }
 
-      .last-service-date, .filter-system, .is-paused {
+      .last-service-date, .filter-system, .is-paused, .served {
         margin-top: 8px;
         display: block;
       }
@@ -97,7 +97,9 @@
       }
 
       > .next-service-date {
+
         flex: 20;
+
         > * + * {
           margin-top: 2px;
         }

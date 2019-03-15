@@ -4,7 +4,8 @@
 
     bindings: {
       serviceItem: '=ngModel',
-      readyState: '='
+      readyState: '=',
+      etc: '<',
     },
 
     templateUrl: 'app/domain/servicePoint/editServiceItem/editServiceItem.html',
@@ -17,7 +18,7 @@
 
     bindings: {
       serviceItem: '=ngModel',
-      readyState: '='
+      readyState: '=',
     },
 
     templateUrl: 'app/domain/servicePoint/editServiceItem/showServiceItem.html',
