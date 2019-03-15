@@ -116,7 +116,7 @@
 
     function editModal(componentName, title, lead) {
 
-      return item => {
+      return (item, etc = {}) => {
 
         if (!title) {
 
@@ -130,7 +130,7 @@
 
         }
 
-        return openEditModal(item, componentName, title, lead);
+        return openEditModal(item, componentName, title, lead, etc);
 
       };
 
@@ -140,7 +140,7 @@
       me.modal.close();
     }
 
-    function openEditModal(item, componentName, title, lead) {
+    function openEditModal(item, componentName, title, lead, etc = {}) {
 
       me.modal = $uibModal.open({
 
@@ -170,7 +170,8 @@
           editingEnabled: /show/.test(componentName),
           editing: /edit/.test(componentName),
           componentName,
-          readyState: {}
+          readyState: {},
+          etc,
         };
 
         $scope.vm = vm;
