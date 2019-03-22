@@ -23,6 +23,21 @@
         nextServiceDate: null,
         nextServiceInfo: '',
         newServiceInfo: '',
+        type: 'service',
+        placeholder: {
+          service: {
+            a: 'Papildomas aptarnavimas',
+            b: 'Sekančiam aptarnavimui',
+          },
+          pause: {
+            a: 'Komentaras',
+            b: 'Sekančiam aptarnavimui',
+          },
+          forward: {
+            a: 'Priežastis',
+            b: 'Sekančiam aptarnavimui',
+          },
+        },
       });
 
     const {
@@ -38,12 +53,13 @@
     function saveItemServiceClick() {
 
       const { serviceItemId, servingMasterId, id } = vm.servicePlanning;
-      const { newServiceInfo, nextServiceInfo, newServiceDate } = vm;
+      const { newServiceInfo, nextServiceInfo, newServiceDate, type } = vm;
 
       ServiceItemService.create({
         serviceItemId,
         servingMasterId,
         nextServiceInfo,
+        type,
         date: newServiceDate,
         info: newServiceInfo,
       })

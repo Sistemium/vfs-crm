@@ -1,0 +1,16 @@
+@import "variables";
+
+.service-planning-service {
+
+  .service-form {
+    > .btn-group {
+      display: flex;
+      //justify-content: center;
+      > * {
+        float: none;
+        flex: 1;
+      }
+    }
+  }
+
+}

@@ -98,7 +98,8 @@
 
       > .next-service-date {
 
-        flex: 20;
+        flex: 25;
+        min-width: 270px;
 
         > * + * {
           margin-top: 2px;

@@ -1,17 +1,46 @@
 .service-planning-service
+
   sab-date-picker-input(
   placeholder="{{ vm.servicePlanning.nextServiceDate }}"
   value="vm.newServiceDate"
   init-date="vm.monthDate"
   )
 
-  .form-group-1(ng-if='vm.newServiceDate')
-    input.info.form-control(placeholder='Papildomas aptarnavimas' ng-model='vm.newServiceInfo')
+  .service-form(ng-if='vm.newServiceDate')
 
-  .input-group(ng-if='vm.newServiceDate')
-    input.info.form-control(placeholder='Sekančiam aptarnavimui' ng-model='vm.nextServiceInfo')
-    span.input-group-btn
-      button.btn.btn-success(
-      ng-click='vm.saveItemServiceClick()'
+    .btn-group
+
+      label.btn.btn-default(
+      ng-model='vm.type'
+      uib-btn-radio="'service'" uib-uncheckable='false'
+      ) Įvykdytas
+
+      label.btn.btn-default(
+      ng-model='vm.type'
+      uib-btn-radio="'forward'" uib-uncheckable='false'
+      ) Perkelti
+
+      label.btn.btn-default(
+      ng-model='vm.type'
+      uib-btn-radio="'pause'" uib-uncheckable='false'
+      ) Sustabdyti
+
+    .form-group-1
+
+      input.info.form-control(
+      placeholder='{{ vm.placeholder[vm.type].a }}'
+      ng-model='vm.newServiceInfo'
       )
-        i.glyphicon.glyphicon-ok
+
+    .input-group(ng-if='vm.newServiceDate')
+
+      input.info.form-control(
+      placeholder='{{ vm.placeholder[vm.type].b }}'
+      ng-model='vm.nextServiceInfo'
+      )
+
+      span.input-group-btn
+        button.btn.btn-success(
+        ng-click='vm.saveItemServiceClick()'
+        )
+          i.glyphicon.glyphicon-ok
