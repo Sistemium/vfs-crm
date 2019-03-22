@@ -91,23 +91,8 @@
           ng-switch-when="paused"
           ) Sustabdytas nuo {{ item.serviceItem.pausedFrom | amDateFormat }}
 
-          .serving(ng-switch-when="serving")
-            sab-date-picker-input(
-            placeholder='{{item.nextServiceDate}}'
-            value='item.newServiceDate'
-            init-date="vm.monthDate"
-            )
-            .form-group-1(ng-if='item.newServiceDate')
-              input.info.form-control(placeholder='Papildomas aptarnavimas' ng-model='item.newServiceInfo')
-              //span.input-group-btn
-                button.btn.btn-success(
-                ng-click='vm.saveItemService(item)'
-                )
-                  i.glyphicon.glyphicon-ok
-            .input-group(ng-if='item.newServiceDate')
-              input.info.form-control(placeholder='Sekančiam aptarnavimui' ng-model='item.nextServiceInfo')
-              span.input-group-btn
-                button.btn.btn-success(
-                ng-click='vm.saveItemService(item)'
-                )
-                  i.glyphicon.glyphicon-ok
+          service-planning-service(
+          service-planning="item"
+          month-date="vm.monthDate"
+          ng-switch-when="serving"
+          )

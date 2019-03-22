@@ -23,7 +23,6 @@
         servicePointClick,
         exportClick,
         exportAllClick,
-        saveItemService
       });
 
     const {
@@ -89,38 +88,6 @@
 
       }
 
-    }
-
-
-    function saveItemService(item) {
-
-      let { serviceItemId, newServiceDate, newServiceInfo, servingMasterId, nextServiceInfo } = item;
-
-      ServiceItemService.create({
-        serviceItemId,
-        servingMasterId,
-        nextServiceInfo,
-        date: newServiceDate,
-        info: newServiceInfo,
-      })
-        .then(() => ServiceItem.find(serviceItemId, { bypassCache: true }))
-        // .then(serviceItem => {
-        //
-        //   _.assign(serviceItem, {
-        //     lastServiceDate: newServiceDate
-        //   });
-        //
-        //   return serviceItem.DSCreate();
-        //
-        // })
-        .then(() => {
-          ServicePlanning.find(item.id, { bypassCache: true })
-            .then(() => {
-              delete item.newServiceDate;
-              delete item.newServiceInfo;
-              delete item.nextServiceInfo;
-            })
-        });
     }
 
     function exportAllClick() {
