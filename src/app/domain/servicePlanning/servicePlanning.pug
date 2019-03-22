@@ -85,7 +85,13 @@
 
         .next-service-date(ng-switch-default ng-switch="item.serviceStatus")
 
-          .served(ng-switch-when="served") Aptarnautas {{ ::item.service.date | amDateFormat }}
+          .served(
+          ng-switch-when="served"
+          ) Aptarnautas {{ ::item.service.date | amDateFormat }}
+
+          .served(
+          ng-switch-when="forward"
+          ) Perkeltas į {{ ::item.serviceItem.nextServiceDate | amDateFormat }}
 
           span.is-paused(
           ng-switch-when="paused"

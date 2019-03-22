@@ -255,10 +255,11 @@
     }
 
     function serviceStatus(item) {
-      if (!item.service && item.serviceItem.pausedFrom) {
+      const { serviceItem, service } = item;
+      if (serviceItem.pausedFrom) {
         return 'paused';
-      } else if (item.service) {
-        return 'served';
+      } else if (service) {
+        return service.type === 'forward' ? 'forward' : 'served';
       }
 
       return 'serving';

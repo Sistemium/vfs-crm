@@ -14,7 +14,7 @@
 
     });
 
-  function servicePlanningServiceController($scope, saControllerHelper, Schema) {
+  function servicePlanningServiceController($scope, saControllerHelper, Schema, $q, moment) {
 
     const vm = saControllerHelper.setup(this, $scope)
       .use({
@@ -52,17 +52,31 @@
 
     function saveItemServiceClick() {
 
-      const { serviceItemId, servingMasterId, id } = vm.servicePlanning;
+      const { serviceItemId, servingMasterId, id, serviceItem } = vm.servicePlanning;
       const { newServiceInfo, nextServiceInfo, newServiceDate, type } = vm;
 
-      ServiceItemService.create({
-        serviceItemId,
-        servingMasterId,
-        nextServiceInfo,
-        type,
-        date: newServiceDate,
-        info: newServiceInfo,
-      })
+      let date = newServiceDate;
+
+      const promises = [];
+
+      if (type === 'pause') {
+        serviceItem.pausedFrom = newServiceDate;
+        promises.push(serviceItem.DSCreate());
+      } else if (type === 'forward') {
+        date = moment(vm.monthDate).format('YYYY-MM-DD');
+        serviceItem.nextServiceDate = newServiceDate;
+        promises.push(serviceItem.DSCreate());
+      }
+
+      $q.all(promises)
+        .then(() => ServiceItemService.create({
+          serviceItemId,
+          servingMasterId,
+          nextServiceInfo,
+          type,
+          date,
+          info: newServiceInfo,
+        }))
         .then(() => ServicePlanning.find(id, { bypassCache: true }));
     }
 
