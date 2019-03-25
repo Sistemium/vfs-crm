@@ -30,6 +30,7 @@
 
     .serving-master {
       margin-left: 1em;
+
       .popover {
         max-width: 300px;
       }
@@ -75,10 +76,15 @@
 
       > .service-point {
         flex: 30;
+
         a > .address {
           color: $gray;
         }
-        a {display: inline-block}
+
+        a {
+          display: inline-block
+        }
+
         .not-ready .address {
           color: $red;
         }
@@ -116,10 +122,21 @@
 
       display: flex;
       justify-content: space-between;
+
+      .name {
+        //flex: 1;
+      }
+
       align-items: center;
 
-      .export {
+      .options {
+
+        display: flex;
         font-size: 75%;
+
+        > * {
+          margin-left: $margin-default;
+        }
       }
 
     }

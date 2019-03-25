@@ -1,0 +1,22 @@
+.service-month-report
+
+  .report-header
+    .filter-system Sistema
+    .count Iš viso
+    .type-service Aptarnauta
+    .type-forward Perkelta
+    .type-pause Sustabdyta
+
+  .report-row(ng-repeat="row in vm.data track by row.id")
+    .filter-system {{ row.filterSystem.name }}
+    .cnt {{ row.items.length }}
+    .type-service {{ row.types.service.length | number}}
+    .type-forward {{ row.types.forward.length | number }}
+    .type-pause {{ row.types.pause.length | number }}
+
+  .report-footer
+    .filter-system
+    .cnt {{ vm.totals.items }}
+    .type-service {{ vm.totals.service | number}}
+    .type-forward {{ vm.totals.forward | number }}
+    .type-pause {{ vm.totals.pause | number }}

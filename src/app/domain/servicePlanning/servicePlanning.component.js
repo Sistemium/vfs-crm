@@ -14,7 +14,8 @@
     });
 
   function servicePlanningController($scope, saControllerHelper, Schema, moment, Editing,
-                                     servicePlanningExportConfig, ExportExcel, $filter, $q, saEtc) {
+                                     servicePlanningExportConfig, ExportExcel, $filter, $q, saEtc,
+                                     $uibModal) {
 
     const vm = saControllerHelper.setup(this, $scope)
       .use({
@@ -23,6 +24,7 @@
         servicePointClick,
         exportClick,
         exportAllClick,
+        reportClick,
       });
 
     const {
@@ -255,14 +257,47 @@
     }
 
     function serviceStatus(item) {
-      const { serviceItem, service } = item;
-      if (serviceItem.pausedFrom) {
-        return 'paused';
-      } else if (service) {
-        return service.type === 'forward' ? 'forward' : 'served';
-      }
 
-      return 'serving';
+      const { serviceItem, service } = item;
+
+      if (service && service.type) {
+        return service.type;
+      } else if (serviceItem.pausedFrom) {
+        return 'paused';
+      } else
+
+        return 'serving';
+
+    }
+
+    function reportClick(item) {
+
+      console.info('reportClick', item);
+
+      const modal = $uibModal.open({
+
+        animation: true,
+        templateUrl: 'app/domain/servicePlanning/report/serviceReportModal.html',
+        size: 'lg',
+
+        controller() {
+          _.assign(this, dateFilter({
+            title: item.servingMaster.name,
+            lead: `Aptarnavimo ataskaita už ${vm.month}`,
+            servingMasterId: item.servingMaster.id,
+            cancelClick: () => modal.dismiss(),
+          }));
+        },
+
+        controllerAs: 'vm',
+        bindToController: true,
+
+      });
+
+      modal.result
+        .catch(() => {
+        });
+
     }
 
     function groupByServingMaster(serviceFilter) {

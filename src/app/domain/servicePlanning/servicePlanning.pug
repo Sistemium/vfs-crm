@@ -66,9 +66,13 @@
       )
         h4.serving-master(ng-switch-when='group')
           .name {{ item.servingMaster.name || 'Aptarnavimo meistras nepaskirtas' }}
-          .export
-            a(href ng-click='vm.exportClick(item)' title='Atsisiųsti Excel')
-              i.glyphicon.glyphicon-download-alt
+          .options
+            .report
+              a(href ng-click='vm.reportClick(item)' title='Paroditi reportą')
+                i.glyphicon.glyphicon-book
+            .export
+              a(href ng-click='vm.exportClick(item)' title='Atsisiųsti Excel')
+                i.glyphicon.glyphicon-download-alt
 
         .service-point(ng-switch-default)
           a(
@@ -86,7 +90,7 @@
         .next-service-date(ng-switch-default ng-switch="item.serviceStatus")
 
           .served(
-          ng-switch-when="served"
+          ng-switch-when="service"
           ) Aptarnautas {{ ::item.service.date | amDateFormat }}
 
           .served(
@@ -94,7 +98,7 @@
           ) Perkeltas į {{ ::item.serviceItem.nextServiceDate | amDateFormat }}
 
           span.is-paused(
-          ng-switch-when="paused"
+          ng-switch-when="pause"
           ) Sustabdytas nuo {{ item.serviceItem.pausedFrom | amDateFormat }}
 
           service-planning-service(

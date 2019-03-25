@@ -1,0 +1,33 @@
+@import "variables";
+
+.service-month-report {
+
+  .report-header, .report-row, .report-footer {
+    display: flex;
+
+    > * {
+      margin: $margin-bottom-xs-minus;
+      flex: 10;
+    }
+
+  }
+
+  .report-row + .report-row {
+    border-top: solid 1px darken($border-gray, 1%);
+  }
+
+  .report-header {
+    font-weight: 500;
+    border-bottom: solid 2px darken($border-gray, 10%);
+  }
+
+  .report-footer {
+    font-weight: 500;
+    border-top: solid 2px darken($border-gray, 10%);
+  }
+
+  .filter-system {
+    flex: 30;
+  }
+
+}
