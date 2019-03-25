@@ -7,6 +7,7 @@
         dateB: '<',
         dateE: '<',
         servingMasterId: '<',
+        groupBy: '@',
       },
 
       templateUrl: 'app/domain/servicePlanning/report/serviceMonthReport.html',
@@ -17,18 +18,26 @@
 
   function serviceMonthReportController($scope, saControllerHelper, Schema) {
 
-    const { ServiceItemService, ServiceItem, FilterSystem } = Schema.models();
+    const { ServiceItemService, ServiceItem } = Schema.models();
 
     const vm = saControllerHelper.setup(this, $scope);
 
     vm.use({
-      $onInit
+      $onInit,
+      groupings: [
+        { code: 'serviceItem.filterSystem.filterSystemType.name', name: 'Sistemos Tipas' },
+        { code: 'serviceItem.filterSystem.name', name: 'Sistema' },
+      ],
+      setGrouping,
+      grouping: null,
     });
 
 
     function $onInit() {
 
       const { servingMasterId, dateB, dateE } = vm;
+
+      setGrouping(vm.groupings[0]);
 
       ServiceItemService.findAll({ servingMasterId, dateB, dateE }, { bypassCache: true })
         .then(data => {
@@ -46,16 +55,23 @@
 
     }
 
-    function reportData(data) {
+    function setGrouping(grouping) {
+      vm.grouping = grouping;
+      reportData();
+    }
 
-      const grouped = _.groupBy(data, 'serviceItem.filterSystemId');
+    function reportData(data = vm.rawData) {
 
-      vm.data = _.map(grouped, (items, filterSystemId) => {
+      const { grouping: { code: groupBy } } = vm;
+
+      const grouped = _.groupBy(data, groupBy);
+
+      vm.data = _.map(grouped, (items, id) => {
         return {
-          id: filterSystemId,
+          id,
           items,
           types: _.groupBy(items, 'type'),
-          filterSystem: FilterSystem.get(filterSystemId),
+          // filterSystem: FilterSystem.get(filterSystemId),
         };
       });
 
@@ -64,7 +80,9 @@
         service: _.sumBy(vm.data, 'types.service.length'),
         pause: _.sumBy(vm.data, 'types.pause.length'),
         forward: _.sumBy(vm.data, 'types.forward.length'),
-      }
+      };
+
+      vm.rawData = data;
 
     }
 

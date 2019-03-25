@@ -1,22 +1,28 @@
 .service-month-report
 
   .report-header
-    .filter-system Sistema
-    .count Iš viso
+    .filter-system(uib-dropdown on-toggle="toggled(open)")
+      a(href uib-dropdown-toggle) {{ vm.grouping.name }}
+
+      ul.dropdown-menu(uib-dropdown-menu)
+        li(ng-repeat="grp in vm.groupings")
+          a(href ng-click="vm.setGrouping(grp)") {{ grp.name }}
+
     .type-service Aptarnauta
     .type-forward Perkelta
     .type-pause Sustabdyta
+    .count Iš viso
 
   .report-row(ng-repeat="row in vm.data track by row.id")
-    .filter-system {{ row.filterSystem.name }}
-    .cnt {{ row.items.length }}
+    .filter-system {{ row.id }}
     .type-service {{ row.types.service.length | number}}
     .type-forward {{ row.types.forward.length | number }}
     .type-pause {{ row.types.pause.length | number }}
+    .cnt {{ row.items.length }}
 
   .report-footer
     .filter-system
-    .cnt {{ vm.totals.items }}
     .type-service {{ vm.totals.service | number}}
     .type-forward {{ vm.totals.forward | number }}
     .type-pause {{ vm.totals.pause | number }}
+    .cnt {{ vm.totals.items }}
