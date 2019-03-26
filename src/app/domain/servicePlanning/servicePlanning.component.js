@@ -313,7 +313,11 @@
 
       _.each(groups, (data, servingMasterId) => {
 
-        data = _.orderBy(data, ['serviceItem.servicePoint.locality.district.name', 'nextServiceDate']);
+        data = _.orderBy(data, [
+          'serviceItem.servicePoint.locality.district.name',
+          'serviceItem.serviceContract.customer().name',
+          'nextServiceDate',
+        ]);
 
         _.each(data, item => {
 

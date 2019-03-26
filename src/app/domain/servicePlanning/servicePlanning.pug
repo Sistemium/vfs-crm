@@ -95,7 +95,11 @@
 
           .served(
           ng-switch-when="forward"
-          ) Perkeltas į {{ ::item.serviceItem.nextServiceDate | amDateFormat }}
+          ) Perkeltas į
+            span(
+            ng-if="item.serviceItem.nextServiceDate"
+            ) {{ ::item.serviceItem.nextServiceDate | amDateFormat }}
+            span(ng-if="!item.serviceItem.nextServiceDate") kitą mėnesį
 
           span.is-paused(
           ng-switch-when="pause"
