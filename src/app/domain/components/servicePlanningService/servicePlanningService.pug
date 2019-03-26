@@ -8,22 +8,7 @@
 
   .service-form(ng-if='vm.newServiceDate')
 
-    .btn-group
-
-      label.btn.btn-default(
-      ng-model='vm.type'
-      uib-btn-radio="'service'" uib-uncheckable='false'
-      ) Įvykdytas
-
-      label.btn.btn-default(
-      ng-model='vm.type'
-      uib-btn-radio="'forward'" uib-uncheckable='false'
-      ) Perkelti
-
-      label.btn.btn-default(
-      ng-model='vm.type'
-      uib-btn-radio="'pause'" uib-uncheckable='false'
-      ) Sustabdyti
+    service-type-switch(ng-model="vm.type")
 
     .form-group-1
 

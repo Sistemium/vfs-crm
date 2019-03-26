@@ -13,6 +13,12 @@
       placeholder='privaloma'
       )
 
+    .field.type
+
+      service-type-switch(ng-model="vm.serviceItemService.type")
+
+  .field-group
+
     .field.service-type(ng-if="vm.serviceItemService.serviceType || vm.serviceItemService.serviceSchema")
 
       label Aptarnavimo tipas

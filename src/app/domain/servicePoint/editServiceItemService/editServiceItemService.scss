@@ -1,14 +1,25 @@
 @import "editing";
 
 .edit-service-item-service {
+
   @extend %editing-with-form;
+
   .field.date {
     max-width: 190px;
   }
+
   .field.info {
     flex: 1;
   }
+
   .field vfs-dropdown .popover {
     width: auto;
   }
+
+  .field.type {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
 }

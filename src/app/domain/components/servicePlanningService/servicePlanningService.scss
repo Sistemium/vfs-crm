@@ -3,13 +3,15 @@
 .service-planning-service {
 
   .service-form {
-    > .btn-group {
+    .service-type-switch {
+
       display: flex;
-      //justify-content: center;
+
       > * {
         float: none;
         flex: 1;
       }
+
     }
   }
 
