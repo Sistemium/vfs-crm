@@ -66,7 +66,8 @@
         isValid,
         concatAddress,
         refreshCache,
-        recentServingMaster
+        recentServingMaster,
+        allContacts,
       },
 
       defaultValues: {
@@ -83,6 +84,28 @@
       }
 
     });
+
+    function allContacts() {
+
+      let contractPerson = _.get(this, 'currentServiceContract.customerPerson');
+
+      const res = _.map(this.servicePointContacts, c => {
+        return { person: c.person, servicePointContact: c };
+      });
+
+      if (contractPerson) {
+        res.push({ person: contractPerson });
+      }
+
+      let contractLegalentity = _.get(this, 'currentServiceContract.customerLegalEntity');
+
+      if (contractLegalentity) {
+        res.push({ person: contractLegalentity });
+      }
+
+      return res;
+
+    }
 
     function orderBy(point) {
 
@@ -123,7 +146,7 @@
 
     function concatAddress() {
 
-      let {locality, street, house} = this;
+      let { locality, street, house } = this;
 
       if (!locality) return null;
 
