@@ -77,15 +77,15 @@
       > .service-point {
         flex: 30;
 
-        a > .address {
+        .address {
           color: $gray;
         }
 
         a {
-          display: inline-block
+          display: block;
         }
 
-        .not-ready .address {
+        &.not-ready .address {
           color: $red;
         }
       }

@@ -74,13 +74,23 @@
               a(href ng-click='vm.exportClick(item)' title='Atsisiųsti Excel')
                 i.glyphicon.glyphicon-download-alt
 
-        .service-point(ng-switch-default)
-          a(
-          href ng-click='vm.servicePointClick(item)'
-          ng-class='{"not-ready": !item.serviceItem.servicePoint.isReady}'
+        .service-point(
+        ng-switch-default
+        ng-class='{"not-ready": !item.serviceItem.servicePoint.isReady}'
+        )
+
+          a.name(
+          ng-repeat="contact in item.contacts track by contact.person.id"
+          href
+          ng-click="vm.personNameClick(contact.person)"
           )
-            .name {{ item.serviceItem.servicePoint.currentServiceContract.customer().name }}
-            .address {{ item.serviceItem.servicePoint.address }}
+            | {{ contact.person.name }}
+          //.name {{ item.contacts | json }}
+
+          a.address(
+          href ng-click='vm.servicePointClick(item)'
+          )
+            | {{ item.serviceItem.servicePoint.address }}
 
         .filter-system(ng-switch-default)
           a(href ng-click='vm.filterSystemClick(item)') {{ item.serviceItem.filterSystem.name }}

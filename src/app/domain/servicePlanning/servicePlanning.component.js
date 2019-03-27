@@ -25,6 +25,7 @@
         exportClick,
         exportAllClick,
         reportClick,
+        personNameClick,
       });
 
     const {
@@ -85,6 +86,12 @@
         }
 
         res = re.test(servicePoint.currentServiceContract.customer().name);
+
+        if (res) {
+          return res;
+        }
+
+        res = _.find(item.contacts, ({ person }) => re.test(person.name));
 
         return res;
 
@@ -270,6 +277,17 @@
 
     }
 
+    function personNameClick(item) {
+
+      let component = `edit-${_.kebabCase(item.constructor.name)}`;
+      let model = Schema.model(item.constructor.name);
+      let title = `${model.meta.label.genitive} Redagavimas`;
+
+      Editing.editModal(component, title)(item);
+
+    }
+
+
     function reportClick(item) {
 
       console.info('reportClick', item);
@@ -322,18 +340,22 @@
         _.each(data, item => {
 
           const { serviceItem } = item;
-          item.service = servicesByItem[item.id];
+          const { servicePoint } = serviceItem;
 
+          item.service = servicesByItem[item.id];
           item.serviceStatus = serviceStatus(item);
 
-          let servicePointContacts = serviceItem.servicePoint.DSLoadRelations('ServicePointContact')
-            .then(servicePoint => {
+          let servicePointContacts = servicePoint.DSLoadRelations('ServicePointContact')
+            .then(() => {
               let { currentServiceContract } = servicePoint;
               if (!currentServiceContract) {
                 return;
               }
               busy.push(currentServiceContract.customer().contactsLazy());
-              return $q.all(_.map(servicePoint.servicePointContacts, contact => contact.person.contactsLazy()));
+              return $q.all(_.map(servicePoint.servicePointContacts, ({ person }) => person.contactsLazy()));
+            })
+            .then(() => {
+              item.contacts = servicePoint.allContacts();
             });
 
           busy.push(servicePointContacts);
