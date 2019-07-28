@@ -19,7 +19,25 @@
             localKey: 'serviceItemId'
           }
         }
-      }
+      },
+
+      methods: {
+
+        serviceStatusCode() {
+
+          const { serviceItem, service } = this;
+
+          if (service && service.type) {
+            return service.type;
+          } else if (serviceItem.pausedFrom) {
+            return 'paused';
+          }
+
+          return 'serving';
+
+        },
+
+      },
 
     });
 

@@ -46,25 +46,26 @@
 
       },
 
+      meta: {
+        label: {
+          add: 'Naujas Įrenginys'
+        }
+      },
+
       methods: {
         isValid,
         guaranteeEnd,
         guaranteePeriodFn,
         serviceFrequencyFn,
-        servicePriceFn
-      },
+        servicePriceFn,
 
-      meta: {
-        label: {
-          add: 'Naujas Įrenginys'
-        }
-      }
+      },
 
     });
 
     function servicePriceFn() {
 
-      let {servicePrice} = this;
+      let { servicePrice } = this;
 
       return _.isNumber(servicePrice) ? servicePrice : (
         _.get(this.filterSystem, 'servicePrice') ||
@@ -74,7 +75,7 @@
     }
 
     function serviceFrequencyFn() {
-      let {serviceFrequency} = this;
+      let { serviceFrequency } = this;
 
       return _.isNumber(serviceFrequency) ? serviceFrequency : (
         _.get(this.filterSystem, 'serviceFrequency') ||
@@ -84,7 +85,7 @@
 
     function guaranteePeriodFn() {
 
-      let {guaranteePeriod} = this;
+      let { guaranteePeriod } = this;
 
       return _.isNumber(guaranteePeriod) ? guaranteePeriod : (
         _.get(this.filterSystem, 'guaranteePeriod') ||
@@ -94,7 +95,7 @@
     }
 
     function guaranteeEnd() {
-      let {installingDate} = this;
+      let { installingDate } = this;
       return installingDate && moment(installingDate).add(this.guaranteePeriodFn(), 'months');
     }
 

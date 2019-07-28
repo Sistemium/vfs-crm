@@ -14,8 +14,8 @@
     });
 
   function servicePlanningController($scope, saControllerHelper, Schema, moment, Editing,
-                                     servicePlanningExportConfig, ExportExcel, $filter, $q, saEtc,
-                                     $uibModal) {
+                                     servicePlanningExportConfig, ExportExcel, $q, saEtc,
+                                     ServicePlanningService, $uibModal) {
 
     const vm = saControllerHelper.setup(this, $scope)
       .use({
@@ -34,8 +34,6 @@
       Site, District, ServiceItemService
     } = Schema.models('');
 
-    const ltphone = $filter('ltphone');
-
     const exportConfig = servicePlanningExportConfig.ServicePlanning;
 
     vm.watchScope('vm.monthDate', () => {
@@ -50,6 +48,10 @@
     /*
     Functions
      */
+
+    function dateFilter(filter) {
+      return ServicePlanningService.dateFilter(filter, vm.monthDate);
+    }
 
     function onSearch() {
 
@@ -108,7 +110,7 @@
       }
 
       let sheets = _.map(groups, group => {
-        let data = exportData(group.data);
+        let data = ServicePlanningService.exportData(group.data, vm.monthDate);
         return {
           name: group.servingMaster.name,
           sheet: ExportExcel.worksheetFromArrayWithConfig(data, exportConfig)
@@ -121,66 +123,11 @@
 
     function exportClick(group) {
 
-      let { data } = group;
-      let name = `${vm.month} - ${group.servingMaster.name}`;
+      const { data } = group;
+      const name = `${vm.month} - ${group.servingMaster.name}`;
+      const exportData = ServicePlanningService.exportData(data, vm.monthDate);
 
-      ExportExcel.exportArrayWithConfig(exportData(data), exportConfig, name);
-
-    }
-
-    function exportData(data) {
-
-      return _.map(data, item => {
-
-        let { serviceItem, serviceFrequency } = item;
-        let { filterSystem, servicePoint, installingDate, lastServiceDate } = serviceItem;
-        let { servicePrice, guaranteePeriod } = serviceItem;
-        let { filterSystemType } = filterSystem;
-
-        servicePrice = servicePrice || filterSystem.servicePrice || filterSystemType.servicePrice;
-
-        guaranteePeriod = guaranteePeriod || filterSystem.guaranteePeriod || filterSystemType.guaranteePeriod;
-
-        let guaranteeEnd = installingDate && moment(installingDate).add(guaranteePeriod, 'months').toDate();
-
-        let customer = servicePoint.currentServiceContract.customer();
-        let allPhones = _.clone(customer.allPhones()) || [];
-
-        _.each(servicePoint.servicePointContacts, contact => {
-          allPhones.push(...contact.person.allPhones());
-        });
-
-        let contacts = _.map(allPhones, phone => _.replace(ltphone(phone.address), /[ ]/g, '')).join(' ');
-
-        let { apartment, doorCode } = servicePoint;
-        let apartmentAndDoorCode = apartment &&
-          `${apartment}${doorCode ? ' (' + doorCode + ')' : ''}`;
-
-        let serviceItemPointInfo = _.filter([serviceItem.serviceInfo, serviceItem.additionalServiceInfo]).join('\n');
-
-        return _.defaults({
-
-          lastServiceDate: lastServiceDate && moment(lastServiceDate).toDate(),
-          installingDate,
-          guaranteeEnd: {
-            val: guaranteeEnd,
-            style: {
-              font: { strike: guaranteeEnd < vm.monthDate }
-            }
-          },
-          apartmentAndDoorCode,
-          serviceFrequency,
-          servicePoint,
-          serviceItem,
-          filterSystem,
-          customer,
-          servicePrice,
-          contacts,
-          serviceItemPointInfo
-
-        }, item);
-
-      });
+      ExportExcel.exportArrayWithConfig(exportData, exportConfig, name);
 
     }
 
@@ -196,7 +143,7 @@
           if (serviceItem.id) {
             return ServicePlanning.findAll(filter, { bypassCache: true })
               .then(([item]) => {
-                item.serviceStatus = serviceStatus(item);
+                item.serviceStatus = item.serviceStatusCode();
               });
           }
         })
@@ -204,28 +151,11 @@
     }
 
     function onMonthChange() {
-      console.info(vm.month);
+      // console.info(vm.month);
       if (vm.month && Site.meta.getCurrent()) {
+        vm.groupedDataFiltered = [];
         refresh();
       }
-    }
-
-    function dateFilter(filter) {
-
-      const date = moment(vm.monthDate);
-
-      if (!date.isValid()) {
-        return;
-      }
-
-      const dateB = date.format();
-
-      const monthEnd = date.add(1, 'month').add(-1, 'day');
-
-      const dateE = monthEnd.format();
-
-      return _.assign({ dateB, dateE }, filter);
-
     }
 
     function refresh() {
@@ -258,22 +188,15 @@
 
       return vm.setBusy(busy)
         .then(() => {
-          vm.rebindAll(ServiceItemService, serviceFilter, 'vm.services', () => groupByServingMaster(serviceFilter));
+          vm.rebindAll(ServiceItemService, serviceFilter, 'vm.services', () => {
+            const busy = ServicePlanningService.groupByServingMaster(vm.data, serviceFilter);
+            vm.setBusy(busy);
+            busy.then(res => {
+              vm.groupedData = res;
+              onSearch();
+            });
+          });
         });
-
-    }
-
-    function serviceStatus(item) {
-
-      const { serviceItem, service } = item;
-
-      if (service && service.type) {
-        return service.type;
-      } else if (serviceItem.pausedFrom) {
-        return 'paused';
-      } else
-
-        return 'serving';
 
     }
 
@@ -289,8 +212,6 @@
 
 
     function reportClick(item) {
-
-      console.info('reportClick', item);
 
       const modal = $uibModal.open({
 
@@ -315,68 +236,6 @@
       modal.result
         .catch(() => {
         });
-
-    }
-
-    function groupByServingMaster(serviceFilter) {
-
-      let groups = _.groupBy(_.filter(vm.data, 'servingMasterId'), 'servingMasterId');
-      let res = [];
-
-      let busy = [];
-
-      let services = ServiceItemService.filter(serviceFilter);
-
-      let servicesByItem = _.keyBy(services, 'serviceItemId');
-
-      _.each(groups, (data, servingMasterId) => {
-
-        data = _.orderBy(data, [
-          'serviceItem.servicePoint.locality.district.name',
-          'serviceItem.serviceContract.customer().name',
-          'nextServiceDate',
-        ]);
-
-        _.each(data, item => {
-
-          const { serviceItem } = item;
-          const { servicePoint } = serviceItem;
-
-          item.service = servicesByItem[item.id];
-          item.serviceStatus = serviceStatus(item);
-
-          let servicePointContacts = servicePoint.DSLoadRelations('ServicePointContact')
-            .then(() => {
-              let { currentServiceContract } = servicePoint;
-              if (!currentServiceContract) {
-                return;
-              }
-              busy.push(currentServiceContract.customer().contactsLazy());
-              return $q.all(_.map(servicePoint.servicePointContacts, ({ person }) => person.contactsLazy()));
-            })
-            .then(() => {
-              item.contacts = servicePoint.allContacts();
-            });
-
-          busy.push(servicePointContacts);
-
-        });
-
-        res.push({
-          cls: 'group',
-          id: servingMasterId,
-          servingMaster: Employee.get(servingMasterId),
-          data
-        });
-
-        res.push(...data);
-
-      });
-
-      vm.setBusy(busy);
-
-      vm.groupedData = res;
-      onSearch();
 
     }
 
