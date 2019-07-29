@@ -15,7 +15,7 @@
 
   function servicePlanningController($scope, saControllerHelper, Schema, moment, Editing,
                                      servicePlanningExportConfig, ExportExcel, $q, saEtc,
-                                     ServicePlanningService, $uibModal) {
+                                     ServicePlanningService, $uibModal, util) {
 
     const vm = saControllerHelper.setup(this, $scope)
       .use({
@@ -62,7 +62,7 @@
         return;
       }
 
-      const re = new RegExp(_.escapeRegExp(searchText), 'i');
+      const re = util.searchRe(searchText);
 
       vm.groupedDataFiltered = _.filter(vm.groupedData, filterService);
 
@@ -136,8 +136,12 @@
     }
 
     function filterSystemClick({ serviceItem }) {
+
       const etc = { monthDate: vm.monthDate };
       const filter = dateFilter({ id: serviceItem.id });
+
+      const { ts } = serviceItem;
+
       Editing.editModal('show-service-item', `«${serviceItem.servicePoint.address}» irenginys`)(serviceItem, etc)
         .then(() => {
           if (serviceItem.id) {

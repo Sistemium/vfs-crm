@@ -2,7 +2,7 @@
 
 (function () {
 
-  angular.module('Models').run(function (Schema) {
+  angular.module('Models').run(function (Schema, util) {
 
     Schema.register({
 
@@ -124,9 +124,7 @@
 
       if (!text) return data;
 
-      text = _.replace(_.escapeRegExp(_.trim(text)), /[ ]/g, '.*');
-
-      let re = new RegExp(text, 'i');
+      let re = util.searchRe(text);
 
       return _.filter(data, item => {
 
