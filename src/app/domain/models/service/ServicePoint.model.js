@@ -97,10 +97,10 @@
         res.push({ person: contractPerson });
       }
 
-      let contractLegalentity = _.get(this, 'currentServiceContract.customerLegalEntity');
+      let contractLegalEntity = _.get(this, 'currentServiceContract.customerLegalEntity');
 
-      if (contractLegalentity) {
-        res.push({ person: contractLegalentity });
+      if (contractLegalEntity) {
+        res.push({ person: contractLegalEntity });
       }
 
       return res;
@@ -146,11 +146,16 @@
 
     function concatAddress() {
 
-      let { locality, street, house } = this;
+      let { locality, street, house, apartment } = this;
 
       if (!locality) return null;
 
-      return `${locality.name}${street ? ', ' + street.name : ''}${house ? ' ' + house : ''}`;
+      `${locality.name}${street ? ', ' + street.name : ''}${house ? ' ' + house : ''}`;
+
+      return _.filter([
+        _.filter([locality.name, street && street.name]).join(', '),
+        _.filter([house, apartment]).join('-'),
+      ]).join(' ');
 
     }
 

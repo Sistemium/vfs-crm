@@ -311,7 +311,7 @@
     }
 
     function addressFields() {
-      return _.pick(vm.servicePoint, ['locality.name', 'street.name', 'house']);
+      return _.pick(vm.servicePoint, ['locality.name', 'street.name', 'house', 'apartment']);
     }
 
     function onChange() {
