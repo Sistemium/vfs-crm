@@ -143,15 +143,16 @@
       const { ts } = serviceItem;
 
       Editing.editModal('show-service-item', `«${serviceItem.servicePoint.address}» irenginys`)(serviceItem, etc)
-        .then(() => {
-          if (serviceItem.id) {
-            return ServicePlanning.findAll(filter, { bypassCache: true })
-              .then(([item]) => {
-                item.serviceStatus = item.serviceStatusCode();
-              });
-          }
-        })
-        .catch(_.noop);
+        .catch(_.noop)
+        .finally(() => ServiceItem.find(serviceItem.id, { bypassCache: true })
+          .then(({ ts: updatedTs }) => {
+            if (updatedTs !== ts) {
+              return ServicePlanning.findAll(filter, { bypassCache: true })
+                .then(([item]) => {
+                  item.serviceStatus = item.serviceStatusCode();
+                });
+            }
+          }));
     }
 
     function onMonthChange() {
