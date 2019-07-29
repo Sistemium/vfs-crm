@@ -12,7 +12,7 @@
 
     const vm = saControllerHelper.setup(this, $scope);
 
-    const {Employee, ServicePoint, ServiceContract, Person, LegalEntity, Site} = Schema.models();
+    const { Employee, ServicePoint, ServiceContract, Person, LegalEntity, Site } = Schema.models();
 
     vm.use({
       servicePointClick,
@@ -51,7 +51,7 @@
       Editing.editModal('edit-service-point', 'Naujas Taškas')(servicePoint)
         .then(() => {
           if (servicePoint && servicePoint.id) {
-            $state.go('servicePoint.detailed', {servicePointId: servicePoint.id});
+            $state.go('servicePoint.detailed', { servicePointId: servicePoint.id });
           }
         })
         .catch(_.noop);
@@ -59,7 +59,7 @@
 
     function onSearch() {
 
-      let {searchText} = vm;
+      let { searchText } = vm;
 
       vm.servicePoints = searchText ? ServicePoint.meta.filter(vm.data, searchText) : vm.data;
       vm.servicePoints = $filter('orderBy')(vm.servicePoints, ServicePoint.meta.orderBy);
@@ -73,7 +73,7 @@
     function servicePointClick(servicePoint, idx) {
       vm.idx = idx;
 
-      $state.go('servicePoint.detailed', {servicePointId: servicePoint.id});
+      $state.go('servicePoint.detailed', { servicePointId: servicePoint.id });
 
     }
 
