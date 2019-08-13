@@ -34,10 +34,10 @@
         },
 
         hasMany: {
-          ServiceContractItem: {
-            localField: 'serviceContractItems',
-            foreignKey: 'serviceItemId'
-          },
+          // ServiceContractItem: {
+          //   localField: 'serviceContractItems',
+          //   foreignKey: 'serviceItemId'
+          // },
           ServiceItemService: {
             localField: 'services',
             foreignKey: 'serviceItemId'

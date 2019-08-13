@@ -267,7 +267,7 @@
       if (_.get(servicePoint, 'servingItems')) {
 
         return $q.all(_.map(servicePoint.servingItems, serviceItem => {
-          return serviceItem.DSLoadRelations(['ServiceContract', 'ServiceContractItem', 'currentServiceContract']);
+          return serviceItem.DSLoadRelations(['ServiceContract', 'currentServiceContract']);
         }));
 
       }
