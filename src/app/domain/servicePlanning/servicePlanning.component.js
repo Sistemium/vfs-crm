@@ -19,6 +19,7 @@
 
     const vm = saControllerHelper.setup(this, $scope)
       .use({
+        oldDates: false,
         monthDate: new Date(this.month),
         filterSystemClick,
         servicePointClick,
@@ -44,6 +45,15 @@
     vm.watchScope(() => _.get(Site.meta.getCurrent(), 'id'), onMonthChange);
     vm.watchScope('vm.searchText', saEtc.debounce(onSearch, 400));
     vm.watchScope('vm.servingMasterId', onSearch);
+
+    $scope.$on('ServicePlanningUpdated', (e, planning, service, serviceItem) => {
+      const servicePlanning = _.find(vm.groupedData, { id: planning.id });
+      if (servicePlanning) {
+        servicePlanning.service = service;
+        servicePlanning.serviceItem = serviceItem;
+        servicePlanning.serviceStatus = servicePlanning.serviceStatusCode();
+      }
+    });
 
     /*
     Functions
@@ -193,6 +203,7 @@
 
       return vm.setBusy(busy)
         .then(() => {
+
           vm.rebindAll(ServiceItemService, serviceFilter, 'vm.services', () => {
             const busy = ServicePlanningService.groupByServingMaster(vm.data, serviceFilter);
             vm.setBusy(busy);
@@ -201,6 +212,11 @@
               onSearch();
             });
           });
+          //
+          // vm.rebindAll(ServicePlanning, {}, 'vm.servicePlanningAll', () => {
+          //
+          // });
+
         });
 
     }

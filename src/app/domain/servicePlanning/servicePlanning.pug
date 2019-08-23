@@ -34,6 +34,14 @@
       disable-add="true"
       )
 
+    .date-mode
+      label Senos datos
+      toggle-switch(
+        ng-model='vm.oldDates'
+        on-label='Taip'
+        off-label='Ne'
+      )
+
     .space
 
     .search
@@ -118,5 +126,6 @@
           service-planning-service(
           service-planning="item"
           month-date="vm.monthDate"
+          min-date="vm.oldDates ? item.lastServiceDate : vm.monthDate"
           ng-switch-when="serving"
           )

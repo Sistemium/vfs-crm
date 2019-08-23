@@ -46,6 +46,11 @@
 
   }
 
+  .date-mode {
+    //display: flex;
+    margin-left: $margin-bottom-xs;
+  }
+
   .planning {
 
     @extend %flex-table;

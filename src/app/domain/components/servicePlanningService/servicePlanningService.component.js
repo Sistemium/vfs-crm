@@ -6,6 +6,7 @@
       bindings: {
         servicePlanning: '<',
         monthDate: '<',
+        minDate: '<',
       },
 
       templateUrl: 'app/domain/components/servicePlanningService/servicePlanningService.html',
@@ -14,7 +15,7 @@
 
     });
 
-  function servicePlanningServiceController($scope, saControllerHelper, Schema, $q, moment) {
+  function servicePlanningServiceController($scope, saControllerHelper, Schema, $q, moment, $rootScope) {
 
     const {
       ServiceItemService,
@@ -72,8 +73,12 @@
             date,
             info: newServiceInfo,
           }))
-          .then(() => ServicePlanning.find(id, { bypassCache: true }))
-          .then(() => ServiceItem.find(serviceItemId, { bypassCache: true }));
+          .then(service => {
+            return ServicePlanning.find(id, { bypassCache: true })
+              .then(planning => ServiceItem.find(serviceItemId, { bypassCache: true })
+                .then(item => $rootScope.$broadcast('ServicePlanningUpdated', planning, service, item))
+              );
+          });
 
       },
 

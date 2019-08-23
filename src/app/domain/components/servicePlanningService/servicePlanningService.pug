@@ -4,7 +4,7 @@
   placeholder="{{ vm.servicePlanning.nextServiceDate }}"
   value="vm.newServiceDate"
   init-date="vm.monthDate"
-  min-date="vm.monthDate"
+  min-date="vm.minDate || vm.monthDate"
   )
 
   .service-form(ng-if='vm.newServiceDate')
