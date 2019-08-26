@@ -108,13 +108,13 @@
 
         let servicesByItem = _.keyBy(services, 'serviceItemId');
 
-        _.each(groups, (data, servingMasterId) => {
+        _.each(groups, (dataUnsorted, servingMasterId) => {
 
-          data = _.orderBy(data, [
-            'serviceItem.servicePoint.locality.district.name',
-            'serviceItem.serviceContract.customer().name',
-            'nextServiceDate',
-          ]);
+          const data = _.orderBy(dataUnsorted, ({ serviceItem, nextServiceDate }) => ([
+            _.get(serviceItem, 'servicePoint.locality.district.name'),
+            _.get(_.result(serviceItem, 'servicePoint.currentServiceContract.customer'), 'name'),
+            nextServiceDate,
+          ]));
 
           _.each(data, item => {
 
