@@ -148,7 +148,8 @@
     function filterSystemClick({ serviceItem }) {
 
       const etc = { monthDate: vm.monthDate };
-      const filter = dateFilter({ id: serviceItem.id });
+      const siteId = Site.meta.getCurrent().id;
+      const filter = dateFilter({ siteId, id: serviceItem.id });
 
       const { ts } = serviceItem;
 
@@ -159,6 +160,10 @@
             if (updatedTs !== ts) {
               return ServicePlanning.findAll(filter, { bypassCache: true })
                 .then(([item]) => {
+                  if (!item) {
+                    // TODO: process item delete
+                    return;
+                  }
                   item.serviceStatus = item.serviceStatusCode();
                 });
             }
