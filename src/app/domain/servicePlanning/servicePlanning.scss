@@ -1,8 +1,15 @@
 @import "flex-table";
+@import "mixins";
 
 .service-planning {
 
   .filters {
+
+    @include responsive-only(lt-md) {
+      > * > label {
+        display: none;
+      }
+    }
 
     display: flex;
     align-items: center;
