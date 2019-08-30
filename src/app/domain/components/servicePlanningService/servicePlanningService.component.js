@@ -48,31 +48,26 @@
 
       saveItemServiceClick() {
 
-        const { serviceItemId, servingMasterId, id, serviceItem } = this.servicePlanning;
+        const { serviceItemId, servingMasterId, id } = this.servicePlanning;
         const { newServiceInfo, nextServiceInfo, newServiceDate, type } = this;
 
         let date = newServiceDate;
+        let nextServiceDate = null;
 
-        const promises = [];
-
-        if (type === 'pause') {
-          serviceItem.pausedFrom = newServiceDate;
-          promises.push(serviceItem.DSCreate());
-        } else if (type === 'forward') {
+        if (type === 'forward') {
           date = moment(this.monthDate).format('YYYY-MM-DD');
-          serviceItem.nextServiceDate = newServiceDate;
-          promises.push(serviceItem.DSCreate());
+          nextServiceDate = newServiceDate;
         }
 
-        $q.all(promises)
-          .then(() => ServiceItemService.create({
-            serviceItemId,
-            servingMasterId,
-            nextServiceInfo,
-            type,
-            date,
-            info: newServiceInfo,
-          }))
+        ServiceItemService.create({
+          serviceItemId,
+          servingMasterId,
+          nextServiceInfo,
+          type,
+          date,
+          nextServiceDate,
+          info: newServiceInfo,
+        })
           .then(service => {
             return ServicePlanning.find(id, { bypassCache: true })
               .then(planning => ServiceItem.find(serviceItemId, { bypassCache: true })
