@@ -43,6 +43,7 @@
       let appConfig = {
         url: {
           socket: `https://${socket}.sistemium.com`
+          // socket: 'http://localhost:8000'
         }
       };
 
