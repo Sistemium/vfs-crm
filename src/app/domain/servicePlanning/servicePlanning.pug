@@ -116,7 +116,7 @@
           ) Perkeltas į
             span(
             ng-if="item.serviceItem.nextServiceDate"
-            ) {{ ::item.serviceItem.nextServiceDate | amDateFormat }}
+            ) {{ item.service.nextServiceDate || item.serviceItem.nextServiceDate | amDateFormat }}
             span(ng-if="!item.serviceItem.nextServiceDate") kitą mėnesį
 
           span.is-paused(

@@ -17,6 +17,16 @@
 
       service-type-switch(ng-model="vm.serviceItemService.type")
 
+  .field.date(ng-if="vm.serviceItemService.type==='forward'")
+
+    label Perkeltas į
+
+    sab-date-picker-input(
+      value='vm.serviceItemService.nextServiceDate'
+      ng-required='true'
+      placeholder='privaloma'
+    )
+
   .field-group
 
     .field.service-type(ng-if="vm.serviceItemService.serviceType || vm.serviceItemService.serviceSchema")
