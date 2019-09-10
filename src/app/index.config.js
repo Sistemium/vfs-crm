@@ -43,9 +43,10 @@
       let appConfig = {
         url: {
           socket: `https://${socket}.sistemium.com`
-          // socket: 'http://localhost:8000'
         }
       };
+
+      // appConfig.url.socket = 'http://localhost:8000';
 
       let org = `vfs${ InitService.localDevMode ? 'd' : '' }`;
 
