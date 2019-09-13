@@ -142,7 +142,8 @@
     }
 
     function servicePointClick({ serviceItem }) {
-      Editing.editModal('edit-service-point', 'Aptarnavimo Taško Redagavimas')(serviceItem.servicePoint);
+      const title = 'Aptarnavimo Taško Redagavimas';
+      Editing.editModal('edit-service-point', title)(serviceItem.servicePoint);
     }
 
     function filterSystemClick({ serviceItem }) {
@@ -152,8 +153,9 @@
       const filter = dateFilter({ siteId, id: serviceItem.id });
 
       const { ts } = serviceItem;
+      const title = `«${serviceItem.servicePoint.address}» irenginys`;
 
-      Editing.editModal('show-service-item', `«${serviceItem.servicePoint.address}» irenginys`)(serviceItem, etc)
+      Editing.editModal('show-service-item', title)(serviceItem, etc)
         .catch(_.noop)
         .finally(() => ServiceItem.find(serviceItem.id, { bypassCache: true })
           .then(({ ts: updatedTs }) => {

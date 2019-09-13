@@ -98,6 +98,11 @@
             //}
           }
 
+          .info {
+            @extend %ellipsis;
+            max-width: 200px;
+          }
+
           .installing-master, .serving-master, .next-service {
 
             span {
