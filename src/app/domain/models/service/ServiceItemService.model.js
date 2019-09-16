@@ -33,7 +33,8 @@
         label: {
           add: 'Naujas įrenginio aptarnavimas',
           about: 'įrenginio aptarnavimo'
-        }
+        },
+        typeIcon,
       },
 
       beforeCreateInstance: function (model, item) {
@@ -50,6 +51,8 @@
 
     function typeIcon(type) {
       switch (type) {
+        case 'other':
+          return 'green glyphicon glyphicon-wrench';
         case 'pause':
           return 'red glyphicon glyphicon-pause';
         case 'forward':

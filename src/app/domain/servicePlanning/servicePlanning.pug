@@ -108,6 +108,10 @@
         .next-service-date(ng-switch-default ng-switch="item.serviceStatus")
 
           .served(
+            ng-switch-when="other"
+          ) Remontuos {{ ::item.service.date | amDateFormat }}
+
+          .served(
           ng-switch-when="service"
           ) Aptarnautas {{ ::item.service.date | amDateFormat }}
 

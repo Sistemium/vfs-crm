@@ -44,6 +44,10 @@
           a: 'Priežastis',
           b: 'Sekančiam aptarnavimui',
         },
+        other: {
+          a: 'Komentaras',
+          b: 'Sekančiam aptarnavimui',
+        },
       },
 
       saveItemServiceClick() {

@@ -1,19 +1,9 @@
 .service-type-switch.btn-group
 
   label.btn.btn-default(
+  ng-repeat="item in vm.items"
   ng-model='vm.type'
-  uib-btn-radio="'service'"
+  uib-btn-radio="item.type"
   uib-uncheckable='false'
-  ) Įvykdytas
-
-  label.btn.btn-default(
-  ng-model='vm.type'
-  uib-btn-radio="'forward'"
-  uib-uncheckable='false'
-  ) Perkelti
-
-  label.btn.btn-default(
-  ng-model='vm.type'
-  uib-btn-radio="'pause'"
-  uib-uncheckable='false'
-  ) Sustabdyti
+  )
+    i(ng-class="item.cls")
