@@ -77,7 +77,14 @@
 
       },
 
-    });
+      onDate(date) {
+        if (moment(date) > moment(this.monthDate).add(1, 'month')) {
+          this.type = 'forward';
+        }
+      },
+
+    })
+      .watchScope('vm.newServiceDate', date => this.onDate(date));
 
     /*
     Functions
