@@ -21,10 +21,11 @@
       )
 
     .name
-      label(for='name') Modelis
+      label(for='filterSystemName') Modelis
 
-      input#name.form-control(
+      input#filterSystemName.form-control(
       autocomplete='off'
+      required
       placeholder='Modelio numeris'
       ng-model='vm.filterSystem.name'
       )
