@@ -409,6 +409,10 @@
 
     function accentLess(line) {
 
+      if (!line) {
+        return '';
+      }
+
       let lineLowerCase = line.toLowerCase();
 
       let to = ['a', 'c', 'e', 'e', 'i', 's', 'u', 'u', 'z'], from = 'ąčęėįšųūž';
