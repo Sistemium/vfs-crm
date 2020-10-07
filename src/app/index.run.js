@@ -18,7 +18,7 @@
       angular.element($window.document.querySelector('[ng-app]'))
         .injector()
         .invoke(function ($rootScope) {
-          var a = performance.now();
+          const a = performance.now();
           $rootScope.$apply();
           console.log('Digest length:', Math.round(performance.now() - a));
         });

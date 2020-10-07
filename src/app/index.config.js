@@ -48,11 +48,11 @@
 
       // appConfig.url.socket = 'http://localhost:8000';
 
-      let org = `vfs${ InitService.localDevMode ? 'd' : '' }`;
+      const org = `vfs${ InitService.localDevMode ? 'd' : '' }`;
 
       if (!IOS.isIos()) {
         angular.extend(appConfig, {
-          jsDataPrefix: org + '/',
+          jsDataPrefix: `${org}/`,
           org
         });
       }
