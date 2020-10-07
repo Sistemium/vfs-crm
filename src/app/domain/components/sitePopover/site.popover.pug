@@ -8,7 +8,7 @@
   popover-placement='bottom-right auto'
   popover-is-open='vm.popoverIsOpen'
   )
-    span(ng-if='!vm.current') pasirinkite padalinį
+    span.empty(ng-if='!vm.current') pasirinkite padalinį
     span(ng-if='vm.current')
       span.name «{{ vm.current.name }}»
       span.suffix &nbsp;padalinys
