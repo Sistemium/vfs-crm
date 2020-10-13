@@ -102,6 +102,8 @@
 
         .filter-system(ng-switch-default)
           a(href ng-click='vm.filterSystemClick(item)') {{ item.serviceItem.filterSystem.name }}
+          .gray {{ item.serviceItem.info }}
+
 
         .last-service-date(ng-switch-default) {{ item.lastServiceDate | amDateFormat }}
 

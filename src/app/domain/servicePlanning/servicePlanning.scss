@@ -104,6 +104,11 @@
 
       > .filter-system {
         flex: 20;
+        max-width: 100%;
+        > .gray {
+          max-width: 100%;
+          //@extend .ellipsis;
+        }
       }
 
       > .serving-master {
