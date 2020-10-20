@@ -11,12 +11,20 @@
       ng-model='vm.legalEntity.name'
       )
 
-    .code
-      label(for='code') Įmonės kodas
-      input#code.form-control(
-      autocomplete='off'
-      ng-model='vm.legalEntity.code'
-      )
+    .field-group
+      .code
+        label(for='code') Įmonės kodas
+        input#code.form-control(
+        autocomplete='off'
+        ng-model='vm.legalEntity.code'
+        )
+      .vat-code
+        label(for='vat-code') PVM kodas
+        input#vat-code.form-control(
+          autocomplete='off'
+          ng-model='vm.legalEntity.vatCode'
+        )
+
 
     entity-contacts.contact-methods.field-group(
     source="LegalEntity"
