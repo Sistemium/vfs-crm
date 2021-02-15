@@ -8,6 +8,28 @@
       stateHelperProvider
 
         .state({
+          name: 'privacy',
+          url: '/privacy',
+          template: '<privacy-policy></privacy-policy>',
+          data: {
+            title: 'Privatumo politika',
+            rootState: 'home',
+            isPublic: true,
+          }
+        })
+
+        .state({
+          name: 'about',
+          url: '/about',
+          template: '<about></about>',
+          data: {
+            title: 'Apie Sistemą',
+            rootState: 'home',
+            isPublic: true,
+          }
+        })
+
+        .state({
 
           name: 'login',
           url: '/login?error',

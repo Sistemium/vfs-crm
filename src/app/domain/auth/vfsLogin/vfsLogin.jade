@@ -1,5 +1,6 @@
 .vfs-login
 
+  //about
   .login-options-group
 
     .alert-warning(uib-alert ng-if='vm.error') {{ vm.error }}
@@ -17,3 +18,7 @@
       p Socialinį tinklą:
       oauth-buttons(buttons-config='vm.buttons')
 
+  .footer
+    a(href="/#/privacy") Privatumo politika
+    span |
+    a(href="/#/about") Apie

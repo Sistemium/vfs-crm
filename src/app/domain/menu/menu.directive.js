@@ -19,9 +19,7 @@
 
         $rootScope.$broadcast('menu-show');
 
-        let vm = this;
-
-        _.assign(vm, {
+        _.assign(this, {
           itemClick
         });
 

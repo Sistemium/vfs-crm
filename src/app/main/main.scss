@@ -1,7 +1,22 @@
+@import "variables";
+
 .domain-ui-view {
   padding-top: 10px;
 }
 
 .container .root-navbar {
   margin-top: 15px;
+}
+
+.stm-menu, .login-options-group {
+  & + .footer {
+    margin: 20px;
+    text-align: center;
+
+    > span {
+      color: $border-gray;
+      margin: 0 20px;
+      font-weight: bold;
+    }
+  }
 }
