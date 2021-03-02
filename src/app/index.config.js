@@ -48,7 +48,9 @@
 
       // appConfig.url.socket = 'http://localhost:8000';
 
-      const org = `vfs${ InitService.localDevMode ? 'd' : '' }`;
+      const devOrg = localStorageService.get('dev');
+
+      const org = `vfs${ devOrg || (InitService.localDevMode && devOrg !== false) ? 'd' : '' }`;
 
       if (!IOS.isIos()) {
         angular.extend(appConfig, {
