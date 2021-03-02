@@ -1,0 +1,81 @@
+.form(ng-if="vm.ready")
+
+  .address-search
+
+    input.form-control(
+      autocomplete='off'
+      ng-keyup='vm.onAddressSearchKeyPress($event)'
+      ng-model='vm.addressSearch'
+      ng-model-options='{debounce: 300}'
+      placeholder='Adresų paieška'
+      uib-popover-template='"app/domain/servicePoint/editServicePoint/addressSearch.template.html"'
+      popover-is-open='vm.isAddressSearchOpen'
+      popover-placement='bottom-left'
+    )
+
+  .field-group
+
+    .district
+
+      label Apskritis
+
+      vfs-dropdown(
+        ng-model='vm.districtId'
+        disable-edit='true'
+        items-data-source-name='District'
+        items-name-property='name'
+        placement='bottom-left'
+        ready-state='vm.readyState.districtId'
+      )
+
+    .locality(ng-disabled='!vm.districtId')
+
+      label Gyvenamoji Vieta
+
+      vfs-dropdown(
+        ng-required='true'
+        items-data-source-name='Locality'
+        items-name-property='name'
+        disable-edit='true'
+        ng-model='vm.addressee.localityId'
+        filter='{districtId: vm.districtId}'
+        placement='bottom-left'
+        ready-state='vm.readyState.localityId'
+      )
+
+  .field-group
+
+    .street(ng-disabled='!vm.addressee.localityId')
+
+      label Gatvė
+
+      vfs-dropdown(
+        ng-required='true'
+        ng-model='vm.addressee.streetId'
+        items-data-source-name='Street'
+        disable-edit='true'
+        items-name-property='name'
+        filter='{localityId: vm.addressee.localityId}'
+        placement='bottom-left'
+        ready-state='vm.readyState.streetId'
+      )
+
+    .house
+
+      label(for='house') Namas
+
+      input#house.form-control(
+        autocomplete='off'
+        placeholder='Namo numeris'
+        ng-model='vm.addressee.house'
+      )
+
+    .apartment
+
+      label(for='apartment') Butas
+
+      input#apartment.form-control(
+        autocomplete='off'
+        placeholder='Buto numeris'
+        ng-model='vm.addressee.apartment'
+      )

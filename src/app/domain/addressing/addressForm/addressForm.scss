@@ -1,0 +1,60 @@
+@import "editing";
+
+address-form {
+
+  @extend %editing-with-form;
+
+  .address-search {
+
+    margin-top: $margin-bottom-xs-minus;
+
+    .popover {
+      max-width: 650px;
+    }
+
+    .address-search-results {
+
+      > * {
+        line-height: 34px;
+        padding: 0 10px;
+      }
+
+      .address {
+
+        display: flex;
+        flex-flow: row nowrap;
+        //@extend .ellipsis;
+
+        &:hover, &.focused {
+          background: $hover-color;
+          text-decoration: none;
+        }
+
+        > * + * {
+          margin-left: 5px;
+        }
+
+        .district, .locality, .street {
+          @extend .ellipsis;
+        }
+
+        .glyphicon {
+          line-height: inherit;
+          font-size: 80%;
+          color: $state-warning-text;
+        }
+
+      }
+
+      .no-results {
+        text-align: center;
+        font-weight: bold;
+        color: $state-warning-text;
+      }
+
+
+    }
+
+  }
+
+}
