@@ -68,6 +68,19 @@
 
     }
 
+    function findByMany(ids, options) {
+
+      const { chunk = 20, field = 'id' } = options || {};
+
+      const chunks = _.chunk(_.uniq(_.filter(ids)), chunk);
+
+      return $q.all(_.map(chunks, chunkIds =>
+        this.findAll({ [field]: chunkIds }, _.assign({}, options))
+      ))
+        .then(_.flatten);
+
+    }
+
     function cachedFindAll(resource, filter, options) {
 
       let store = DS.store[resource.name];
@@ -150,6 +163,7 @@
       getCount,
       groupBy,
       copyInstance,
+      findByMany,
 
       loadPaged: function (filter, options) {
         return loadPaged(this, filter, options)
