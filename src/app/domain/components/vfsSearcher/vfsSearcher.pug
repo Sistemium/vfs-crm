@@ -9,6 +9,7 @@
     name='search'
     placeholder='Įveskite paieškos tekstą'
     ng-model='vm.search'
+    ng-model-options="{ debounce: 500 }"
     select-on-focus
     autocomplete='off'
     auto-focus='{{vm.focus}}'
