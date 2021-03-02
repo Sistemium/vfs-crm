@@ -4,6 +4,11 @@
 
 
   .contact-method {
+
+    & + *  {
+      margin: 5px 0;
+    }
+
     .field-group {
 
       align-items: center;

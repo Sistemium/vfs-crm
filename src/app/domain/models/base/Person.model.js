@@ -25,7 +25,15 @@
           Picture: {
             localField: 'avatarPicture',
             localKey: 'avatarPictureId'
-          }
+          },
+          Locality: {
+            localField: 'locality',
+            localKey: 'localityId'
+          },
+          Street: {
+            localField: 'street',
+            localKey: 'streetId'
+          },
         }
 
       },

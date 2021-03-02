@@ -10,7 +10,17 @@
 
       relations: {
 
-        hasOne: {},
+        hasOne: {
+          Locality: {
+            localField: 'locality',
+            localKey: 'localityId'
+          },
+
+          Street: {
+            localField: 'street',
+            localKey: 'streetId'
+          },
+        },
 
         hasMany: {
           ServiceContract: {

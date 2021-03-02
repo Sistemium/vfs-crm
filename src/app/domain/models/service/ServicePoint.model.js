@@ -64,7 +64,6 @@
       methods: {
         servingItemsLazy,
         isValid,
-        concatAddress,
         refreshCache,
         recentServingMaster,
         allContacts,
@@ -139,21 +138,6 @@
           });
 
       });
-
-    }
-
-    function concatAddress() {
-
-      let { locality, street, house, apartment } = this;
-
-      if (!locality) return null;
-
-      `${locality.name}${street ? ', ' + street.name : ''}${house ? ' ' + house : ''}`;
-
-      return _.filter([
-        _.filter([locality.name, street && street.name]).join(', '),
-        _.filter([house, apartment]).join('-'),
-      ]).join(' ');
 
     }
 
