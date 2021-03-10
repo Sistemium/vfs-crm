@@ -39,7 +39,7 @@
 
       setGrouping(vm.groupings[0]);
 
-      ServiceItemService.findAll({ servingMasterId, dateB, dateE }, { bypassCache: true })
+      const busy = ServiceItemService.findAll({ servingMasterId, dateB, dateE }, { bypassCache: true })
         .then(data => {
 
           const loadIds = _.filter(data, s => !s.serviceItem);
@@ -48,10 +48,13 @@
 
           return ServiceItem.findAll({
             where: { id: { in: _.map(loadIds, 'serviceItemId') } },
-          });
+          })
+            .then(() => data);
 
         })
         .then(reportData);
+
+      vm.setBusy(busy);
 
     }
 
@@ -64,7 +67,7 @@
 
       const { grouping: { code: groupBy } } = vm;
 
-      const grouped = _.groupBy(data, groupBy);
+      const grouped = _.groupBy(data, item => _.get(item, groupBy) || 'Nenurodytas');
 
       vm.data = _.map(grouped, (items, id) => {
         return {
