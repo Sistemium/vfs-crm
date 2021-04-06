@@ -1,8 +1,20 @@
-'use strict';
-
 /* global moment:false uuid:false geolib:false XLSX:false */
 (function () {
 
+  const APPS = {
+    test: {
+      id: '8f334616-96c6-11eb-8000-e069958a099e',
+      url: 'https://vfsd.sistemium.com',
+    },
+    localDev: {
+      id: '141731ce-93e4-11e7-8000-81ed4ca6ee78',
+      url: 'http://localhost:3100',
+    },
+    prod: {
+      id: '16c5fe1e-93e4-11e7-8000-81ed4ca6ee78',
+      url: 'https://vfs.sistemium.com',
+    },
+  };
 
   const localDev = !!location.port;
 
@@ -19,10 +31,10 @@
 
     .constant('saaAppConfig', {
       loginState: 'login',
-      authUrl: authUrl,
-      authApiUrl: authUrl + '/api/',
-      redirect_uri: localDev ? 'http://localhost:3100' : 'https://vfs.sistemium.com',
-      orgAppId: localDev ? '141731ce-93e4-11e7-8000-81ed4ca6ee78' : '16c5fe1e-93e4-11e7-8000-81ed4ca6ee78'
+      authUrl,
+      authApiUrl: `${authUrl}/api/`,
+      redirect_uri: appURL(),
+      orgAppId: appId(),
     })
 
     .value('cgBusyDefaults', {
@@ -55,5 +67,23 @@
         showWeeks: false
       };
     })
+
+  function appURL() {
+    return APPS[appCode()].url;
+  }
+
+  function appId() {
+    return APPS[appCode()].id;
+  }
+
+  function appCode() {
+    if (localDev) {
+      return 'localDev';
+    }
+    if (location.hostname.match(/^vfsd/)) {
+      return 'test';
+    }
+    return 'prod';
+  }
 
 })();
