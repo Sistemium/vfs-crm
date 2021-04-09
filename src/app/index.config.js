@@ -21,7 +21,7 @@
     return saDebug.log('stg:log');
   }
 
-  function run(Sockets, InitService, $rootScope, IOS, localStorageService, DEBUG, Auth) {
+  function run(Sockets, InitService, $rootScope, IOS, localStorageService, DEBUG, Auth, saaAppConfig) {
 
     InitService
       .then(Sockets.init)
@@ -48,7 +48,7 @@
 
       // appConfig.url.socket = 'http://localhost:8000';
 
-      const devOrg = localStorageService.get('dev');
+      const devOrg = localStorageService.get('dev') || saaAppConfig.appCode === 'test';
 
       const org = `vfs${ devOrg || (InitService.localDevMode && devOrg !== false) ? 'd' : '' }`;
 

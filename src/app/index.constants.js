@@ -31,6 +31,7 @@
 
     .constant('saaAppConfig', {
       loginState: 'login',
+      appCode: appCode(),
       authUrl,
       authApiUrl: `${authUrl}/api/`,
       redirect_uri: appURL(),
