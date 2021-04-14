@@ -8,8 +8,8 @@
         .state({
 
           name: 'servicePlanning',
-          url: '/servicePlanning?month',
-          template: '<service-planning month="vm.month"></service-planning>',
+          url: '/servicePlanning?month&servingMasterId',
+          template: '<service-planning month="vm.month" serving-master-id="vm.servingMasterId"></service-planning>',
 
           controller: servicePlanningRouterController,
           controllerAs: 'vm',
@@ -25,9 +25,10 @@
   function servicePlanningRouterController($state, moment, $scope) {
 
     this.month = $state.params.month || moment().format('YYYY.MM');
+    this.servingMasterId = $state.params.servingMasterId || null;
 
-    $scope.$watch('vm.month', month => {
-      $state.go('.', {month}, {notify: false});
+    $scope.$watchGroup(['vm.month', 'vm.servingMasterId'], ([month, servingMasterId]) => {
+      $state.go('.', { month, servingMasterId }, { notify: false });
     });
 
   }

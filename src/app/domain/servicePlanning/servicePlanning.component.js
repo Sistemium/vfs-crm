@@ -4,7 +4,8 @@
     .component('servicePlanning', {
 
       bindings: {
-        month: '='
+        month: '=',
+        servingMasterId: '=',
       },
 
       templateUrl: 'app/domain/servicePlanning/servicePlanning.html',
@@ -32,7 +33,8 @@
     const {
       ServicePlanning, Employee, Person, FilterSystem, Brand, ServicePoint,
       ServiceItem, ServiceContract, LegalEntity,
-      Site, District, ServiceItemService
+      Site, District, ServiceItemService,
+      Locality,
     } = Schema.models('');
 
     const exportConfig = servicePlanningExportConfig.ServicePlanning;
@@ -44,7 +46,7 @@
     vm.watchScope('vm.month', onMonthChange);
     vm.watchScope(() => _.get(Site.meta.getCurrent(), 'id'), onMonthChange);
     vm.watchScope('vm.searchText', saEtc.debounce(onSearch, 400));
-    vm.watchScope('vm.servingMasterId', onSearch);
+    vm.watchScope('vm.servingMasterId', onMonthChange);
 
     $scope.$on('ServicePlanningUpdated', (e, planning, service, serviceItem) => {
       const servicePlanning = _.find(vm.groupedData, { id: planning.id });
@@ -173,7 +175,7 @@
     }
 
     function onMonthChange() {
-      // console.info(vm.month);
+      vm.siteId = _.get(Site.meta.getCurrent(), 'id');
       if (vm.month && Site.meta.getCurrent()) {
         vm.groupedDataFiltered = [];
         refresh();
@@ -183,7 +185,13 @@
     function refresh() {
 
       const siteId = Site.meta.getCurrent().id;
-      const where = dateFilter({ siteId });
+      const { servingMasterId } = vm;
+
+      if (!servingMasterId) {
+        return;
+      }
+
+      const where = dateFilter({ siteId, servingMasterId });
 
       if (!where) {
         return;
@@ -199,13 +207,25 @@
         FilterSystem.findAll(),
         Brand.findAll(),
         Employee.findAll(),
-        ServicePoint.findAllWithRelations({ siteId })('Locality'),
+        ServicePoint.findAll({ siteId })
+          .then(servicePoints => {
+            const toLoad = _.filter(servicePoints, ({ locality, localityId }) => localityId && !locality);
+            const ids = _.filter(_.map(toLoad, 'localityId'));
+            return Locality.findByMany(ids);
+          }),
         ServiceContract.findAll({ siteId }),
-        ServiceItem.findAll(),
+        // ServiceItem.findAll(),
         District.findAll(),
         ServiceItemService.findAll(serviceFilter, { bypassCache: true }),
-        ServicePlanning.findAllWithRelations(where, { bypassCache: true })('ServiceItem')
-          .then(res => (vm.data = res))
+        ServicePlanning.findAll(where, { bypassCache: true })
+          .then(res => {
+            const toLoad = _.filter(res, ({ serviceItem }) => !serviceItem);
+            const ids = _.filter(_.map(toLoad, 'serviceItemId'));
+            return ServiceItem.findByMany(ids)
+              .then(() => {
+                vm.data = res;
+              });
+          })
       ];
 
       return vm.setBusy(busy)
