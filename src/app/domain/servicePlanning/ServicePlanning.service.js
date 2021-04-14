@@ -40,10 +40,12 @@
         return _.map(data, item => {
 
           const { serviceItem, serviceFrequency } = item;
-          const { filterSystem, servicePoint, installingDate, lastServiceDate } = serviceItem;
+          const { filterSystem, servicePoint, installingDate } = serviceItem;
           const { serviceInfo, additionalServiceInfo } = serviceItem;
           const { filterSystemType } = filterSystem;
           const { currentServiceContract, servicePointContacts } = servicePoint;
+
+          const { lastServiceDate = item.lastServiceDate } = serviceItem;
 
           const servicePrice = serviceItem.servicePrice ||
             filterSystem.servicePrice ||
