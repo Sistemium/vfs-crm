@@ -2,7 +2,7 @@
 
 (function () {
 
-  angular.module('Models').run(function (Schema) {
+  angular.module('Models').run(function (Schema, $q) {
 
     Schema.register({
 
@@ -135,7 +135,8 @@
 
       if (cached) return cached;
 
-      cache[this.id] = this.DSLoadRelations('Contact')
+      cache[this.id] = $q.when(this.contacts)
+        .then(res => res.length ? this : this.DSLoadRelations('Contact'))
         .then(res => {
           cache[this.id] = {
             primaryPhone: primaryAddress(res.contacts, 'phone'),

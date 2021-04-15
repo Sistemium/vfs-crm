@@ -126,7 +126,8 @@
             item.service = servicesByItem[item.id];
             item.serviceStatus = item.serviceStatusCode();
 
-            const servicePointContacts = servicePoint.DSLoadRelations('ServicePointContact')
+            const servicePointContacts = $q.when()
+            //servicePoint.DSLoadRelations('ServicePointContact')
               .then(() => {
                 let { currentServiceContract } = servicePoint;
                 if (!currentServiceContract) {

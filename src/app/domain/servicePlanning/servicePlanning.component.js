@@ -35,6 +35,8 @@
       ServiceItem, ServiceContract, LegalEntity,
       Site, District, ServiceItemService,
       Locality,
+      ServicePointContact,
+      Contact,
     } = Schema.models('');
 
     const exportConfig = servicePlanningExportConfig.ServicePlanning;
@@ -207,6 +209,8 @@
         FilterSystem.findAll(),
         Brand.findAll(),
         Employee.findAll(),
+        Contact.findAll(),
+        ServicePointContact.findAll({}),
         ServicePoint.findAll({ siteId })
           .then(servicePoints => {
             const toLoad = _.filter(servicePoints, ({ locality, localityId }) => localityId && !locality);
