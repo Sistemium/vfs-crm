@@ -110,8 +110,9 @@
 
       //TODO: fix this.customer().name
 
-      if (!date || !this.customer()) return this.name || null;
-      return `${this.customer().name}${num ? ' №' + num : ''} nuo ${date}`;
+      if (!this.customer()) return this.name || null;
+      const dateFrom = date ? `nuo ${date}`: 'be datos';
+      return `${this.customer().name}${num ? ' №' + num : ''} ${dateFrom}`;
     }
 
   });

@@ -129,7 +129,7 @@
             const servicePointContacts = $q.when()
             //servicePoint.DSLoadRelations('ServicePointContact')
               .then(() => {
-                let { currentServiceContract } = servicePoint;
+                const { currentServiceContract } = servicePoint;
                 if (!currentServiceContract) {
                   return;
                 }
